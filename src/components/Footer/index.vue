@@ -94,7 +94,7 @@ const handleJumps = (item) => {
 
   &-common {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     color: #ffffff;
   }
 
@@ -118,19 +118,19 @@ const handleJumps = (item) => {
 
       &-text1,
       &-text2 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 500;
         color: #ffffff;
       }
 
       &-text1 {
-        width: 57px;
+        width: 67px;
         margin-left: 42px;
         text-align: right;
       }
 
       &-text2 {
-        width: 70px;
+        width: 87px;
         margin-left: 15px;
       }
     }
@@ -177,7 +177,7 @@ const handleJumps = (item) => {
         justify-content: space-between;
 
         &-item {
-          width: 56px;
+          width: 66px;
           height: 10px;
           color: #ffffff;
           cursor: pointer;
@@ -186,7 +186,7 @@ const handleJumps = (item) => {
 
       &-products {
         &-item {
-          width: 120px;
+          width: 128px;
           height: 48px;
           color: #8a8f98;
 

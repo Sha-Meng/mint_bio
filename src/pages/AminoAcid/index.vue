@@ -86,19 +86,6 @@ export default {
   setup() {
     const module2Data = ref([
       {
-        title: "生物合成 异亮氨酸",
-        topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-        introductionTitle1: "生物合成",
-        introductionTitle2: "异亮氨酸",
-        applyTexts: ["医药", "化学试剂", "饲料添加剂"],
-        advantages: [
-          "添加于饲料中，减少大豆用量，降低养殖成本",
-          "相较同类产品，具有大幅成本优势",
-          "相较行业平均水准，发酵速度快、效率高",
-        ],
-        imageUrl: ["assets/AminoAcid/module2_ele1.png"],
-      },
-      {
         title: "生物合成 组氨酸",
         topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
         introductionTitle1: "生物合成",
@@ -107,6 +94,19 @@ export default {
         advantages: ["相较同类产品，具有成本优势", "相较行业平均水准，发酵速度快、效率高", "相较化学合成法，产品纯度高"],
         imageUrl: ["assets/AminoAcid/module2_ele2.png"],
       },
+	  {
+	    title: "生物合成 异亮氨酸",
+	    topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
+	    introductionTitle1: "生物合成",
+	    introductionTitle2: "异亮氨酸",
+	    applyTexts: ["医药", "化学试剂", "饲料添加剂"],
+	    advantages: [
+	      "添加于饲料中，减少大豆用量，降低养殖成本",
+	      "相较同类产品，具有大幅成本优势",
+	      "相较行业平均水准，发酵速度快、效率高",
+	    ],
+	    imageUrl: ["assets/AminoAcid/module2_ele1.png"],
+	  },
       // {
       //   title: "生物合成 色氨酸",
       //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
