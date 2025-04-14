@@ -44,10 +44,13 @@ export default {
 
     // 处理滚动事件，添加防止默认滚动的逻辑
     const handleWheel = (event) => {
-      event.preventDefault(); // 阻止浏览器滚动
-
-      // 节流控制逻辑
-      throttleWheel(event);
+		let delta = event.deltaY;
+		if ((delta > 0 && scrollDistance.value < maxScrollDistance.value) ||
+		(delta < 0 && scrollDistance.value > 0) ) {
+		  event.preventDefault(); // 阻止浏览器滚动
+		  // 节流控制逻辑
+		  throttleWheel(event);
+		} 
     };
 
     // 使用节流函数包装

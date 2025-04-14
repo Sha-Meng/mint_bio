@@ -85,7 +85,7 @@ export const MobileRoutes = [
   {
     path: '/',
     name: '/',
-    component: VisionMobile,
+    component: validPcOrPhone() ? Home : HomeMobile,
   },
   {
     path: '/aminoAcid',
