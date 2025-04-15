@@ -42,31 +42,33 @@ export default {
     });
 
     const startDrag = (event, index) => {
-      event.preventDefault();
-      isDragging.value = true;
-      draggingModuleIndex.value = index;
-      const touch = event.touches[0];
-      dragStartY.value = touch.clientY;
-      const rect = event.target.getBoundingClientRect();
-      dragStartOffsetY.value = touch.clientY - rect.top;
+	  // event.preventDefault(); // 阻止浏览器滚动
+	  isDragging.value = true;
+	  draggingModuleIndex.value = index;
+	  const touch = event.touches[0];
+	  dragStartY.value = touch.clientY;
+	  const rect = event.target.getBoundingClientRect();
+	  dragStartOffsetY.value = touch.clientY - rect.top;
     };
 
-    const onDrag = throttle((event) => {
-      event.preventDefault();
-      if (!isDragging.value || draggingModuleIndex.value === null) return;
-      const touch = event.touches[0];
-
-      const dy = dragStartY.value - touch.clientY;
-
-      // 更新 scrollDistance
-      scrollDistance.value = Math.max(
-        Math.min(scrollDistance.value + dy, maxScrollDistance.value),
-        0
-      );
-
-      // 重置 dragStartY 以便连续拖拽
-      dragStartY.value = touch.clientY;
-    }, 30);
+    const onDrag = (event) => {
+	  if (!isDragging.value || draggingModuleIndex.value === null) return;
+	  const touch = event.touches[0];
+	  const dy = dragStartY.value - touch.clientY;
+		
+	  if ((dy > 0 && scrollDistance.value < maxScrollDistance.value) ||
+	  (dy < 0 && scrollDistance.value > 0) ) {
+		event.preventDefault(); // 阻止浏览器滚动
+	    // 更新 scrollDistance
+	    scrollDistance.value = Math.max(
+	    		  Math.min(scrollDistance.value + dy, maxScrollDistance.value),
+	    		  0
+	    );
+	    		
+	    // 重置 dragStartY 以便连续拖拽
+	    dragStartY.value = touch.clientY;	
+	  } 
+    };
 
     const stopDrag = () => {
       isDragging.value = false;
