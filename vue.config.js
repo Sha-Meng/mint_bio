@@ -30,7 +30,7 @@ module.exports = defineConfig({
       })
       .end();
     config.plugin('html').tap(args => {
-      args[0].title = '元素驱动'
+      args[0].title = '元素驱动: 引领生物制造创新'
       return args
     })
   }

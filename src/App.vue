@@ -37,7 +37,7 @@ export default {
     window.onresize = () => { // 修改: 使用箭头函数确保 this 指向正确
       autoFont();
       this.isPc = validPcOrPhone();
-      console.log('this.isPc', this.isPc);
+      // console.log('this.isPc', this.isPc);
     };
   },
 };
