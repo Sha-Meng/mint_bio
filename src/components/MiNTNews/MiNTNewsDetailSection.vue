@@ -11,11 +11,18 @@
         <div v-if="content.pic" class="pic">
           <img :src="getImageUrl(content.pic)" />
         </div>
+		
+		<div v-if="content.nopaddingpic" class="nopaddingpic">
+		  <img :src="getImageUrl(content.nopaddingpic)" />
+		</div>
 
-        <div class="section-desc">
-          <span v-if="content.desc"> {{ content.desc }} </span>
-          <div v-if="content.strongText" v-html="content.strongText" class="new-strongText"></div>
-        </div>
+		<div v-if="content.desc" class="section-desc">
+		  <span > {{ content.desc }} </span>
+		</div>
+		
+		<div v-if="content.strongText" class="section-desc">
+		  <div v-html="content.strongText" class="new-strongText"></div>
+		</div>
 
       </div>
     </div>
@@ -42,7 +49,10 @@ const props = defineProps({
   font-size: 21px;
   line-height: 33px;
   font-family: MiSans VF;
+}
 
+.strong-text{
+	font-weight: bold;
 }
 
 .orange-text {
@@ -60,7 +70,6 @@ const props = defineProps({
 .green-text {
   color: #74d887;
   font-weight: 800;
-
 }
 
 .blue-green-text {
@@ -98,6 +107,16 @@ const props = defineProps({
         height: 100%;
       }
     }
+	
+	.nopaddingpic {
+	  width: 100%;
+	  margin: 0px 0px;
+	
+	  img {
+	    width: 100%;
+	    height: 100%;
+	  }
+	}
 
     .section-desc {
       margin-top: 50px;

@@ -1,0 +1,31 @@
+{
+  "id": 3,
+  "title": "MiNT 进行时｜河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动",
+  "categorylabel": "#Mint 进行时",
+  "categorycolor": "#FF7200",
+  "time": "2025/05/03",
+  "overviewtitle": "MiNT 进行时｜河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动",
+  "sections": [
+    {
+      "id": 2,
+      "headPic": [
+        "assets/News/new_head_1.jpg",
+        "assets/News/new_head_2.jpg"
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ],
+      "contents": [
+        {
+          "desc": "5月2日，河南省省长王凯到南阳市调研。",
+          "height": 451
+        },
+		{
+		  "height": 451,
+		  "strongText": "在牧原实验室、牧元安粮合成生物技术有限公司，王凯同科研人员、企业负责人亲切交谈，详细了解科技创新、成果转化等情况。他指出，要充分发挥企业创新主体作用，持续加大研发投入，招引高端人才团队，加强关键核心技术攻关，<span class='orange-text'>加快创新成果落地转化，不断提升企业创新能力。要加强与上下游企业协同联动，推动生物制造产业延链补链强链，形成完整的产业链条和产业生态。</span>"
+		}
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "id": 1,
+  "id": 2,
   "title": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」",
   "categorylabel": "#Mint 进行时",
   "categorycolor": "#FF7200",
@@ -32,6 +32,10 @@
 		},
 		{
 		  "pic": "assets/News/202505/news2_pic_1.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "<span class='new-strongText'>给猪吃的口粮和给新疆棉盖的“被子”</span>"
 		},
 		{
 		  "height": 451,
@@ -96,6 +100,10 @@
 		},
 		{
 		  "height": 451,
+		  "strongText": "<span class='new-strongText'>“科技-产业-公益”的正向循环</span>"
+		},
+		{
+		  "height": 451,
 		  "strongText": "2023年10月，西湖大学未来产业研究中心与西湖教育基金会，共同启动<span class='blue-text'>新质生产力培育平台，</span> 目光瞄准人工智能、生物制造、新能源、医疗大健康等未来产业。"
 		},
 		{
@@ -133,6 +141,10 @@
 		},
 		{
 		  "height": 451,
+		  "strongText": "<span class='new-strongText'>16岁的选择</span>"
+		},
+		{
+		  "height": 451,
 		  "desc": "川妹子刘旻昊9岁开始学钢琴，14岁达到业余10级水平，文化课成绩也名列前茅。16岁那年，她做出了人生中第一个重大决定：放弃国内升学机会，独自赴英留学。"
 		},
 		{
@@ -161,6 +173,10 @@
 		},
 		{
 		  "pic": "assets/News/202505/news2_pic_12.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "<span class='new-strongText'>命运的邀约</span>"
 		},
 		{
 		  "height": 451,
@@ -218,6 +234,10 @@
 		},
 		{
 		  "pic": "assets/News/202505/news2_pic_15.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "<span class='new-strongText'>让更多女性被“看见”</span>"
 		},
 		{
 		  "height": 451,

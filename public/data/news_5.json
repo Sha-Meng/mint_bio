@@ -1,0 +1,58 @@
+{
+  "id": 5,
+  "title": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时",
+  "categorylabel": "#MiNT 进行时",
+  "categorycolor": "#FF7200",
+  "time": "2025/04/29",
+  "overviewtitle": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时",
+  "sections": [
+    {
+      "id": 2,
+      "headPic": [
+        "assets/News/new_head_1.jpg",
+        "assets/News/new_head_2.jpg"
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ],
+      "contents": [
+		{
+		  "nopaddingpic": "assets/News/202505/news5_pic_1.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news5_pic_01.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "2025年3月5日，国家发展和改革委员会在第十四届全国人民代表大会第三次会议上发布的《关于2024年国民经济和社会发展计划执行情况与2025年国民经济和社会发展计划草案的报告》中指出，要协同推进降碳减污扩绿增长，加快经济社会发展全面绿色转型；坚定不移走生态优先、节约集约、绿色低碳高质量发展道路，深化国家生态文明试验区建设，全面推进美丽中国建设。其重点内容之一是<span class='orange-text'>加快推动绿色低碳发展</span>，具体动作包括持续构建碳排放双控制度体系，制定出台碳达峰碳中和综合评价考核办法，建立健全碳排放统计核算等制度；<span class='orange-text'>发布第二批绿色低碳先进技术示范项目清单</span>，扎实开展第二批国家碳达峰试点，出台零碳园区建设方案等。"
+		},
+		{
+		  "pic": "assets/News/202505/news5_pic_2.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "近日，国家发展和改革委员会发布关于印发《绿色低碳先进技术示范项目清单(第二批)》的通知，<span class='orange-text'>元素智造</span>凭借<span class='orange-text'>3万吨高性能环保降碳生物基材料PBX的绿色应用示范项目</span>入选。"
+		},
+		{
+		  "pic": "assets/News/202505/news5_pic_3.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "国家发改委等十部门于2023年联合印发《绿色低碳先进技术示范工程实施方案》（下称《方案》），提出要通过实施绿色低碳先进技术示范工程，布局一批技术水平领先、减排效果突出的示范项目。《方案》将绿色低碳先进技术按照<span class='orange-text'>源头减碳、过程降碳、末端固碳</span>分为三大类。"
+		},
+		{
+		  "pic": "assets/News/202505/news5_pic_4.png"
+		},
+		{
+		  "height": 451,
+		  "strongText": "元素智造的入选方向正是<span class='orange-text'>过程降碳</span>。作为<span class='orange-text'>工业领域示范项目</span>，元素智造入选项目采用先进聚合工艺，自主研发生产新一代生物基可降解材料。主要建设聚合装置、动力装置、废水处理等相关装置。项目建成后，每年可生产生物基可降解材料3万吨，每年减少碳排放3万吨以上。"
+		},
+		{
+		  "desc": "“元素智造年产3万吨高性能环保降碳生物基材料项目”作为元素驱动科研成果产业化落地的核心项目，代表着产学研一体化深度探索。元素驱动将坚持以示范项目为引领，用环保新材料推动下游产业升级，在落实碳达峰碳中和目标任务过程中锻造新的产业竞争优势，为经济社会高质量发展提供绿色动能。",
+		  "height": 451
+		}
+      ]
+    }
+  ]
+}

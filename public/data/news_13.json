@@ -1,0 +1,31 @@
+{
+  "id": 10,
+  "category": "vision",
+  "title": "地球已不堪重负，我们能为它做些什么？",
+  "categorylabel": "#MiNT Vision",
+  "categorycolor": "#007D30",
+  "time": "2025/03/26",
+  "overviewtitle": "地球已不堪重负，我们能为它做些什么？",
+  "sections": [
+    {
+      "id": 2,
+      "headPic": [
+        
+      ],
+      "footerPic": [
+       
+      ],
+      "contents": [
+		{
+		  "nopaddingpic": "assets/News/202505/news13_pic_1.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news13_pic_2.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news13_pic_3.png"
+		}
+      ]
+    }
+  ]
+}

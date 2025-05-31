@@ -1,0 +1,79 @@
+{
+  "id": 11,
+  "title": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研",
+  "categorylabel": "#MiNT 制造力",
+  "categorycolor": "#7455F6",
+  "time": "2025/04/03",
+  "overviewtitle": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研",
+  "sections": [
+    {
+      "id": 2,
+      "headPic": [
+        "assets/News/new_head_1.jpg",
+		"assets/News/202505/news11_pic_1.png",
+		"assets/News/202505/news4_head_3.jpg"
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ],
+      "contents": [
+		{
+		  "nopaddingpic": "assets/News/202505/news_11.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_2.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_3.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_4.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_5.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news4_pic_5.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_6.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_7.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_8.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news4_pic_7.jpg"
+		},
+		
+		{
+		  "desc": "当前，中国养猪业面临着饲料成本高的问题，其中豆粕作为主要饲料原料，依赖进口，用量大。牧原与元素驱动（杭州）生物科技有限公司联合创建的合成生物产业园落地内乡，利用合成生物技术打造生物发酵和生物制品产业平台，生产氨基酸替代大豆，实现“无豆养猪”，降低成本。",
+		  "height": 451
+		},
+		{
+		  "height": 451,
+		  "desc": "该项技术如果在全国推广使用，最少能减少2000万吨大豆的消耗，使养猪摆脱对大豆的依赖，同时也解放了土地，能够对国家粮食安全作出重大贡献。它通过对氨基酸的生产，让氨基酸的价格降下来，支撑生产应用，降低生产成本，真正让猪肉物美价廉，既能让老百姓吃得起猪肉，又能让企业赚到钱，实现产业良性循环。"
+		},
+		{
+		  "height": 451,
+		  "desc": "牧元安粮项目工厂的建设得到了政府对生产资料的大力支持，政府通过每月召开项目调度会，全力推动水、电、蒸汽能够快速引入厂区，牧元安粮仅用了10个月就已经进入试生产的状态。"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news4_pic_8.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_9.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_10.jpg"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news11_pic_11.jpg"
+		}
+      ]
+    }
+  ]
+}

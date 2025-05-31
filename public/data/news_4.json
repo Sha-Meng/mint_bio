@@ -1,0 +1,79 @@
+{
+  "id": 4,
+  "title": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区",
+  "categorylabel": "#Mint 制造力",
+  "categorycolor": "#7455F6",
+  "time": "2025/04/30",
+  "overviewtitle": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区",
+  "sections": [
+    {
+      "id": 2,
+      "headPic": [
+        "assets/News/new_head_1.jpg",
+        "assets/News/202505/news4_head_2.png"
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ],
+      "contents": [
+		{
+		  "nopaddingpic": "assets/News/202505/news4_head_3.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_1.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_2.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_3.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_4.jpg"
+		},
+		{
+		  "height": 451,
+		  "desc": "4月15日，市长路红卫到内乡县，就合成生物产业及有关项目建设情况进行调研。"
+		},
+		{
+		  "height": 451,
+		  "desc": "在牧元安粮合成生物技术有限公司，路红卫走进生产车间，认真察看设备运行情况，深入了解工艺流程、产量产能和市场前景，鼓励企业依托技术和人才优势，加快抢占合成生物产业制高点。"
+		},
+		{
+		  "height": 451,
+		  "strongText": "在随后召开的座谈会上，路红卫听取有关工作汇报，指出<span class='strong-text'>合成生物产业是我市重点培育的未来产业之一，是抢占发展新赛道的重要抓手。</span>希望牧元安粮深耕合成生物领域，高效集聚创新要素，建好用好科研平台，推动更多科研成果转化落地。要发挥品牌优势、资源优势、科研优势，不断延链补链强链壮链，争创省级合成生物未来产业先导区。"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_5.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_6.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_7.jpg"
+		},
+		{
+		  "height": 451,
+		  "strongText": "“这里是牧元安粮合成生物项目的提取车间，刚刚下线的这些产品就是我手里拿的这种白色的粉末——复合型氨基酸，它是动物饲料必备的营养物质之一，有了它，<span class='strong-text'>每头猪可以节约15块钱的饲料成本。</span>”"
+		},
+		{
+		  "height": 451,
+		  "strongText": "<span class='strong-text'>项目一期年产3万吨生物发酵产品，预计年产值5亿元。</span> 2023年企业落户到这里，就是看中了内乡县“低成本、强支撑”的县域营商生态。“内乡县给予我们企业拿地即开工的极简审批模式，成立政府专班小组全程护航，实现一天办四证，从立项到封顶仅用了6个月的时间。”"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_8.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_9.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_10.jpg"
+		},
+		{
+		  "pic": "assets/News/202505/news4_pic_11.jpg"
+		}
+      ]
+    }
+  ]
+}

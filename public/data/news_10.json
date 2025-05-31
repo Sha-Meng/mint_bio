@@ -1,0 +1,50 @@
+{
+  "id": 10,
+  "category": "manufacture",
+  "title": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶",
+  "categorylabel": "#MiNT 制造力",
+  "categorycolor": "#7455F6",
+  "time": "2025/04/08",
+  "overviewtitle": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶",
+  "sections": [
+    {
+      "id": 2,
+      "headPic": [
+        
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ],
+      "contents": [
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_1.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_2.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_3.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_4.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_5.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_6.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_7.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_8.png"
+		},
+		{
+		  "nopaddingpic": "assets/News/202505/news10_pic_9.png"
+		}
+      ]
+    }
+  ]
+}
