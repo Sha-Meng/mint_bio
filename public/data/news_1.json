@@ -18,6 +18,10 @@
         "assets/News/new_footer_2.jpg"
       ],
       "contents": [
+		{
+		  "video": "/video/News/202505/news1_video1.mp4",
+		  "poster": "assets/News/202505/news1_video1_pic.jpg"
+		},
         {
           "desc": "河南生猪饲养量占全国的1/10，大豆提取豆油后的副产品豆粕在生猪饲料中应用广泛，我国近八成的大豆需要进口。“对等关税”引起全球贸易震荡，河南的生猪养殖会受到什么影响呢？又会以怎样的方式应对？",
           "height": 451

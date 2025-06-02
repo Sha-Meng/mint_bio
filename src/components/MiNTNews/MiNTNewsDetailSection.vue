@@ -15,6 +15,20 @@
 		<div v-if="content.nopaddingpic" class="nopaddingpic">
 		  <img :src="getImageUrl(content.nopaddingpic)" />
 		</div>
+		
+		<div v-if="content.video" class="video">
+			<video width="100%" controls :poster="getImageUrl(content.poster)">
+			  <source :src="content.video" type="video/mp4" >
+			您的浏览器不支持 video 标签。
+			</video>
+		</div>
+		
+		<!-- <div v-if="content.video" class="video">
+			<video width="100%" controls :poster="getImageUrl(content.poster)">
+			  <source :src="getVideoUrl(content.video)" type="video/mp4" >
+			  您的浏览器不支持 video 标签。
+			</video>
+		</div> -->
 
 		<div v-if="content.desc" class="section-desc">
 		  <span > {{ content.desc }} </span>
@@ -37,6 +51,8 @@
 
 <script setup>
 import { getImageUrl } from "@/utils/index";
+import { getVideoUrl } from "@/utils/index";
+
 const props = defineProps({
   info: {
     Object,
@@ -116,6 +132,14 @@ const props = defineProps({
 	    width: 100%;
 	    height: 100%;
 	  }
+	}
+	
+	.video{
+		width: 100%;
+		.video_fill{
+			width: 100%;
+			object-fit: fill;
+		}
 	}
 
     .section-desc {

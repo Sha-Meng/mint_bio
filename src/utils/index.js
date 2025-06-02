@@ -6,3 +6,11 @@ export function getImageUrl(picPath) {
         return ""; // 返回空字符串或其他默认图片路径
     }
 }
+export function getVideoUrl(videoPath) {
+    try {
+        return require(`@/${videoPath}`);
+    } catch (e) {
+        console.error(`Video not found: ${videoPath}`, e);
+        return ""; // 返回空字符串或其他默认图片路径
+    }
+}
