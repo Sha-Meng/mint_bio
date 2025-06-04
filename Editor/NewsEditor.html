@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻配置编辑器</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .editor-container {
+            display: flex;
+            min-height: 700px;
+        }
+        
+        .editor-panel {
+            flex: 1;
+            padding: 25px;
+            border-right: 1px solid #eaeaea;
+            background: #fafafa;
+            overflow-y: auto;
+        }
+        
+        .preview-panel {
+            flex: 1;
+            padding: 25px;
+            background: white;
+            overflow-y: auto;
+        }
+        
+        .panel-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .form-group h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-group h3 i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .array-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            position: relative;
+        }
+        
+        .array-item .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: gray;
+            color: white;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-add {
+            background: #2ecc71;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-add:hover {
+            background: #27ae60;
+        }
+        
+        .btn-export {
+            background: #9b59b6;
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+        }
+        
+        .btn-export:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .content-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .type-btn {
+            flex: 1;
+            padding: 12px;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .type-btn:hover, .type-btn.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .color-preview {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .preview-news {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .preview-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+        
+        .preview-category {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .preview-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .preview-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 15px;
+        }
+        
+        .preview-content {
+            padding: 25px;
+        }
+        
+        .preview-section {
+            margin-bottom: 30px;
+        }
+        
+        .preview-image {
+            width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: block;
+        }
+        
+        .preview-video {
+            width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+            background: #000;
+            position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .preview-desc {
+            margin: 15px 0;
+            line-height: 1.7;
+        }
+        
+        .preview-strong {
+            margin: 15px 0;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+        
+        .orange-text {
+            color: #e67e22;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        
+        .empty-state i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        .empty-state p {
+            font-size: 18px;
+        }
+		
+		.new-strongText {
+		  line-height: 33px;
+		  font-family: MiSans VF;
+		}
+		
+		.strong-text{
+			font-weight: bold;
+		}
+		
+		.orange-text {
+		  color: #e75a29;
+		  font-weight: 800;
+		
+		}
+		
+		.blue-text {
+		  color: #2d5bf6;
+		  font-weight: 800;
+		
+		}
+		
+		.green-text {
+		  color: #74d887;
+		  font-weight: 800;
+		}
+		
+		.blue-green-text {
+		  color: #6bbea9;
+		  font-weight: 800;
+		}
+        
+        @media (max-width: 768px) {
+            .editor-container {
+                flex-direction: column;
+            }
+            
+            .editor-panel {
+                border-right: none;
+                border-bottom: 1px solid #eaeaea;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <header>
+                <h1>新闻配置编辑器</h1>
+                <p class="subtitle">可视化编辑新闻内容</p>
+            </header>
+            
+            <div class="editor-container">
+                <div class="editor-panel">
+                    <h2 class="panel-title">编辑配置</h2>
+                    
+                    <div class="form-group">
+                        <h3><i>📰</i> 基本信息</h3>
+                        <label>新闻ID</label>
+                        <input type="number" v-model="config.id" min="1">
+                        
+                        <label>新闻标题</label>
+                        <input type="text" v-model="config.title" placeholder="输入新闻标题">
+                        
+                        <label>新闻分类</label>
+                        <select v-model="config.categorylabel">
+                            <option v-for="(color, label) in categories" :value="label" :key="label">
+                                {{ label }} <span class="color-preview" :style="{backgroundColor: color}"></span>
+                            </option>
+                        </select>
+                        
+                        <label>发布时间</label>
+                        <input type="text" v-model="config.time" placeholder="格式：YYYY/MM/DD">
+                        
+                        <label>概览标题</label>
+                        <input type="text" v-model="config.overviewtitle" placeholder="输入概览标题">
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3><i>📸</i> 头部图片</h3>
+                        <div v-for="(item, index) in config.sections[0].headPic" :key="index" class="array-item">
+                            <button class="remove-btn" @click="removeHeadPic(index)">×</button>
+                            <label>图片URL {{index + 1}}</label>
+                            <input type="text" v-model="config.sections[0].headPic[index]" placeholder="输入图片URL">
+                        </div>
+                        <button class="btn btn-add" @click="addHeadPic"><i>+</i> 添加图片</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3><i>📝</i> 内容区块</h3>
+                        <div v-for="(content, index) in config.sections[0].contents" :key="index" class="array-item">
+                            <button class="remove-btn" @click="removeContent(index)">×</button>
+                            
+                            <label>内容类型</label>
+                            <div class="content-type-selector">
+                                <button 
+                                    class="type-btn" 
+                                    :class="{active: content.desc !== undefined}"
+                                    @click="setContentType(index, 'desc')"
+                                >描述文本</button>
+                                <button 
+                                    class="type-btn" 
+                                    :class="{active: content.strongText !== undefined}"
+                                    @click="setContentType(index, 'strongText')"
+                                >强调文本</button>
+                                <button 
+                                    class="type-btn" 
+                                    :class="{active: content.video !== undefined}"
+                                    @click="setContentType(index, 'video')"
+                                >视频</button>
+                                <button 
+                                    class="type-btn" 
+                                    :class="{active: content.pic !== undefined}"
+                                    @click="setContentType(index, 'pic')"
+                                >图片</button>
+                            </div>
+                            
+                            <div v-if="content.desc !== undefined">
+                                <label>描述内容</label>
+                                <textarea v-model="content.desc" placeholder="输入描述内容"></textarea>
+                            </div>
+                            
+                            <div v-if="content.strongText !== undefined">
+                                <label>超文本 (支持HTML)</label>
+                                <textarea v-model="content.strongText" placeholder="输入强调文本，可使用HTML标签"></textarea>
+                                <p style="font-size: 13px; color: #777; margin-top: 5px;">
+                                    提示：使用 &lt;span class='orange-text'&gt; <span class="orange-text">文本 </span> &lt;/span&gt; 添加橙色高亮
+                                </p>
+								<p style="font-size: 13px; color: #777; margin-top: 5px;"> 
+									提示：使用 &lt;span class='blue-text'&gt; <span class="blue-text">文本 </span> &lt;/span&gt; 添加蓝色高亮
+								</p>
+								<p style="font-size: 13px; color: #777; margin-top: 5px;">
+									提示：使用 &lt;span class='green-text'&gt; <span class="green-text">文本 </span> &lt;/span&gt; 添加绿色高亮
+								</p>
+								<p style="font-size: 13px; color: #777; margin-top: 5px;">
+									提示：使用 &lt;span class='blue-green-text'&gt; <span class="blue-green-text">文本 </span> &lt;/span&gt; 添加蓝绿色高亮
+								</p>
+								<p style="font-size: 13px; color: #777; margin-top: 5px;">
+								    提示：使用 &lt;span class='strong-text'&gt;<span class="strong-text">文本 </span>&lt;/span&gt; 添加加粗
+								</p>
+                            </div>
+                            
+                            <div v-if="content.video !== undefined">
+                                <label>视频URL</label>
+                                <input type="text" v-model="content.video" placeholder="输入视频URL">
+                                <label>封面图片URL</label>
+                                <input type="text" v-model="content.poster" placeholder="输入封面图片URL">
+                            </div>
+                            
+                            <div v-if="content.pic !== undefined">
+                                <label>图片URL</label>
+                                <input type="text" v-model="content.pic" placeholder="输入图片URL">
+                            </div>
+                        </div>
+                        <button class="btn btn-add" @click="addContent"><i>+</i> 添加内容区块</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3><i>🖼️</i> 底部图片</h3>
+                        <div v-for="(item, index) in config.sections[0].footerPic" :key="index" class="array-item">
+                            <button class="remove-btn" @click="removeFooterPic(index)">×</button>
+                            <label>图片URL {{index + 1}}</label>
+                            <input type="text" v-model="config.sections[0].footerPic[index]" placeholder="输入图片URL">
+                        </div>
+                        <button class="btn btn-add" @click="addFooterPic"><i>+</i> 添加图片</button>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn btn-export" @click="exportJson"><i>📥</i> 导出JSON配置</button>
+                        <button class="btn btn-danger" @click="resetConfig"><i>🔄</i> 重置</button>
+                    </div>
+                </div>
+                
+                <div class="preview-panel">
+                    <h2 class="panel-title">预览效果</h2>
+                    
+                    <div class="preview-news">
+                        <div class="preview-header">
+                            <div class="preview-category" :style="{backgroundColor: categories[config.categorylabel]}">
+                                {{ config.categorylabel }}
+                            </div>
+                            <h2 class="preview-title">{{ config.title || "新闻标题" }}</h2>
+                            <div class="preview-meta">
+                                <span>ID: {{ config.id || "1" }}</span>
+                                <span>发布时间: {{ config.time || "2025/05/12" }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-content">
+                            <div v-if="config.sections[0].headPic.length > 0">
+                                <img 
+                                    v-for="(pic, idx) in config.sections[0].headPic" 
+                                    :key="'head-'+idx" 
+                                    :src="pic || 'https://via.placeholder.com/800x400?text=头部图片'" 
+                                    class="preview-image"
+                                >
+                            </div>
+                            
+                            <div v-for="(content, index) in config.sections[0].contents" :key="index" class="preview-section">
+                                <div v-if="content.desc">
+                                    <p class="preview-desc">{{ content.desc }}</p>
+                                </div>
+                                
+                                <div v-if="content.strongText">
+                                    <p class="preview-strong" v-html="content.strongText"></p>
+                                </div>
+                                
+                                <div v-if="content.video">
+                                    <div class="preview-video">
+                                        <div>视频: {{ content.video }}</div>
+                                    </div>
+                                    <p v-if="content.poster">封面: {{ content.poster }}</p>
+                                </div>
+                                
+                                <div v-if="content.pic">
+                                    <img 
+                                        :src="content.pic || 'https://via.placeholder.com/800x400?text=内容图片'" 
+                                        class="preview-image"
+                                    >
+                                </div>
+                            </div>
+                            
+                            <div v-if="config.sections[0].footerPic.length > 0">
+                                <img 
+                                    v-for="(pic, idx) in config.sections[0].footerPic" 
+                                    :key="'footer-'+idx" 
+                                    :src="pic || 'https://via.placeholder.com/800x400?text=底部图片'" 
+                                    class="preview-image"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div v-if="!config.sections[0].contents.length && !config.sections[0].headPic.length && !config.sections[0].footerPic.length" class="empty-state">
+                        <div>📋</div>
+                        <p>添加内容后，预览将显示在这里</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, reactive, computed } = Vue
+        
+        createApp({
+            setup() {
+                // 预设分类选项
+                const categories = reactive({
+                    "#Mint 进行时": "#FF7200",
+                    "#MiNT 制造力": "#7455F6",
+                    "#MiNT 产品力": "#144BE1",
+                    "#MiNT Vision": "#007D30"
+                })
+                
+                // 默认配置
+                const defaultConfig = {
+                    id: 1,
+                    title: "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
+                    categorylabel: "#Mint 进行时",
+                    time: "2025/05/12",
+                    overviewtitle: "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
+                    sections: [
+                        {
+                            id: 2,
+                            headPic: [
+                                "assets/News/new_head_1.jpg",
+                                "assets/News/202505/news1_head_1.jpg"
+                            ],
+                            footerPic: [
+                                "assets/News/202505/news1_footer_1.png",
+                                "assets/News/new_footer_1.jpg",
+                                "assets/News/new_footer_2.jpg"
+                            ],
+                            contents: [
+                                {
+                                    video: "/video/News/202505/news1_video1.mp4",
+                                    poster: "assets/News/202505/news1_video1_pic.jpg"
+                                },
+                                {
+                                    desc: "河南生猪饲养量占全国的1/10，大豆提取豆油后的副产品豆粕在生猪饲料中应用广泛，我国近八成的大豆需要进口。\"对等关税\"引起全球贸易震荡，河南的生猪养殖会受到什么影响呢？又会以怎样的方式应对？",
+                                    height: 451
+                                },
+                                {
+                                    height: 451,
+                                    strongText: "近日，河南广播电视台记者来到了牧原集团，就低豆粕日粮用于养殖进行了采访。近年，牧原集团与西湖大学、元素驱动（杭州）生物科技有限公司展开了合作，借助合成生物技术推动豆粕减量替代。目前，该项目已经实现从实验室到量产的跨越，<span class='orange-text'>元素驱动与牧原集团合作的牧元安粮项目工厂也成为科技创新与产业创新融合、以合成生物技术解决产业难题、保障国家战略问题的代表案例，成为南阳生物制造的金名片。</span>"
+                                },
+                                {
+                                    height: 451,
+                                    desc: "在采访中，记者走访了牧原集团、牧元安粮合成生物技术有限公司、南阳市西湖牧原合成生物研究院、牧原实验室等机构，了解了低豆粕日粮从菌种到中试再到量产的过程。"
+                                },
+                                {
+                                    height: 451,
+                                    strongText: "牧原集团牵手西湖大学孵化企业元素驱动（杭州）生物科技有限公司，一直致力于\"无豆养猪\"技术的研发，利用生物发酵技术生产氨基酸作为豆粕替代品。<span class='orange-text'>元素驱动通过合成生物技术，自研了工业菌种，提高了氨基酸的发酵率和产酸率。</span>据悉，目前的低豆粕日粮技术可以使每头猪降低饲料成本约15元，降本增效效果显著。"
+                                },
+                                {
+                                    height: 451,
+                                    desc: "目前，科研攻关还在继续，牧原正在和西湖大学及元素驱动合作，通过合成生物技术，研发生产更多品种的氨基酸。最终目标要实现\"低豆养猪\"、\"无豆养猪\"。"
+                                },
+                                {
+                                    pic: "assets/News/202505/news_1.png"
+                                },
+                                {
+                                    height: 451,
+                                    desc: "元素驱动创始人兼首席科学家、牧原实验室主任张科春也指出，\"欧美国家养猪豆粕用量可以达到4%，我国的平均用量在13%左右，生物合成氨基酸是可行的豆粕替代方法之一。\""
+                                },
+                                {
+                                    height: 451,
+                                    desc: "牧原股份董事会秘书秦军表示：\"我们（牧原）的豆粕添加量已经可以达到5%左右，低豆日粮技术，如果得到全行业推广，每年可以节约2000万吨大豆，这就相当于是1.5亿亩的耕地。对于国家的粮食安全战略有非常重要的意义。\""
+                                }
+                            ]
+                        }
+                    ]
+                }
+                
+                // 当前配置
+                const config = reactive(JSON.parse(JSON.stringify(defaultConfig)))
+                
+                // 获取当前分类颜色
+                const categoryColor = computed(() => {
+                    return categories[config.categorylabel] || "#FF7200"
+                })
+                
+                // 添加头部图片
+                const addHeadPic = () => {
+                    config.sections[0].headPic.push("")
+                }
+                
+                // 移除头部图片
+                const removeHeadPic = (index) => {
+                    config.sections[0].headPic.splice(index, 1)
+                }
+                
+                // 添加底部图片
+                const addFooterPic = () => {
+                    config.sections[0].footerPic.push("")
+                }
+                
+                // 移除底部图片
+                const removeFooterPic = (index) => {
+                    config.sections[0].footerPic.splice(index, 1)
+                }
+                
+                // 添加内容区块
+                const addContent = () => {
+                    config.sections[0].contents.push({
+                        desc: "",
+                        height: 451
+                    })
+                }
+                
+                // 移除内容区块
+                const removeContent = (index) => {
+                    config.sections[0].contents.splice(index, 1)
+                }
+                
+                // 设置内容类型
+                const setContentType = (index, type) => {
+                    const content = config.sections[0].contents[index]
+                    
+                    // 清除所有类型属性
+                    delete content.desc
+                    delete content.strongText
+                    delete content.video
+                    delete content.poster
+                    delete content.pic
+                    
+                    // 设置新类型
+                    if (type === 'desc') {
+                        content.desc = ""
+                        content.height = 451
+                    } else if (type === 'strongText') {
+                        content.strongText = ""
+                        content.height = 451
+                    } else if (type === 'video') {
+                        content.video = ""
+                        content.poster = ""
+                    } else if (type === 'pic') {
+                        content.pic = ""
+                    }
+                }
+                
+                // 导出JSON
+                const exportJson = () => {
+                    const jsonStr = JSON.stringify(config, null, 2)
+                    const blob = new Blob([jsonStr], {type: 'application/json'})
+                    const url = URL.createObjectURL(blob)
+                    
+                    const a = document.createElement('a')
+                    a.href = url
+                    a.download = 'news-config.json'
+                    document.body.appendChild(a)
+                    a.click()
+                    
+                    // 清理
+                    setTimeout(() => {
+                        document.body.removeChild(a)
+                        URL.revokeObjectURL(url)
+                    }, 100)
+                }
+                
+                // 重置配置
+                const resetConfig = () => {
+                    if(confirm('确定要重置所有配置吗？')) {
+                        Object.assign(config, JSON.parse(JSON.stringify(defaultConfig)))
+                    }
+                }
+                
+                return {
+                    categories,
+                    config,
+                    categoryColor,
+                    addHeadPic,
+                    removeHeadPic,
+                    addFooterPic,
+                    removeFooterPic,
+                    addContent,
+                    removeContent,
+                    setContentType,
+                    exportJson,
+                    resetConfig
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
