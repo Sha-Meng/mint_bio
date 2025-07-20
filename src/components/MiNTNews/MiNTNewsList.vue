@@ -54,7 +54,7 @@ const options = ref([
   },
   {
 	value: "manufacture",
-	label: "#MiNT制造力"
+	label: "#MiNT智造力"
   }
   // 可以添加更多分类选项
 ]);

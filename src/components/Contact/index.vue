@@ -55,13 +55,34 @@
             <p class="contact-popover-content-connection-title">
               您也可以通过以下渠道找到我们
             </p>
-            <p class="contact-popover-content-connection-item mt30">
-              顾问电话：15937287752
-            </p>
-            <p class="contact-popover-content-connection-item counselor">
-              或扫码添加顾问
-            </p>
-            <img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode.png" />
+			<div class="contact-popover-content-connection-tel">
+				<div class="contact-popover-content-connection-tel-left">
+					<p class="contact-popover-content-connection-desc mt30">
+					  氨基酸产品顾问
+					</p>
+					<p class="contact-popover-content-connection-desc counselor">
+					  TEL: 15937287752
+					</p>
+					<p class="contact-popover-content-connection-desc counselor">
+					  WECHAT: 扫码添加
+					</p>
+					<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode.png" />
+				</div>
+				<div class="contact-popover-content-connection">
+					<p class="contact-popover-content-connection-desc mt30">
+					  新材料产品顾问
+					</p>
+					<p class="contact-popover-content-connection-desc counselor">
+					  TEL: 19129376767
+					</p>
+					<p class="contact-popover-content-connection-desc counselor">
+					  WECHAT: 扫码添加
+					</p>
+					<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode2.jpg" />
+				</div>
+			</div>
+			
+            
             <p class="contact-popover-content-connection-item email">
               邮箱：mkt@mint-bio.com
             </p>
@@ -324,6 +345,30 @@ onBeforeUnmount(() => {
         font-size: 12px;
         font-weight: 500;
       }
+	  
+	  &-tel {
+		display: flex;
+		
+		&-left{
+			width: 280px;
+			
+			&-item{
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				font-size: 20px;
+				font-weight: 500;
+			}
+		}
+		
+		&-right{
+		    &-item{
+				height: 100%;
+				font-size: 20px;
+				font-weight: 500;
+			}
+		}
+	  }
     }
   }
 }

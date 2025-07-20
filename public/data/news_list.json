@@ -1,33 +1,33 @@
 [
   {
-  	"id": 1,
-  	"category": "runtime",
-  	"title": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/05/12",
-  	"pic": "assets/News/202505/news_1.png",
-	"overviewtitle": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法”"
+    "id": 1,
+    "category": "runtime",
+    "title": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
+    "categorylabel": "#Mint 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/05/12",
+    "pic": "assets/News/202505/news_1.png",
+    "overviewtitle": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法”"
   },
   {
-  	"id": 4,
-  	"category": "manufacture",
-  	"title": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区",
-  	"categorylabel": "#MiNT 制造力",
-  	"categorycolor": "#7455F6",
-  	"time": "2025/04/30",
-  	"pic": "assets/News/202505/news_4.png",
-  	"overviewtitle": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区"
+    "id": 5,
+    "category": "runtime",
+    "title": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/04/29",
+    "pic": "assets/News/202505/news_5.jpg",
+    "overviewtitle": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时"
   },
   {
-  	"id": 5,
-  	"category": "runtime",
-  	"title": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/04/29",
-  	"pic": "assets/News/202505/news_5.jpg",
-  	"overviewtitle": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时"
+    "id": 4,
+    "category": "manufacture",
+    "title": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区",
+    "categorylabel": "#MiNT 制造力",
+    "categorycolor": "#7455F6",
+    "time": "2025/04/30",
+    "pic": "assets/News/202505/news_4.png",
+    "overviewtitle": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区"
   },
   {
     "id": 8,
@@ -37,17 +37,17 @@
     "categorycolor": "#144BE1",
     "time": "2025/04/28",
     "pic": "assets/News/202505/news_8.png",
-  	"overviewtitle": "产品密码 |天然之力，科技赋能—元素惠通PBAT+PPC生物降解地膜"
+    "overviewtitle": "产品密码 |天然之力，科技赋能—元素惠通PBAT+PPC生物降解地膜"
   },
   {
-  	"id": 10,
-  	"category": "manufacture",
-  	"title": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶",
-  	"categorylabel": "#MiNT 制造力",
-  	"categorycolor": "#7455F6",
-  	"time": "2025/04/08",
-  	"pic": "assets/News/202505/news_10.png",
-  	"overviewtitle": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶"
+    "id": 10,
+    "category": "manufacture",
+    "title": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶",
+    "categorylabel": "#MiNT 制造力",
+    "categorycolor": "#7455F6",
+    "time": "2025/04/08",
+    "pic": "assets/News/202505/news_10.png",
+    "overviewtitle": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶"
   },
   {
     "id": 14,
@@ -57,88 +57,87 @@
     "categorycolor": "#144BE1",
     "time": "2025/03/21",
     "pic": "assets/images/product-1.jpeg",
-  	"overviewtitle": "新数据出炉，元素驱动氨基酸持续助力养殖业低碳减排｜MiNT产品力"
+    "overviewtitle": "新数据出炉，元素驱动氨基酸持续助力养殖业低碳减排｜MiNT产品力"
   },
   {
-  	"id": 15,
-  	"category": "runtime",
-  	"title": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/03/19",
-  	"pic": "assets/News/202505/news_15.png",
-  	"overviewtitle": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时"
+    "id": 15,
+    "category": "runtime",
+    "title": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/03/19",
+    "pic": "assets/News/202505/news_15.png",
+    "overviewtitle": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时"
   },
   {
-  	"id": 2,
-  	"category": "runtime",
-  	"title": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/05/09",
-  	"pic": "assets/News/202505/news_2.jpg",
-  	"overviewtitle": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」"
+    "id": 2,
+    "category": "runtime",
+    "title": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/05/09",
+    "pic": "assets/News/202505/news_2.jpg",
+    "overviewtitle": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」"
   },
   {
-  	"id": 3,
-  	"category": "runtime",
-  	"title": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/05/03",
-  	"pic": "assets/News/202505/news_3.jpg",
-  	"overviewtitle": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动"
+    "id": 3,
+    "category": "runtime",
+    "title": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/05/03",
+    "pic": "assets/News/202505/news_3.jpg",
+    "overviewtitle": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动"
   },
   {
-  	"id": 6,
-  	"category": "runtime",
-  	"title": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/04/25",
-  	"pic": "assets/News/202505/news_6.jpg",
-  	"overviewtitle": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单"
+    "id": 6,
+    "category": "runtime",
+    "title": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/04/25",
+    "pic": "assets/News/202505/news_6.jpg",
+    "overviewtitle": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单"
   },
   {
-  	"id": 7,
-  	"category": "runtime",
-  	"title": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/04/21",
-  	"pic": "assets/News/202505/news_7.jpg",
-  	"overviewtitle": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时"
-  },
-  
-  {
-  	"id": 9,
-  	"category": "runtime",
-  	"title": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/04/18",
-  	"pic": "assets/News/202505/news_9.png",
-  	"overviewtitle": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时"
+    "id": 7,
+    "category": "runtime",
+    "title": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/04/21",
+    "pic": "assets/News/202505/news_7.jpg",
+    "overviewtitle": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时"
   },
   {
-  	"id": 11,
-  	"category": "manufacture",
-  	"title": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研",
-  	"categorylabel": "#MiNT 制造力",
-  	"categorycolor": "#7455F6",
-  	"time": "2025/04/03",
-  	"pic": "assets/News/202505/news_11.jpg",
-  	"overviewtitle": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研"
+    "id": 9,
+    "category": "runtime",
+    "title": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/04/18",
+    "pic": "assets/News/202505/news_9.png",
+    "overviewtitle": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时"
   },
   {
-  	"id": 12,
-  	"category": "runtime",
-  	"title": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/03/30",
-  	"pic": "assets/News/202505/news_12.jpg",
-  	"overviewtitle": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时"
+    "id": 11,
+    "category": "manufacture",
+    "title": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研",
+    "categorylabel": "#MiNT 制造力",
+    "categorycolor": "#7455F6",
+    "time": "2025/04/03",
+    "pic": "assets/News/202505/news_11.jpg",
+    "overviewtitle": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研"
+  },
+  {
+    "id": 12,
+    "category": "runtime",
+    "title": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/03/30",
+    "pic": "assets/News/202505/news_12.jpg",
+    "overviewtitle": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时"
   },
   {
     "id": 13,
@@ -150,14 +149,14 @@
     "pic": "assets/News/202505/news_13.png"
   },
   {
-  	"id": 16,
-  	"category": "runtime",
-  	"title": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/03/08",
-  	"pic": "assets/News/202505/news_16.jpg",
-  	"overviewtitle": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》"
+    "id": 16,
+    "category": "runtime",
+    "title": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/03/08",
+    "pic": "assets/News/202505/news_16.jpg",
+    "overviewtitle": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》"
   },
   {
     "id": 17,
@@ -167,17 +166,17 @@
     "categorycolor": "#144BE1",
     "time": "2025/03/07",
     "pic": "assets/News/202505/news_17.jpg",
-  	"overviewtitle": "小小粉末竟然是大豆价格的“调节器”｜MiNT 产品力"
+    "overviewtitle": "小小粉末竟然是大豆价格的“调节器”｜MiNT 产品力"
   },
   {
-  	"id": 18,
-  	"category": "runtime",
-  	"title": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定",
-  	"categorylabel": "#MiNT 进行时",
-  	"categorycolor": "#FF7200",
-  	"time": "2025/02/20",
-  	"pic": "assets/News/202505/news_18.jpg",
-  	"overviewtitle": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定"
+    "id": 18,
+    "category": "runtime",
+    "title": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定",
+    "categorylabel": "#MiNT 进行时",
+    "categorycolor": "#FF7200",
+    "time": "2025/02/20",
+    "pic": "assets/News/202505/news_18.jpg",
+    "overviewtitle": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定"
   },
   {
     "id": 19,
@@ -315,5 +314,4 @@
     "time": "2024/06/06",
     "pic": "assets/News/news_15.jpg"
   }
-  
 ]
