@@ -312,7 +312,9 @@
 							<label>分类</label>
 							<select v-model="config.categorylabel">
 								<option value="#Mint 进行时">Mint 进行时</option>
-								<option value="#MiNT 智造力">MiNT 智造力</option>
+								<option value="#MiNT 制造力">MiNT 制造力</option>
+								<option value="#MiNT 产品力">MiNT 产品力</option>
+								<option value="#MiNT Vision">MiNT Vision</option>
 							</select>
 							<label>发布时间</label>
 							<input v-model="config.time">
@@ -348,35 +350,32 @@
 								<button class="remove-btn" @click="removeContent(index)">×</button>
 
 								<div class="content-type-selector">
-									<button class="type-btn" :class="{active: content.desc}"
-										@click="setContentType(index, 'desc')">文本</button>
-									<button class="type-btn" :class="{active: content.pic}"
+									<button class="type-btn" :class="{active: content.type === 'text'}"
+										@click="setContentType(index, 'text')">文本</button>
+									<button class="type-btn" :class="{active: content.type === 'pic'}"
 										@click="setContentType(index, 'pic')">图片</button>
-									<button class="type-btn" :class="{active: content.strongText}"
+									<button class="type-btn" :class="{active: content.type === 'strongText'}"
 										@click="setContentType(index, 'strongText')">强调</button>
-									<button class="type-btn" :class="{active: content.video}"
+									<button class="type-btn" :class="{active: content.type === 'video'}"
 										@click="setContentType(index, 'video')">视频</button>
 								</div>
 
-								<div v-if="content.desc">
+								<div v-if="content.type === 'text'">
 									<label>文本内容</label>
 									<textarea v-model="content.desc" rows="3"></textarea>
-									
 								</div>
 
-								<div v-if="content.pic">
+								<div v-if="content.type === 'pic'">
 									<label>图片URL</label>
 									<input type="text" v-model="content.pic">
-									
 								</div>
 
-								<div v-if="content.strongText">
+								<div v-if="content.type === 'strongText'">
 									<label>强调文本</label>
 									<textarea v-model="content.strongText" rows="3"></textarea>
-									
 								</div>
 
-								<div v-if="content.video">
+								<div v-if="content.type === 'video'">
 									<label>视频URL</label>
 									<input type="text" v-model="content.video">
 									<label>海报URL</label>
@@ -427,17 +426,17 @@
 						<div class="preview-section">
 							<h3>主要内容</h3>
 							<div v-for="(content, index) in config.sections[0].contents" :key="'preview-content'+index">
-								<div v-if="content.desc" class="preview-text">
+								<div v-if="content.type === 'text'" class="preview-text">
 									{{ content.desc }}
 								</div>
-								<div v-if="content.pic" class="preview-image">
+								<div v-if="content.type === 'pic'" class="preview-image">
 									<img :src="getResourcePath(content.pic)" @error="handleImageError">
 									<div v-if="imageError[getResourcePath(content.pic)]" class="image-error"><i
 											class="fas fa-image"></i> 图片加载失败</div>
 								</div>
-								<div v-if="content.strongText" class="preview-strong" v-html="content.strongText">
+								<div v-if="content.type === 'strongText'" class="preview-strong" v-html="content.strongText">
 								</div>
-								<div v-if="content.video" class="preview-video">
+								<div v-if="content.type === 'video'" class="preview-video">
 									<video controls :poster="getResourcePath(content.poster)" style="max-width: 100%;">
 										<source :src="getResourcePath(content.video)" type="video/mp4">
 									</video>
@@ -457,245 +456,259 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<script>
-			const {
-				createApp,
-				ref,
-				reactive
-			} = Vue;
-			const draggable = vuedraggable;
+			<script>
+				const {
+					createApp,
+					ref,
+					reactive
+				} = Vue;
+				const draggable = vuedraggable;
 
-			createApp({
-				components: {
-					draggable
-				},
-				setup() {
-					const showNotification = ref(false);
-					const notificationMessage = ref('');
-					const notificationType = ref('success');
-					const notificationIcon = ref('fas fa-check-circle');
+				createApp({
+					components: {
+						draggable
+					},
+					setup() {
+						const showNotification = ref(false);
+						const notificationMessage = ref('');
+						const notificationType = ref('success');
+						const notificationIcon = ref('fas fa-check-circle');
 
-					const showNotificationMessage = (message, type = 'success') => {
-						notificationMessage.value = message;
-						notificationType.value = type;
-						notificationIcon.value = type === 'success' ? 'fas fa-check-circle' :
-							'fas fa-exclamation-circle';
-						showNotification.value = true;
-						setTimeout(() => showNotification.value = false, 3000);
-					}
-
-					const categories = {
-						"#Mint 进行时": "#FF7200",
-						"#MiNT 智造力": "#7455F6"
-					};
-
-					const defaultConfig = {
-						id: null,
-						title: "",
-						categorylabel: "#Mint 进行时",
-						time: new Date().toLocaleDateString('zh-CN'),
-						pic: "",
-						coverPic: "",
-						sections: [{
-							headPic: [],
-							footerPic: [],
-							contents: []
-						}]
-					};
-
-					const config = reactive(JSON.parse(JSON.stringify(defaultConfig)));
-					const localNewsList = ref([]);
-					const loading = ref(false);
-					const imageError = reactive({});
-
-					const getResourcePath = (relativePath) => {
-						if (!relativePath) return '';
-
-						const cleanedPath = String(relativePath)
-							.replace(/^[./\\]+/, '')
-							.replace(/^assets[\\/]/, '')
-							.replace(/\\/g, '/');
-
-						const isVideo = /\.(mp4|mov|avi|webm)$/i.test(cleanedPath) ||
-							/\/video\//i.test(cleanedPath);
-
-						return isVideo ? `../public/${cleanedPath}` : `../src/assets/${cleanedPath}`;
-					};
-
-					const handleImageError = (e) => {
-						imageError[e.target.src] = true;
-						e.target.style.display = 'none';
-					};
-
-					const loadNewsList = async () => {
-						try {
-							loading.value = true;
-							localNewsList.value = await window.electronAPI.readNewsList();
-						} catch (error) {
-							showNotificationMessage('加载列表失败', 'error');
-						} finally {
-							loading.value = false;
+						const showNotificationMessage = (message, type = 'success') => {
+							notificationMessage.value = message;
+							notificationType.value = type;
+							notificationIcon.value = type === 'success' ? 'fas fa-check-circle' :
+								'fas fa-exclamation-circle';
+							showNotification.value = true;
+							setTimeout(() => showNotification.value = false, 3000);
 						}
-					};
 
-					const selectNews = async (news) => {
-						try {
-							loading.value = true;
-							const detail = await window.electronAPI.readNewsDetail(news.id);
-
-							const listItem = localNewsList.value.find(item => item.id === news.id);
-							const coverPic = listItem?.pic || detail.pic || detail.coverPic;
-
-							const filteredContents = detail.sections?.[0]?.contents?.filter(content => {
-								return content.desc || content.pic || content.strongText || content
-								.video;
-							}) || [];
-
-							Object.assign(config, {
-								...detail,
-								pic: coverPic,
-								coverPic: coverPic,
-								sections: [{
-									headPic: detail.sections?.[0]?.headPic || [],
-									footerPic: detail.sections?.[0]?.footerPic || [],
-									contents: filteredContents
-								}]
-							});
-
-							showNotificationMessage(`已加载新闻: ${news.title}`, 'success');
-						} catch (error) {
-							showNotificationMessage('加载详情失败', 'error');
-						} finally {
-							loading.value = false;
-						}
-					};
-
-					const createNewNews = () => {
-						const maxId = Math.max(0, ...localNewsList.value.map(n => n.id));
-						Object.assign(config, {
-							...defaultConfig,
-							id: maxId + 1,
-							time: new Date().toLocaleDateString('zh-CN')
-						});
-					};
-
-					const saveNewsConfig = async () => {
-						try {
-							const newsToSave = JSON.parse(JSON.stringify({
-								...config,
-								coverPic: config.pic,
-								sections: config.sections.map(section => ({
-									...section,
-									contents: section.contents.filter(content =>
-										content.desc || content.pic || content
-										.strongText || content.video
-									)
-								}))
-							}));
-
-							const updatedList = JSON.parse(JSON.stringify(localNewsList.value));
-							const index = updatedList.findIndex(item => item.id === config.id);
-							const newsItem = {
-								...updatedList[index] || {},
-								id: config.id,
-								title: config.title,
-								time: config.time,
-								pic: config.pic,
-								categorylabel: config.categorylabel,
-								categorycolor: categories[config.categorylabel]
-							};
-
-							if (index === -1) {
-								updatedList.push(newsItem);
-							} else {
-								updatedList[index] = newsItem;
-							}
-
-							const result = await window.electronAPI.saveNews(newsToSave, updatedList);
-
-							if (result?.success) {
-								showNotificationMessage('保存成功!', 'success');
-								await loadNewsList();
-							} else {
-								throw new Error(result?.error || '保存失败');
-							}
-						} catch (error) {
-							showNotificationMessage(`保存失败: ${error.message}`, 'error');
-						}
-					};
-
-					const addHeadPic = () => config.sections[0].headPic.push("");
-					const removeHeadPic = (index) => config.sections[0].headPic.splice(index, 1);
-					const addFooterPic = () => config.sections[0].footerPic.push("");
-					const removeFooterPic = (index) => config.sections[0].footerPic.splice(index, 1);
-
-					const addContent = () => {
-						config.sections[0].contents.push({
-							desc: "",
-							height: 200
-						});
-					};
-
-					const removeContent = (index) => {
-						config.sections[0].contents.splice(index, 1);
-					};
-
-					const setContentType = (index, type) => {
-						const content = config.sections[0].contents[index];
-
-						const newContent = {
-							height: content.height || 200
+						const categories = {
+							"#Mint 进行时": "#FF7200",
+							"#MiNT 制造力": "#7455F6",
+							"#MiNT 产品力": "#144BE1",
+							"#MiNT Vision": "#007D30"
 						};
 
-						if (type === 'desc') {
-							newContent.desc = content.desc || "";
-						} else if (type === 'pic') {
-							newContent.pic = content.pic || "";
-						} else if (type === 'strongText') {
-							newContent.strongText = content.strongText || "";
-						} else if (type === 'video') {
-							newContent.video = content.video || "";
-							newContent.poster = content.poster || "";
-						}
+						const defaultConfig = {
+							id: null,
+							title: "",
+							categorylabel: "#Mint 进行时",
+							time: new Date().toLocaleDateString('zh-CN'),
+							pic: "",
+							coverPic: "",
+							sections: [{
+								headPic: [],
+								footerPic: [],
+								contents: []
+							}]
+						};
 
-						config.sections[0].contents.splice(index, 1, newContent);
-					};
+						const config = reactive(JSON.parse(JSON.stringify(defaultConfig)));
+						const localNewsList = ref([]);
+						const loading = ref(false);
+						const imageError = reactive({});
 
-					const onDragEnd = () => {
-						showNotificationMessage('顺序已调整，保存后生效', 'info');
-					};
+						const getResourcePath = (relativePath) => {
+							if (!relativePath) return '';
 
-					loadNewsList();
+							const cleanedPath = String(relativePath)
+								.replace(/^[./\\]+/, '')
+								.replace(/^assets[\\/]/, '')
+								.replace(/\\/g, '/');
 
-					return {
-						showNotification,
-						notificationMessage,
-						notificationType,
-						notificationIcon,
-						config,
-						localNewsList,
-						loading,
-						imageError,
-						getResourcePath,
-						handleImageError,
-						loadNewsList,
-						selectNews,
-						createNewNews,
-						saveNewsConfig,
-						addHeadPic,
-						removeHeadPic,
-						addFooterPic,
-						removeFooterPic,
-						addContent,
-						removeContent,
-						setContentType,
-						onDragEnd,
-						showNotificationMessage
-					};
-				}
-			}).mount('#app');
-		</script>
+							const isVideo = /\.(mp4|mov|avi|webm)$/i.test(cleanedPath) ||
+								/\/video\//i.test(cleanedPath);
+
+							return isVideo ? `../public/${cleanedPath}` : `../src/assets/${cleanedPath}`;
+						};
+
+						const handleImageError = (e) => {
+							imageError[e.target.src] = true;
+							e.target.style.display = 'none';
+						};
+
+						const loadNewsList = async () => {
+							try {
+								loading.value = true;
+								localNewsList.value = await window.electronAPI.readNewsList();
+							} catch (error) {
+								showNotificationMessage('加载列表失败', 'error');
+							} finally {
+								loading.value = false;
+							}
+						};
+
+						const selectNews = async (news) => {
+							try {
+								loading.value = true;
+								const detail = await window.electronAPI.readNewsDetail(news.id);
+
+								const listItem = localNewsList.value.find(item => item.id === news.id);
+								const coverPic = listItem?.pic || detail.pic || detail.coverPic;
+
+								const filteredContents = detail.sections?.[0]?.contents?.filter(content => {
+									return content.desc || content.pic || content.strongText || content
+										.video;
+								}) || [];
+
+								Object.assign(config, {
+									...detail,
+									pic: coverPic,
+									coverPic: coverPic,
+									sections: [{
+										headPic: detail.sections?.[0]?.headPic || [],
+										footerPic: detail.sections?.[0]?.footerPic || [],
+										contents: filteredContents
+									}]
+								});
+
+								showNotificationMessage(`已加载新闻: ${news.title}`, 'success');
+							} catch (error) {
+								showNotificationMessage('加载详情失败', 'error');
+							} finally {
+								loading.value = false;
+							}
+						};
+
+						const createNewNews = () => {
+							const maxId = Math.max(0, ...localNewsList.value.map(n => n.id));
+							Object.assign(config, {
+								...defaultConfig,
+								id: maxId + 1,
+								time: new Date().toLocaleDateString('zh-CN')
+							});
+						};
+
+						const saveNewsConfig = async () => {
+							try {
+								const newsToSave = JSON.parse(JSON.stringify({
+									...config,
+									coverPic: config.pic,
+									sections: config.sections.map(section => ({
+										...section,
+										contents: section.contents.filter(content =>
+											content.desc || content.pic || content
+											.strongText || content.video
+										)
+									}))
+								}));
+
+								const updatedList = JSON.parse(JSON.stringify(localNewsList.value));
+								const index = updatedList.findIndex(item => item.id === config.id);
+								const newsItem = {
+									...updatedList[index] || {},
+									id: config.id,
+									title: config.title,
+									time: config.time,
+									pic: config.pic,
+									categorylabel: config.categorylabel,
+									categorycolor: categories[config.categorylabel]
+								};
+
+								if (index === -1) {
+									updatedList.push(newsItem);
+								} else {
+									updatedList[index] = newsItem;
+								}
+
+								const result = await window.electronAPI.saveNews(newsToSave, updatedList);
+
+								if (result?.success) {
+									showNotificationMessage('保存成功!', 'success');
+									await loadNewsList();
+								} else {
+									throw new Error(result?.error || '保存失败');
+								}
+							} catch (error) {
+								showNotificationMessage(`保存失败: ${error.message}`, 'error');
+							}
+						};
+
+						const addHeadPic = () => config.sections[0].headPic.push("");
+						const removeHeadPic = (index) => config.sections[0].headPic.splice(index, 1);
+						const addFooterPic = () => config.sections[0].footerPic.push("");
+						const removeFooterPic = (index) => config.sections[0].footerPic.splice(index, 1);
+
+						const addContent = () => {
+							const newContent = {
+								type: 'text',
+								desc: "",
+								pic: "",
+								strongText: "",
+								video: "",
+								poster: "",
+								height: 200
+							};
+							config.sections[0].contents.push(newContent);
+
+							// 强制触发响应式更新
+							config.sections[0].contents = [...config.sections[0].contents];
+						};
+
+						const removeContent = (index) => {
+							config.sections[0].contents.splice(index, 1);
+						};
+
+						const setContentType = (index, type) => {
+							const content = config.sections[0].contents[index];
+
+							// 创建新内容对象，保留必要属性
+							const newContent = {
+								type: type,
+								height: content.height || 200
+							};
+
+							// 根据类型设置对应字段
+							if (type === 'text') {
+								newContent.desc = content.desc || "";
+							} else if (type === 'pic') {
+								newContent.pic = content.pic || "";
+							} else if (type === 'strongText') {
+								newContent.strongText = content.strongText || "";
+							} else if (type === 'video') {
+								newContent.video = content.video || "";
+								newContent.poster = content.poster || "";
+							}
+
+							// 替换原有内容
+							config.sections[0].contents.splice(index, 1, newContent);
+						};
+
+						const onDragEnd = () => {
+							showNotificationMessage('顺序已调整，保存后生效', 'info');
+						};
+
+						loadNewsList();
+
+						return {
+							showNotification,
+							notificationMessage,
+							notificationType,
+							notificationIcon,
+							config,
+							localNewsList,
+							loading,
+							imageError,
+							getResourcePath,
+							handleImageError,
+							loadNewsList,
+							selectNews,
+							createNewNews,
+							saveNewsConfig,
+							addHeadPic,
+							removeHeadPic,
+							addFooterPic,
+							removeFooterPic,
+							addContent,
+							removeContent,
+							setContentType,
+							onDragEnd,
+							showNotificationMessage
+						};
+					}
+				}).mount('#app');
+			</script>
 	</body>
 </html>
