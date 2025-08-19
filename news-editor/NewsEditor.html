@@ -327,9 +327,11 @@
 						<div class="form-group">
 							<h3><i class="fas fa-image"></i> 封面设置</h3>
 							<label>封面图片URL</label>
-							<input type="text" v-model="config.pic" placeholder="例如: assets/News/test.jpg">
+							<input type="text" v-model="config.pic" placeholder="例如: assets/News/test.jpg"
+								@input="refreshImagePreview('cover')">
 							<div class="preview-image" v-if="config.pic">
-								<img :src="getResourcePath(config.pic)" @error="handleImageError">
+								<img :src="getResourcePath(config.pic, true)" @error="handleImageError"
+									:key="'cover-'+config.pic">
 								<div v-if="imageError[getResourcePath(config.pic)]" class="image-error">
 									<i class="fas fa-image"></i> 封面图加载失败
 								</div>
@@ -342,7 +344,8 @@
 								class="content-block">
 								<button class="remove-btn" @click="removeHeadPic(index)">×</button>
 								<label>图片URL {{index + 1}}</label>
-								<input type="text" v-model="config.sections[0].headPic[index]">
+								<input type="text" v-model="config.sections[0].headPic[index]"
+									@input="refreshImagePreview('head', index)">
 							</div>
 							<button class="btn-add" @click="addHeadPic"><i class="fas fa-plus"></i> 添加头部图片</button>
 						</div>
@@ -371,7 +374,8 @@
 
 								<div v-if="content.type === 'pic'">
 									<label>图片URL</label>
-									<input type="text" v-model="content.pic">
+									<input type="text" v-model="content.pic"
+										@input="refreshImagePreview('content', index)">
 								</div>
 
 								<div v-if="content.type === 'strongText'">
@@ -395,7 +399,8 @@
 								class="content-block">
 								<button class="remove-btn" @click="removeFooterPic(index)">×</button>
 								<label>图片URL {{index + 1}}</label>
-								<input type="text" v-model="config.sections[0].footerPic[index]">
+								<input type="text" v-model="config.sections[0].footerPic[index]"
+									@input="refreshImagePreview('footer', index)">
 							</div>
 							<button class="btn-add" @click="addFooterPic"><i class="fas fa-plus"></i> 添加底部图片</button>
 						</div>
@@ -407,7 +412,8 @@
 						<div class="preview-section">
 							<h3>封面预览</h3>
 							<div class="preview-cover" v-if="config.pic">
-								<img :src="getResourcePath(config.pic)" @error="handleImageError">
+								<img :src="getResourcePath(config.pic, true)" @error="handleImageError"
+									:key="'preview-cover-'+config.pic">
 								<div v-if="imageError[getResourcePath(config.pic)]" class="image-error">
 									<i class="fas fa-image"></i> 封面图加载失败
 								</div>
@@ -421,7 +427,8 @@
 							<h3>头部图片</h3>
 							<div v-for="(img, index) in config.sections[0].headPic" :key="'preview-head'+index"
 								class="preview-image">
-								<img :src="getResourcePath(img)" @error="handleImageError">
+								<img :src="getResourcePath(img, true)" @error="handleImageError"
+									:key="'head-'+index+'-'+img">
 								<div v-if="imageError[getResourcePath(img)]" class="image-error"><i
 										class="fas fa-image"></i> 图片加载失败</div>
 							</div>
@@ -434,7 +441,8 @@
 									{{ content.desc }}
 								</div>
 								<div v-if="content.type === 'pic'" class="preview-image">
-									<img :src="getResourcePath(content.pic)" @error="handleImageError">
+									<img :src="getResourcePath(content.pic, true)" @error="handleImageError"
+										:key="'content-'+index+'-'+content.pic">
 									<div v-if="imageError[getResourcePath(content.pic)]" class="image-error"><i
 											class="fas fa-image"></i> 图片加载失败</div>
 								</div>
@@ -442,8 +450,9 @@
 									v-html="content.strongText">
 								</div>
 								<div v-if="content.type === 'video'" class="preview-video">
-									<video controls :poster="getResourcePath(content.poster)" style="max-width: 100%;">
-										<source :src="getResourcePath(content.video)" type="video/mp4">
+									<video controls :poster="getResourcePath(content.poster, true)"
+										style="max-width: 100%;">
+										<source :src="getResourcePath(content.video, true)" type="video/mp4">
 									</video>
 								</div>
 							</div>
@@ -453,7 +462,8 @@
 							<h3>底部图片</h3>
 							<div v-for="(img, index) in config.sections[0].footerPic" :key="'preview-foot'+index"
 								class="preview-image">
-								<img :src="getResourcePath(img)" @error="handleImageError">
+								<img :src="getResourcePath(img, true)" @error="handleImageError"
+									:key="'footer-'+index+'-'+img">
 								<div v-if="imageError[getResourcePath(img)]" class="image-error"><i
 										class="fas fa-image"></i> 图片加载失败</div>
 							</div>
@@ -466,7 +476,8 @@
 				const {
 					createApp,
 					ref,
-					reactive
+					reactive,
+					watch
 				} = Vue;
 				const draggable = vuedraggable;
 
@@ -515,7 +526,7 @@
 						const loading = ref(false);
 						const imageError = reactive({});
 
-						const getResourcePath = (relativePath) => {
+						const getResourcePath = (relativePath, forceRefresh = false) => {
 							if (!relativePath) return '';
 
 							const cleanedPath = String(relativePath)
@@ -526,12 +537,51 @@
 							const isVideo = /\.(mp4|mov|avi|webm)$/i.test(cleanedPath) ||
 								/\/video\//i.test(cleanedPath);
 
-							return isVideo ? `../public/${cleanedPath}` : `../src/assets/${cleanedPath}`;
+							const timestamp = forceRefresh ? `?t=${Date.now()}` : '';
+							return isVideo ?
+								`../public/${cleanedPath}${timestamp}` :
+								`../src/assets/${cleanedPath}${timestamp}`;
 						};
 
 						const handleImageError = (e) => {
 							imageError[e.target.src] = true;
 							e.target.style.display = 'none';
+						};
+
+						const refreshImagePreview = (type, index) => {
+							if (type === 'cover') {
+								// 封面图刷新
+								const currentPic = config.pic;
+								config.pic = '';
+								Vue.nextTick(() => {
+									config.pic = currentPic;
+									delete imageError[getResourcePath(currentPic)];
+								});
+							} else if (type === 'head') {
+								// 头部图片刷新
+								const currentPic = config.sections[0].headPic[index];
+								config.sections[0].headPic[index] = '';
+								Vue.nextTick(() => {
+									config.sections[0].headPic[index] = currentPic;
+									delete imageError[getResourcePath(currentPic)];
+								});
+							} else if (type === 'content') {
+								// 内容区块图片刷新
+								const currentPic = config.sections[0].contents[index].pic;
+								config.sections[0].contents[index].pic = '';
+								Vue.nextTick(() => {
+									config.sections[0].contents[index].pic = currentPic;
+									delete imageError[getResourcePath(currentPic)];
+								});
+							} else if (type === 'footer') {
+								// 底部图片刷新
+								const currentPic = config.sections[0].footerPic[index];
+								config.sections[0].footerPic[index] = '';
+								Vue.nextTick(() => {
+									config.sections[0].footerPic[index] = currentPic;
+									delete imageError[getResourcePath(currentPic)];
+								});
+							}
 						};
 
 						const loadNewsList = async () => {
@@ -553,7 +603,6 @@
 								const listItem = localNewsList.value.find(item => item.id === news.id);
 								const coverPic = listItem?.pic || detail.pic || detail.coverPic;
 
-								// 修复：自动推断内容类型并添加type字段
 								const processedContents = detail.sections?.[0]?.contents?.map(content => {
 									const type = content.desc ? 'desc' :
 										content.pic ? 'pic' :
@@ -665,19 +714,30 @@
 							const content = config.sections[0].contents[index];
 
 							const newContent = {
+								...content,
 								type: type,
 								height: content.height || 200
 							};
 
 							if (type === 'desc') {
-								newContent.desc = content.desc || "";
+								newContent.pic = "";
+								newContent.strongText = "";
+								newContent.video = "";
+								newContent.poster = "";
 							} else if (type === 'pic') {
-								newContent.pic = content.pic || "";
+								newContent.desc = "";
+								newContent.strongText = "";
+								newContent.video = "";
+								newContent.poster = "";
 							} else if (type === 'strongText') {
-								newContent.strongText = content.strongText || "";
+								newContent.desc = "";
+								newContent.pic = "";
+								newContent.video = "";
+								newContent.poster = "";
 							} else if (type === 'video') {
-								newContent.video = content.video || "";
-								newContent.poster = content.poster || "";
+								newContent.desc = "";
+								newContent.pic = "";
+								newContent.strongText = "";
 							}
 
 							config.sections[0].contents.splice(index, 1, newContent);
@@ -700,6 +760,7 @@
 							imageError,
 							getResourcePath,
 							handleImageError,
+							refreshImagePreview,
 							loadNewsList,
 							selectNews,
 							createNewNews,
