@@ -329,5 +329,21 @@
     "pic": "assets/News/202508/news35_pic_1.jpg",
     "categorylabel": "#MiNT 制造力",
     "categorycolor": "#7455F6"
+  },
+  {
+    "id": 36,
+    "title": "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新",
+    "time": "2025/8/10",
+    "pic": "assets/News/202508/news36_head_1.jpg",
+    "categorylabel": "#Mint 进行时",
+    "categorycolor": "#FF7200"
+  },
+  {
+    "id": 37,
+    "title": "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时",
+    "time": "2025/8/20",
+    "pic": "assets/News/202508/news37_pic_1.jpg",
+    "categorylabel": "#Mint 进行时",
+    "categorycolor": "#FF7200"
   }
 ]
