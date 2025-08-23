@@ -1,349 +1,348 @@
-[
-  {
-    "id": 1,
-    "category": "runtime",
-    "title": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/05/12",
-    "pic": "assets/News/202505/news_1.png",
-    "overviewtitle": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法”"
-  },
-  {
-    "id": 5,
-    "category": "runtime",
-    "title": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/04/29",
-    "pic": "assets/News/202505/news_5.jpg",
-    "overviewtitle": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时"
-  },
-  {
-    "id": 4,
-    "category": "manufacture",
-    "title": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区",
-    "categorylabel": "#MiNT 制造力",
-    "categorycolor": "#7455F6",
-    "time": "2025/04/30",
-    "pic": "assets/News/202505/news_4.png",
-    "overviewtitle": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区"
-  },
-  {
-    "id": 8,
-    "title": "产品密码 |天然之力，科技赋能—元素惠通PBAT+PPC生物降解地膜",
-    "category": "production",
-    "categorylabel": "#MiNT产品力",
-    "categorycolor": "#144BE1",
-    "time": "2025/04/28",
-    "pic": "assets/News/202505/news_8.png",
-    "overviewtitle": "产品密码 |天然之力，科技赋能—元素惠通PBAT+PPC生物降解地膜"
-  },
-  {
-    "id": 10,
-    "category": "manufacture",
-    "title": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶",
-    "categorylabel": "#MiNT 制造力",
-    "categorycolor": "#7455F6",
-    "time": "2025/04/08",
-    "pic": "assets/News/202505/news_10.png",
-    "overviewtitle": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶"
-  },
-  {
-    "id": 14,
-    "title": "新数据出炉，元素驱动氨基酸持续助力养殖业低碳减排｜MiNT产品力",
-    "category": "production",
-    "categorylabel": "#MiNT产品力",
-    "categorycolor": "#144BE1",
-    "time": "2025/03/21",
-    "pic": "assets/images/product-1.jpeg",
-    "overviewtitle": "新数据出炉，元素驱动氨基酸持续助力养殖业低碳减排｜MiNT产品力"
-  },
-  {
-    "id": 15,
-    "category": "runtime",
-    "title": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/03/19",
-    "pic": "assets/News/202505/news_15.png",
-    "overviewtitle": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时"
-  },
-  {
-    "id": 2,
-    "category": "runtime",
-    "title": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/05/09",
-    "pic": "assets/News/202505/news_2.jpg",
-    "overviewtitle": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」"
-  },
-  {
-    "id": 3,
-    "category": "runtime",
-    "title": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/05/03",
-    "pic": "assets/News/202505/news_3.jpg",
-    "overviewtitle": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动"
-  },
-  {
-    "id": 6,
-    "category": "runtime",
-    "title": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/04/25",
-    "pic": "assets/News/202505/news_6.jpg",
-    "overviewtitle": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单"
-  },
-  {
-    "id": 7,
-    "category": "runtime",
-    "title": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/04/21",
-    "pic": "assets/News/202505/news_7.jpg",
-    "overviewtitle": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时"
-  },
-  {
-    "id": 9,
-    "category": "runtime",
-    "title": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/04/18",
-    "pic": "assets/News/202505/news_9.png",
-    "overviewtitle": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时"
-  },
-  {
-    "id": 11,
-    "category": "manufacture",
-    "title": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研",
-    "categorylabel": "#MiNT 制造力",
-    "categorycolor": "#7455F6",
-    "time": "2025/04/03",
-    "pic": "assets/News/202505/news_11.jpg",
-    "overviewtitle": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研"
-  },
-  {
-    "id": 12,
-    "category": "runtime",
-    "title": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/03/30",
-    "pic": "assets/News/202505/news_12.jpg",
-    "overviewtitle": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时"
-  },
-  {
-    "id": 13,
-    "title": "地球已不堪重负，我们能为它做些什么？",
-    "category": "vision",
-    "categorylabel": "#MiNT Vision",
-    "categorycolor": "#007D30",
-    "time": "2025/03/26",
-    "pic": "assets/News/202505/news_13.png"
-  },
-  {
-    "id": 16,
-    "category": "runtime",
-    "title": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/03/08",
-    "pic": "assets/News/202505/news_16.jpg",
-    "overviewtitle": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》"
-  },
-  {
-    "id": 17,
-    "title": "小小粉末竟然是大豆价格的“调节器”｜MiNT 产品力",
-    "category": "production",
-    "categorylabel": "#MiNT产品力",
-    "categorycolor": "#144BE1",
-    "time": "2025/03/07",
-    "pic": "assets/News/202505/news_17.jpg",
-    "overviewtitle": "小小粉末竟然是大豆价格的“调节器”｜MiNT 产品力"
-  },
-  {
-    "id": 18,
-    "category": "runtime",
-    "title": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/02/20",
-    "pic": "assets/News/202505/news_18.jpg",
-    "overviewtitle": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定"
-  },
-  {
-    "id": 19,
-    "title": "元素智造项目加速推进",
-    "category": "runtime",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/02/05",
-    "pic": "assets/News/news_01.jpg",
-    "overviewtitle": "元素智造项目加速推进 冲刺一季度“开门红”",
-    "overviewcontent": "一季度是项目建设施工的起步冲刺黄金期。元素智造年产 3 万吨项目作为建德市重点项目之一，正以时不我待的紧迫感，鼓足“起步冲刺、决胜全年”的干劲，奋起冲刺一季度“开门红”。"
-  },
-  {
-    "id": 20,
-    "title": "元素驱动董事长刘旻昊博士荣获“建德城市人才合伙人”称号",
-    "category": "runtime",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/01/17",
-    "pic": "assets/News/news_02.jpg"
-  },
-  {
-    "id": 21,
-    "title": "喜结金顶！元素智造年产3万吨PBX柔性装置项目正式结顶",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/01/01",
-    "pic": "assets/News/news_03.jpg"
-  },
-  {
-    "id": 22,
-    "title": "国家乳业技术创新中心与元素驱动启动可持续包装孵化项目，深化乳业ESG创新实践",
-    "category": "runtime",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2024/12/05",
-    "pic": "assets/News/news_04.jpg"
-  },
-  {
-    "id": 23,
-    "title": "元素驱动获近2亿元A轮融资，生物降解新材料可实现量产",
-    "category": "runtime",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2024/09/21",
-    "pic": "assets/News/news_05.jpg"
-  },
-  {
-    "id": 24,
-    "title": "向“新”而创——元素驱动的生物智造之路",
-    "category": "runtime",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2024/10/12",
-    "pic": "assets/News/news_06.jpg"
-  },
-  {
-    "id": 25,
-    "title": "一块好地膜的自我修养",
-    "category": "production",
-    "categorylabel": "#MiNT产品力",
-    "categorycolor": "#144BE1",
-    "time": "2024/09/21",
-    "pic": "assets/News/news_07.jpeg"
-  },
-  {
-    "id": 26,
-    "category": "production",
-    "title": "低豆粕日粮助力全面绿色转型",
-    "categorylabel": "#MiNT产品力",
-    "categorycolor": "#144BE1",
-    "time": "2024/08/30",
-    "pic": "assets/News/news_8_1.png"
-  },
-  {
-    "id": 27,
-    "title": "周扬区长莅临元素驱动调研指导",
-    "category": "runtime",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2025/01/17",
-    "pic": "assets/News/news_09.jpg"
-  },
-  {
-    "id": 28,
-    "title": "姚高员市长调研重点产业赛道企业，莅临元素驱动指导",
-    "category": "runtime",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2024/09/21",
-    "pic": "assets/News/news_10.jpg"
-  },
-  {
-    "id": 29,
-    "title": "这届奥运，没它不行！",
-    "category": "vision",
-    "categorylabel": "#MiNT Vision",
-    "categorycolor": "#007D30",
-    "time": "2024/08/02",
-    "pic": "assets/News/news_11.jpg"
-  },
-  {
-    "id": 30,
-    "title": "九部门联合发文，推动非粮生物基材料发展",
-    "category": "vision",
-    "categorylabel": "#MiNT Vision",
-    "categorycolor": "#007D30",
-    "time": "2025/01/17",
-    "pic": "assets/News/news_12.jpg"
-  },
-  {
-    "id": 31,
-    "title": "元素驱动董事长刘旻昊博士荣获“建德城市人才合伙人”称号",
-    "category": "runtime",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2024/06/19",
-    "pic": "assets/News/news_13.jpg"
-  },
-  {
-    "id": 32,
-    "category": "vision",
-    "title": "它在你看不见的地方，影响你的生活、健康和寿命",
-    "categorylabel": "#Mint Vision",
-    "categorycolor": "#007D30",
-    "time": "2024/06/14",
-    "pic": "assets/News/news_14.jpg"
-  },
-  {
-    "id": 33,
-    "category": "runtime",
-    "title": "合成生物赋能新质生产力，张科春教授畅谈生物智造的历史与未来",
-    "categorylabel": "#MiNT 进行时",
-    "categorycolor": "#FF7200",
-    "time": "2024/06/06",
-    "pic": "assets/News/news_15.jpg"
-  },
-  {
-    "id": 34,
-    "title": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办",
-    "time": "2025/7/14",
-    "pic": "assets/News/202508/news34_pic_1.jpg",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200"
-  },
-  {
-    "id": 35,
-    "title": "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力",
-    "time": "2025/7/31",
-    "pic": "assets/News/202508/news35_pic_1.jpg",
-    "categorylabel": "#MiNT 制造力",
-    "categorycolor": "#7455F6"
-  },
-  {
-    "id": 36,
-    "title": "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新",
-    "time": "2025/8/10",
-    "pic": "assets/News/202508/news36_head_1.jpg",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200"
-  },
-  {
-    "id": 37,
-    "title": "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时",
-    "time": "2025/8/20",
-    "pic": "assets/News/202508/news37_pic_1.jpg",
-    "categorylabel": "#Mint 进行时",
-    "categorycolor": "#FF7200"
-  }
+[{
+		"id": 34,
+		"title": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办",
+		"time": "2025/7/14",
+		"pic": "assets/News/202508/news34_pic_1.jpg",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200"
+	},
+	{
+		"id": 35,
+		"title": "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力",
+		"time": "2025/7/31",
+		"pic": "assets/News/202508/news35_pic_1.jpg",
+		"categorylabel": "#MiNT 制造力",
+		"categorycolor": "#7455F6"
+	},
+	{
+		"id": 36,
+		"title": "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新",
+		"time": "2025/8/10",
+		"pic": "assets/News/202508/news36_head_1.jpg",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200"
+	},
+	{
+		"id": 37,
+		"title": "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时",
+		"time": "2025/8/20",
+		"pic": "assets/News/202508/news37_pic_1.jpg",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200"
+	},
+	{
+		"id": 1,
+		"category": "runtime",
+		"title": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/05/12",
+		"pic": "assets/News/202505/news_1.png",
+		"overviewtitle": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法”"
+	},
+	{
+		"id": 5,
+		"category": "runtime",
+		"title": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/04/29",
+		"pic": "assets/News/202505/news_5.jpg",
+		"overviewtitle": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时"
+	},
+	{
+		"id": 4,
+		"category": "manufacture",
+		"title": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区",
+		"categorylabel": "#MiNT 制造力",
+		"categorycolor": "#7455F6",
+		"time": "2025/04/30",
+		"pic": "assets/News/202505/news_4.png",
+		"overviewtitle": "MiNT 智造力｜牧元安粮4月接待南阳市长带队调研，加快打造未来产业先导区"
+	},
+	{
+		"id": 8,
+		"title": "产品密码 |天然之力，科技赋能—元素惠通PBAT+PPC生物降解地膜",
+		"category": "production",
+		"categorylabel": "#MiNT产品力",
+		"categorycolor": "#144BE1",
+		"time": "2025/04/28",
+		"pic": "assets/News/202505/news_8.png",
+		"overviewtitle": "产品密码 |天然之力，科技赋能—元素惠通PBAT+PPC生物降解地膜"
+	},
+	{
+		"id": 10,
+		"category": "manufacture",
+		"title": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶",
+		"categorylabel": "#MiNT 制造力",
+		"categorycolor": "#7455F6",
+		"time": "2025/04/08",
+		"pic": "assets/News/202505/news_10.png",
+		"overviewtitle": "MiNT 智造力|元素智造新材料工厂主体建筑全部封顶"
+	},
+	{
+		"id": 14,
+		"title": "新数据出炉，元素驱动氨基酸持续助力养殖业低碳减排｜MiNT产品力",
+		"category": "production",
+		"categorylabel": "#MiNT产品力",
+		"categorycolor": "#144BE1",
+		"time": "2025/03/21",
+		"pic": "assets/images/product-1.jpeg",
+		"overviewtitle": "新数据出炉，元素驱动氨基酸持续助力养殖业低碳减排｜MiNT产品力"
+	},
+	{
+		"id": 15,
+		"category": "runtime",
+		"title": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/03/19",
+		"pic": "assets/News/202505/news_15.png",
+		"overviewtitle": "元素惠通新材料（扬州）有限公司正式揭幕 | MiNT进行时"
+	},
+	{
+		"id": 2,
+		"category": "runtime",
+		"title": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/05/09",
+		"pic": "assets/News/202505/news_2.png",
+		"overviewtitle": "《都市快报》人物访谈｜刘旻昊：生物智造「破壁者」"
+	},
+	{
+		"id": 3,
+		"category": "runtime",
+		"title": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/05/03",
+		"pic": "assets/News/202505/news_3.jpg",
+		"overviewtitle": "河南省省长王凯到牧元安粮调研，强调要加强上下游企业联动"
+	},
+	{
+		"id": 6,
+		"category": "runtime",
+		"title": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/04/25",
+		"pic": "assets/News/202505/news_6.jpg",
+		"overviewtitle": "MiNT 进行时|元素驱动入选浙江省未来独角兽企业名单"
+	},
+	{
+		"id": 7,
+		"category": "runtime",
+		"title": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/04/21",
+		"pic": "assets/News/202505/news_7.jpg",
+		"overviewtitle": "南阳市委书记王智慧率南阳考察团到杭州考察元素驱动｜MiNT 进行时"
+	},
+	{
+		"id": 9,
+		"category": "runtime",
+		"title": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/04/18",
+		"pic": "assets/News/202505/news_9.png",
+		"overviewtitle": "元素驱动董事长刘旻昊入选创业邦「2025值得关注的女性创业者」榜单｜MiNT 进行时"
+	},
+	{
+		"id": 11,
+		"category": "manufacture",
+		"title": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研",
+		"categorylabel": "#MiNT 制造力",
+		"categorycolor": "#7455F6",
+		"time": "2025/04/03",
+		"pic": "assets/News/202505/news_11.jpg",
+		"overviewtitle": "MiNT 智造力｜牧元安粮3月迎接多个政府部门调研"
+	},
+	{
+		"id": 12,
+		"category": "runtime",
+		"title": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/03/30",
+		"pic": "assets/News/202505/news_12.jpg",
+		"overviewtitle": "元素驱动“袋”领减塑新生活，无废新时尚！|MiNT 进行时"
+	},
+	{
+		"id": 13,
+		"title": "地球已不堪重负，我们能为它做些什么？",
+		"category": "vision",
+		"categorylabel": "#MiNT Vision",
+		"categorycolor": "#007D30",
+		"time": "2025/03/26",
+		"pic": "assets/News/202505/news_13.png"
+	},
+	{
+		"id": 16,
+		"category": "runtime",
+		"title": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/03/08",
+		"pic": "assets/News/202505/news_16.jpg",
+		"overviewtitle": "MiNT 进行时｜元素驱动受邀分享《合成生物学创新如何跨越死亡谷》"
+	},
+	{
+		"id": 17,
+		"title": "小小粉末竟然是大豆价格的“调节器”｜MiNT 产品力",
+		"category": "production",
+		"categorylabel": "#MiNT产品力",
+		"categorycolor": "#144BE1",
+		"time": "2025/03/07",
+		"pic": "assets/News/202505/news_17.jpg",
+		"overviewtitle": "小小粉末竟然是大豆价格的“调节器”｜MiNT 产品力"
+	},
+	{
+		"id": 18,
+		"category": "runtime",
+		"title": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/02/20",
+		"pic": "assets/News/202505/news_18.jpg",
+		"overviewtitle": "Mint 进行时｜元素驱动荣获“浙江省专精特新中小企业”认定"
+	},
+	{
+		"id": 19,
+		"title": "元素智造项目加速推进",
+		"category": "runtime",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/02/05",
+		"pic": "assets/News/news_01.jpg",
+		"overviewtitle": "元素智造项目加速推进 冲刺一季度“开门红”",
+		"overviewcontent": "一季度是项目建设施工的起步冲刺黄金期。元素智造年产 3 万吨项目作为建德市重点项目之一，正以时不我待的紧迫感，鼓足“起步冲刺、决胜全年”的干劲，奋起冲刺一季度“开门红”。"
+	},
+	{
+		"id": 20,
+		"title": "元素驱动董事长刘旻昊博士荣获“建德城市人才合伙人”称号",
+		"category": "runtime",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/01/17",
+		"pic": "assets/News/news_02.jpg"
+	},
+	{
+		"id": 21,
+		"title": "喜结金顶！元素智造年产3万吨PBX柔性装置项目正式结顶",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/01/01",
+		"pic": "assets/News/news_03.jpg"
+	},
+	{
+		"id": 22,
+		"title": "国家乳业技术创新中心与元素驱动启动可持续包装孵化项目，深化乳业ESG创新实践",
+		"category": "runtime",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2024/12/05",
+		"pic": "assets/News/news_04.jpg"
+	},
+	{
+		"id": 23,
+		"title": "元素驱动获近2亿元A轮融资，生物降解新材料可实现量产",
+		"category": "runtime",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2024/09/21",
+		"pic": "assets/News/news_05.jpg"
+	},
+	{
+		"id": 24,
+		"title": "向“新”而创——元素驱动的生物智造之路",
+		"category": "runtime",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2024/10/12",
+		"pic": "assets/News/news_06.jpg"
+	},
+	{
+		"id": 25,
+		"title": "一块好地膜的自我修养",
+		"category": "production",
+		"categorylabel": "#MiNT产品力",
+		"categorycolor": "#144BE1",
+		"time": "2024/09/21",
+		"pic": "assets/News/news_07.jpeg"
+	},
+	{
+		"id": 26,
+		"category": "production",
+		"title": "低豆粕日粮助力全面绿色转型",
+		"categorylabel": "#MiNT产品力",
+		"categorycolor": "#144BE1",
+		"time": "2024/08/30",
+		"pic": "assets/News/news_8_1.png"
+	},
+	{
+		"id": 27,
+		"title": "周扬区长莅临元素驱动调研指导",
+		"category": "runtime",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2025/01/17",
+		"pic": "assets/News/news_09.jpg"
+	},
+	{
+		"id": 28,
+		"title": "姚高员市长调研重点产业赛道企业，莅临元素驱动指导",
+		"category": "runtime",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2024/09/21",
+		"pic": "assets/News/news_10.jpg"
+	},
+	{
+		"id": 29,
+		"title": "这届奥运，没它不行！",
+		"category": "vision",
+		"categorylabel": "#MiNT Vision",
+		"categorycolor": "#007D30",
+		"time": "2024/08/02",
+		"pic": "assets/News/news_11.jpg"
+	},
+	{
+		"id": 30,
+		"title": "九部门联合发文，推动非粮生物基材料发展",
+		"category": "vision",
+		"categorylabel": "#MiNT Vision",
+		"categorycolor": "#007D30",
+		"time": "2025/01/17",
+		"pic": "assets/News/news_12.jpg"
+	},
+	{
+		"id": 31,
+		"title": "元素驱动董事长刘旻昊博士荣获“建德城市人才合伙人”称号",
+		"category": "runtime",
+		"categorylabel": "#Mint 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2024/06/19",
+		"pic": "assets/News/news_13.jpg"
+	},
+	{
+		"id": 32,
+		"category": "vision",
+		"title": "它在你看不见的地方，影响你的生活、健康和寿命",
+		"categorylabel": "#Mint Vision",
+		"categorycolor": "#007D30",
+		"time": "2024/06/14",
+		"pic": "assets/News/news_14.jpg"
+	},
+	{
+		"id": 33,
+		"category": "runtime",
+		"title": "合成生物赋能新质生产力，张科春教授畅谈生物智造的历史与未来",
+		"categorylabel": "#MiNT 进行时",
+		"categorycolor": "#FF7200",
+		"time": "2024/06/06",
+		"pic": "assets/News/news_15.jpg"
+	}
 ]
