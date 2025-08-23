@@ -2,6 +2,7 @@
 node_modules
 /dist
 /public/video
+/news-editor/dist
 
 
 # local env files

@@ -1,34 +1,43 @@
 {
-  "name": "news-editor",
-  "version": "1.0.0",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
-  },
-  "devDependencies": {
-    "electron": "^28.3.3",
-    "electron-builder": "^24.6.4"
-  },
-  "dependencies": {
-    "fs-extra": "^11.3.0"
-  },
-  "build": {
-    "appId": "com.example.newseditor",
-    "files": [
-      "​**​/*",
-      "../public/data/*.json"
-    ],
-    "extraResources": [
-      {
-        "from": "../public/data",
-        "to": "public/data"
-      }
-    ]
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+	"name": "news-editor",
+	"version": "1.0.0",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron .",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder --mac --win"
+	},
+	"devDependencies": {
+		"electron": "^28.3.3",
+		"electron-builder": "^24.13.3"
+	},
+	"dependencies": {
+		"fs-extra": "^11.3.0"
+	},
+	"build": {
+		"appId": "com.example.editorapp",
+		"productName": "EditorApp",
+		"mac": {
+			"category": "public.app-category.utilities",
+			"icon": "build/icons/favicon.icns"
+		},
+		"win": {
+			"icon": "build/icons/favicon.ico"
+		},
+		"directories": {
+			"output": "dist"
+		},
+		"files": [
+			"**/*",
+			"../public/data/*.json"
+		],
+		"extraResources": [{
+			"from": "../public/data",
+			"to": "public/data"
+		}]
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": ""
 }
