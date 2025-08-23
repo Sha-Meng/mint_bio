@@ -3,6 +3,8 @@
   "title": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办",
   "categorylabel": "#Mint 进行时",
   "time": "2025/7/14",
+  "pic": "assets/News/202508/news34_pic_1.jpg",
+  "coverPic": "assets/News/202508/news34_pic_1.jpg",
   "sections": [
     {
       "headPic": [
@@ -292,6 +294,196 @@
           "poster": "",
           "height": 200
         },
+		{
+		  "type": "desc",
+		  "desc": "西湖大学教授、牧原实验室主任张科春\n《合成生物赋能可持续发展》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_20.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "江南大学生物工程学院院长、教授刘龙\n《功能糖合成生物制造》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_21.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院天津工业生物技术研究所研究员王钦宏\n《食用菌丝蛋白细胞工厂创制及应用》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_22.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院上海高等研究院研究员孙俊松\n《微生物脂肽的高效合成及应用》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_23.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "河南农业大学教授杨森\n《黑水虻”新质生产力”在畜禽行业的应用场景和发展潜力》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_24.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "北京化工大学教授、牧原实验室特聘顾问孙新晓\n《高效细胞工厂构建生产芳香族化合物》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_25.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院天津工业生物技术研究所研究员孙际宾\n《谷氨酸棒杆菌系统代谢工程与氨基酸生物合成》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_26.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院天津工业生物技术研究所研究员、人工合成淀研究中心主任蔡韬\n《二氧化碳人工合成碳水化合物》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_27.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "天津科技大学科研院长、教授夏小乐\n《新质蛋白及其衍生物的探索及实践》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_28.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院天津工业生物技术研究所研究员、低碳合成工程生物学全国重点实验室主任张以恒\n《中国特色的农业工业化+端牢中国饭碗》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_29.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "北京理工大学生命学院副院长、教授，牧原实验室特聘顾问霍毅欣\n《基于生成式模型和高通量筛选的微生物细胞工厂构建》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		
         {
           "type": "strongText",
           "desc": "",
@@ -310,6 +502,33 @@
           "poster": "",
           "height": 200
         },
+		{
+		  "type": "desc",
+		  "desc": "清华大学教授于慧敏\n《合成生物制造底盘菌种工程及材料单体与透明质酸合成》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_30.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "湖北大学教授杨世辉\n《平台化合物非粮生物制造高产稳产工业菌株构建及应用》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
         {
           "type": "strongText",
           "desc": "",
