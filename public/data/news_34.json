@@ -3,8 +3,6 @@
   "title": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办",
   "categorylabel": "#Mint 进行时",
   "time": "2025/7/14",
-  "pic": "assets/News/202508/news34_pic_1.jpg",
-  "coverPic": "assets/News/202508/news34_pic_1.jpg",
   "sections": [
     {
       "headPic": [
@@ -511,6 +509,7 @@
 		  "poster": "",
 		  "height": 200
 		},
+		
 		{
 		  "type": "pic",
 		  "desc": "",
@@ -529,6 +528,186 @@
 		  "poster": "",
 		  "height": 200
 		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_31.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "江南大学教授刘立明\n《微生物化学品细胞工厂的构建与应用》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_32.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中山大学教授孟跃中\n《生物基二氧化碳功能材料的合成理论、产业化与应用进展》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_33.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "大连理工大学教授、牧原实验室特聘顾问孙冰冰\n《疫苗用佐剂及递送系统》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_34.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "北京理工大学教授贾海洋\n《甘草天然产物生物制造》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_35.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "西湖大学特聘研究员、牧原实验室特聘顾问王蕾\n《基于绿色溶剂的生物质拆解与材料化利用》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_36.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "全国生物基材料及降解制品标准化技术委员会(SAC/TC380)委员姜凯\n《生物基与生物降解材料——从萌芽到绽放,能否顺应趋势,开辟‘钱’景? 》    ",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_37.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "西湖大学特聘研究员肖方舟    \n《生物调控网络的全局解与代谢网络的动态预测》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_38.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "南阳理工学院教授郭书贤\n《我国本土土壤中产油脂和胞外多糖酵母菌资源的发掘及应用》   ",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_39.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "西湖大学特聘研究员、牧原实验室副主任程钢\n《两性离子抗污材料平台的设计及开发》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_40.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "北京工商大学轻工科学与工程学院院长、中国塑协降解塑料专委会秘书长翁云宣\n《非粮生物基材料创新发展与机遇》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
         {
           "type": "strongText",
           "desc": "",
@@ -541,12 +720,183 @@
         {
           "type": "pic",
           "desc": "",
-          "pic": "assets/News/202508/news34_pic_15.jpg",
+          "pic": "assets/News/202508/news34_pic_41.jpg",
           "strongText": "",
           "video": "",
           "poster": "",
           "height": 200
         },
+		{
+		  "type": "desc",
+		  "desc": "上海交通大学特聘教授刘天罡\n《萜类化合物的高效合成与创新发现》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_42.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "华东理工大学生物工程学院院长叶邦策\n《植物活性成分的微生物高效合成》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_43.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院微生物研究所研究员刘双江\n《人工合成微生物组工程》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_44.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院深圳先进技术研究院研究员、合成生物学研究所所长助理罗小舟\n《数据驱动的天然产物生物合成》    ",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_45.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "西湖大学特聘研究员、牧原实验室特聘顾问鞠峰\n《宏基因组学和深度学习驱动微生物组资源发掘及风险识别》  ",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_46.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "南方科技大学副教授夏雨\n《空间基因组学与纳米孔选择性测序技术在突破微生物组研究瓶颈中的创新性应用》 ",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_47.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "中国科学院动物研究所研究员王关红\n《合成生物学在微生物组和媒介害虫精准防控中的应用》    ",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_48.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "南阳师范学院生命科学学院副院长韦宇平\n《生物制造核心酶元件的性能强化及应用》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_49.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "华东理工大学特聘副研究员解永涛\n《酶催化的非天然反应研究》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "pic",
+		  "desc": "",
+		  "pic": "assets/News/202508/news34_pic_50.jpg",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
+		{
+		  "type": "desc",
+		  "desc": "广东以色列理工学院教授、牧原实验室副主任徐鹏\n《解脂耶氏酵母作为绿色生物制造的使能技术平台》",
+		  "pic": "",
+		  "strongText": "",
+		  "video": "",
+		  "poster": "",
+		  "height": 200
+		},
         {
           "type": "pic",
           "desc": "",
