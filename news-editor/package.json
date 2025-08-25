@@ -5,7 +5,8 @@
 	"scripts": {
 		"start": "electron .",
 		"pack": "electron-builder --dir",
-		"dist": "electron-builder --mac --win"
+		"dist-win": "electron-builder --win",
+		"dist-mac": "electron-builder --mac"
 	},
 	"devDependencies": {
 		"electron": "^28.3.3",
@@ -30,11 +31,7 @@
 		"files": [
 			"**/*",
 			"../public/data/*.json"
-		],
-		"extraResources": [{
-			"from": "../public/data",
-			"to": "public/data"
-		}]
+		]
 	},
 	"keywords": [],
 	"author": "",

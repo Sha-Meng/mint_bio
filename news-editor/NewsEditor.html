@@ -526,22 +526,29 @@
 						const loading = ref(false);
 						const imageError = reactive({});
 
+						// const getResourcePath = (relativePath, forceRefresh = false) => {
+						// 	if (!relativePath) return '';
+
+						// 	const cleanedPath = String(relativePath)
+						// 		.replace(/^[./\\]+/, '')
+						// 		.replace(/^assets[\\/]/, '')
+						// 		.replace(/\\/g, '/');
+
+						// 	const isVideo = /\.(mp4|mov|avi|webm)$/i.test(cleanedPath) ||
+						// 		/\/video\//i.test(cleanedPath);
+
+						// 	const timestamp = forceRefresh ? `?t=${Date.now()}` : '';
+						// 	return isVideo ?
+						// 		`../public/${cleanedPath}${timestamp}` :
+						// 		`../src/assets/${cleanedPath}${timestamp}`;
+						// };
+						
+						// 原来的 getResourcePath 改为：
 						const getResourcePath = (relativePath, forceRefresh = false) => {
-							if (!relativePath) return '';
-
-							const cleanedPath = String(relativePath)
-								.replace(/^[./\\]+/, '')
-								.replace(/^assets[\\/]/, '')
-								.replace(/\\/g, '/');
-
-							const isVideo = /\.(mp4|mov|avi|webm)$/i.test(cleanedPath) ||
-								/\/video\//i.test(cleanedPath);
-
-							const timestamp = forceRefresh ? `?t=${Date.now()}` : '';
-							return isVideo ?
-								`../public/${cleanedPath}${timestamp}` :
-								`../src/assets/${cleanedPath}${timestamp}`;
+						  if (!relativePath) return '';
+						  return window.assets.toUrl(relativePath, forceRefresh);
 						};
+
 
 						const handleImageError = (e) => {
 							imageError[e.target.src] = true;
