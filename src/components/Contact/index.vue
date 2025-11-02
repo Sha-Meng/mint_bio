@@ -86,11 +86,22 @@
             <p class="contact-popover-content-connection-item email">
               邮箱：mkt@mint-bio.com
             </p>
-            <img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png" alt="QRcode" />
-            <p class="contact-popover-content-connection-desc">关注公众号了解</p>
-            <p class="contact-popover-content-connection-desc mt30">
-              公司动向、产品信息、行业新闻、前沿进展
-            </p>
+			<div class="contact-popover-content-connection-tel">
+				<div class="contact-popover-content-connection-tel-left">
+					<img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png" alt="QRcode" />
+				</div>
+				<div class="contact-popover-content-connection">
+					<p class="contact-popover-content-connection-desc">Oversea Business Contact:</p>
+					<p class="contact-popover-content-connection-desc mt30">
+					  aminosales@mint-bio.com
+					</p>
+				</div>
+			</div>
+			<p class="contact-popover-content-connection-desc">关注公众号了解</p>
+			<p class="contact-popover-content-connection-desc mt30">
+			  公司动向、产品信息、行业新闻、前沿进展
+			</p>
+            
           </div>
         </div>
       </div>
@@ -350,7 +361,7 @@ onBeforeUnmount(() => {
 		display: flex;
 		
 		&-left{
-			width: 280px;
+			width: 200px;
 			
 			&-item{
 				display: flex;

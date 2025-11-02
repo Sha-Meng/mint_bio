@@ -1,354 +1,390 @@
 <template>
-  <div class="contact">
-    <el-popover placement="left-end" width="370" trigger="manual" :visible="visible" :show-arrow="false"
-      popper-class="contact-popover-w" :popper-options="popperOptions">
-      <div class="contact-popover">
-        <div class="contact-popover-close" @click="visible = !visible">
-          <img src="@/assets/images/close.png" alt="close" />
-        </div>
-        <div class="contact-popover-content">
-          <div class="contact-popover-content-left">
-            <p class="contact-popover-content-left-title">洽谈合作</p>
-            <p class="contact-popover-content-left-tip">
-              感谢您对元素驱动的关注，如您对生物智造产品 &
-              <br />解决方案有兴趣或疑问，使用1分钟填写下方表格，<br />我们将尽快安排工作人员与您建联。
-            </p>
-            <div class="contact-popover-content-left-form">
-              <div class="contact-popover-content-left-form-item">
+	<div class="contact">
+		<el-popover placement="left-end" width="370" trigger="manual" :visible="visible" :show-arrow="false"
+			popper-class="contact-popover-w" :popper-options="popperOptions">
+			<div class="contact-popover">
+				<div class="contact-popover-close" @click="visible = !visible">
+					<img src="@/assets/images/close.png" alt="close" />
+				</div>
+				<div class="contact-popover-content">
+					<div class="contact-popover-content-left">
+						<p class="contact-popover-content-left-title">洽谈合作</p>
+						<p class="contact-popover-content-left-tip">
+							感谢您对元素驱动的关注，如您对生物智造产品 &
+							<br />解决方案有兴趣或疑问，使用1分钟填写下方表格，<br />我们将尽快安排工作人员与您建联。
+						</p>
+						<div class="contact-popover-content-left-form">
+							<div class="contact-popover-content-left-form-item">
 
-                <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的姓名..." v-model="formData.name" />
-                </div>
+								<div class="contact-popover-content-left-form-item-input">
+									<input type="text" placeholder="您的姓名..." v-model="formData.name" />
+								</div>
 
-                <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的邮箱..." v-model="formData.email" />
-                </div>
+								<div class="contact-popover-content-left-form-item-input">
+									<input type="text" placeholder="您的邮箱..." v-model="formData.email" />
+								</div>
 
-                <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的电话..." v-model="formData.phone" />
-                </div>
+								<div class="contact-popover-content-left-form-item-input">
+									<input type="text" placeholder="您的电话..." v-model="formData.phone" />
+								</div>
 
-                <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的留言...(请简单描述您的问题)" v-model="formData.message" />
-                </div>
-              </div>
-              <div class="contact-popover-content-left-form-submit" @click="debouncedSubmit"
-                :class="{ 'loading': isLoading }">
-                <p class="contact-popover-content-left-form-submit-btn">提交</p>
-              </div>
-            </div>
-          </div>
+								<div class="contact-popover-content-left-form-item-input">
+									<input type="text" placeholder="您的留言...(请简单描述您的问题)" v-model="formData.message" />
+								</div>
+							</div>
+							<div class="contact-popover-content-left-form-submit" @click="debouncedSubmit"
+								:class="{ 'loading': isLoading }">
+								<p class="contact-popover-content-left-form-submit-btn">提交</p>
+							</div>
+						</div>
+					</div>
 
-          <div class="contact-popover-content-connection">
-            <p class="contact-popover-content-connection-title">
-              您也可以通过以下渠道找到我们
-            </p>
-            <p class="contact-popover-content-connection-email">
-              邮箱：mkt@mint-bio.com
-            </p>
-            <div class="contact-popover-content-connection-bottom">
-              <img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png" alt="QRcode" />
-              <div class="bottom-right">
-                <div>公司动向</div>
-                <div>产品信息</div>
-                <div>行业新闻</div>
-                <div>前沿进展</div>
-              </div>
+					<div class="contact-popover-content-connection">
+						<p class="contact-popover-content-connection-title">
+							您也可以通过以下渠道找到我们
+						</p>
+						<p class="contact-popover-content-connection-email">
+							邮箱：mkt@mint-bio.com
+						</p>
+						<div class="contact-popover-content-connection-bottom">
+							<img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png"
+								alt="QRcode" />
+							<div class="bottom-right">
+								<div>公司动向</div>
+								<div>产品信息</div>
+								<div>行业新闻</div>
+								<div>前沿进展</div>
+							</div>
 
-            </div>
+						</div>
+						<div>
+							<p class="contact-popover-content-connection-desc mt30">
+								氨基酸产品顾问
+							</p>
+							<p class="contact-popover-content-connection-desc counselor">
+								TEL: 15937287752
+							</p>
+							<p class="contact-popover-content-connection-desc counselor">
+								WECHAT: 扫码添加
+							</p>
+							<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode.png" />
 
-          </div>
-        </div>
-      </div>
-      <template #reference>
-        <div class="contact-btn" @click="visible = !visible">
-          <div class="contact-btn-icon">
-            <img src="@/assets/images/contact.png" alt="contact" />
-          </div>
-        </div>
-      </template>
-    </el-popover>
-    <div v-if="visible" class="contact-popover-overlay" @click="visible = false"></div>
-  </div>
+						</div>
+
+						<div>
+							<p class="contact-popover-content-connection-desc mt30">
+								新材料产品顾问
+							</p>
+							<p class="contact-popover-content-connection-desc counselor">
+								TEL: 19129376767
+							</p>
+							<p class="contact-popover-content-connection-desc counselor">
+								WECHAT: 扫码添加
+							</p>
+							<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode2.jpg" />
+
+						</div>
+
+						<div>
+							<p class="contact-popover-content-connection-desc mt30">Oversea Business Contact:</p>
+							<p>aminosales@mint-bio.com</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<template #reference>
+				<div class="contact-btn" @click="visible = !visible">
+					<div class="contact-btn-icon">
+						<img src="@/assets/images/contact.png" alt="contact" />
+					</div>
+				</div>
+			</template>
+		</el-popover>
+		<div v-if="visible" class="contact-popover-overlay" @click="visible = false"></div>
+	</div>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
-import axios from "axios";
-import { debounce } from "lodash";
+	import {
+		ref,
+		reactive
+	} from "vue";
+	import axios from "axios";
+	import {
+		debounce
+	} from "lodash";
 
 
-const visible = ref(false);
-const isLoading = ref(false);
-const formData = reactive({
-  name: "",
-  email: "",
-  phone: "",
-  message: "",
-});
+	const visible = ref(false);
+	const isLoading = ref(false);
+	const formData = reactive({
+		name: "",
+		email: "",
+		phone: "",
+		message: "",
+	});
 
-const popperOptions = ref({
-  modifiers: [
-    {
-      name: "offset",
-      options: {
-        offset: [250, 0], // 控制水平和垂直偏移
-      },
-    },
-  ],
-});
-// 提交函数
-const submit = async () => {
-  try {
-    isLoading.value = true;
-    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-      alert("请填写完整信息");
-      return;
-    }
-    // 校验 email 格式
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      alert('请输入有效的邮箱地址')
-      return;
-    }
+	const popperOptions = ref({
+		modifiers: [{
+			name: "offset",
+			options: {
+				offset: [250, 0], // 控制水平和垂直偏移
+			},
+		}, ],
+	});
+	// 提交函数
+	const submit = async () => {
+		try {
+			isLoading.value = true;
+			if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+				alert("请填写完整信息");
+				return;
+			}
+			// 校验 email 格式
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailRegex.test(formData.email)) {
+				alert('请输入有效的邮箱地址')
+				return;
+			}
 
-    // 校验 phone 格式
-    const phoneRegex = /^1[3-9]\d{9}$/;
-    if (!phoneRegex.test(formData.phone)) {
-      alert('请输入有效的手机号码');
-      return;
-    }
-    const res = axios.post("http://8.155.35.138:8080/api/contact/submit", JSON.stringify(formData));
-    if (res) {
-      alert("提交成功");
-      formData.name = '';
-      formData.email = '';
-      formData.phone = '';
-      formData.message = '';
-      visible.value = false; // 关闭弹窗
-    }
-  } catch (error) {
-    if (error.response && error.response.status === 400) {
-      alert('请求格式错误，请检查输入信息');
-    }
-  } finally {
-    isLoading.value = false;
-  }
-};
-const debouncedSubmit = debounce(submit, 500); // 500 毫秒的防抖时间
+			// 校验 phone 格式
+			const phoneRegex = /^1[3-9]\d{9}$/;
+			if (!phoneRegex.test(formData.phone)) {
+				alert('请输入有效的手机号码');
+				return;
+			}
+			const res = axios.post("http://8.155.35.138:8080/api/contact/submit", JSON.stringify(formData));
+			if (res) {
+				alert("提交成功");
+				formData.name = '';
+				formData.email = '';
+				formData.phone = '';
+				formData.message = '';
+				visible.value = false; // 关闭弹窗
+			}
+		} catch (error) {
+			if (error.response && error.response.status === 400) {
+				alert('请求格式错误，请检查输入信息');
+			}
+		} finally {
+			isLoading.value = false;
+		}
+	};
+	const debouncedSubmit = debounce(submit, 500); // 500 毫秒的防抖时间
 </script>
 
 <style lang="less">
-@media (max-width: 992px) {
-  .el-popper.el-popover.contact-popover-w {
-    background-color: #12161b !important;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    left: 10px !important;
-    height: 80vh !important;
-    overflow-y: auto !important;
-    margin-bottom: 20px !important;
+	@media (max-width: 992px) {
+		.el-popper.el-popover.contact-popover-w {
+			background-color: #12161b !important;
+			border-radius: 20px;
+			border: 1px solid transparent;
+			left: 10px !important;
+			height: 80vh !important;
+			overflow-y: auto !important;
+			margin-bottom: 20px !important;
 
-  }
+		}
 
-  .contact-popover {
-    white-space: normal;
+		.contact-popover {
+			white-space: normal;
 
-    &-close {
-      text-align: right;
+			&-close {
+				text-align: right;
 
-      img {
-        width: 54px;
-        height: 54px;
-      }
-    }
+				img {
+					width: 54px;
+					height: 54px;
+				}
+			}
 
-    &-content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-
-      &-left {
-        width: 370px;
-
-        &-title {
-          margin-bottom: 15px;
-          font-size: 17px;
-          font-weight: 500;
-          color: #f1f3f7;
-        }
-
-        &-tip {
-          font-size: 13px;
-          font-weight: 500;
-          color: #F1F3F780;
-        }
-
-        &-form {
-          margin-top: 25px;
-
-          &-item {
-            &-label {
-              margin-top: 15px;
-              font-size: 15px;
-              color: #f1f3f766;
-            }
-
-            &-input {
-              input {
-                width: 100%;
-                border: none;
-                border-bottom: 0.5px solid #f1f3f733;
-                background-color: transparent;
-                padding-top: 15px;
-                padding-bottom: 10px;
-                outline: none;
-              }
-
-              input::placeholder {
-                color: #F1F3F7CC;
-                opacity: 1;
-              }
-            }
-          }
-
-          &-submit {
-            display: flex;
-            justify-content: flex-start !important;
-            margin-top: 20px !important;
-
-            &-btn {
-              width: 96px;
-              height: 37px;
-              line-height: 37px;
-              text-align: center;
-              color: #f1f3f7;
-              border-radius: 8px;
-              border: 1px solid #ffffff1a;
-            }
-          }
-        }
-      }
+			&-content {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
 
 
+				&-left {
+					width: 370px;
 
-      &-connection {
-        margin-top: 20px;
-        color: #f1f3f7;
+					&-title {
+						margin-bottom: 15px;
+						font-size: 17px;
+						font-weight: 500;
+						color: #f1f3f7;
+					}
 
-        &-title {
-          font-size: 17px;
-          font-weight: 500;
-        }
+					&-tip {
+						font-size: 13px;
+						font-weight: 500;
+						color: #F1F3F780;
+					}
 
-        &-bottom {
-          display: flex;
-          justify-content: flex-start;
-          gap: 5px;
+					&-form {
+						margin-top: 25px;
 
-          .bottom-right {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: #F1F3F780;
-          }
-        }
+						&-item {
+							&-label {
+								margin-top: 15px;
+								font-size: 15px;
+								color: #f1f3f766;
+							}
 
-        &-email {
-          margin-top: 30px;
-          margin-bottom: 30px;
-          font-size: 15px;
-          font-weight: 500;
-        }
+							&-input {
+								input {
+									width: 100%;
+									border: none;
+									border-bottom: 0.5px solid #f1f3f733;
+									background-color: transparent;
+									padding-top: 15px;
+									padding-bottom: 10px;
+									outline: none;
+								}
 
-        &-qrcode {
-          width: 100px;
-          height: 100px;
-          margin: 0;
-        }
+								input::placeholder {
+									color: #F1F3F7CC;
+									opacity: 1;
+								}
+							}
+						}
 
-        &-desc {
-          margin-top: 37px;
-          font-size: 12px;
-          font-weight: 500;
-        }
-      }
-    }
+						&-submit {
+							display: flex;
+							justify-content: flex-start !important;
+							margin-top: 20px !important;
 
-  }
+							&-btn {
+								width: 96px;
+								height: 37px;
+								line-height: 37px;
+								text-align: center;
+								color: #f1f3f7;
+								border-radius: 8px;
+								border: 1px solid #ffffff1a;
+							}
+						}
+					}
+				}
 
-  .contact-popover-overlay {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    /* Semi-transparent background */
-    z-index: 9;
-    /* Ensure it's above the page content but below the popover */
-  }
-}
+
+
+				&-connection {
+					margin-top: 20px;
+					color: #f1f3f7;
+
+					&-title {
+						font-size: 17px;
+						font-weight: 500;
+					}
+
+					&-bottom {
+						display: flex;
+						justify-content: flex-start;
+						gap: 5px;
+
+						.bottom-right {
+							display: flex;
+							flex-direction: column;
+							justify-content: space-between;
+							color: #F1F3F780;
+						}
+					}
+
+					&-email {
+						margin-top: 30px;
+						margin-bottom: 30px;
+						font-size: 15px;
+						font-weight: 500;
+					}
+
+					&-qrcode {
+						width: 100px;
+						height: 100px;
+						margin: 0;
+					}
+
+					&-desc {
+						margin-top: 37px;
+						font-size: 12px;
+						font-weight: 500;
+					}
+				}
+			}
+
+		}
+
+		.contact-popover-overlay {
+			position: fixed !important;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.6);
+			/* Semi-transparent background */
+			z-index: 9;
+			/* Ensure it's above the page content but below the popover */
+		}
+	}
 </style>
 <style lang="less" scoped>
-.contact {
-  position: fixed;
-  right: 0.5%;
-  top: 60%;
-  z-index: 1000;
+	.contact {
+		position: fixed;
+		right: 0.5%;
+		top: 60%;
+		z-index: 1000;
 
-  &-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 80px;
-    position: relative;
-    border-radius: 100px;
-    background-color: #0a0b10b2;
+		&-btn {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100px;
+			height: 80px;
+			position: relative;
+			border-radius: 100px;
+			background-color: #0a0b10b2;
 
-    // transition: all 0.5s;
-    &-icon {
-      width: 24px;
-      height: 24px;
+			// transition: all 0.5s;
+			&-icon {
+				width: 24px;
+				height: 24px;
 
-      img {
-        width: 100%;
-      }
-    }
-  }
+				img {
+					width: 100%;
+				}
+			}
+		}
 
-  &-btn::after,
-  &-btn::before {
-    content: "";
-    position: absolute;
-    border: 2px solid #808184;
-    width: 100px;
-    height: 80px;
-    border-radius: 100px;
-    /* 添加动画 */
-    animation: ellipse-rotate 3s infinite linear;
-  }
+		&-btn::after,
+		&-btn::before {
+			content: "";
+			position: absolute;
+			border: 2px solid #808184;
+			width: 100px;
+			height: 80px;
+			border-radius: 100px;
+			/* 添加动画 */
+			animation: ellipse-rotate 3s infinite linear;
+		}
 
-  @keyframes ellipse-rotate {
+		@keyframes ellipse-rotate {
 
-    0%,
-    100% {
-      clip-path: inset(0 0 65% 0);
-    }
+			0%,
+			100% {
+				clip-path: inset(0 0 65% 0);
+			}
 
-    25% {
-      clip-path: inset(0 65% 0 0);
-    }
+			25% {
+				clip-path: inset(0 65% 0 0);
+			}
 
-    50% {
-      clip-path: inset(65% 0 0 0);
-    }
+			50% {
+				clip-path: inset(65% 0 0 0);
+			}
 
-    75% {
-      clip-path: inset(0 0 0 65%);
-    }
-  }
-}
+			75% {
+				clip-path: inset(0 0 0 65%);
+			}
+		}
+	}
 </style>
