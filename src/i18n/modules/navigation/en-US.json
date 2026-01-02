@@ -1,0 +1,25 @@
+{
+  "main": {
+    "bioIntelligent": "Intelligent Biomanufacturing",
+    "products": "Products",
+    "aboutUs": "About Us",
+    "news": "News",
+    "contact": "Contact Us"
+  },
+  "products": {
+    "materials": "PiX: Novel High-Performance Eco-Friendly Materials",
+    "aminoAcids": "Biosynthetic Amino Acids",
+    "solutions": "Soybean-Reduced Ration Solutions"
+  },
+  "about": {
+    "company": "Company Profile",
+    "vision": "Vision & Responsibility"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "current": "Current Page"
+  },
+  "meta": {
+    "language": "English"
+  }
+}

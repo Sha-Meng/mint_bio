@@ -6,8 +6,8 @@
           <div class="footer-left-logo-img-w pointer" @click="handleJumps('home')">
             <img class="footer-left-logo-img" src="@/assets/images/logo.png" alt="" />
           </div>
-          <div class="footer-left-logo-text1">生物智造惠及</div>
-          <div class="footer-left-logo-text2">每一个生命</div>
+          <div class="footer-left-logo-text1">{{ getText('footer.slogan') }}</div>
+          <div class="footer-left-logo-text2"></div>
         </div>
         <!-- <div class="footer-left-download">
           <span>下载品牌手册</span>
@@ -22,16 +22,16 @@
       <el-col :span="14" class="footer-right">
         <div class="footer-right-content">
           <div class="footer-right-content-menus footer-common">
-            <p class="footer-right-content-menus-item" @click="handleJumps('bioIntelligent')">生物智造</p>
-            <p class="footer-right-content-menus-item" @click="handleJumps('mintNews')">发展动态</p>
+            <p class="footer-right-content-menus-item" @click="handleJumps('bioIntelligent')">{{ getText('nav.bioIntelligent') }}</p>
+            <p class="footer-right-content-menus-item" @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
             <p class="footer-right-content-menus-item" @click="handleJumps('corporate')">加入我们</p>
             <!-- <p class="footer-right-content-menus-item">下载中心</p> -->
           </div>
           <div class="footer-right-content-products footer-common">
-            <p class="footer-right-content-products-item-title">产品</p>
-            <p class="footer-right-content-products-item pointer" @click="handleJumps('material')">生物降解新材料</p>
-            <p class="footer-right-content-products-item pointer" @click="handleJumps('aminoAcid')">生物合成氨基酸</p>
-            <p class="footer-right-content-products-item pointer" @click="handleJumps('knotWeed')">节豆日粮解决方案</p>
+            <p class="footer-right-content-products-item-title">{{ getText('nav.products') }}</p>
+            <p class="footer-right-content-products-item pointer" @click="handleJumps('material')">{{ getText('nav.material') }}</p>
+            <p class="footer-right-content-products-item pointer" @click="handleJumps('aminoAcid')">{{ getText('nav.aminoAcid') }}</p>
+            <p class="footer-right-content-products-item pointer" @click="handleJumps('knotWeed')">{{ getText('nav.knotWeed') }}</p>
           </div>
           <div class="footer-right-content-about footer-common">
             <p class="footer-right-content-about-item-title">关于我们</p>
@@ -67,6 +67,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { getText } from "@/utils/language";
 
 const router = useRouter();
 

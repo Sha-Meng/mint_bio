@@ -1,0 +1,78 @@
+{
+  "buttons": {
+    "learnMore": "Learn More",
+    "submit": "Submit",
+    "contact": "Contact Us",
+    "contactAdvisor": "Contact Advisor",
+    "download": "Download",
+    "viewDetails": "View Details",
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "E-mail",
+    "phone": "Tel",
+    "company": "Company",
+    "message": "Message",
+    "description": "Please briefly describe your inquiry",
+    "required": "Required",
+    "invalid": "Invalid format",
+    "success": "Submitted successfully",
+    "error": "Submission failed",
+    "placeholders": {
+      "name": "Your Name...",
+      "email": "Your Email...",
+      "phone": "Your Phone...",
+      "message": "Your Message...",
+      "messageWithDesc": "Your Message... (Please briefly describe your inquiry)"
+    },
+    "validation": {
+      "required": "Please fill in all required fields",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "submitSuccess": "Submitted successfully",
+      "formatError": "Request format error, please check your input"
+    }
+  },
+  "actions": {
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "all": "All",
+    "more": "More",
+    "less": "Less",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "moreNews": "More News"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "week": "This Week",
+    "month": "This Month",
+    "year": "This Year",
+    "recent": "Recent"
+  },
+  "status": {
+    "loading": "Loading...",
+    "empty": "No Data",
+    "error": "Loading Failed",
+    "success": "Success",
+    "failed": "Failed"
+  },
+  "labels": {
+    "partners": "Partners",
+    "testimonial": "Testimonials",
+    "inDevelopment": "Products in R&D",
+    "performanceAdvantages": "Performance Advantages",
+    "applicationAreas": "Application Areas"
+  },
+  "language": {
+    "switch": "Language",
+    "zh": "简体中文",
+    "en": "English"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "categories": {
+    "updates": "#MiNT 进行时",
+    "biomanufacturing": "#MiNT 智造力",
+    "innovation": "#MiNT 创新力",
+    "all": "全部动态"
+  },
+  "meta": {
+    "readMore": "了解更多",
+    "publishDate": "发布时间",
+    "category": "分类",
+    "tags": "标签"
+  },
+  "sampleNews": {
+    "alliance": {
+      "title": "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟",
+      "subtitle": "MiNT 进行时"
+    },
+    "westlake": {
+      "title": "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新"
+    },
+    "conference": {
+      "title": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办"
+    },
+    "media": {
+      "title": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法"
+    },
+    "demonstration": {
+      "title": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）"
+    }
+  },
+  "navigation": {
+    "previous": "上一篇",
+    "next": "下一篇",
+    "backToList": "返回列表"
+  }
+}

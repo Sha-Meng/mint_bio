@@ -1,0 +1,25 @@
+{
+  "main": {
+    "bioIntelligent": "生物智造",
+    "products": "产品",
+    "aboutUs": "关于我们",
+    "news": "发展动态",
+    "contact": "联系我们"
+  },
+  "products": {
+    "materials": "系列高性能新型生态环保材料PiX",
+    "aminoAcids": "生物合成氨基酸",
+    "solutions": "节豆日粮解决方案"
+  },
+  "about": {
+    "company": "企业介绍",
+    "vision": "愿景与责任"
+  },
+  "breadcrumbs": {
+    "home": "首页",
+    "current": "当前页面"
+  },
+  "meta": {
+    "language": "中文"
+  }
+}

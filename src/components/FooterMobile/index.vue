@@ -7,8 +7,8 @@
           <div class="footer-left-logo-img-w pointer" @click="handleJumps('home')">
             <img class="footer-left-logo-img" src="@/assets/images/logo.png" alt="" />
           </div>
-          <div class="footer-left-logo-text1">生物智造惠及</div>
-          <div class="footer-left-logo-text2">每一个生命</div>
+          <div class="footer-left-logo-text1">{{ getText('footer.slogan') }}</div>
+          <div class="footer-left-logo-text2"></div>
         </div>
 
       </el-col>
@@ -19,17 +19,17 @@
 
           </div>
           <div class="footer-right-content-products footer-common">
-            <p class="footer-right-content-products-item-title gray-text">产品</p>
-            <p class="footer-right-content-products-item pointer " @click="handleJumps('material')">生物降解新材料</p>
-            <p class="footer-right-content-products-item pointer" @click="handleJumps('aminoAcid')">生物合成氨基酸</p>
-            <p class="footer-right-content-products-item pointer" @click="handleJumps('knotWeed')">节豆日粮解决方案</p>
+            <p class="footer-right-content-products-item-title gray-text">{{ getText('nav.products') }}</p>
+            <p class="footer-right-content-products-item pointer " @click="handleJumps('material')">{{ getText('nav.material') }}</p>
+            <p class="footer-right-content-products-item pointer" @click="handleJumps('aminoAcid')">{{ getText('nav.aminoAcid') }}</p>
+            <p class="footer-right-content-products-item pointer" @click="handleJumps('knotWeed')">{{ getText('nav.knotWeed') }}</p>
           </div>
           <div class="footer-right-content-about footer-common">
-            <p class="footer-right-content-about-item-title gray-text">关于我们</p>
-            <p class="footer-right-content-about-item pointer" @click="handleJumps('corporate')">企业介绍</p>
-            <p class="footer-right-content-about-item pointer" @click="handleJumps('vision')">愿景与责任</p>
+            <p class="footer-right-content-about-item-title gray-text">{{ getText('nav.aboutUs') }}</p>
+            <p class="footer-right-content-about-item pointer" @click="handleJumps('corporate')">{{ getText('nav.corporate') }}</p>
+            <p class="footer-right-content-about-item pointer" @click="handleJumps('vision')">{{ getText('nav.vision') }}</p>
           </div>
-          <p class="footer-right-content-dynamic " @click="handleJumps('mintNews')">发展动态</p>
+          <p class="footer-right-content-dynamic " @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
           <p class="footer-right-content-join">加入我们</p>
           <p class="footer-right-content-down">下载中心</p>
         </div>
@@ -64,6 +64,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { getText } from "@/utils/language";
 
 const router = useRouter();
 const showQRCode = ref(false);

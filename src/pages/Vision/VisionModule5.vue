@@ -4,7 +4,7 @@
       <div v-if="titleInView" class="vision-module5-title animate__animated animate__fadeInUp">
         <p class="vision-module5-title-text1 animate__animated animate__flipInX animate__slow">60%</p>
         <p class="vision-module5-title-text2">
-          未来60%的物质<br />可以通过生物制造生产
+          {{ getText('vision.title60') }}<br />{{ getText('vision.subtitle60') }}
         </p>
       </div>
     </div>
@@ -21,28 +21,28 @@
       </div>
       <div v-intersect="() => img2InView = true" class="vision-module5-content-img2">
         <div v-if="img2InView" class="vision-module5-content-img2-item1 animate__animated animate__fadeInUp">
-          <p class="vision-module5-content-img2-item1-text">生物降解新材料</p>
+          <p class="vision-module5-content-img2-item1-text">{{ getText('nav.material') }}</p>
           <router-link :to="`/material`">
 
-            <p class="learn-more-btn">了解更多</p>
+            <p class="learn-more-btn">{{ getText('common.buttons.learnMore') }}</p>
           </router-link>
         </div>
         <div v-if="img2InView" class="vision-module5-content-img2-item2 animate__animated animate__fadeInUp">
-          <p class="vision-module5-content-img2-item2-text">生物合成氨基酸</p>
+          <p class="vision-module5-content-img2-item2-text">{{ getText('nav.aminoAcid') }}</p>
           <router-link :to="`/aminoAcid`">
-            <p class="learn-more-btn">了解更多</p>
+            <p class="learn-more-btn">{{ getText('common.buttons.learnMore') }}</p>
           </router-link>
         </div>
       </div>
       <div v-intersect="() => img3InView = true" class="vision-module5-content-img3-w">
         <div v-if="img3InView" class="vision-module5-content-img3 animate__animated animate__fadeInUp">
           <p class="vision-module5-content-img3-title">
-            生物智造 [ 定制解决方案 ]
+            {{ getText('vision.customSolution') }}
           </p>
           <p class="vision-module5-content-img3-desc">
-            元素驱动将针对您的需求，进行菌种定制、优化、产品延展等<br />生物智造全流程服务。
+            {{ getText('vision.customSolutionDesc') }}
           </p>
-          <p class="vision-module5-content-img3-btn" @click="triggerPopover">匹配顾问</p>
+          <p class="vision-module5-content-img3-btn" @click="triggerPopover">{{ getText('vision.matchAdvisor') }}</p>
         </div>
       </div>
       <div v-intersect="() => img4InView = true" class="vision-module5-content-img4">
@@ -55,6 +55,7 @@
 <script setup>
 import { ref } from "vue";
 import emitter from '@/event/event';
+import { getText } from "@/utils/language";
 
 const triggerPopover = () => {
   emitter.emit('open-popover');

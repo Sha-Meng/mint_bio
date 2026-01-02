@@ -40,9 +40,8 @@
 			<div class="header-middle-right">
 				<div class="contactnav" @click="openContact">
 					<div class="contactnav-item">
-						<span>联系我们</span>
+						<span>{{ getText('nav.contact') }}</span>
 					</div>
-
 				</div>
 			</div>
 
@@ -58,28 +57,28 @@
 					<div class="popover-content-menu">
 						<div class="popover-content-menu-item">
 							<p class="pointer" @click="handleJumps('bioIntelligent')">
-								生物智造
+								{{ getText('nav.bioIntelligent') }}
 							</p>
 						</div>
 						<div class="popover-content-menu-item">
-							<p>产品</p>
+							<p>{{ getText('nav.products') }}</p>
 							<p class="pointer" @click="handleJumps('material')">
-								生物降解新材料
+								{{ getText('nav.material') }}
 							</p>
 							<p class="pointer" @click="handleJumps('aminoAcid')">
-								生物合成氨基酸
+								{{ getText('nav.aminoAcid') }}
 							</p>
 							<p class="pointer" @click="handleJumps('knotWeed')">
-								节豆日粮解决方案
+								{{ getText('nav.knotWeed') }}
 							</p>
 						</div>
 						<div class="popover-content-menu-item">
-							<p>关于我们</p>
-							<p class="pointer" @click="handleJumps('corporate')">企业介绍</p>
-							<p class="pointer" @click="handleJumps('vision')">愿景与责任</p>
+							<p>{{ getText('nav.aboutUs') }}</p>
+							<p class="pointer" @click="handleJumps('corporate')">{{ getText('nav.corporate') }}</p>
+							<p class="pointer" @click="handleJumps('vision')">{{ getText('nav.vision') }}</p>
 						</div>
 						<div class="popover-content-menu-item">
-							<p class="pointer" @click="handleJumps('mintNews')">发展动态</p>
+							<p class="pointer" @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
 						</div>
 						<!-- <div class="popover-content-menu-item">
               <p>加入我们</p>
@@ -89,12 +88,12 @@
             </div> -->
 					</div>
 					<div class="popover-content-language">
-						<p class="popover-content-language-cn">简体中文</p>
-						<!-- <p class="popover-content-language-en">ENGLISH</p>
-            <div class="popover-content-download">
-              <p>下载品牌手册</p>
-              <img src="./images/download.png" alt="download" />
-            </div> -->
+						<p class="popover-content-language-cn" 
+						   :class="{ 'active-language': isChinese() }"
+						   @click="switchToCN">{{ getText('nav.language', 'zh') }}</p>
+						<p class="popover-content-language-en"
+						   :class="{ 'active-language': !isChinese() }"
+						   @click="switchToEN">{{ getText('nav.language', 'en') }}</p>
 					</div>
 				</div>
 				<template #reference>
@@ -125,13 +124,20 @@
 		debounce
 	} from "lodash";
 	import emitter from "@/event/event";
+	import { currentLanguage, switchLanguage, isChinese, getText } from "@/utils/language";
 
 	const router = useRouter();
 	const route = useRoute();
 
-	const navData = ref([{
+	// 语言切换函数
+	const switchToCN = () => switchLanguage('zh');
+	const switchToEN = () => switchLanguage('en');
+
+	// 使用动态菜单数据，支持语言切换
+	const navData = computed(() => [
+		{
 			key: 0,
-			name: "生物智造",
+			name: getText('nav.bioIntelligent'),
 			router: "bioIntelligent",
 			state: false,
 			submenu: [],
@@ -139,22 +145,23 @@
 		},
 		{
 			key: 1,
-			name: "产品",
+			name: getText('nav.products'),
 			router: "/",
 			state: false,
-			submenu: [{
+			submenu: [
+				{
 					key: 1,
-					name: "生物降解新材料",
+					name: getText('nav.material'),
 					router: "material"
 				},
 				{
 					key: 2,
-					name: "生物合成氨基酸",
+					name: getText('nav.aminoAcid'),
 					router: "aminoAcid"
 				},
 				{
 					key: 3,
-					name: "节豆日粮解决方案",
+					name: getText('nav.knotWeed'),
 					router: "knotWeed"
 				},
 			],
@@ -163,17 +170,18 @@
 		},
 		{
 			key: 2,
-			name: "关于我们",
+			name: getText('nav.aboutUs'),
 			router: "/",
 			state: false,
-			submenu: [{
+			submenu: [
+				{
 					key: 21,
-					name: "企业介绍",
+					name: getText('nav.corporate'),
 					router: "corporate"
 				},
 				{
 					key: 22,
-					name: "愿景与责任",
+					name: getText('nav.vision'),
 					router: "vision"
 				},
 			],
@@ -182,7 +190,7 @@
 		},
 		{
 			key: 3,
-			name: "发展动态",
+			name: getText('nav.news'),
 			router: "mintNews",
 			state: false,
 			submenu: [],
@@ -228,12 +236,21 @@
 		window.removeEventListener('scroll', handleScroll);
 	});
 
+	// 添加状态管理
+	const navStates = ref({});
+
 	const setMouseOver = (item) => {
-		navData.value.forEach((navItem) => (navItem.state = false));
+		// 清除所有状态
+		Object.keys(navStates.value).forEach(key => {
+			navStates.value[key] = false;
+		});
+		// 设置当前项状态
+		navStates.value[item.key] = true;
 		item.state = true;
 	};
 
 	const setMouseLeave = (item) => {
+		navStates.value[item.key] = false;
 		item.state = false;
 	};
 
@@ -318,6 +335,17 @@
 				font-size: 16px;
 				font-weight: 500;
 				color: #f1f3f7;
+				cursor: pointer;
+				transition: color 0.3s ease;
+
+				&:hover {
+					color: #ff7200;
+				}
+
+				&.active-language {
+					color: #ff7200;
+					font-weight: 600;
+				}
 			}
 		}
 
@@ -373,12 +401,12 @@
 		}
 
 		&-middle {
-			width: 40%;
+			width: 50%;
 			display: flex;
 			justify-content: space-between;
 
 			&-left {
-				width: 78%;
+				width: 80%;
 
 				.nav {
 					width: 100%;
@@ -403,7 +431,8 @@
 
 					.nav-item {
 						position: relative;
-						width: 25%;
+						flex: 1;
+						min-width: 0;
 						height: 54px;
 						line-height: 54px;
 						text-align: center;
@@ -417,8 +446,13 @@
 							display: block;
 							width: 100%;
 							height: 100%;
+							padding: 0 12px;
+							box-sizing: border-box;
 							text-decoration: none;
 							color: inherit;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
 						}
 
 						&-current {

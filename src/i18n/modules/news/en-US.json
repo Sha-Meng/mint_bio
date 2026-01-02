@@ -1,0 +1,40 @@
+{
+  "categories": {
+    "updates": "#MiNT Updates",
+    "biomanufacturing": "#MiNT Biomanufacturing",
+    "innovation": "#MiNT Innovation",
+    "all": "All News"
+  },
+  "meta": {
+    "readMore": "Learn More",
+    "publishDate": "Published",
+    "category": "Category",
+    "tags": "Tags"
+  },
+  "sampleNews": {
+    "alliance": {
+      "title": "MiNT Bio Joins the Industrial Alliance of Zhejiang Provincial Bio-based Fully Degradable and Nanomaterial Innovation Center｜MiNT Updates",
+      "subtitle": "MiNT Updates"
+    },
+    "westlake": {
+      "title": "MiNT Updates｜Chairman Qin Linlin Encourages Westlake University Undergraduates to Explore and Innovate with Prof. Zhang Kechun's Achievements"
+    },
+    "muyuan": {
+      "title": "MiNT Intelligence to Create｜Muyuan Anliang July Report: Co-organizing the 2025 Nanyang Synthetic Biology Industry Conference, Showcasing Industrial Transformation Capabilities On-Site"
+    },
+    "conference": {
+      "title": "Let Technological Innovation Ignite the Engine of Development—2025 Nanyang Synthetic Biology Industry Conference Successfully Held"
+    },
+    "media": {
+      "title": "Media Focus｜MiNT Bio's Synthetic Biotechnology Offers a New Solution to the Soybean Import Dilemma"
+    },
+    "demonstration": {
+      "title": "MiNT Bio-Driven Intelligent Manufacturing Project Selected for the Green and Low-Carbon Advanced Technology Demonstration Project List (Second Batch)｜MiNT Updates"
+    }
+  },
+  "navigation": {
+    "previous": "Previous",
+    "next": "Next",
+    "backToList": "Back to List"
+  }
+}

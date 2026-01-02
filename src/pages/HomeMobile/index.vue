@@ -25,7 +25,19 @@
     </div>
     <div class="product-section mobile-sector border-gradient">
       <div class="title">
-        <img src="@/assets/images/infinite.png" />
+        <div class="infinite-title">
+          <div class="infinite-title-row">
+            <span class="infinite-title-zh">生物</span>
+            <span class="infinite-title-zh orange">智造</span>
+            <span class="infinite-title-en">
+              <span>Infinity from</span>
+              <span>Biomanufacturing</span>
+            </span>
+            <span class="infinite-title-zh orange">无限</span>
+            <span class="infinite-title-zh">可能</span>
+          </div>
+        </div>
+        <p class="product-description">{{ getText('home.hero.description') }}</p>
       </div>
       <div class="product-list">
         <Swiper :caseList="productList" :topTip="productTopTip">
@@ -56,7 +68,7 @@
 
             <div class="overlay">
               <div class="overlay-content">
-                <div class="button-more">了解更多</div>
+                <div class="button-more">{{ getText('common.buttons.learnMore') }}</div>
               </div>
             </div>
           </div>
@@ -70,7 +82,7 @@
         <div class="text-bottom">{{ item.title }}</div>
       </div>
       <router-link :to="`/mintNews`">
-        <div class="button-more-lg border-gradient">更多动态</div>
+        <div class="button-more-lg border-gradient">{{ getText('common.actions.moreNews') }}</div>
       </router-link>
     </div>
   </div>
@@ -81,6 +93,7 @@ import BannerTitleAnimationMobile from "@/components/BannerTitleAnimationMobile"
 import Swiper from "@/components/Swiper";
 import axios from "axios";
 import { getImageUrl } from "@/utils/index";
+import { getText, currentLanguage } from "@/utils/language";
 
 
 export default {
@@ -104,48 +117,7 @@ export default {
         { marginLeft: 16 },
         { marginLeft: 32 },
       ],
-      caseList: [
-        {
-          title: "前沿科技力",
-          describe: "聚焦合成生物技术突破",
-          describe2: "引领生物智造创新",
-          moveColor: "#FF7200",
-          isShow: false,
-          router: '/corporate',
-        },
-        {
-          title: "平台强赋能",
-          describe: "独创 MiNT X Platform ",
-          describe2: "AI赋能生物智造",
-          moveColor: "#254ad9",
-          isShow: false,
-          router: '/bioIntelligent',
-        },
-        {
-          title: "卓越产品力",
-          describe: "生物降解新材料   ",
-          describe2: "低成本高性能的环保新材料",
-          moveColor: "#3170d3",
-          isShow: false,
-          router: 'material',
-        },
-        {
-          title: "卓越产品力",
-          describe: "生物合成氨基酸 ",
-          describe2: "高效生物合成20+种氨基酸",
-          moveColor: "#3880f3",
-          isShow: false,
-          router: 'aminoAcid',
-        },
-        {
-          title: "绿色可持续",
-          describe: "与合作伙伴共担ESG",
-          describe2: "责任共筑地球可持续未来",
-          moveColor: "#42945f",
-          isShow: false,
-          router: 'vision',
-        },
-      ],
+      caseList: [],
       topTip: ['N 30.2741°', 'MiNT BiO', 'China'],
       bottomTip: ['Hangzhou', 'DNA', 'E 120.1552°'],
       productTopTip: ['China', 'MiNT BiO', 'Hangzhou'],
@@ -156,55 +128,191 @@ export default {
           second: "[ 无豆粕日粮解决方案 ]",
           imgSrc: require("../../assets/images/product-1.jpeg"),
           advantage: [
-            "高效补充牲畜必需氨基酸",
-            "有效减少养殖过程中温室气体排放",
+            "节省大豆",
+            "提供精准氨基酸",
+            "控制成本", 
+            "降氮减排"
           ],
+          applications: "养殖业",
           first: "[ 牧原集团 ]",
           top: 0,
           width: "50%",
         },
         {
           isShow: false,
-          product: "[ 乳品包装 ]",
+          second: "[ 组氨酸 ]",
           imgSrc: require("../../assets/images/product-2.jpg"),
-          advantage: ["纸塑复合", "可降解", "可回收", "成本可控"],
-          friends: "[ 国家乳业创新中心 ]",
+          advantage: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
+          applications: "食品、医药、工业、化妆品",
+          first: "[ 国家乳业创新中心 ]",
         },
         {
           isShow: false,
-          second: "[ 快递袋 ]",
+          second: "[ 生物可降解膜袋 ]",
           imgSrc: require("../../assets/images/product-3.jpeg"),
-          advantage: ["强度高", "成本可控", "可降解", "可回收"],
+          advantage: ["强度高", "阻隔性高", "可生物降解"],
+          applications: "包装、快递",
           first: "[ 唯品会 ]",
         },
         {
           isShow: false,
-          second: "[ 生物降解地膜 ]",
+          second: "[ 生物可降解地膜 ]",
           imgSrc: require("../../assets/images/product-4.jpeg"),
-          advantage: ["寿命长", "保温保墒", "降解期可调控", "有助增产"],
+          advantage: ["可调控降解", "机械性能优", "保温保墒性优"],
+          applications: "农业",
           first: "[ 中国农科院 ]",
         },
         {
           isShow: false,
-          product: "[ 一次性吸管 ]",
+          second: "[ 生物可降解吸管杯材 ]",
           imgSrc: require("../../assets/images/product-5.jpg"),
-          advantage: ["耐热耐冷", "硬度大", "韧性强", "成本可控"],
-          friends: "",
+          advantage: ["耐温性佳", "韧性强", "可生物降解"],
+          applications: "食品",
+          first: "",
         },
         {
           isShow: false,
-          second: "[ 功能性纤维 ]",
+          second: "[ 生物基可降解纤维 ]",
           imgSrc: require("../../assets/images/product-6.jpg"),
-          advantage: ["吸湿性强", "弹力大", "可降解", "可回收"],
+          advantage: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
+          applications: "纺织、医药、日用",
           first: "",
           objectFit: "contain",
         },
       ],
+      // 产品翻译映射
+      productTranslations: {
+        zh: {
+          products: [
+            {
+              name: "[ 无豆粕日粮解决方案 ]",
+              advantages: ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
+              applications: "养殖业",
+              first: "[ 牧原集团 ]"
+            },
+            {
+              name: "[ 组氨酸 ]", 
+              advantages: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
+              applications: "食品、医药、工业、化妆品",
+              first: "[ 国家乳业创新中心 ]"
+            },
+            {
+              name: "[ 生物可降解膜袋 ]",
+              advantages: ["强度高", "阻隔性高", "可生物降解"], 
+              applications: "包装、快递",
+              first: "[ 唯品会 ]"
+            },
+            {
+              name: "[ 生物可降解地膜 ]",
+              advantages: ["可调控降解", "机械性能优", "保温保墒性优"],
+              applications: "农业",
+              first: "[ 中国农科院 ]"
+            },
+            {
+              name: "[ 生物可降解吸管杯材 ]",
+              advantages: ["耐温性佳", "韧性强", "可生物降解"],
+              applications: "食品",
+              first: ""
+            },
+            {
+              name: "[ 生物基可降解纤维 ]", 
+              advantages: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
+              applications: "纺织、医药、日用",
+              first: ""
+            }
+          ]
+        },
+        en: {
+          products: [
+            {
+              name: "[ Soybean Meal-Free Ration Solutions ]",
+              advantages: ["Substantial reduction in soybean consumption", "Precise essential amino acid supplementation", "Cost-effective operation", "Reduced nitrogen excretion and carbon emissions"],
+              applications: "Animal Husbandry",
+              first: "[ Muyuan Group ]"
+            },
+            {
+              name: "[ Histidine ]",
+              advantages: ["Manufactured via advanced biosynthesis", "High fermentation efficiency", "High product purity", "Mature production process"],
+              applications: "Food, Pharmaceuticals, Industrial Applications, Cosmetics",
+              first: "[ National Dairy Innovation Center ]"
+            },
+            {
+              name: "[ Biodegradable Films & Bags ]",
+              advantages: ["High tensile strength", "Excellent barrier performance", "Biodegradable"],
+              applications: "Packaging, Express Logistics",
+              first: "[ Vipshop ]"
+            },
+            {
+              name: "[ Biodegradable Mulching Film ]",
+              advantages: ["Adjustable degradation rate", "Superior mechanical performance", "Excellent heat and moisture retention"],
+              applications: "Planting Industry",
+              first: "[ Chinese Academy of Agricultural Sciences ]"
+            },
+            {
+              name: "[ Biodegradable Materials for Straws & Cups ]",
+              advantages: ["Excellent thermal tolerance", "High toughness", "Biodegradable"],
+              applications: "Food",
+              first: ""
+            },
+            {
+              name: "[ Bio-based Degradable Fibers ]",
+              advantages: ["Green and non-toxic", "High moisture absorption", "Soft, cotton-like feel", "Antimicrobial", "Biodegradable"], 
+              applications: "Textiles, Pharmaceuticals, Daily Use Products",
+              first: ""
+            }
+          ]
+        }
+      },
       newsList: [],
       getImageUrl
     };
   },
   methods: {
+    getText,
+    initializeCaseList() {
+      this.caseList = [
+        {
+          get title() { return getText('home.sections.technology.title'); },
+          describe: "聚焦合成生物技术突破",
+          describe2: "引领生物智造创新",
+          moveColor: "#FF7200",
+          isShow: false,
+          router: '/corporate',
+        },
+        {
+          get title() { return getText('home.sections.platform.title'); },
+          describe: "独创 MiNT X Platform ",
+          describe2: "AI赋能生物智造",
+          moveColor: "#254ad9",
+          isShow: false,
+          router: '/bioIntelligent',
+        },
+        {
+          get title() { return getText('home.sections.products.title'); },
+          get describe() { return getText('nav.material'); },
+          describe2: "低成本高性能的环保新材料",
+          moveColor: "#3170d3",
+          isShow: false,
+          router: 'material',
+        },
+        {
+          get title() { return getText('home.sections.products.title'); },
+          get describe() { return getText('nav.aminoAcid'); },
+          describe2: "高效生物合成20+种氨基酸",
+          moveColor: "#3880f3",
+          isShow: false,
+          router: 'aminoAcid',
+        },
+        {
+          get title() { return getText('home.sections.sustainability.title'); },
+          describe: "与合作伙伴共担ESG",
+          describe2: "责任共筑地球可持续未来",
+          moveColor: "#42945f",
+          isShow: false,
+          router: 'vision',
+        },
+      ];
+    },
     expandMargin() {
       this.advantageShow = true;
       this.lineDivides.forEach((element) => {
@@ -241,7 +349,25 @@ export default {
     }
   },
   mounted() {
+    this.initializeCaseList();
     this.getList();
+    
+    // 监听语言变化，重新初始化数据
+    this.$watch(() => currentLanguage.value, () => {
+      this.initializeCaseList();
+      
+      // 更新产品翻译
+      const currentLang = currentLanguage.value;
+      const translations = this.productTranslations[currentLang] || this.productTranslations.zh;
+      this.productList.forEach((product, index) => {
+        if (translations.products[index]) {
+          product.second = translations.products[index].name;
+          product.advantage = translations.products[index].advantages;
+          product.applications = translations.products[index].applications;
+          product.first = translations.products[index].first;
+        }
+      });
+    });
   },
 };
 </script>
@@ -370,11 +496,52 @@ export default {
 
     .title {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       margin-bottom: 0 auto 40px;
 
-      img {
-        width: 300px;
+      .infinite-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        &-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+
+        &-zh {
+          font: 600 32px MiSans;
+          color: #ffffff;
+          letter-spacing: 4px;
+
+          &.orange {
+            color: #FF7200;
+          }
+        }
+
+        &-en {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font: 400 10px Montserrat;
+          color: rgba(241, 243, 247, 0.5);
+          line-height: 1.4;
+          margin: 0 6px;
+        }
+      }
+
+      .product-description {
+        max-width: 340px;
+        text-align: center;
+        color: rgba(241, 243, 247, 0.6);
+        font-size: 12px;
+        line-height: 2;
+        margin-top: 30px;
       }
 
     }

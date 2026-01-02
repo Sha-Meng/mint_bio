@@ -1,0 +1,91 @@
+{
+  "home": {
+    "hero": {
+      "title": "MiNT Bio",
+      "subtitle": "Element-Driven Innovation",
+      "tagline": "Infinity from Biomanufacturing",
+      "description": "MiNT Bio has built an end-to-end intelligent biomanufacturing platform, integrating R&D, production, and commercialization. By partnering with industry leaders and establishing our own manufacturing hubs, we are cultivating a diverse bio-product matrix with limitless potential."
+    },
+    "sections": {
+      "technology": {
+        "title": "Technological Prowess",
+        "subtitle": "Together to build a sustainable future"
+      },
+      "platform": {
+        "title": "Platform Empowerment",
+        "subtitle": "Powered by the proprietary MiNT X Platform, leveraging AI for Bio-Intelligent Manufacturing"
+      },
+      "products": {
+        "title": "Product Excellence",
+        "materials": "PiX: Novel High-Performance Eco-Friendly Materials",
+        "materialsDesc": "Bio-based, Biodegradable, and Recyclable",
+        "aminoAcids": "Biosynthetic amino acids",
+        "aminoAcidsDesc": "20+ Types of Brilliant BioAmino"
+      },
+      "sustainability": {
+        "title": "Green & Sustainable",
+        "subtitle": "Together to build a sustainable future"
+      }
+    },
+    "testimonial": {
+      "text": "THEY Trusted Our Innovation.",
+      "engText": "Trusted by Industry Leaders"
+    }
+  },
+  "contact": {
+    "title": "Cooperation Enquiry",
+    "subtitle": "Thank you for your interest in MiNT Bio. If you are interested in or have questions about our intelligent biomanufacturing products & solutions,",
+    "instruction": "please take 1 minute to fill out the form below, and we will arrange for advisors to contact you promptly.",
+    "alternativeContact": "Our Contacts",
+    "email": "Email: mkt@mint-bio.com",
+    "advisors": {
+      "aminoAcid": "Amino Acid Products Advisor",
+      "materials": "New Materials Products Advisor"
+    },
+    "wechat": "Scan QR Code to Add",
+    "followUs": "Follow our WeChat Official Account to Learn About",
+    "followUsDesc": "Company Updates, Product Information, Industry News, Frontier Progress",
+    "followUsItems": {
+      "companyUpdates": "Company Updates",
+      "productInfo": "Product Information",
+      "industryNews": "Industry News", 
+      "frontierProgress": "Frontier Progress"
+    }
+  },
+  "partners": {
+    "muyuanGroup": "[ Muyuan Group ]",
+    "nationalDairyInnovationCenter": "[ National Dairy Innovation Center ]",
+    "vipshop": "[ Vipshop ]",
+    "caas": "[ Chinese Academy of Agricultural Sciences ]"
+  },
+  "vision": {
+    "title60": "60% of future materials",
+    "subtitle60": "can be produced through biomanufacturing",
+    "productSolution": "Bio-Intelligent Manufacturing [ Product Solutions ]",
+    "productSolutionDesc": "Match MiNT Bio's existing products and optimize specifically for your application areas.",
+    "customSolution": "Bio-Intelligent Manufacturing [ Custom Solutions ]",
+    "customSolutionDesc": "MiNT Bio will provide full-process biomanufacturing services including strain customization, optimization, and product extension based on your needs.",
+    "matchAdvisor": "Match Advisor",
+    "customProcess": "Custom Process",
+    "step1": "Requirement Customization",
+    "step2": "Synthetic Biology Route Design",
+    "step3": "Effect Verification",
+    "step4": "Engineering Mass Production",
+    "step5": "Put into Use"
+  },
+  "footer": {
+    "slogan": "Create Green Products Benefiting Every Life",
+    "engSlogan": "Intelligent Biomanufacturing for a Sustainable Future",
+    "address": {
+      "label": "Address",
+      "building": "Block 3, Xitou·Yuncheng Xigu",
+      "street": "No. 3 Xiyuan 7th Road, Xihu District, Hangzhou, Zhejiang, China"
+    },
+    "copyright": "© 2024 MiNT Bio (Hangzhou) Co., Ltd.",
+    "icp": "Zhejiang ICP License No. 2024085355",
+    "sections": {
+      "biomanufacturing": "Intelligent Biomanufacturing",
+      "joinUs": "Join Us"
+    }
+  }
+}

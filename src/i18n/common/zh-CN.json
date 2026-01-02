@@ -1,0 +1,78 @@
+{
+  "buttons": {
+    "learnMore": "了解更多",
+    "submit": "提交",
+    "contact": "联系我们",
+    "contactAdvisor": "联系顾问",
+    "download": "下载",
+    "viewDetails": "查看详情",
+    "back": "返回",
+    "next": "下一步",
+    "cancel": "取消",
+    "confirm": "确认"
+  },
+  "forms": {
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话",
+    "company": "公司",
+    "message": "留言",
+    "description": "请简单描述您的问题",
+    "required": "必填项",
+    "invalid": "格式不正确",
+    "success": "提交成功",
+    "error": "提交失败",
+    "placeholders": {
+      "name": "您的姓名...",
+      "email": "您的邮箱...",
+      "phone": "您的电话...",
+      "message": "您的留言...",
+      "messageWithDesc": "您的留言...(请简单描述您的问题)"
+    },
+    "validation": {
+      "required": "请填写完整信息",
+      "invalidEmail": "请输入有效的邮箱地址",
+      "invalidPhone": "请输入有效的手机号码",
+      "submitSuccess": "提交成功",
+      "formatError": "请求格式错误，请检查输入信息"
+    }
+  },
+  "actions": {
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "all": "全部",
+    "more": "更多",
+    "less": "收起",
+    "expand": "展开",
+    "collapse": "收起",
+    "moreNews": "更多动态"
+  },
+  "time": {
+    "today": "今天",
+    "yesterday": "昨天",
+    "week": "本周",
+    "month": "本月",
+    "year": "今年",
+    "recent": "最近"
+  },
+  "status": {
+    "loading": "加载中...",
+    "empty": "暂无数据",
+    "error": "加载失败",
+    "success": "操作成功",
+    "failed": "操作失败"
+  },
+  "labels": {
+    "partners": "合作伙伴",
+    "testimonial": "客户见证",
+    "inDevelopment": "在研产品",
+    "performanceAdvantages": "性能优势",
+    "applicationAreas": "应用领域"
+  },
+  "language": {
+    "switch": "语言切换",
+    "zh": "中文",
+    "en": "English"
+  }
+}

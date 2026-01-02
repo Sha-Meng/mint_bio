@@ -30,18 +30,31 @@
       </div>
     </div>
     <div class="product-section sector border-gradient">
-      <div v-intersect="() => titleInView = true">
-        <img v-if="titleInView" src="@/assets/images/infinite.png" class="title animate__animated animate__fadeInUp" />
+      <div v-intersect="() => titleInView = true" class="product-header">
+        <div v-if="titleInView" class="infinite-title animate__animated animate__fadeInUp">
+          <span class="infinite-title-zh">生物</span>
+          <span class="infinite-title-zh orange">智造</span>
+          <span class="infinite-title-en">
+            <span>Infinity from</span>
+            <span>Biomanufacturing</span>
+          </span>
+          <span class="infinite-title-zh orange">无限</span>
+          <span class="infinite-title-zh">可能</span>
+        </div>
+        <div v-if="titleInView" class="product-description animate__animated animate__fadeInUp">
+          <p>{{ descriptionLine1 }}</p>
+          <p>{{ descriptionLine2 }}</p>
+        </div>
       </div>
       <div class="product-list">
         <div class="product-list-top">
-          <div class="product-list-top-item product">在研产品</div>
-          <div class="product-list-top-item advantage">性能优势</div>
-          <div class="product-list-top-item friends">合作伙伴</div>
+          <div class="product-list-top-item product">{{ getText('common.labels.inDevelopment') }}</div>
+          <div class="product-list-top-item advantage">{{ getText('common.labels.performanceAdvantages') }}</div>
+          <div class="product-list-top-item applications">{{ getText('common.labels.applicationAreas') }}</div>
         </div>
         <div class="product-list-content">
           <div v-for="(item, index) in productList" :key="index" class="product-list-content-item"
-            :style="{ color: item.isShow ? '#fff' : '' }" @mousemove="productMove(index)">
+            :style="{ color: item.isShow ? '#fff' : '' }" @mousemove="productMove(index)" @mouseleave="productLeave">
             <div class="product">
               <span class="product-text">{{ item.product }}</span>
               <transition name="fade">
@@ -53,7 +66,7 @@
               <span class="dot-before" v-for="i in item.advantage" :key="i" :style="{ width: item.width }">{{ i
                 }}</span>
             </div>
-            <div class="friends product-text">{{ item.friends }}</div>
+            <div class="applications product-text">{{ item.applications }}</div>
           </div>
         </div>
       </div>
@@ -61,7 +74,7 @@
     <div v-intersect="() => bannerSectionInView = true" class="banner-section-w sector border-gradient">
       <div v-if="bannerSectionInView" class="animate__animated animate__fadeInUp banner-section">
         <div class="title">
-          <span>您的选择和 </span><span class="orange-text"> 他们 </span><span> 一样</span>
+          <span>{{ getText('common.labels.testimonial') }}</span>
         </div>
         <img src="@/assets/images/banners.png" class="banner-img" />
       </div>
@@ -74,7 +87,7 @@
           <router-link :to="`/mintNews/detail/${item.id}`">
             <div class="overlay">
               <div class="overlay-content">
-                <div class="button-more">了解更多</div>
+                <div class="button-more">{{ getText('common.buttons.learnMore') }}</div>
               </div>
             </div>
           </router-link>
@@ -88,7 +101,7 @@
       </div>
       <div class="new-item new-item-last ">
         <router-link :to="`/mintNews`">
-          <div class=" button-more-lg border-gradient">更多动态</div>
+          <div class=" button-more-lg border-gradient">{{ getText('common.actions.moreNews') }}</div>
         </router-link>
         <img class="line-bottom-img" src="@/assets/images/line-bottom.png" alt="" />
       </div>
@@ -97,10 +110,11 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed, watch } from "vue";
 import BannerTitleAnimation from "@/components/BannerTitleAnimation";
 import axios from "axios";
 import { getImageUrl } from "@/utils/index";
+import { getText, currentLanguage } from "@/utils/language";
 
 
 const lineDivides = reactive([
@@ -114,40 +128,46 @@ const lineDivides = reactive([
   { marginLeft: 32 },
 ]);
 
+// 使用 reactive 存储advantage数据，支持hover状态修改
 const advantageArr = reactive([
   {
-    title: "前沿 科技力",
-    describe: "与合作伙伴共担ESG责任共筑地球可持续未来",
+    title: getText('home.sections.technology.title'),
+    describe: getText('home.sections.technology.subtitle'),
+    color: "#ffffff",
     moveColor: "#FF7200",
     animationClass: "",
     router: '/corporate',
   },
   {
-    title: "平台 强赋能",
-    describe: "独创 MiNT X Platform AI赋能生物智造",
+    title: getText('home.sections.platform.title'),
+    describe: getText('home.sections.platform.subtitle'),
+    color: "#ffffff",
     moveColor: "#144BE1",
     animationClass: "",
     router: '/bioIntelligent',
   },
   {
-    title: "卓越 产品力",
-    subTitle: "生物降解新材料",
-    describe: "低成本高性能的环保新材料",
+    title: getText('home.sections.products.title'),
+    subTitle: getText('nav.material'),
+    describe: getText('home.sections.products.materialsDesc'),
+    color: "#ffffff",
     moveColor: "#0082FB",
     animationClass: "",
     router: 'material',
   },
   {
-    title: "卓越 产品力",
-    subTitle: "生物合成氨基酸",
-    describe: "高效生物合成20+种氨基酸",
+    title: getText('home.sections.products.title'),
+    subTitle: getText('nav.aminoAcid'),
+    describe: getText('home.sections.products.aminoAcidsDesc'),
+    color: "#ffffff",
     moveColor: "#0082FB",
     animationClass: "",
     router: 'aminoAcid',
   },
   {
-    title: "绿色 可持续",
-    describe: "与合作伙伴共担ESG责任共筑地球可持续未来",
+    title: getText('home.sections.sustainability.title'),
+    describe: getText('home.sections.sustainability.subtitle'),
+    color: "#ffffff",
     moveColor: "#00965A",
     animationClass: "",
     router: 'vision',
@@ -155,58 +175,268 @@ const advantageArr = reactive([
 ]);
 
 const advantageShow = ref(false);
+// 产品翻译映射
+const productTranslations = {
+  zh: {
+    products: [
+      {
+        name: "[ 无豆粕日粮解决方案 ]",
+        advantages: ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
+        applications: "养殖业",
+        friends: "[ 牧原集团 ]"
+      },
+      {
+        name: "[ 组氨酸 ]", 
+        advantages: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
+        applications: "食品、医药、工业、化妆品",
+        friends: "[ 国家乳业创新中心 ]"
+      },
+      {
+        name: "[ 生物可降解膜袋 ]",
+        advantages: ["强度高", "阻隔性高", "可生物降解"], 
+        applications: "包装、快递",
+        friends: "[ 唯品会 ]"
+      },
+      {
+        name: "[ 生物可降解地膜 ]",
+        advantages: ["可调控降解", "机械性能优", "保温保墒性优"],
+        applications: "农业",
+        friends: "[ 中国农科院 ]"
+      },
+      {
+        name: "[ 生物可降解吸管杯材 ]",
+        advantages: ["耐温性佳", "韧性强", "可生物降解"],
+        applications: "食品",
+        friends: ""
+      },
+      {
+        name: "[ 生物基可降解纤维 ]", 
+        advantages: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
+        applications: "纺织、医药、日用",
+        friends: ""
+      }
+    ]
+  },
+  en: {
+    products: [
+      {
+        name: "[ Soybean Meal-Free Ration Solutions ]",
+        advantages: ["Substantial reduction in soybean consumption", "Precise essential amino acid supplementation", "Cost-effective operation", "Reduced nitrogen excretion and carbon emissions"],
+        applications: "Animal Husbandry",
+        friends: "[ Muyuan Group ]"
+      },
+      {
+        name: "[ Histidine ]",
+        advantages: ["Manufactured via advanced biosynthesis", "High fermentation efficiency", "High product purity", "Mature production process"],
+        applications: "Food, Pharmaceuticals, Industrial Applications, Cosmetics",
+        friends: "[ National Dairy Innovation Center ]"
+      },
+      {
+        name: "[ Biodegradable Films & Bags ]",
+        advantages: ["High tensile strength", "Excellent barrier performance", "Biodegradable"],
+        applications: "Packaging, Express Logistics",
+        friends: "[ Vipshop ]"
+      },
+      {
+        name: "[ Biodegradable Mulching Film ]",
+        advantages: ["Adjustable degradation rate", "Superior mechanical performance", "Excellent heat and moisture retention"],
+        applications: "Planting Industry",
+        friends: "[ Chinese Academy of Agricultural Sciences ]"
+      },
+      {
+        name: "[ Biodegradable Materials for Straws & Cups ]",
+        advantages: ["Excellent thermal tolerance", "High toughness", "Biodegradable"],
+        applications: "Food",
+        friends: ""
+      },
+      {
+        name: "[ Bio-based Degradable Fibers ]",
+        advantages: ["Green and non-toxic", "High moisture absorption", "Soft, cotton-like feel", "Antimicrobial", "Biodegradable"], 
+        applications: "Textiles, Pharmaceuticals, Daily Use Products",
+        friends: ""
+      }
+    ]
+  }
+};
+
 const productList = reactive([
   {
     isShow: true,
     product: "[ 无豆粕日粮解决方案 ]",
     imgSrc: require("../../assets/images/product-1.jpeg"),
-    advantage: ["高效补充牲畜必需氨基酸", "有效减少养殖过程中温室气体排放"],
+    advantage: ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
+    applications: "养殖业",
     friends: "[ 牧原集团 ]",
     top: -12,
-    width: "50%",
   },
   {
     isShow: false,
-    product: "[ 乳品包装 ]",
+    product: "[ 组氨酸 ]",
     imgSrc: require("../../assets/images/product-2.jpg"),
-    advantage: ["纸塑复合", "可降解", "可回收", "成本可控"],
+    advantage: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
+    applications: "食品、医药、工业、化妆品",
     friends: "[ 国家乳业创新中心 ]",
   },
   {
     isShow: false,
-    product: "[ 快递袋 ]",
+    product: "[ 生物可降解膜袋 ]",
     imgSrc: require("../../assets/images/product-3.jpeg"),
-    advantage: ["强度高", "成本可控", "可降解", "可回收"],
+    advantage: ["强度高", "阻隔性高", "可生物降解"],
+    applications: "包装、快递",
     friends: "[ 唯品会 ]",
   },
   {
     isShow: false,
-    product: "[ 生物降解地膜 ]",
+    product: "[ 生物可降解地膜 ]",
     imgSrc: require("../../assets/images/product-4.jpeg"),
-    advantage: ["寿命长", "保温保墒", "降解期可调控", "有助增产"],
+    advantage: ["可调控降解", "机械性能优", "保温保墒性优"],
+    applications: "农业",
     friends: "[ 中国农科院 ]",
   },
   {
     isShow: false,
-    product: "[ 一次性吸管 ]",
+    product: "[ 生物可降解吸管杯材 ]",
     imgSrc: require("../../assets/images/product-5.jpg"),
-    advantage: ["耐热耐冷", "硬度大", "韧性强", "成本可控"],
+    advantage: ["耐温性佳", "韧性强", "可生物降解"],
+    applications: "食品",
     friends: "",
   },
   {
     isShow: false,
-    product: "[ 功能性纤维 ]",
+    product: "[ 生物基可降解纤维 ]",
     imgSrc: require("../../assets/images/product-6.jpg"),
-    advantage: ["吸湿性强", "弹力大", "可降解", "可回收"],
+    advantage: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
+    applications: "纺织、医药、日用",
     friends: "",
     objectFit: "fill",
   },
 ]);
 
+// 新闻翻译映射
+const newsTranslations = {
+  zh: {
+    categories: {
+      "#Mint 进行时": "#MiNT 进行时",
+      "#MiNT 智造力": "#MiNT 智造力",
+      "#MiNT 创新力": "#MiNT 创新力"
+    },
+    titles: {
+      "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时": "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时",
+      "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新": "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新",
+      "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力": "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力",
+      "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办",
+      "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
+      "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时"
+    }
+  },
+  en: {
+    categories: {
+      "#Mint 进行时": "#MiNT Updates",
+      "#MiNT 智造力": "#MiNT Biomanufacturing",
+      "#MiNT 创新力": "#MiNT Innovation"
+    },
+    titles: {
+      "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时": "MiNT Bio Joins the Industrial Alliance of Zhejiang Provincial Bio-based Fully Degradable and Nanomaterial Innovation Center｜MiNT Updates",
+      "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新": "MiNT Updates｜Chairman Qin Linlin Encourages Westlake University Undergraduates to Explore and Innovate with Prof. Zhang Kechun's Achievements",
+      "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力": "MiNT Intelligence to Create｜Muyuan Anliang July Report: Co-organizing the 2025 Nanyang Synthetic Biology Industry Conference, Showcasing Industrial Transformation Capabilities On-Site",
+      "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办": "Let Technological Innovation Ignite the Engine of Development—2025 Nanyang Synthetic Biology Industry Conference Successfully Held",
+      "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法": "Media Focus｜MiNT Bio's Synthetic Biotechnology Offers a New Solution to the Soybean Import Dilemma",
+      "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时": "MiNT Bio-Driven Intelligent Manufacturing Project Selected for the Green and Low-Carbon Advanced Technology Demonstration Project List (Second Batch)｜MiNT Updates"
+    }
+  }
+};
+
+// 翻译新闻数据
+const translateNewsData = (newsData, language) => {
+  return newsData.map(news => ({
+    ...news,
+    categorylabel: newsTranslations[language]?.categories[news.categorylabel] || news.categorylabel,
+    title: newsTranslations[language]?.titles[news.title] || news.title
+  }));
+};
 
 const newsList = ref([]);
 const titleInView = ref(false);
 const bannerSectionInView = ref(false);
+
+// 监听语言变化，更新数据
+watch(() => currentLanguage.value, async () => {
+  advantageArr[0].title = getText('home.sections.technology.title');
+  advantageArr[0].describe = getText('home.sections.technology.subtitle');
+  
+  advantageArr[1].title = getText('home.sections.platform.title');
+  advantageArr[1].describe = getText('home.sections.platform.subtitle');
+  
+  advantageArr[2].title = getText('home.sections.products.title');
+  advantageArr[2].subTitle = getText('nav.material');
+  advantageArr[2].describe = getText('home.sections.products.materialsDesc');
+  
+  advantageArr[3].title = getText('home.sections.products.title');
+  advantageArr[3].subTitle = getText('nav.aminoAcid');
+  advantageArr[3].describe = getText('home.sections.products.aminoAcidsDesc');
+  
+  advantageArr[4].title = getText('home.sections.sustainability.title');
+  advantageArr[4].describe = getText('home.sections.sustainability.subtitle');
+  
+  // 更新产品翻译
+  const currentLang = currentLanguage.value;
+  const translations = productTranslations[currentLang] || productTranslations.zh;
+  productList.forEach((product, index) => {
+    if (translations.products[index]) {
+      product.product = translations.products[index].name;
+      product.advantage = translations.products[index].advantages;
+      product.applications = translations.products[index].applications;
+      product.friends = translations.products[index].friends;
+    }
+  });
+  
+  // 重新翻译新闻数据
+  if (newsList.value.length > 0) {
+    try {
+      const response = await axios.get("/data/news_list.json");
+      if (response.status === 200) {
+        const rawNews = response.data.slice(0, 6);
+        newsList.value = translateNewsData(rawNews, currentLanguage.value);
+        newsList.value.forEach((news) => {
+          news.transform = 'scale(1)';
+        });
+      }
+    } catch (error) {
+      console.error("Error updating news translations:", error);
+    }
+  }
+}, { immediate: true });
+
+// 计算描述文字的两行内容
+const descriptionLine1 = computed(() => {
+  const fullText = getText('home.hero.description');
+  // 中文在"应用领域，"后换行
+  if (currentLanguage.value === 'zh') {
+    const splitIndex = fullText.indexOf('应用领域，');
+    if (splitIndex !== -1) {
+      return fullText.substring(0, splitIndex + 5);
+    }
+  }
+  // 英文在合适位置换行
+  const midPoint = Math.floor(fullText.length / 2);
+  const spaceIndex = fullText.indexOf(' ', midPoint);
+  return spaceIndex !== -1 ? fullText.substring(0, spaceIndex) : fullText;
+});
+
+const descriptionLine2 = computed(() => {
+  const fullText = getText('home.hero.description');
+  // 中文在"应用领域，"后换行
+  if (currentLanguage.value === 'zh') {
+    const splitIndex = fullText.indexOf('应用领域，');
+    if (splitIndex !== -1) {
+      return fullText.substring(splitIndex + 5);
+    }
+  }
+  // 英文在合适位置换行
+  const midPoint = Math.floor(fullText.length / 2);
+  const spaceIndex = fullText.indexOf(' ', midPoint);
+  return spaceIndex !== -1 ? fullText.substring(spaceIndex + 1) : '';
+});
 
 const expandMargin = () => {
   advantageShow.value = true;
@@ -231,8 +461,11 @@ const productMove = (index) => {
   });
 };
 
-const productLeave = (product) => {
-  product.isShow = false;
+const productLeave = () => {
+  // 当鼠标离开整个产品区域时，重置为显示第一个产品
+  productList.forEach((product, i) => {
+    product.isShow = i === 0;
+  });
 };
 
 const cardHover = (card) => {
@@ -242,12 +475,13 @@ const cardHover = (card) => {
 const cardLeave = (card) => {
   card.transform = "scale(1)";
 };
+
 onMounted(async () => {
   try {
     const response = await axios.get("/data/news_list.json");
-    // const res = axios.post("/api/contact/submit", { name: 'testN', email: '1464646@qq.com', phone: '18865479008', message: 'test' });
     if (response.status === 200) {
-      newsList.value = response.data.slice(0, 6);
+      const rawNews = response.data.slice(0, 6);
+      newsList.value = translateNewsData(rawNews, currentLanguage.value);
       newsList.value.forEach((news) => {
         news.transform = 'scale(1)';
       });
@@ -325,6 +559,7 @@ onMounted(async () => {
         .title {
           margin-bottom: 20px;
           width: 96px;
+          white-space: pre-line;
         }
 
         .sub-title {
@@ -347,24 +582,73 @@ onMounted(async () => {
     flex-direction: column;
     align-items: center;
 
-    .title {
-      width: 678px;
+    .product-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .infinite-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 50px;
+      position: relative;
+
+      &-zh {
+        font: 600 72px MiSans;
+        color: #ffffff;
+        letter-spacing: 6px;
+
+        &.orange {
+          color: #FF7200;
+        }
+      }
+
+      &-en {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        font: 400 21px Montserrat;
+        color: rgba(241, 243, 247, 0.8);
+        line-height: 1.3;
+        margin: 0 -30px;
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    .product-description {
+      text-align: center;
+      color: rgba(241, 243, 247, 0.5);
+      font-size: 21px;
+      line-height: 2.2;
       margin-bottom: 170px;
+
+      p {
+        margin: 0;
+      }
     }
 
     .product-list {
       width: 100%;
 
       .product {
-        width: 35%;
+        width: 28%;
       }
 
       .advantage {
-        width: 50%;
+        width: 40%;
+        display: flex;
+        flex-wrap: wrap;
 
         span {
           display: inline-block;
-          width: 150px;
+          min-width: 120px;
+          white-space: nowrap;
+          margin-right: 16px;
         }
 
         .dot-before {
@@ -377,28 +661,8 @@ onMounted(async () => {
         }
       }
 
-      .product-item {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 32px;
-
-        img {
-          width: 35%;
-        }
-      }
-
-      &-item {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 32px;
-
-        img {
-          width: 35%;
-        }
+      .applications {
+        width: 17%;
       }
 
       .friends {

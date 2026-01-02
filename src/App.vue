@@ -13,6 +13,15 @@
 </template>
 
 <script>
+import Header from './components/Header'
+import Footer from './components/Footer'
+import FooterMobile from './components/FooterMobile'
+import Contact from './components/Contact'
+import MobileHeader from './components/MobileHeader'
+import ContactMobile from './components/ContactMobile'
+import { validPcOrPhone, autoFont } from './utils/isPc'
+import './style/common.less'
+
 export default {
   components: {
     Header,
@@ -41,15 +50,6 @@ export default {
     };
   },
 };
-import Header from './components/Header'
-import Footer from './components/Footer'
-import FooterMobile from './components/FooterMobile'
-import Contact from './components/Contact'
-import MobileHeader from './components/MobileHeader'
-import ContactMobile from './components/ContactMobile'
-import { validPcOrPhone, autoFont } from './utils/isPc'
-import './style/common.less'
-
 </script>
 
 <style scoped>

@@ -1,0 +1,56 @@
+{
+  "categories": {
+    "inDevelopment": "Products in R&D",
+    "materials": "New Materials",
+    "aminoAcids": "Amino Acids",
+    "solutions": "Solutions"
+  },
+  "headers": {
+    "performanceAdvantages": "Performance Advantages",
+    "applicationAreas": "Application Areas",
+    "productName": "Product Name"
+  },
+  "materials": {
+    "biodegradableFilms": {
+      "name": "Biodegradable Films & Bags",
+      "advantages": "• High tensile strength\\n• Excellent barrier performance\\n• Biodegradable",
+      "applications": "Packaging, Express Logistics"
+    },
+    "mulchingFilm": {
+      "name": "Biodegradable Mulching Film",
+      "advantages": "• Adjustable degradation rate\\n• Superior mechanical performance\\n• Excellent heat and moisture retention",
+      "applications": "Planting Industry"
+    },
+    "strawMaterials": {
+      "name": "Biodegradable Materials for Straws & Cups",
+      "advantages": "• Excellent thermal tolerance\\n• High toughness\\n• Biodegradable",
+      "applications": "Food"
+    },
+    "fibers": {
+      "name": "Bio-based Degradable Fibers",
+      "advantages": "• Green and non-toxic\\n• High moisture absorption\\n• Soft, cotton-like feel\\n• Antimicrobial\\n• Biodegradable",
+      "applications": "Textiles, Pharmaceuticals, Daily Use Products"
+    }
+  },
+  "aminoAcids": {
+    "histidine": {
+      "name": "Histidine",
+      "advantages": "• Manufactured via advanced biosynthesis\\n• High fermentation efficiency\\n• High product purity\\n• Mature production process",
+      "applications": "Food, Pharmaceuticals, Industrial Applications, Cosmetics"
+    }
+  },
+  "solutions": {
+    "soybeanFree": {
+      "name": "Soybean-Reduced Ration Solutions",
+      "advantages": "• Substantial reduction in soybean consumption\\n• Precise essential amino acid supplementation\\n• Cost-effective operation\\n• Reduced nitrogen excretion and carbon emissions",
+      "applications": "Animal Husbandry"
+    }
+  },
+  "features": {
+    "bioSynthesis": "Biosynthesis",
+    "biodegradable": "Biodegradable",
+    "highPurity": "High Purity",
+    "costEffective": "Cost Control",
+    "environmentFriendly": "Eco-friendly"
+  }
+}

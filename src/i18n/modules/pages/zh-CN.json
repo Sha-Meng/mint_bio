@@ -1,0 +1,91 @@
+{
+  "home": {
+    "hero": {
+      "title": "元素驱动",
+      "subtitle": "MiNT Bio",
+      "tagline": "生物智造，无限可能",
+      "description": "元素驱动已打通研发，生产，下游产品转化的生物智造全链路。我们布局多个应用领域，并与下游龙头企业合作打造自有工厂，发展可能性无限的生物智造产品矩阵。"
+    },
+    "sections": {
+      "technology": {
+        "title": "前沿科技力",
+        "subtitle": "与合作伙伴共担ESG责任，共筑地球可持续未来"
+      },
+      "platform": {
+        "title": "平台强赋能",
+        "subtitle": "独创MiNT X Platform, AI赋能生物智造"
+      },
+      "products": {
+        "title": "卓越产品力",
+        "materials": "系列高性能新型生态环保材料PiX",
+        "materialsDesc": "生物基、可降解、可回收",
+        "aminoAcids": "生物合成氨基酸",
+        "aminoAcidsDesc": "高效生物合成20+种氨基酸"
+      },
+      "sustainability": {
+        "title": "绿色可持续",
+        "subtitle": "与合作伙伴共担ESG责任，共筑地球可持续未来"
+      }
+    },
+    "testimonial": {
+      "text": "您的选择和他们一样",
+      "engText": "THEY Trusted Our Innovation."
+    }
+  },
+  "contact": {
+    "title": "洽谈合作",
+    "subtitle": "感谢您对元素驱动的关注，如您对生物智造产品 & 解决方案有兴趣或疑问，",
+    "instruction": "使用1分钟填写下方表格，我们将尽快安排工作人员与您建联。",
+    "alternativeContact": "您也可以通过以下渠道找到我们",
+    "email": "邮箱：mkt@mint-bio.com",
+    "advisors": {
+      "aminoAcid": "氨基酸产品顾问",
+      "materials": "新材料产品顾问"
+    },
+    "wechat": "扫码添加",
+    "followUs": "关注公众号了解",
+    "followUsDesc": "公司动向、产品信息、行业新闻、前沿进展",
+    "followUsItems": {
+      "companyUpdates": "公司动向",
+      "productInfo": "产品信息", 
+      "industryNews": "行业新闻",
+      "frontierProgress": "前沿进展"
+    }
+  },
+  "partners": {
+    "muyuanGroup": "[ 牧原集团 ]",
+    "nationalDairyInnovationCenter": "[ 国家乳业创新中心 ]",
+    "vipshop": "[ 唯品会 ]",
+    "caas": "[ 中国农科院 ]"
+  },
+  "vision": {
+    "title60": "未来60%的物质",
+    "subtitle60": "可以通过生物制造生产",
+    "productSolution": "生物智造 [ 产品解决方案 ]",
+    "productSolutionDesc": "匹配元素驱动现有产品，并针对性您的应用领域针对性优化。",
+    "customSolution": "生物智造 [ 定制解决方案 ]",
+    "customSolutionDesc": "元素驱动将针对您的需求，进行菌种定制、优化、产品延展等生物智造全流程服务。",
+    "matchAdvisor": "匹配顾问",
+    "customProcess": "定制流程",
+    "step1": "需求定制",
+    "step2": "合成生物路线设计",
+    "step3": "效果验证",
+    "step4": "工程量产",
+    "step5": "投入使用"
+  },
+  "footer": {
+    "slogan": "生物智造惠及每一个生命",
+    "engSlogan": "Create Green Products Benefiting Every Life",
+    "address": {
+      "label": "总部地址",
+      "building": "西投·云城犀谷3号楼",
+      "street": "浙江省杭州市西湖区西园七路3号"
+    },
+    "copyright": "© 2024 元素驱动(杭州)生物科技有限公司",
+    "icp": "浙ICP备2024085355号",
+    "sections": {
+      "biomanufacturing": "生物智造",
+      "joinUs": "加入我们"
+    }
+  }
+}

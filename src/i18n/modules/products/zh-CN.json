@@ -1,0 +1,56 @@
+{
+  "categories": {
+    "inDevelopment": "在研产品",
+    "materials": "新材料",
+    "aminoAcids": "氨基酸",
+    "solutions": "解决方案"
+  },
+  "headers": {
+    "performanceAdvantages": "性能优势",
+    "applicationAreas": "应用领域",
+    "productName": "产品名称"
+  },
+  "materials": {
+    "biodegradableFilms": {
+      "name": "生物可降解膜袋",
+      "advantages": "强度高、阻隔性高、可生物降解",
+      "applications": "包装、快递"
+    },
+    "mulchingFilm": {
+      "name": "生物可降解地膜", 
+      "advantages": "可调控降解、机械性能优、保温保墒性优",
+      "applications": "农业"
+    },
+    "strawMaterials": {
+      "name": "生物可降解吸管杯材",
+      "advantages": "耐温性佳、韧性强、可生物降解",
+      "applications": "食品"
+    },
+    "fibers": {
+      "name": "生物基可降解纤维",
+      "advantages": "绿色无毒、吸湿性佳、舒适棉感、抑菌、可生物降解",
+      "applications": "纺织、医药、日用"
+    }
+  },
+  "aminoAcids": {
+    "histidine": {
+      "name": "组氨酸",
+      "advantages": "生物合成、发酵效率高、产品纯度高、工艺成熟",
+      "applications": "食品、医药、工业、化妆品"
+    }
+  },
+  "solutions": {
+    "soybeanFree": {
+      "name": "无豆粕日粮解决方案",
+      "advantages": "节省大豆、提供精准氨基酸、控制成本、降氮减排",
+      "applications": "养殖业"
+    }
+  },
+  "features": {
+    "bioSynthesis": "生物合成",
+    "biodegradable": "可生物降解",
+    "highPurity": "高纯度",
+    "costEffective": "成本控制",
+    "environmentFriendly": "环保"
+  }
+}

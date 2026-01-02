@@ -8,42 +8,41 @@
         </div>
         <div class="contact-popover-content">
           <div class="contact-popover-content-left">
-            <p class="contact-popover-content-left-title">洽谈合作</p>
+            <p class="contact-popover-content-left-title">{{ getText('contact.title') }}</p>
             <p class="contact-popover-content-left-tip">
-              感谢您对元素驱动的关注，如您对生物智造产品 &
-              解决方案有兴趣或疑问，<br />使用1分钟填写下方表格，我们将尽快安排工作人员与您建联。
+              {{ getText('contact.subtitle') }}<br />{{ getText('contact.instruction') }}
             </p>
             <div class="contact-popover-content-left-form">
               <div class="contact-popover-content-left-form-item">
                 <div class="contact-popover-content-left-form-item-label">
-                  姓名
+                  {{ getText('common.forms.name') }}
                 </div>
                 <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的姓名..." v-model="formData.name" />
+                  <input type="text" :placeholder="getText('common.forms.placeholders.name')" v-model="formData.name" />
                 </div>
                 <div class="contact-popover-content-left-form-item-label">
-                  邮箱
+                  {{ getText('common.forms.email') }}
                 </div>
                 <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的邮箱..." v-model="formData.email" />
+                  <input type="text" :placeholder="getText('common.forms.placeholders.email')" v-model="formData.email" />
                 </div>
                 <div class="contact-popover-content-left-form-item-label">
-                  电话
+                  {{ getText('common.forms.phone') }}
                 </div>
                 <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的电话..." v-model="formData.phone" />
+                  <input type="text" :placeholder="getText('common.forms.placeholders.phone')" v-model="formData.phone" />
                 </div>
                 <div class="contact-popover-content-left-form-item-label">
-                  请简单描述您的问题
+                  {{ getText('common.forms.description') }}
                 </div>
                 <div class="contact-popover-content-left-form-item-input">
-                  <input type="text" placeholder="您的留言..." v-model="formData.message" />
+                  <input type="text" :placeholder="getText('common.forms.placeholders.message')" v-model="formData.message" />
                 </div>
               </div>
               <!-- <div class="contact-popover-content-left-form-submit-w"> -->
               <div class="contact-popover-content-left-form-submit" @click="debouncedSubmit"
                 :class="{ 'loading': isLoading }">
-                <p class="contact-popover-content-left-form-submit-btn">提交</p>
+                <p class="contact-popover-content-left-form-submit-btn">{{ getText('common.buttons.submit') }}</p>
               </div>
               <!-- </div> -->
             </div>
@@ -53,30 +52,30 @@
           </div>
           <div class="contact-popover-content-connection">
             <p class="contact-popover-content-connection-title">
-              您也可以通过以下渠道找到我们
+              {{ getText('contact.alternativeContact') }}
             </p>
 			<div class="contact-popover-content-connection-tel">
 				<div class="contact-popover-content-connection-tel-left">
 					<p class="contact-popover-content-connection-desc mt30">
-					  氨基酸产品顾问
+					  {{ getText('contact.advisors.aminoAcid') }}
 					</p>
 					<p class="contact-popover-content-connection-desc counselor">
 					  TEL: 15937287752
 					</p>
 					<p class="contact-popover-content-connection-desc counselor">
-					  WECHAT: 扫码添加
+					  WECHAT: {{ getText('contact.wechat') }}
 					</p>
 					<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode.png" />
 				</div>
 				<div class="contact-popover-content-connection">
 					<p class="contact-popover-content-connection-desc mt30">
-					  新材料产品顾问
+					  {{ getText('contact.advisors.materials') }}
 					</p>
 					<p class="contact-popover-content-connection-desc counselor">
 					  TEL: 19129376767
 					</p>
 					<p class="contact-popover-content-connection-desc counselor">
-					  WECHAT: 扫码添加
+					  WECHAT: {{ getText('contact.wechat') }}
 					</p>
 					<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode2.jpg" />
 				</div>
@@ -84,7 +83,7 @@
 			
             
             <p class="contact-popover-content-connection-item email">
-              邮箱：mkt@mint-bio.com
+              {{ getText('contact.email') }}
             </p>
 			<div class="contact-popover-content-connection-tel">
 				<div class="contact-popover-content-connection-tel-left">
@@ -97,9 +96,9 @@
 					</p>
 				</div>
 			</div>
-			<p class="contact-popover-content-connection-desc">关注公众号了解</p>
+			<p class="contact-popover-content-connection-desc">{{ getText('contact.followUs') }}</p>
 			<p class="contact-popover-content-connection-desc mt30">
-			  公司动向、产品信息、行业新闻、前沿进展
+			  {{ getText('contact.followUsDesc') }}
 			</p>
             
           </div>
@@ -122,6 +121,7 @@ import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import axios from "axios";
 import { debounce } from "lodash";
 import emitter from '@/event/event';
+import { getText } from "@/utils/language";
 
 
 const visible = ref(false);
@@ -148,25 +148,25 @@ const submit = async () => {
   try {
     isLoading.value = true;
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-      alert("请填写完整信息");
+      alert(getText('common.forms.validation.required'));
       return;
     }
     // 校验 email 格式
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      alert('请输入有效的邮箱地址')
+      alert(getText('common.forms.validation.invalidEmail'))
       return;
     }
 
     // 校验 phone 格式
     const phoneRegex = /^1[3-9]\d{9}$/;
     if (!phoneRegex.test(formData.phone)) {
-      alert('请输入有效的手机号码');
+      alert(getText('common.forms.validation.invalidPhone'));
       return;
     }
     const res = axios.post("http://8.155.35.138:8080/api/contact/submit", JSON.stringify(formData));
     if (res) {
-      alert("提交成功");
+      alert(getText('common.forms.validation.submitSuccess'));
       formData.name = '';
       formData.email = '';
       formData.phone = '';
@@ -175,7 +175,7 @@ const submit = async () => {
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      alert('请求格式错误，请检查输入信息');
+      alert(getText('common.forms.validation.formatError'));
     }
   } finally {
     isLoading.value = false;

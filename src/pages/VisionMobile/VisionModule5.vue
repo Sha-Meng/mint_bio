@@ -3,7 +3,7 @@
     <div class="vision-module5-title">
       <p class="vision-module5-title-text1">60%</p>
       <p class="vision-module5-title-text2">
-        未来60%的物质<br />可以通过生物制造生产
+        {{ getText('vision.title60') }}<br />{{ getText('vision.subtitle60') }}
       </p>
     </div>
     <div class="vision-module5-content">
@@ -17,16 +17,16 @@
       </div>
       <div class="vision-module5-content-img2">
         <div class="vision-module5-content-img2-item1">
-          <p class="vision-module5-content-img2-item1-text">生物降解新材料</p>
+          <p class="vision-module5-content-img2-item1-text">{{ getText('nav.material') }}</p>
           <router-link :to="`/material`">
-            <p class="learn-more-btn">了解更多</p>
+            <p class="learn-more-btn">{{ getText('common.buttons.learnMore') }}</p>
           </router-link>
         </div>
         <div class="vision-module5-content-img2-item2">
-          <p class="vision-module5-content-img2-item2-text">生物合成氨基酸</p>
-          <router-link :to="`/knotWeed`">
+          <p class="vision-module5-content-img2-item2-text">{{ getText('nav.aminoAcid') }}</p>
+          <router-link :to="`/aminoAcid`">
 
-            <p class="learn-more-btn">了解更多</p>
+            <p class="learn-more-btn">{{ getText('common.buttons.learnMore') }}</p>
           </router-link>
         </div>
       </div>
@@ -42,12 +42,12 @@
 
 
       <div class="vision-module5-step">
-        <div class="title">定制流程</div>
-        <div><span class="number">01</span><span class="text">需求定制</span></div>
-        <div><span class="number">02</span><span class="text">合成生物路线设计</span></div>
-        <div><span class="number">03</span><span class="text">效果验证</span></div>
-        <div><span class="number">04</span><span class="text">工程量产</span></div>
-        <div><span class="number">05</span><span class="text">投入使用</span></div>
+        <div class="title">{{ getText('vision.customProcess') }}</div>
+        <div><span class="number">01</span><span class="text">{{ getText('vision.step1') }}</span></div>
+        <div><span class="number">02</span><span class="text">{{ getText('vision.step2') }}</span></div>
+        <div><span class="number">03</span><span class="text">{{ getText('vision.step3') }}</span></div>
+        <div><span class="number">04</span><span class="text">{{ getText('vision.step4') }}</span></div>
+        <div><span class="number">05</span><span class="text">{{ getText('vision.step5') }}</span></div>
       </div>
     </div>
   </div>
@@ -55,6 +55,7 @@
 
 <script setup>
 import emitter from '@/event/event';
+import { getText } from "@/utils/language";
 
 const triggerPopover = () => {
   emitter.emit('open-popover');
