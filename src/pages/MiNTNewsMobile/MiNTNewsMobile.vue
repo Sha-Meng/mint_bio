@@ -3,16 +3,16 @@
     <BannerTitle>
       <div class="text-section">
         <div class="title">
-          <div label1>发展&nbsp;&nbsp;<span class="sub"> & </span>&nbsp;&nbsp;动态</div>
+          <div label1>{{ getText('news.title') }}&nbsp;&nbsp;<span class="sub"> & </span>&nbsp;&nbsp;{{ getText('news.title2') }}</div>
         </div>
         <div class="desc">
-          实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。
+          {{ getText('news.subtitle') }}
         </div>
       </div>
     </BannerTitle>
     <div class="button">
       <div class="button-btn">
-        <span>下载品牌手册</span>
+        <span>{{ getText('news.downloadBrochure') }}</span>
         <img src="@/assets/images/download.png" alt="download" />
       </div>
     </div>
@@ -27,6 +27,7 @@
 import MiNTNewsListMobile from "../../components/MiNTNews/MiNTNewsListMobile.vue";
 import MiNTDivider from "@/components/Divider";
 import BannerTitle from "@/components/BannerTitle";
+import { getText } from "@/utils/language";
 
 export default {
   components: {
@@ -34,7 +35,9 @@ export default {
     BannerTitle,
     MiNTNewsListMobile
   },
-
+  methods: {
+    getText,
+  },
 };
 </script>
 <style lang="less" scoped>

@@ -17,7 +17,7 @@ export default {
   props: {
     titleImage: {
       type: String,
-      required: true
+      default: ''
     },
     titleStyle: {
       type: Object,

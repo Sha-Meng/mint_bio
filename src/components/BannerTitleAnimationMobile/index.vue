@@ -8,8 +8,12 @@
         :class="{ 'animate-grid': isAnimating }" />
       <img class="mint-image" src="@/assets/images/mint.png" alt="vision_mint"
         :class="{ 'animate-mint': isAnimating }" />
-      <img class="text-image" :src="titleImage" :style="titleStyle" alt="title"
+      <img v-if="titleImage" class="text-image" :src="titleImage" :style="titleStyle" alt="title"
         :class="{ 'animate-text': isAnimating }" />
+      <div v-if="$slots.default" class="text-image banner-text-slot" :style="titleStyle"
+        :class="{ 'animate-text': isAnimating }">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -23,7 +27,7 @@ export default {
   props: {
     titleImage: {
       type: String,
-      required: true,
+      default: '',
     },
     backgroundImg: {
       type: String,
@@ -131,6 +135,14 @@ export default {
       opacity: 1;
       top: 50%;
       transform: translate(-50%, -50%);
+    }
+
+    .banner-text-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
     }
   }
 }

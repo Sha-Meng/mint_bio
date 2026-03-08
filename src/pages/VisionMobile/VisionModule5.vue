@@ -9,10 +9,10 @@
     <div class="vision-module5-content">
       <div class="vision-module5-content-img1">
         <p class="vision-module5-content-img1-title">
-          生物智造 [ 产品解决方案 ]
+          {{ getText('vision.productSolution') }}
         </p>
         <p class="vision-module5-content-img1-desc">
-          匹配元素驱动现有产品，并针对性您的应用领域针对性优化。
+          {{ getText('vision.productSolutionDesc') }}
         </p>
       </div>
       <div class="vision-module5-content-img2">
@@ -32,12 +32,12 @@
       </div>
       <div class="vision-module5-content-img3 last-box">
         <p class="vision-module5-content-img3-title">
-          生物智造 [ 定制解决方案 ]
+          {{ getText('vision.customSolution') }}
         </p>
         <p class="vision-module5-content-img3-desc">
-          元素驱动将针对您的需求，进行菌种定制、优化、产品延展等生物智造全流程服务。
+          {{ getText('vision.customSolutionDesc') }}
         </p>
-        <p class="vision-module5-content-img3-btn last-box-btn" @click="triggerPopover">匹配顾问</p>
+        <p class="vision-module5-content-img3-btn last-box-btn" @click="triggerPopover">{{ getText('vision.matchAdvisor') }}</p>
       </div>
 
 

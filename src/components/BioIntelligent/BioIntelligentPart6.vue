@@ -15,19 +15,19 @@
         @mouseout="handleMouseOut(0)"
       >
         <div class="box-title">
-          <p>牧元安粮工厂<br />河南·南阳</p>
+          <p>{{ getText('bioIntelligent.bases.muyuan.name') }}<br />{{ getText('bioIntelligent.bases.muyuan.location') }}</p>
         </div>
         <div class="box-data-w" :class="{ visible: expandedIndex === 0 }">
           <div class="box-data">
-            <p class="box-data-top">占地（亩）</p>
+            <p class="box-data-top">{{ getText('bioIntelligent.bases.muyuan.area') }}</p>
             <p class="box-data-bottom">126</p>
           </div>
           <div class="box-data">
-            <p class="box-data-top">一期年产能（吨）</p>
+            <p class="box-data-top">{{ getText('bioIntelligent.bases.muyuan.capacity1') }}</p>
             <p class="box-data-bottom">30,000</p>
           </div>
           <div class="box-data">
-            <p class="box-data-top">二期年产能（吨）</p>
+            <p class="box-data-top">{{ getText('bioIntelligent.bases.muyuan.capacity2') }}</p>
             <p class="box-data-bottom">40,000</p>
           </div>
         </div>
@@ -65,26 +65,26 @@
         @mouseout="handleMouseOut(2)"
       >
         <div class="box-title">
-          <p>元素智造工厂<br />浙江·建德</p>
+          <p>{{ getText('bioIntelligent.bases.jiande.name') }}<br />{{ getText('bioIntelligent.bases.jiande.location') }}</p>
         </div>
         <div class="box3-data-w" :class="{ visible: expandedIndex === 2 }">
           <div class="box3-data-left">
             <div class="box3-data">
-              <p class="box3-data-top">一期占地（亩）</p>
+              <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.area1') }}</p>
               <p class="box3-data-bottom">50</p>
             </div>
             <div class="box3-data">
-              <p class="box3-data-top">一期年产能（吨）</p>
+              <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.capacity1') }}</p>
               <p class="box3-data-bottom">30,000</p>
             </div>
           </div>
           <div class="box3-data-right">
             <div class="box3-data">
-              <p class="box3-data-top">二期占地（亩）</p>
+              <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.area2') }}</p>
               <p class="box3-data-bottom">70</p>
             </div>
             <div class="box3-data">
-              <p class="box3-data-top">二期年产能（吨）</p>
+              <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.capacity2') }}</p>
               <p class="box3-data-bottom">120,000</p>
             </div>
           </div>
@@ -96,6 +96,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { getText } from "@/utils/language";
 
 // 使用 ref 创建响应式变量
 const expandedIndex = ref(-1); // 当前扩展的盒子索引

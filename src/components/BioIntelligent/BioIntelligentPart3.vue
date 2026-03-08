@@ -53,9 +53,10 @@
 
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { getImageUrl } from "@/utils";
 import { throttle } from "lodash";
+import { getText } from "@/utils/language";
 
 import "swiper/css";
 
@@ -65,31 +66,22 @@ export default {
     SwiperSlide,
   },
   setup() {
-    const bannerList = ref([
-      {
-        url: "assets/BioIntelligent/swipper1.png",
-        title: "可再生原料",
-        description: "源自微生物和秸秆、淀粉等非粮生物质。",
-      },
-      {
-        url: "assets/BioIntelligent/swipper2.png",
-        title: "AI蛋白质设计",
-        description: "深入融合AI技术，AI高效预测和设计分子结构。",
-      },
-      {
-        url: "assets/images/swiper3.png",
-        title: "科技引擎",
-        description: "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。",
-      }, {
-        url: "assets/images/swiper4.png",
-        title: "量产无忧",
-        description: "布局2个生物智造基地，到2025年底产能6万吨，成熟产品均已具备量产条件，并配备严格的质量管理流程。",
-      }, {
-        url: "assets/images/swiper5.png",
-        title: "应用无限",
-        description: "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。",
-      },
-    ]);
+    const featureKeys = ['renewable', 'aiProtein', 'engine', 'massProduction', 'application'];
+    const featureUrls = [
+      "assets/BioIntelligent/swipper1.png",
+      "assets/BioIntelligent/swipper2.png",
+      "assets/images/swiper3.png",
+      "assets/images/swiper4.png",
+      "assets/images/swiper5.png",
+    ];
+
+    const bannerList = computed(() => {
+      return featureKeys.map((key, i) => ({
+        url: featureUrls[i],
+        title: getText(`bioIntelligent.features.${key}.title`),
+        description: getText(`bioIntelligent.features.${key}.desc`),
+      }));
+    });
     const curSwipIndex = ref(0);
     const swiperRef = ref(null); // 用于存储Swiper实例
     const showElement = ref(true);

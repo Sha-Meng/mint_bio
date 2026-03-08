@@ -15,7 +15,7 @@
       <el-col :span="24" class="footer-right">
         <div class="footer-right-content">
           <div class="footer-right-content-menus footer-common">
-            <p class="footer-right-content-menus-item " @click="handleJumps('bioIntelligent')">生物智造</p>
+            <p class="footer-right-content-menus-item " @click="handleJumps('bioIntelligent')">{{ getText('footer.sections.biomanufacturing') }}</p>
 
           </div>
           <div class="footer-right-content-products footer-common">
@@ -30,8 +30,8 @@
             <p class="footer-right-content-about-item pointer" @click="handleJumps('vision')">{{ getText('nav.vision') }}</p>
           </div>
           <p class="footer-right-content-dynamic " @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
-          <p class="footer-right-content-join">加入我们</p>
-          <p class="footer-right-content-down">下载中心</p>
+          <p class="footer-right-content-join">{{ getText('nav.joinUs') }}</p>
+          <p class="footer-right-content-down">{{ getText('footer.downloadCenter') }}</p>
         </div>
 
       </el-col>
@@ -44,17 +44,17 @@
       <div class="overlay" v-if="showQRCode" @click="toggleQRCode"></div>
 
       <div class="address footer-common">
-        <p class="mb26">总部地址</p>
+        <p class="mb26">{{ getText('footer.address') }}</p>
         <p>
-          西投·云城犀谷3号楼<br />
-          浙江省杭州市西湖区西园七路3号
+          {{ getText('footer.addressLine1') }}<br />
+          {{ getText('footer.addressLine2') }}
         </p>
       </div>
       <div class="copyright">
         <p>
-          © 2024 元素驱动(杭州)生物科技有限公司
+          {{ getText('footer.copyright') }}
         </p>
-        <a class="copyright-record" href="https://beian.miit.gov.cn" target="_blank">浙ICP备2024085355号</a>
+        <a class="copyright-record" href="https://beian.miit.gov.cn" target="_blank">{{ getText('footer.icp') }}</a>
       </div>
 
     </el-row>

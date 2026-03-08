@@ -32,14 +32,14 @@
     <div class="product-section sector border-gradient">
       <div v-intersect="() => titleInView = true" class="product-header">
         <div v-if="titleInView" class="infinite-title animate__animated animate__fadeInUp">
-          <span class="infinite-title-zh">生物</span>
-          <span class="infinite-title-zh orange">智造</span>
+          <span class="infinite-title-zh">{{ getText('home.hero.bio1') }}</span>
+          <span class="infinite-title-zh orange">{{ getText('home.hero.bio2') }}</span>
           <span class="infinite-title-en">
             <span>Infinity from</span>
             <span>Biomanufacturing</span>
           </span>
-          <span class="infinite-title-zh orange">无限</span>
-          <span class="infinite-title-zh">可能</span>
+          <span class="infinite-title-zh orange">{{ getText('home.hero.infinite1') }}</span>
+          <span class="infinite-title-zh">{{ getText('home.hero.infinite2') }}</span>
         </div>
         <div v-if="titleInView" class="product-description animate__animated animate__fadeInUp">
           <p>{{ descriptionLine1 }}</p>
@@ -175,191 +175,42 @@ const advantageArr = reactive([
 ]);
 
 const advantageShow = ref(false);
-// 产品翻译映射
-const productTranslations = {
-  zh: {
-    products: [
-      {
-        name: "[ 无豆粕日粮解决方案 ]",
-        advantages: ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
-        applications: "养殖业",
-        friends: "[ 牧原集团 ]"
-      },
-      {
-        name: "[ 组氨酸 ]", 
-        advantages: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
-        applications: "食品、医药、工业、化妆品",
-        friends: "[ 国家乳业创新中心 ]"
-      },
-      {
-        name: "[ 生物可降解膜袋 ]",
-        advantages: ["强度高", "阻隔性高", "可生物降解"], 
-        applications: "包装、快递",
-        friends: "[ 唯品会 ]"
-      },
-      {
-        name: "[ 生物可降解地膜 ]",
-        advantages: ["可调控降解", "机械性能优", "保温保墒性优"],
-        applications: "农业",
-        friends: "[ 中国农科院 ]"
-      },
-      {
-        name: "[ 生物可降解吸管杯材 ]",
-        advantages: ["耐温性佳", "韧性强", "可生物降解"],
-        applications: "食品",
-        friends: ""
-      },
-      {
-        name: "[ 生物基可降解纤维 ]", 
-        advantages: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
-        applications: "纺织、医药、日用",
-        friends: ""
-      }
-    ]
-  },
-  en: {
-    products: [
-      {
-        name: "[ Soybean Meal-Free Ration Solutions ]",
-        advantages: ["Substantial reduction in soybean consumption", "Precise essential amino acid supplementation", "Cost-effective operation", "Reduced nitrogen excretion and carbon emissions"],
-        applications: "Animal Husbandry",
-        friends: "[ Muyuan Group ]"
-      },
-      {
-        name: "[ Histidine ]",
-        advantages: ["Manufactured via advanced biosynthesis", "High fermentation efficiency", "High product purity", "Mature production process"],
-        applications: "Food, Pharmaceuticals, Industrial Applications, Cosmetics",
-        friends: "[ National Dairy Innovation Center ]"
-      },
-      {
-        name: "[ Biodegradable Films & Bags ]",
-        advantages: ["High tensile strength", "Excellent barrier performance", "Biodegradable"],
-        applications: "Packaging, Express Logistics",
-        friends: "[ Vipshop ]"
-      },
-      {
-        name: "[ Biodegradable Mulching Film ]",
-        advantages: ["Adjustable degradation rate", "Superior mechanical performance", "Excellent heat and moisture retention"],
-        applications: "Planting Industry",
-        friends: "[ Chinese Academy of Agricultural Sciences ]"
-      },
-      {
-        name: "[ Biodegradable Materials for Straws & Cups ]",
-        advantages: ["Excellent thermal tolerance", "High toughness", "Biodegradable"],
-        applications: "Food",
-        friends: ""
-      },
-      {
-        name: "[ Bio-based Degradable Fibers ]",
-        advantages: ["Green and non-toxic", "High moisture absorption", "Soft, cotton-like feel", "Antimicrobial", "Biodegradable"], 
-        applications: "Textiles, Pharmaceuticals, Daily Use Products",
-        friends: ""
-      }
-    ]
-  }
-};
+// 产品列表 - 使用 computed 自动响应语言切换
+const productListData = computed(() => {
+  const langResources = getText('products.list')
+  if (!Array.isArray(langResources)) return []
+  const images = [
+    { src: require("../../assets/images/product-1.jpeg"), top: -12 },
+    { src: require("../../assets/images/product-2.jpg") },
+    { src: require("../../assets/images/product-3.jpeg") },
+    { src: require("../../assets/images/product-4.jpeg") },
+    { src: require("../../assets/images/product-5.jpg") },
+    { src: require("../../assets/images/product-6.jpg"), objectFit: "fill" },
+  ]
+  return langResources.map((item, index) => ({
+    isShow: index === 0,
+    product: item.name,
+    imgSrc: images[index]?.src,
+    advantage: item.advantages,
+    applications: item.applications,
+    friends: item.friends,
+    top: images[index]?.top,
+    objectFit: images[index]?.objectFit,
+  }))
+})
 
-const productList = reactive([
-  {
-    isShow: true,
-    product: "[ 无豆粕日粮解决方案 ]",
-    imgSrc: require("../../assets/images/product-1.jpeg"),
-    advantage: ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
-    applications: "养殖业",
-    friends: "[ 牧原集团 ]",
-    top: -12,
-  },
-  {
-    isShow: false,
-    product: "[ 组氨酸 ]",
-    imgSrc: require("../../assets/images/product-2.jpg"),
-    advantage: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
-    applications: "食品、医药、工业、化妆品",
-    friends: "[ 国家乳业创新中心 ]",
-  },
-  {
-    isShow: false,
-    product: "[ 生物可降解膜袋 ]",
-    imgSrc: require("../../assets/images/product-3.jpeg"),
-    advantage: ["强度高", "阻隔性高", "可生物降解"],
-    applications: "包装、快递",
-    friends: "[ 唯品会 ]",
-  },
-  {
-    isShow: false,
-    product: "[ 生物可降解地膜 ]",
-    imgSrc: require("../../assets/images/product-4.jpeg"),
-    advantage: ["可调控降解", "机械性能优", "保温保墒性优"],
-    applications: "农业",
-    friends: "[ 中国农科院 ]",
-  },
-  {
-    isShow: false,
-    product: "[ 生物可降解吸管杯材 ]",
-    imgSrc: require("../../assets/images/product-5.jpg"),
-    advantage: ["耐温性佳", "韧性强", "可生物降解"],
-    applications: "食品",
-    friends: "",
-  },
-  {
-    isShow: false,
-    product: "[ 生物基可降解纤维 ]",
-    imgSrc: require("../../assets/images/product-6.jpg"),
-    advantage: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
-    applications: "纺织、医药、日用",
-    friends: "",
-    objectFit: "fill",
-  },
-]);
+const productList = ref([])
 
-// 新闻翻译映射
-const newsTranslations = {
-  zh: {
-    categories: {
-      "#Mint 进行时": "#MiNT 进行时",
-      "#MiNT 智造力": "#MiNT 智造力",
-      "#MiNT 创新力": "#MiNT 创新力"
-    },
-    titles: {
-      "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时": "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时",
-      "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新": "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新",
-      "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力": "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力",
-      "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办": "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办",
-      "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法": "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法",
-      "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时": "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时"
-    }
-  },
-  en: {
-    categories: {
-      "#Mint 进行时": "#MiNT Updates",
-      "#MiNT 智造力": "#MiNT Biomanufacturing",
-      "#MiNT 创新力": "#MiNT Innovation"
-    },
-    titles: {
-      "元素驱动加入浙江省生物基全降解及纳米材料创新中心产业联盟｜MiNT 进行时": "MiNT Bio Joins the Industrial Alliance of Zhejiang Provincial Bio-based Fully Degradable and Nanomaterial Innovation Center｜MiNT Updates",
-      "MiNT进行时｜秦英林董事长以张科春教授成果鼓励西湖大学本科生探索与创新": "MiNT Updates｜Chairman Qin Linlin Encourages Westlake University Undergraduates to Explore and Innovate with Prof. Zhang Kechun's Achievements",
-      "MiNT 智造力｜牧元安粮7月月报：协办2025南阳合成生物产业大会，实地展示产业转化实力": "MiNT Intelligence to Create｜Muyuan Anliang July Report: Co-organizing the 2025 Nanyang Synthetic Biology Industry Conference, Showcasing Industrial Transformation Capabilities On-Site",
-      "让科技创新点燃发展引擎——2025南阳合成生物产业大会成功举办": "Let Technological Innovation Ignite the Engine of Development—2025 Nanyang Synthetic Biology Industry Conference Successfully Held",
-      "媒体聚焦｜元素驱动合成生物技术为大豆进口困局提供新解法": "Media Focus｜MiNT Bio's Synthetic Biotechnology Offers a New Solution to the Soybean Import Dilemma",
-      "元素智造项目入选绿色低碳先进技术示范项目清单（第二批）｜MiNT 进行时": "MiNT Bio-Driven Intelligent Manufacturing Project Selected for the Green and Low-Carbon Advanced Technology Demonstration Project List (Second Batch)｜MiNT Updates"
-    }
-  }
-};
-
-// 翻译新闻数据
-const translateNewsData = (newsData, language) => {
-  return newsData.map(news => ({
-    ...news,
-    categorylabel: newsTranslations[language]?.categories[news.categorylabel] || news.categorylabel,
-    title: newsTranslations[language]?.titles[news.title] || news.title
-  }));
-};
+// 初始化和监听语言变化
+watch(() => productListData.value, (newVal) => {
+  productList.value = newVal.map(item => ({ ...item }))
+}, { immediate: true })
 
 const newsList = ref([]);
 const titleInView = ref(false);
 const bannerSectionInView = ref(false);
 
-// 监听语言变化，更新数据
+// 监听语言变化，更新advantage数据
 watch(() => currentLanguage.value, async () => {
   advantageArr[0].title = getText('home.sections.technology.title');
   advantageArr[0].describe = getText('home.sections.technology.subtitle');
@@ -377,34 +228,6 @@ watch(() => currentLanguage.value, async () => {
   
   advantageArr[4].title = getText('home.sections.sustainability.title');
   advantageArr[4].describe = getText('home.sections.sustainability.subtitle');
-  
-  // 更新产品翻译
-  const currentLang = currentLanguage.value;
-  const translations = productTranslations[currentLang] || productTranslations.zh;
-  productList.forEach((product, index) => {
-    if (translations.products[index]) {
-      product.product = translations.products[index].name;
-      product.advantage = translations.products[index].advantages;
-      product.applications = translations.products[index].applications;
-      product.friends = translations.products[index].friends;
-    }
-  });
-  
-  // 重新翻译新闻数据
-  if (newsList.value.length > 0) {
-    try {
-      const response = await axios.get("/data/news_list.json");
-      if (response.status === 200) {
-        const rawNews = response.data.slice(0, 6);
-        newsList.value = translateNewsData(rawNews, currentLanguage.value);
-        newsList.value.forEach((news) => {
-          news.transform = 'scale(1)';
-        });
-      }
-    } catch (error) {
-      console.error("Error updating news translations:", error);
-    }
-  }
 }, { immediate: true });
 
 // 计算描述文字的两行内容
@@ -456,14 +279,13 @@ const advantageLeave = (advantage) => {
 };
 
 const productMove = (index) => {
-  productList.forEach((product,i) => {
+  productList.value.forEach((product,i) => {
     product.isShow = i === index;   
   });
 };
 
 const productLeave = () => {
-  // 当鼠标离开整个产品区域时，重置为显示第一个产品
-  productList.forEach((product, i) => {
+  productList.value.forEach((product, i) => {
     product.isShow = i === 0;
   });
 };
@@ -481,7 +303,7 @@ onMounted(async () => {
     const response = await axios.get("/data/news_list.json");
     if (response.status === 200) {
       const rawNews = response.data.slice(0, 6);
-      newsList.value = translateNewsData(rawNews, currentLanguage.value);
+      newsList.value = rawNews;
       newsList.value.forEach((news) => {
         news.transform = 'scale(1)';
       });
@@ -722,6 +544,9 @@ onMounted(async () => {
       }
     }
   }
+
+
+
 
   .banner-section {
     display: flex;

@@ -8,14 +8,13 @@
           class="introduction-img animate__animated animate__fadeInUp" />
       </div>
       <div class="introduction-section">
-        元素驱动（MiNT
-        BiO）是一家集技术研发、生产应用推广为一体的合成生物科技公司，由西湖大学张科春教授于2021年8月创办，总部位于浙江杭州。
+        {{ getText('corporate.intro1') }}
       </div>
       <div class="introduction-section">
-        公司配备世界领先的研发团队及行业顶级的产业化团队，从头设计创新型合成生物路径，以人工智能技术为辅助进行颠覆性源头创新，自研多个合成生物平台核心技术。目前，公司通过前沿技术赋能产业，主要聚焦无豆粕日粮和可降解生物材料领域。现有核心产品处于世界领先水平，已与行业龙头展开深度战略合作，并已布局万吨级规模化量产，真正实现从科研到产业的跨越，实现降本增效、绿色生产的生物“智造”。
+        {{ getText('corporate.intro2') }}
       </div>
       <div class="introduction-section">
-        作为西湖大学新质生产力培育平台重点支持项目，元素驱动充分发挥自研技术平台优势，践行“新质生产力”理念。未来，元素驱动将继续深耕合成生物创新研究与应用，用科技助力生物制造、能源环境、新型材料等领域的产业升级。同时，公司产品管线也将覆盖更多应用场景，将绿色经济拓展到食品原料、生物能源、美妆材料、汽车制造等行业，共同朝碳达峰、碳中和目标迈进，助力地球可持续发展。
+        {{ getText('corporate.intro3') }}
       </div>
     </div>
     <div class="timeline">
@@ -50,12 +49,12 @@
           <div class="top-right space-between">
             <div>
               <div class="margin-bottom">
-                <p>张科春</p>
-                <p>创始人&首席科学家</p>
+                <p>{{ getText('corporate.founders.zhang.name') }}</p>
+                <p>{{ getText('corporate.founders.zhang.title') }}</p>
               </div>
               <div class="margin-bottom">
-                <p>西湖大学教授</p>
-                <p>牧原实验室主任</p>
+                <p>{{ getText('corporate.founders.zhang.position1') }}</p>
+                <p>{{ getText('corporate.founders.zhang.position2') }}</p>
               </div>
             </div>
 
@@ -63,10 +62,7 @@
           </div>
         </div>
         <div class="bottom">
-          创始人张科春教授本科毕业于中国科学技术大学，博士毕业于加州理工学院，从事合成生物相关研究20余年，具有独特的交叉学科研究背景。他开发了第一种可规模化生产的弹性生物降解高分子材料，创建了世界第一个可持续高分子研究中心并获得美国自然科学基金经费4000万美元的重点支持。研究成果2022年被选为美国推进生物制造的首批九个重点项目之一。2015年获得明尼苏达大学年轻教授的最高荣誉McKnight
-          Land-Grant Professorship，2014 年获得University of Minnesota Innovator
-          award.
-          2019年，张科春教授选择归国，加入西湖大学创建生物制造和新材料实验室。
+          {{ getText('corporate.founders.zhang.bio') }}
         </div>
       </div>
 
@@ -77,30 +73,27 @@
           </div>
           <div class="top-right">
             <div class="margin-bottom">
-              <p>刘旻昊</p>
-              <p>董事长 & 联合创始人</p>
+              <p>{{ getText('corporate.founders.liu.name') }}</p>
+              <p>{{ getText('corporate.founders.liu.title') }}</p>
             </div>
             <div>
-              <p>西湖大学校长特别顾问</p>
-              <p>西湖大学未来产业研究中心副主任</p>
-              <p>新质生产力培育平台负责人</p>
+              <p>{{ getText('corporate.founders.liu.position1') }}</p>
+              <p>{{ getText('corporate.founders.liu.position2') }}</p>
+              <p>{{ getText('corporate.founders.liu.position3') }}</p>
             </div>
           </div>
         </div>
         <div class="bottom">
           <div class="bottom-left">
             <p>
-              刘旻昊2011年毕业于英国帝国理工学院，获得生物物理博士学位，2012年回国后在清华大学从事博士后研究工作;2016年起任清华大学助理研究员，同时担任北京市结构生物学高精尖中心副主任、行政办公室主任。
+              {{ getText('corporate.founders.liu.bio1') }}
             </p>
             <p>
-              自2014年起，刘旻昊参与西湖大学筹办，先后或同时担任西湖大学筹委会办公室主任、西湖大学董事会秘书、西湖大学校长助理，西湖教育基金会创始秘书长、副理事长等职务。
+              {{ getText('corporate.founders.liu.bio2') }}
             </p>
           </div>
           <ul class="bottom-right">
-            <li>深度参与西湖大学0-1筹建，积累丰富管理经验，建立良好企业关系</li>
-            <li>发起新质生产力平台，孵化未来产业，充当科学家与产业的翻译官，助力科研成果落地</li>
-            <li>推动产学研合作，推动科技创新与产业创新结合，为企业发展提供科研解决方案</li>
-            <li>发起并参与公益项目，为科学家提供良好发展平台，为可持续发展作出贡献</li>
+            <li v-for="(item, index) in getText('corporate.achievements')" :key="index">{{ item }}</li>
           </ul>
         </div>
       </div>
@@ -110,25 +103,25 @@
       <div v-if="title2InView" class="scientific-title animate__animated animate__fadeInUp animate__slow">
         <div class="scientific-title-left">
           <div>
-            <span>前端</span><span class="opacity-0">科研</span><span>攻坚</span>
+            <span>{{ getText('corporate.frontend') }}</span><span class="opacity-0">{{ getText('corporate.research') }}</span><span>{{ getText('corporate.breakthrough') }}</span>
           </div>
           <div>
-            <span class="opacity-0">前端</span><span class="orange-text">科研</span><span class="opacity-0">攻坚</span>
+            <span class="opacity-0">{{ getText('corporate.frontend') }}</span><span class="orange-text">{{ getText('corporate.research') }}</span><span class="opacity-0">{{ getText('corporate.breakthrough') }}</span>
           </div>
         </div>
         <div class="scientific-title-middle">
-          <p>从实验室走向生产线</p>
-          <p>是合成生物行业必经之路</p>
-          <p>迈向生物智造时代</p>
-          <p>元素驱动已做好准备</p>
+          <p>{{ getText('corporate.roadDesc1') }}</p>
+          <p>{{ getText('corporate.roadDesc2') }}</p>
+          <p>{{ getText('corporate.roadDesc3') }}</p>
+          <p>{{ getText('corporate.roadDesc4') }}</p>
         </div>
         <div class="scientific-title-right">
           <div class="scientific-title-left">
             <div>
-              <span>后端</span><span class="opacity-0">落地</span><span>量产</span>
+              <span>{{ getText('corporate.backend') }}</span><span class="opacity-0">{{ getText('corporate.landing') }}</span><span>{{ getText('corporate.massProduction') }}</span>
             </div>
             <div>
-              <span class="opacity-0">后端</span><span class="orange-text">落地</span><span class="opacity-0">量产</span>
+              <span class="opacity-0">{{ getText('corporate.backend') }}</span><span class="orange-text">{{ getText('corporate.landing') }}</span><span class="opacity-0">{{ getText('corporate.massProduction') }}</span>
             </div>
           </div>
         </div>
@@ -167,8 +160,9 @@
 
 <script>
 import BannerTitleAnimation from "@/components/BannerTitleAnimation";
-import { onMounted, } from "vue";
+import { onMounted, computed } from "vue";
 import { getImageUrl } from "@/utils";
+import { getText } from "@/utils/language";
 
 export default {
   name: " CorporateVision",
@@ -179,8 +173,6 @@ export default {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('fade-in');
-          // 停止观察已进入视口的元素
-          // observer.unobserve(entry.target); 
         } else {
           entry.target.classList.remove('fade-in');
         }
@@ -188,7 +180,7 @@ export default {
     };
 
     const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.3, // 当元素10%进入视口时触发
+      threshold: 0.3,
     });
 
     onMounted(() => {
@@ -201,86 +193,44 @@ export default {
       }
     });
 
-    return { titleStyle: { top: "47%" } };
+    const timeList = computed(() => {
+      const timeline = getText('corporate.timeline');
+      const items = Array.isArray(timeline) ? timeline.map(item => ({
+        time: item.year,
+        content: item.desc,
+      })) : [];
+      items.push({
+        time: getText('corporate.futureTitle'),
+        content: getText('corporate.futureDesc'),
+        color: "#00965A",
+        width: "480px",
+      });
+      return items;
+    });
+
+    const cardList = computed(() => [
+      {
+        index: 0,
+        textTop: getText('corporate.rdCenter'),
+        textMiddle: require("@/assets/images/number-1.png"),
+        textBottom: getText('corporate.rdCenterDesc'),
+        imRight: require("@/assets/images/scientific.png"),
+      },
+      {
+        index: 1,
+        textTop: getText('corporate.rdTeam'),
+        textMiddle: require("@/assets/images/number-2.png"),
+        textBottom: getText('corporate.rdTeamDesc'),
+        imRight: require("@/assets/images/scientific-2.png"),
+      },
+    ]);
+
+    return { titleStyle: { top: "47%" }, getText, timeList, cardList };
   },
   data() {
     return {
       imgSrc: require("@/assets/images/scientific.png"),
       activeIndex: 0,
-      timeList: [
-        {
-          time: "2021.08",
-          content: "创办于杭州",
-        },
-        {
-          time: "2022.09",
-          content: "与牧原集团战略合作完成首批饲料添加氨基酸量产交付。",
-        },
-        {
-          time: "2022.11",
-          content: "与商汤科技达成战略合作推动AI+合成生物前沿创新。",
-        },
-        {
-          time: "2022.12",
-          content: "异亮氨酸300吨量产水平转化工艺优化成熟。",
-        },
-        {
-          time: "2023.02",
-          content: "与牧原集团合资成立河南牧元安粮公司。",
-        },
-        {
-          time: "2023.04",
-          content: "首次入围杭州市准独角兽榜单。",
-        },
-        {
-          time: "2023.12",
-          content: "河南牧元安粮年产3万吨项目开工。",
-        },
-        {
-          time: "2024.02",
-          content:
-            "与建德市签约年产15万吨元素新材料项目,打造生物降解材料全产业链标杆。",
-        },
-        {
-          time: "2024.06",
-          content: "建德元素智造项目开工，一期年产3万吨, 计划2025年底投产。",
-        },
-        {
-          time: "2024.10",
-          content: "完成A轮融资",
-        },
-        {
-          time: "2024.12",
-          content: "牧元安粮工厂正式试产、元素智造工厂结顶",
-        },
-		{
-		  time: "2025.1",
-		  content: "获评浙江省专精特新中小企业",
-		},
-        {
-          time: "迎接生物智造时代",
-          content:
-            "60%的物质生产可通过生物制造方式实现, 合成生物带来的经济价值可达万亿元规模。",
-          color: "#00965A",
-          width: "480px",
-        },
-      ],
-      cardList: [
-        {
-          index: 0,
-          textTop: "研发中心",
-          textMiddle: require("@/assets/images/number-1.png"),
-          textBottom: "承担前端科研、实验及小试。",
-          imRight: require("@/assets/images/scientific.png"),
-        },
-        {
-          index: 1,
-          textTop: "科研团队",
-          textMiddle: require("@/assets/images/number-2.png"),
-          textBottom: "跨科学人才合作，探索前沿技术。",
-          imRight: require("@/assets/images/scientific-2.png"),
-        },
-      ],
       corpList: [
         {
           imgSrc: "assets/CorporateVision/corp8.png",
@@ -411,6 +361,7 @@ export default {
 
 .corporate {
   background-color: #11161b;
+
 
   .introduction {
     display: flex;

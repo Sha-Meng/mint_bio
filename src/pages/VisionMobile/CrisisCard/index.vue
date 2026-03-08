@@ -1,6 +1,6 @@
 <template>
   <div class="crisis-card">
-    <div class="crisis-card-top"><span>生物制造</span>MiNT BiO<span></span><span>势在必行</span></div>
+    <div class="crisis-card-top"><span>{{ getText('mouseScroll.line1') }}</span>MiNT BiO<span></span><span>{{ getText('mouseScroll.line2') }}</span></div>
     <div class="crisis-card-title">{{ module.name }}</div>
     <div class="crisis-card-data">
       <img src="@/assets/images/crisis-back.png">
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { getText } from "@/utils/language";
 
 export default {
   components: {
@@ -17,6 +18,9 @@ export default {
   props: {
     module: {},
   },
+  setup() {
+    return { getText };
+  }
 };
 </script>
 

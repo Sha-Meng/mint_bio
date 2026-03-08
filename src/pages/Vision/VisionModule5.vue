@@ -12,10 +12,10 @@
       <div v-intersect="() => img1InView = true" class="vision-module5-content-img1-w">
         <div v-if="img1InView" class="vision-module5-content-img1 animate__animated animate__fadeInUp">
           <p class="vision-module5-content-img1-title">
-            生物智造 [ 产品解决方案 ]
+            {{ getText('vision.productSolution') }}
           </p>
           <p class="vision-module5-content-img1-desc">
-            匹配元素驱动现有产品，并针对性您的应用领域针对性优化。
+            {{ getText('vision.productSolutionDesc') }}
           </p>
         </div>
       </div>
@@ -46,7 +46,19 @@
         </div>
       </div>
       <div v-intersect="() => img4InView = true" class="vision-module5-content-img4">
-        <img v-if="img4InView" src="./images/process.png" alt="" class="animate__animated animate__fadeInUp" />
+        <div v-if="img4InView" class="vision-module5-process animate__animated animate__fadeInUp">
+          <div class="vision-module5-process-title">{{ getText('vision.customProcess') }}</div>
+          <div class="vision-module5-process-steps">
+            <div class="vision-module5-process-step" v-for="n in 5" :key="n">
+              <div class="step-dot-line">
+                <span class="step-dot"></span>
+                <span v-if="n < 5" class="step-line"></span>
+              </div>
+              <span class="step-number">Step 0{{ n }}</span>
+              <span class="step-text">{{ getText('vision.step' + n) }}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -212,10 +224,72 @@ const img4InView = ref(false);
 
     &-img4 {
       width: 34%;
+    }
+  }
 
-      img {
-        width: 100%;
-        height: 460px;
+  &-process {
+    background: rgba(30, 33, 38, 0.9);
+    border-radius: 20px;
+    padding: 40px 36px;
+    height: 460px;
+    box-sizing: border-box;
+
+    &-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #f1f3f7;
+      margin-bottom: 36px;
+    }
+
+    &-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    &-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+
+      .step-dot-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 10px;
+        flex-shrink: 0;
+        padding-top: 5px;
+      }
+
+      .step-dot {
+        width: 10px;
+        height: 10px;
+        background: #00965A;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .step-line {
+        width: 1px;
+        height: 46px;
+        background: rgba(241, 243, 247, 0.2);
+      }
+
+      .step-number {
+        font-size: 16px;
+        font-weight: 400;
+        color: #f1f3f7;
+        white-space: nowrap;
+        font-family: Montserrat, MiSans, sans-serif;
+        line-height: 20px;
+      }
+
+      .step-text {
+        font-size: 16px;
+        font-weight: 400;
+        color: #00965A;
+        white-space: nowrap;
+        line-height: 20px;
       }
     }
   }

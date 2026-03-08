@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "document-docx": {
+      "source": "vasilyu1983/ai-agents-public",
+      "sourceType": "github",
+      "computedHash": "560df370389699f775d5837eb926a13684f2a75c7f0ad8b0f9e5940a41b0c75e"
+    },
+    "figma": {
+      "source": "hoodini/ai-agents-skills",
+      "sourceType": "github",
+      "computedHash": "447846194583da561b6bdfe9c6693dcbb5ddeffe98e197825d506ab6b18aafb8"
+    },
+    "skill-creator": {
+      "source": "apollographql/skills",
+      "sourceType": "github",
+      "computedHash": "b795363075398966cd1d95f95adc9b95a779e89708442f148c003b1b05c0885c"
+    }
+  }
+}

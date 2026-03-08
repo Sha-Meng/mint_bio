@@ -5,17 +5,12 @@
     <div class="aminoAcid-module1">
       <div class="aminoAcid-module1-content">
         <div class="aminoAcid-module1-content-left">
-          <p class="aminoAcid-module1-content-left-text1">生物合成</p>
-          <p class="aminoAcid-module1-content-left-text2">氨基酸</p>
+          <p class="aminoAcid-module1-content-left-text1">{{ getText('aminoAcid.title1') }}</p>
+          <p class="aminoAcid-module1-content-left-text2">{{ getText('aminoAcid.title2') }}</p>
         </div>
         <div class="aminoAcid-module1-content-right">
           <ul class="aminoAcid-module1-content-right-text">
-            <li>高效AI蛋白设计</li>
-            <li>专利前体X</li>
-            <li>优化代谢网络</li>
-            <li>独家分离纯化工艺</li>
-            <li>国际领先的产酸率 & 提取率</li>
-            <li>持续降本</li>
+            <li v-for="(feat, i) in getText('aminoAcid.features')" :key="i">{{ feat }}</li>
           </ul>
         </div>
       </div>
@@ -26,32 +21,32 @@
     <div class="aminoAcid-module3">
       <div v-intersect="() => titleInView = true">
         <div v-if="titleInView" class="aminoAcid-module3-title animate__animated animate__fadeInUp">
-          <span class="aminoAcid-module3-title-text1">应用</span>
-          <span class="aminoAcid-module3-title-text2">案例</span>
+          <span class="aminoAcid-module3-title-text1">{{ getText('aminoAcid.applicationCase') }}</span>
+          <span class="aminoAcid-module3-title-text2">{{ getText('aminoAcid.applicationCase2') }}</span>
         </div>
       </div>
       <div class="aminoAcid-module3-content">
         <div class="aminoAcid-module3-content-name">
-          <p>牧原集团</p>
-          <p>& 元素驱动</p>
+          <p>{{ getText('aminoAcid.muyuanGroup') }}</p>
+          <p>{{ getText('aminoAcid.andMint') }}</p>
         </div>
         <div class="aminoAcid-module3-content-solution">
           <p class="aminoAcid-module3-content-solution-title">
-            [ 节豆日粮解决方案 ]
+            {{ getText('aminoAcid.knotWeedSolution') }}
           </p>
           <ul class="aminoAcid-module3-content-solution-list">
-            <li>合成必需氨基酸</li>
-            <li>营养供给精准高效</li>
-            <li>节约饲养成本</li>
+            <li>{{ getText('aminoAcid.benefit1') }}</li>
+            <li>{{ getText('aminoAcid.benefit2') }}</li>
+            <li>{{ getText('aminoAcid.benefit3') }}</li>
           </ul>
         </div>
       </div>
       <div class="aminoAcid-module3-propagate">
-        <div class="aminoAcid-module3-propagate-title">节豆日粮</div>
+        <div class="aminoAcid-module3-propagate-title">{{ getText('aminoAcid.knotWeedLabel') }}</div>
         <div class="aminoAcid-module3-propagate-target">
           <div class="aminoAcid-module3-propagate-target-top">
-            <p>生物智造</p>
-            <p>惠及每一个生命</p>
+            <p>{{ getText('aminoAcid.slogan1') }}</p>
+            <p>{{ getText('aminoAcid.slogan2') }}</p>
           </div>
           <div class="aminoAcid-module3-propagate-target-bottom">
             <p>
@@ -63,7 +58,7 @@
         <div class="aminoAcid-module3-propagate-more">
           <router-link :to="`/knotWeed`">
 
-            <p>了解更多</p>
+            <p>{{ getText('common.buttons.learnMore') }}</p>
           </router-link>
         </div>
       </div>
@@ -72,10 +67,11 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import BannerTitle from '@/components/BannerTitle'
 import AaModuleContent from "@/components/AaModuleContent";
 import MouseScroll from '@/components/MouseScroll';
+import { getText } from "@/utils/language";
 
 export default {
   components: {
@@ -84,57 +80,29 @@ export default {
     MouseScroll,
   },
   setup() {
-    const module2Data = ref([
-      {
-        title: "生物合成 组氨酸",
-        topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-        introductionTitle1: "生物合成",
-        introductionTitle2: "组氨酸",
-        applyTexts: ["食品", "饲料", "生化试剂制造制药"],
-        advantages: ["相较同类产品，具有成本优势", "相较行业平均水准，发酵速度快、效率高", "相较化学合成法，产品纯度高"],
-        imageUrl: ["assets/AminoAcid/module2_ele2.png"],
-      },
-	  {
-	    title: "生物合成 异亮氨酸",
-	    topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-	    introductionTitle1: "生物合成",
-	    introductionTitle2: "异亮氨酸",
-	    applyTexts: ["医药", "化学试剂", "饲料添加剂"],
-	    advantages: [
-	      "添加于饲料中，减少大豆用量，降低养殖成本",
-	      "相较同类产品，具有大幅成本优势",
-	      "相较行业平均水准，发酵速度快、效率高",
-	    ],
-	    imageUrl: ["assets/AminoAcid/module2_ele1.png"],
-	  },
-      // {
-      //   title: "生物合成 色氨酸",
-      //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-      //   introductionTitle1: "生物合成",
-      //   introductionTitle2: "色氨酸",
-      //   applyTexts: ["医药", "食品强化剂", "饲料添加剂"],
-      //   advantages: ["人体与动物必需氨基酸，应用场景广泛", "相较传统生产方法，效率更高、成本更低"],
-      //   imageUrl: ["assets/AminoAcid/module2_ele3.png"],
-      // },
-      // {
-      //   title: "生物合成 亮氨酸",
-      //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-      //   introductionTitle1: "生物合成",
-      //   introductionTitle2: "亮氨酸",
-      //   applyTexts: ["运动营养剂", "食品添加剂", "特殊医药用途食品"],
-      //   advantages: ["动物必需氨基酸之一", "相较传统水解法，生产过程更环保、更高效", "相较化学合成法，具有成本优势"],
-      //   imageUrl: ["assets/AminoAcid/module2_ele4.png"],
-      // },
-      // {
-      //   title: "生物合成 缬氨酸",
-      //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-      //   introductionTitle1: "生物合成",
-      //   introductionTitle2: "缬氨酸",
-      //   applyTexts: ["医药", "食品强化剂", "饲料添加剂"],
-      //   advantages: ["动物必需氨基酸之一", "提供饲料转化率，降低养殖成本", "相较化学合成法，具有成本优势"],
-      //   imageUrl: ["assets/AminoAcid/module2_ele5.png"],
-      // },
-    ]);
+    const module2Data = computed(() => {
+      const list = getText('aminoAcid.productList');
+      return [
+        {
+          title: list[0].fullName,
+          topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
+          introductionTitle1: list[0].prefix,
+          introductionTitle2: list[0].name,
+          applyTexts: list[0].fields,
+          advantages: list[0].advantages,
+          imageUrl: ["assets/AminoAcid/module2_ele2.png"],
+        },
+        {
+          title: list[1].fullName,
+          topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
+          introductionTitle1: list[1].prefix,
+          introductionTitle2: list[1].name,
+          applyTexts: list[1].fields,
+          advantages: list[1].advantages,
+          imageUrl: ["assets/AminoAcid/module2_ele1.png"],
+        },
+      ];
+    });
 
     const titleInView = ref(false);
     const titleStyle = { top: "55%" }
@@ -142,6 +110,7 @@ export default {
       module2Data,
       titleInView,
       titleStyle,
+      getText,
     };
   },
 };
@@ -152,6 +121,7 @@ export default {
 
 .aminoAcid {
   padding: 0 160px;
+
 
   &-title {
     width: 988px;

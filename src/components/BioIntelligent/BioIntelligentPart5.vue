@@ -6,8 +6,8 @@
 				<span class="sub">%</span> 
 			</div>
 			<div class="titledetailblock">
-				<span class="titledetailcontent">未来60%的物质</span><br />
-				<span class="titledetailcontent">可以通过生物制造生产</span>
+				<span class="titledetailcontent">{{ getText('bioIntelligent.future.line1') }}</span><br />
+				<span class="titledetailcontent">{{ getText('bioIntelligent.future.line2') }}</span>
 			</div>
 			
 		</div>

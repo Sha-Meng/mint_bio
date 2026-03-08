@@ -164,8 +164,8 @@ const submit = async () => {
       alert(getText('common.forms.validation.invalidPhone'));
       return;
     }
-    const res = axios.post("http://8.155.35.138:8080/api/contact/submit", JSON.stringify(formData));
-    if (res) {
+    const res = await axios.post("/api/contact/submit", formData);
+    if (res.data) {
       alert(getText('common.forms.validation.submitSuccess'));
       formData.name = '';
       formData.email = '';
@@ -174,9 +174,8 @@ const submit = async () => {
       visible.value = false; // 关闭弹窗
     }
   } catch (error) {
-    if (error.response && error.response.status === 400) {
-      alert(getText('common.forms.validation.formatError'));
-    }
+    console.error('提交失败:', error);
+    alert(getText('common.forms.validation.formatError'));
   } finally {
     isLoading.value = false;
   }

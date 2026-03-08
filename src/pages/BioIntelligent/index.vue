@@ -32,6 +32,7 @@ import BioIntelligentPart7 from "@/components/BioIntelligent/BioIntelligentPart7
 <style lang="less" scoped>
 @import "@/style/variable.less";
 
+
 .part1 {
   width: 100%;
   height: 1282px;

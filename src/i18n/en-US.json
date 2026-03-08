@@ -1,0 +1,598 @@
+{
+  "nav": {
+    "bioIntelligent": "Intelligent Biomanufacturing",
+    "products": "Products",
+    "material": "Biodegradable New Materials",
+    "aminoAcid": "Biosynthetic Amino Acids",
+    "knotWeed": "Soybean-Reduced Ration Solutions",
+    "aboutUs": "About Us",
+    "corporate": "Company Profile",
+    "vision": "Vision & Responsibility",
+    "news": "News",
+    "contact": "Contact Us",
+    "language": "English",
+    "joinUs": "加入我们",
+    "downloadCenter": "下载中心"
+  },
+  "home": {
+    "sections": {
+      "technology": {
+        "title": "Technological\nProwess",
+        "subtitle": "Together to build a sustainable future"
+      },
+      "platform": {
+        "title": "Platform\nEmpowerment",
+        "subtitle": "Powered by the proprietary MiNT X Platform, leveraging AI for Bio-Intelligent Manufacturing"
+      },
+      "products": {
+        "title": "Product\nExcellence",
+        "materials": "PiX: Novel High-Performance Eco-Friendly Materials",
+        "materialsDesc": "Bio-based, Biodegradable, and Recyclable",
+        "aminoAcids": "Biosynthetic amino acids",
+        "aminoAcidsDesc": "20+ Types of Brilliant BioAmino"
+      },
+      "sustainability": {
+        "title": "Green &\nSustainable",
+        "subtitle": "Together to build a sustainable future"
+      }
+    },
+    "hero": {
+      "bio1": "生物",
+      "bio2": "智造",
+      "infinite1": "无限",
+      "infinite2": "可能",
+      "tagline": "Infinity from Biomanufacturing",
+      "description": "MiNT Bio has built an end-to-end intelligent biomanufacturing platform, integrating R&D, production, and commercialization. By partnering with industry leaders and establishing our own manufacturing hubs, we are cultivating a diverse bio-product matrix with limitless potential."
+    },
+    "caseList": {
+      "technology": {
+        "describe": "聚焦合成生物技术突破",
+        "describe2": "引领生物智造创新"
+      },
+      "platform": {
+        "describe": "独创 MiNT X Platform ",
+        "describe2": "AI赋能生物智造"
+      },
+      "material": {
+        "describe2": "低成本高性能的环保新材料"
+      },
+      "aminoAcid": {
+        "describe2": "高效生物合成20+种氨基酸"
+      },
+      "sustainability": {
+        "describe": "与合作伙伴共担ESG",
+        "describe2": "责任共筑地球可持续未来"
+      }
+    },
+    "testimonial": "They Trusted Our Innovation.",
+    "testimonialParts": {
+      "part1": "您的选择和 ",
+      "part2": " 他们 ",
+      "part3": " 一样"
+    }
+  },
+  "products": {
+    "list": [
+      {
+        "name": "[ Soybean Meal-Free Ration Solutions ]",
+        "advantages": ["Substantial reduction in soybean consumption", "Precise essential amino acid supplementation", "Cost-effective operation", "Reduced nitrogen excretion and carbon emissions"],
+        "applications": "Animal Husbandry",
+        "friends": "[ Muyuan Group ]"
+      },
+      {
+        "name": "[ Histidine ]",
+        "advantages": ["Manufactured via advanced biosynthesis", "High fermentation efficiency", "High product purity", "Mature production process"],
+        "applications": "Food, Pharmaceuticals, Industrial Applications, Cosmetics",
+        "friends": "[ National Dairy Innovation Center ]"
+      },
+      {
+        "name": "[ Biodegradable Films & Bags ]",
+        "advantages": ["High tensile strength", "Excellent barrier performance", "Biodegradable"],
+        "applications": "Packaging, Express Logistics",
+        "friends": "[ Vipshop ]"
+      },
+      {
+        "name": "[ Biodegradable Mulching Film ]",
+        "advantages": ["Adjustable degradation rate", "Superior mechanical performance", "Excellent heat and moisture retention"],
+        "applications": "Planting Industry",
+        "friends": "[ Chinese Academy of Agricultural Sciences ]"
+      },
+      {
+        "name": "[ Biodegradable Materials for Straws & Cups ]",
+        "advantages": ["Excellent thermal tolerance", "High toughness", "Biodegradable"],
+        "applications": "Food",
+        "friends": ""
+      },
+      {
+        "name": "[ Bio-based Degradable Fibers ]",
+        "advantages": ["Green and non-toxic", "High moisture absorption", "Soft, cotton-like feel", "Antimicrobial", "Biodegradable"],
+        "applications": "Textiles, Pharmaceuticals, Daily Use Products",
+        "friends": ""
+      }
+    ]
+  },
+  "contact": {
+    "title": "Cooperation Enquiry",
+    "subtitle": "Thank you for your interest in MiNT Bio. If you are interested in or have questions about our intelligent biomanufacturing products & solutions,",
+    "instruction": "please take 1 minute to fill out the form below, and we will arrange for advisors to contact you promptly.",
+    "alternativeContact": "Our Contacts",
+    "advisors": {
+      "aminoAcid": "Amino Acid Products Advisor",
+      "materials": "New Materials Products Advisor"
+    },
+    "wechat": "Scan QR Code to Add",
+    "email": "Email: mkt@mint-bio.com",
+    "followUs": "Follow our WeChat Official Account to Learn About",
+    "followUsDesc": "Company Updates, Product Information, Industry News, Frontier Progress",
+    "followUsItems": {
+      "companyUpdates": "Company Updates",
+      "productInfo": "Product Information",
+      "industryNews": "Industry News",
+      "frontierProgress": "Frontier Progress"
+    }
+  },
+  "footer": {
+    "slogan": "Create Green Products Benefiting Every Life",
+    "sections": {
+      "biomanufacturing": "Intelligent Biomanufacturing",
+      "joinUs": "Join Us"
+    },
+    "aboutUs": "关于我们",
+    "corporate": "企业介绍",
+    "visionResponsibility": "愿景与责任",
+    "contactAdvisor": "联系顾问",
+    "address": "总部地址",
+    "addressLine1": "西投·云城犀谷3号楼",
+    "addressLine2": "浙江省杭州市西湖区西园七路3号",
+    "copyright": "© 2024 元素驱动(杭州)生物科技有限公司",
+    "icp": "浙ICP备2024085355号",
+    "downloadCenter": "下载中心"
+  },
+  "common": {
+    "buttons": {
+      "learnMore": "Learn More",
+      "submit": "Submit",
+      "contact": "Contact Us",
+      "more": "More",
+      "back": "Back"
+    },
+    "actions": {
+      "moreNews": "More News"
+    },
+    "labels": {
+      "inDevelopment": "Products in R&D",
+      "performanceAdvantages": "Performance Advantages",
+      "applicationAreas": "Application Areas",
+      "partners": "Partners",
+      "testimonial": "They Trusted Our Innovation.",
+      "address": "Address",
+      "contactAdvisor": "Contact Advisor",
+      "matchAdvisor": "Advisor"
+    },
+    "forms": {
+      "name": "Name",
+      "email": "E-mail",
+      "phone": "Tel",
+      "message": "Message",
+      "description": "Please briefly describe your inquiry",
+      "placeholders": {
+        "name": "Your Name...",
+        "email": "Your Email...",
+        "phone": "Your Phone...",
+        "message": "Your Message...",
+        "messageWithDesc": "Your Message... (Please briefly describe your inquiry)"
+      },
+      "validation": {
+        "required": "Please fill in all required fields",
+        "invalidEmail": "Please enter a valid email address",
+        "invalidPhone": "Please enter a valid phone number",
+        "submitSuccess": "Submitted successfully",
+        "formatError": "Request format error, please check your input"
+      }
+    }
+  },
+  "vision": {
+    "bannerLine1": "The Earth that billions of lives depend on",
+    "bannerLine2": "is facing numerous challenges",
+    "title": "Intelligent Biomanufacturing",
+    "subtitle": "is imperative.",
+    "oecdIntro": "According to case analysis by the Organization for Economic Co-operation and Development (OECD),",
+    "oecdIntro2": "the application of biotechnology can reduce industrial energy consumption, raw material usage, air pollution, water pollution, and production costs by 15%–88%.",
+    "respond": "响应",
+    "call": "号召",
+    "nationalPolicy": "Biomanufacturing is one of China's nine key future industries, representing innovative, high-quality, and high-efficiency new quality productive forces.",
+    "title60": "的物质生产",
+    "subtitle60": "可通过生物制造方式实现",
+    "productSolution": "Biomanufacturing [ Product solutions ]",
+    "productSolutionDesc": "Match existing MiNT Bio products and optimize them according to your application field.",
+    "customSolution": "生物智造 [ 定制解决方案 ]",
+    "customSolutionDesc": "元素驱动将针对您的需求，进行菌种定制、优化、产品延展等生物智造全流程服务。",
+    "matchAdvisor": "Advisor",
+    "customProcess": "Custom Process",
+    "step1": "Demand customization",
+    "step2": "Synthetic path design",
+    "step3": "Result verification",
+    "step4": "Mass production",
+    "step5": "Put into production",
+    "esgPartner": "与合作伙伴",
+    "esgResponsibility": "共担ESG责任",
+    "policies": [
+      {
+        "title": "• Action Plan for Plastic Pollution Control during the \"14th Five-Year Plan\" Period",
+        "content": "Scientifically and prudently promote plastic substitute products. Strengthen key core technology research and achievement transformation of degradable plastics, continuously improve product quality and performance, and reduce application costs."
+      },
+      {
+        "title": "• \"14th Five-Year Plan\" for the Development of the Bioeconomy",
+        "content": "Cultivate and strengthen the pillar industries of the bioeconomy. Accelerate the broad application of biotechnology to empower industries such as healthcare, agriculture, energy, and environmental protection. Promote the deep integration of biotechnology and information technology, comprehensively improve the diversification level of the bio-industry, and drive high-quality development of the bioeconomy."
+      },
+      {
+        "title": "• Implementation Plan for the New Industry Standardization Leadership Project (2023–2035)",
+        "content": "Focus on nine key future industries: metaverse, brain-computer interface, quantum information, humanoid robots, generative AI, biomanufacturing, future displays, future networks, and advanced energy storage."
+      },
+      {
+        "title": "• Three-Year Action Plan for Accelerating the Innovative Development of Non-Grain Bio-based Materials",
+        "content": "By 2025, the non-grain bio-based materials industry will basically form an innovative development ecosystem characterized by strong independent innovation capabilities, a continuously enriched product portfolio, and green, circular, and low-carbon practices. The utilization of non-grain biomass feedstocks and related application technologies will be basically mature; some non-grain bio-based products will achieve competitiveness comparable to that of fossil-based products; and a high-quality, sustainable supply and consumption system will be initially established."
+      }
+    ],
+    "oecdStats": [
+      { "label": "Industrial Process Energy (Reduction)", "value": "15%-80%" },
+      { "label": "Raw Material Consumption (Reduction)", "value": "35%-75%" },
+      { "label": "Air Pollution (Reduction)", "value": "50%-90%" },
+      { "label": "Water Pollution (Reduction)", "value": "33%-80%" },
+      { "label": "Production Cost (Reduction)", "value": "9%-90%" }
+    ],
+    "crisisCards": [
+      {
+        "title": "White Pollution",
+        "items": [
+          "Over 500 million pieces of non-degradable plastic waste floating in the ocean",
+          "Each person ingests over 50,000 microplastic particles per year = 50+ credit cards"
+        ]
+      },
+      {
+        "title": "Resource Depletion",
+        "items": [
+          "Earth's soil, land, and water resources continue to deteriorate, all reaching \"critical limits\"",
+          "By 2050, it will be difficult to meet the food demand of nearly 10 billion global population"
+        ]
+      },
+      {
+        "title": "Climate Crisis",
+        "items": [
+          "84% of carbon emissions come from industry and energy production, causing global warming",
+          "Nearly 2/3 of the world's cities with populations over 5 million face the threat of sea level rise"
+        ]
+      },
+      {
+        "title": "Ecological Damage",
+        "items": [
+          "Toxic chemical additives from traditional chemical production methods have caused severe damage to ecosystems.",
+          "Approximately 34% of the world's farmland is affected by human-induced soil degradation, with over 120,000 square kilometers of land further degrading each year, seriously threatening biodiversity and ecological balance."
+        ]
+      }
+    ],
+    "biomanufacturingImperative": "Biomanufacturing Is Imperative"
+  },
+  "aminoAcid": {
+    "title1": "Biosynthetic",
+    "title2": "Amino Acids",
+    "features": [
+      "AI-driven Efficient Protein Design",
+      "Proprietary Precursor X",
+      "Optimized Metabolic Network",
+      "Exclusive Isolation and Purification Process",
+      "Internationally Leading Amino Acid Production Rate & Extraction Yield",
+      "Sustained Cost Reduction"
+    ],
+    "applicationCase": "Application",
+    "applicationCase2": "Examples",
+    "muyuanGroup": "Muyuan Group",
+    "andMint": "& MintBio",
+    "knotWeedSolution": "[ Soybean-Reduced Ration Solutions ]",
+    "benefit1": "Synthesized essential amino acids",
+    "benefit2": "Precise and efficient nutrient supply",
+    "benefit3": "Reduced feeding costs",
+    "knotWeedLabel": "Soybean-Reduced Ration",
+    "slogan1": "生物智造",
+    "slogan2": "惠及每一个生命",
+    "productList": [
+      {
+        "fullName": "Biosynthetic Histidine",
+        "prefix": "Biosynthetic",
+        "name": "Histidine",
+        "fields": ["Food", "Feed", "Biochemical Reagent & Pharmaceutical Manufacturing"],
+        "advantages": ["Cost advantage over similar products", "Higher fermentation rate and efficiency than industry average", "Higher product purity than chemical synthesis"]
+      },
+      {
+        "fullName": "Biosynthetic Isoleucine",
+        "prefix": "Biosynthetic",
+        "name": "Isoleucine",
+        "fields": ["Pharmaceuticals", "Chemical Reagents", "Feed Additives"],
+        "advantages": ["Reduced soybean consumption & lower animal farming costs when incorporated into feed", "Substantial cost reduction over similar products", "Higher fermentation rate and efficiency than the industry average"]
+      }
+    ]
+  },
+  "newMaterial": {
+    "features": ["全新化学结构", "可生物降解", "可回收", "高性能", "高适配性", "成本可控"],
+    "applicationCase": "应用",
+    "applicationCase2": "案例",
+    "vipshop": "唯品会",
+    "andMint": "&元素驱动",
+    "expressCase": "[ 生物降解快递袋 ]",
+    "caas": "中国农科院",
+    "caasAndMint": "& 元素驱动",
+    "mulchingCase": "[ 全生物降解地膜 ]",
+    "xinjiangCaas": "新疆农科院",
+    "faq": "常见",
+    "faq2": "问",
+    "faq3": "题",
+    "categories": [
+      {
+        "title": ["电商包装", "物流包装"],
+        "advantages": ["韧性好", "强度高", "阻隔性能优", "承重性足", "可搭竹粉等环保材料"],
+        "items": ["快递袋", "快递袋", "快递包装泡沫膜"]
+      },
+      {
+        "title": ["吸管", "杯材", "瓶材"],
+        "advantages": ["耐温耐冷", "使用温度 - 30 ℃-100℃", "货架期长"],
+        "items": ["吸管", "杯子", "矿泉水瓶"]
+      },
+      {
+        "title": ["日化产品", "文具玩具", "家具家电"],
+        "advantages": ["强度高", "抗压性好", "适配性强"],
+        "items": ["化妆品", "笔", "玩具", "功能性家具", "日用家具", "白电"]
+      },
+      {
+        "title": ["农业", "种植业"],
+        "advantages": ["保温保墒", "横纵向拉伸性能优", "阻隔性好"],
+        "items": ["地膜", "地膜", "棚膜", "育苗盆"]
+      },
+      {
+        "title": ["服装", "纺织"],
+        "advantages": ["透气性好", "弹性佳", "舒适亲肤"],
+        "items": ["运动服", "运动鞋"]
+      }
+    ],
+    "cases": {
+      "express": {
+        "step1": "使用 PiX 001 打造，兼具性能、成本优势及环保性的快递袋。",
+        "step2": "独创合成工艺进行低成本、高效率量产。",
+        "step3": "即将正式在唯品会电商物流中投入使用。"
+      },
+      "mulching": {
+        "title": "PiX 004 全程护航新疆棉成长",
+        "desc": "元素驱动与中国农业科学院农业环境与可持续发展研究所合作，在新疆进行棉花大田试验，现已完成棉花成长全周期实验。",
+        "advantage1": "可控生物降解，满足长期作物生长条件。",
+        "advantage2": "节水性能优异，水蒸气透过量远低于市面普通可降解地膜。"
+      }
+    },
+    "faqList": [
+      {
+        "question": "PiX新材料的原料是什么？有创新性吗？",
+        "answer": "PiX材料在上游合成生物端创新，源自以CO<sub>2</sub>碳源、桔杆、非粮生物质利用生产的生物基原料。生物基含量最高可达100%"
+      },
+      {
+        "question": "PiX 新材料的生产过程绿色、无毒、环保吗？",
+        "answer": "是的。PiX材料源自生物发酵，从源头节碳减排。在生产过程中，利用了独创的合成工艺，亦无有毒有害气体、副产排出。"
+      },
+      {
+        "question": "PiX新材料的降解条件是什么？可以在哪些环境下降解？",
+        "answer": "主要采用堆肥降解。现阶段实验证明，PiX新材料在微生物丰度、高温高湿、紫外光老化等条件下，可实现降解，且降解周期可调控。"
+      },
+      {
+        "question": "PiX新材料成本可控，体现在哪些方面？",
+        "answer": "材料生产采用了独创的合成工艺，单吨产品原料消耗比例更低，过程能耗更少，产品副产及催化剂用量更少，实现真正的降本增效。同时，PiX的普适性强，能够与竹粉、木浆等其他环保原料搭配生产，可根据需求定制性价比更高的解决方案。"
+      }
+    ]
+  },
+  "knotWeed": {
+    "importIntro": "每年大豆进口量近",
+    "importUnit": "吨",
+    "importPurpose": "进口大豆用于提供饲用蛋白",
+    "title1": "节豆日粮",
+    "title2": "替代",
+    "title3": "大豆",
+    "desc": "提供动物生长的必要氨基酸",
+    "label": "节豆日粮",
+    "slogan1": "生物智造",
+    "slogan2": "惠及每一个生命",
+    "benefit1": "合成必需氨基酸",
+    "benefit2": "营养供给精准高效",
+    "benefit3": "节约饲养成本",
+    "helpTitle": "节豆日粮助力",
+    "helpSubtitle": "解决粮食安全\"卡脖子问题\"",
+    "matchAdvisor": "匹配顾问",
+    "stats": [
+      { "number": "2类", "desc": "合成2类养猪氨基酸" },
+      { "number": "100%", "desc": "有望实现100%豆粕代替" },
+      { "number": "1.5亿", "desc": "节省1.5亿亩大豆种植面积" },
+      { "number": "2000万", "desc": "减少进口2000万吨大豆" }
+    ]
+  },
+  "corporate": {
+    "intro1": "MiNT Bio is a synthetic biology technology company integrating R&D, production, and application, founded in August 2021 by Professor Zhang Kechun from Westlake University, with the headquarter located in Hangzhou, Zhejiang, China.",
+    "intro2": "We have assembled a world-class R&D team and top-tier talents in the industry. We adhere to designing innovative biosynthetic pathways from scratch, utilize AI to drive disruptive innovation from the source, and have independently developed multiple core technologies for synthetic biology platforms. Currently, we empower industrial upgrading with cutting-edge synthetic biology technologies, focusing on two core areas: soybean meal-free rations and biodegradable bio-based materials. Our core products are at the global leading level. We have forged deep strategic partnerships with industry leaders and laid out a 10,000-ton scale production system, truly bridging the critical gap from laboratory research to industrial application and achieving cost reduction, efficiency improvement, and green intelligent biomanufacturing.",
+    "intro3": "As a key project supported by the New Quality Productive Forces Cultivation Platform of Westlake University, MiNT Bio fully leverages the core advantages of our self-developed technology platforms and actively practices the concept of new quality productive forces. Looking ahead, we will keep deepening innovative research and scenario-based applications in the field of synthetic biology, using core technology to drive industrial upgrading in sectors such as biomanufacturing, energy and environment, and advanced materials. Meanwhile, we will expand our product pipeline to cover more application scenarios, extending the concept of green economy to food ingredients, bioenergy, cosmetics materials, automotive manufacturing and other industries. We will work hand in hand with partners from all walks of life to move towards the goals of carbon peaking and carbon neutrality, injecting bio-technology power into global sustainable development.",
+    "founders": {
+      "zhang": {
+        "name": "Zhang Kechun",
+        "title": "Founder & Chief Scientist",
+        "position1": "Professor at Westlake University",
+        "position2": "Director of Muyuan Laboratory",
+        "bio": "Professor Zhang Kechun, the founder, received his bachelor's degree from the University of Science and Technology of China and his Ph.D. from the University of California, Berkeley. He conducted research at the University of Washington and Lawrence National Laboratory. In 2020, he joined Westlake University to establish the Biomanufacturing and New Materials Laboratory."
+      },
+      "liu": {
+        "name": "Liu Minhao",
+        "title": "Chairman & Co-founder",
+        "titleMobile": "Co-founder & Founding Director",
+        "position1": "Special Advisor to the President of Westlake University",
+        "position1Mobile": "Assistant to the President of Westlake University",
+        "position2": "Deputy Director of the Future Industry Research Center of Westlake University",
+        "position3": "Head of the New Quality Productive Forces Cultivation Platform",
+        "position4Mobile": "Secretary of the Board of Directors of Westlake University",
+        "position5Mobile": "Vice Chairman of the Hangzhou Westlake Education Foundation",
+        "bio1": "Liu Minhao received his Ph.D. from Imperial College London in 2011 and conducted research at the University of Oxford from 2012 to 2014. After returning to China, he served as Director of the Administrative Office at the Zhejiang Institute of Advanced Study at Westlake University.",
+        "bio2": "Since 2014, Liu Minhao has been involved in the founding of Westlake University, holding positions including Assistant to the President, Secretary of the Board of Directors, and Vice Chairman of the Hangzhou Westlake Education Foundation."
+      }
+    },
+    "achievements": [
+      "Deeply involved in the founding of Westlake University from 0 to 1, accumulating rich management experience and establishing strong corporate relationships",
+      "Initiated the New Quality Productive Forces Platform, incubating future industries, serving as a bridge between scientists and industry, and facilitating the commercialization of research achievements",
+      "Promoted industry-university-research collaboration, combining technological innovation with industrial innovation, and providing research solutions for enterprise development",
+      "Initiated and participated in public welfare projects, providing scientists with a good development platform and contributing to sustainable development"
+    ],
+    "frontend": "Frontend",
+    "research": "Research",
+    "breakthrough": "Breakthrough",
+    "backend": "Backend",
+    "landing": "Implementation",
+    "massProduction": "Mass Production",
+    "roadDesc1": "From laboratory to production line",
+    "roadDesc2": "is the inevitable path for synthetic biology",
+    "roadDesc3": "Towards the era of biomanufacturing",
+    "roadDesc4": "MiNT Bio is ready",
+    "roadDescMobile1": "From laboratory to production line is the inevitable path for synthetic biology",
+    "roadDescMobile2": "Towards the era of biomanufacturing, MiNT Bio is ready.",
+    "timeline": [
+      { "year": "2021", "desc": "Founded in Hangzhou" },
+      { "year": "2023.05", "desc": "Strategic cooperation with Muyuan Group; completed the first batch of mass production and delivery of feed-grade amino acids." },
+      { "year": "2023.08", "desc": "Reached strategic cooperation with SenseTime to promote AI + synthetic biology frontier innovation." },
+      { "year": "2023.10", "desc": "Isoleucine 300-ton mass production-level conversion process optimization matured." },
+      { "year": "2024.01", "desc": "Jointly established Henan Muyuan Anliang Company with Muyuan Group." },
+      { "year": "2024.04", "desc": "First time listed on the Hangzhou Quasi-Unicorn List." },
+      { "year": "2024.05", "desc": "Henan Muyuan Anliang 30,000 tons/year project commenced." },
+      { "year": "2024.06", "desc": "Signed 150,000 tons/year MiNT New Materials project with Jiande City, building a benchmark for the full biodegradable materials industry chain." },
+      { "year": "2024.09", "desc": "Jiande MiNT Manufacturing project commenced; Phase I 30,000 tons/year, planned for production by end of 2025." },
+      { "year": "2024.12", "desc": "Completed Series A financing" },
+      { "year": "2025.06", "desc": "Muyuan Anliang factory officially started trial production; MiNT Manufacturing factory topped out" },
+      { "year": "2025.07", "desc": "Awarded as Zhejiang Province Specialized, Refined, Distinctive, and Innovative SME" }
+    ],
+    "futureTitle": "Embracing the Era of Biomanufacturing",
+    "futureDesc": "60% of material production can be achieved through biomanufacturing, and the economic value brought by synthetic biology can reach a trillion-yuan scale.",
+    "rdCenter": "R&D Center",
+    "rdCenterDesc": "Responsible for frontier research, experimentation, and pilot testing.",
+    "rdTeam": "R&D Team",
+    "rdTeamMobile": "Core Team",
+    "rdTeamDesc": "Cross-disciplinary talent collaboration, exploring cutting-edge technologies."
+  },
+  "bioIntelligent": {
+    "researchTitle": "科研",
+    "industryTitle": "产业",
+    "to": "到",
+    "understandTitle1": "一起了解",
+    "understandTitle1Part1": "一起",
+    "understandTitle1Part2": "了解",
+    "understandTitle2": "生物智造",
+    "baseTitle": "Biomanufacturing",
+    "baseSuffix": "bases",
+    "research0to1": "科研 0~1",
+    "research0to1Mobile": "科研 0～1",
+    "research0to1Desc": "我们在实验室中进行基础研究和概念验证，打造能够高效生产目标产品的菌株及元件库。通过小试分析和工艺优化后，满足要求的工程微生物将被送往生物智造基地，进行量产验证和放大。",
+    "industry1toInf": "产业 1~∞",
+    "industry1toInfMobile": "产业 1～∞",
+    "industry1toInfDesc": "我们的生物智造基地将生产过程从实验室放大到中试及到产业规模。中试阶段，我们进一步优化生产过程，并进行精密的安全性和稳定性测试。通过中试验证的产品将进行大规模生产，我们将用世界顶级的设备和生产管理流程，对产品质量作出严格把控。",
+    "features": {
+      "renewable": { "title": "可再生原料", "desc": "源自微生物和秸秆、淀粉等非粮生物质。" },
+      "aiProtein": { "title": "AI蛋白质设计", "desc": "深入融合AI技术，AI高效预测和设计分子结构。" },
+      "engine": { "title": "科技引擎", "desc": "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。" },
+      "massProduction": { "title": "量产无忧", "desc": "布局2个生物智造基地，到2025年底产能6万吨，成熟产品均已具备量产条件，并配备严格的质量管理流程。" },
+      "application": { "title": "应用无限", "desc": "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。" }
+    },
+    "platform": {
+      "rawMaterial": "[ 原料 ]",
+      "chassis": "底盘微生物",
+      "biomass": "菲粮生物质",
+      "engine": "[ 发动机 ]",
+      "engineDesc": "合成生物技术平台",
+      "strainOpt": "菌种优化",
+      "aiProtein": "AI蛋白设计",
+      "screening": "分析筛选",
+      "base": "[ 生物智造基地 ]",
+      "extraction": "提取纯化",
+      "fermentation": "发酵量产",
+      "application": "[ 应用 ]",
+      "feed": "饲料",
+      "packaging": "包装",
+      "mulchFilm": "地膜",
+      "appliance": "家电",
+      "stationery": "文具",
+      "toy": "玩具"
+    },
+    "future": {
+      "line1": "未来60%的物质",
+      "line2": "可以通过生物制造生产"
+    },
+    "bases": {
+      "muyuan": {
+        "name": "Muyuan Anliang Hub",
+        "location": "Nanyang, Henan",
+        "area": "Area (Mu)",
+        "capacity1": "Phase I annual production capacity (Tons)",
+        "capacity2": "Phase II annual production capacity (Tons)"
+      },
+      "hq": {
+        "name": "Headquarter",
+        "location": "Xihu District, Hangzhou",
+        "patents": "R&D patents",
+        "team": "R&D team members",
+        "rdCenter": "R&D center area"
+      },
+      "jiande": {
+        "name": "MiNT Manufacturing Hub",
+        "location": "Jiande, Zhejiang",
+        "area1": "Phase I area (Mu)",
+        "capacity1": "Phase I annual production capacity (Tons)",
+        "area2": "Phase II area (Mu)",
+        "capacity2": "Phase II annual production capacity (Tons)"
+      }
+    }
+  },
+  "bannerTitle": {
+    "home": {
+      "line1": "生物",
+      "line2": "智造",
+      "line3": "无限",
+      "line4": "可能"
+    },
+    "corporate": {
+      "line1": "元素驱动",
+      "line2": "MiNT BiO"
+    },
+    "bioIntelligent": {
+      "line1": "释放生物",
+      "line2": "[智造力]",
+      "line3": "Unleashing the power of"
+    },
+    "aminoAcid": {
+      "line1": "氨基酸",
+      "line2": "生物造",
+      "line3": "Brilliant BioAmino"
+    },
+    "vision": {
+      "line1": "与合作伙伴",
+      "line2": "共担ESG责任"
+    },
+    "newMaterial": {
+      "line1": "可塑",
+      "line2": "之材",
+      "line3": "Affordable Infinity"
+    }
+  },
+  "propagate": {
+    "title": "节豆日粮",
+    "slogan1": "生物智造",
+    "slogan2": "惠及每一个生命"
+  },
+  "mouseScroll": {
+    "line1": "生物制造",
+    "line2": "势在必行"
+  },
+  "news": {
+    "title": "发展",
+    "title2": "动态",
+    "subtitle": "实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。",
+    "downloadBrochure": "下载品牌手册",
+    "all": "全部",
+    "moreNews": "更多动态"
+  }
+}

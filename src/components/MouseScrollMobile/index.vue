@@ -4,7 +4,7 @@
     <div v-for="(module, index) in modules" :key="index" :class="['module', `module-${index}`]"
       :ref="el => { if (el) setModuleRef(el, index) }" :style="getModuleStyle(index)">
       <div class="crisis-card">
-        <div class="crisis-card-top"><span>生物制造</span>MiNT BiO<span></span><span>势在必行</span></div>
+        <div class="crisis-card-top"><span>{{ getText('mouseScroll.line1') }}</span>MiNT BiO<span></span><span>{{ getText('mouseScroll.line2') }}</span></div>
         <div class="crisis-card-title">{{ module.name }}</div>
         <div class="crisis-card-data">
           <img src="@/assets/images/crisis-back.png">
@@ -18,6 +18,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import { throttle } from "lodash";
+import { getText } from "@/utils/language";
 
 export default {
   components: {
@@ -132,6 +133,7 @@ export default {
       handleDragStart,
       handleDrag,
       handleDragEnd,
+      getText,
     };
   },
 };

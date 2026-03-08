@@ -1,10 +1,10 @@
 <template>
   <div class="propagate">
-    <div class="propagate-title">节豆日粮</div>
+    <div class="propagate-title">{{ getText('propagate.title') }}</div>
     <div class="propagate-target">
       <div class="propagate-target-top">
-        <p>生物智造</p>
-        <p>惠及每一个生命</p>
+        <p>{{ getText('propagate.slogan1') }}</p>
+        <p>{{ getText('propagate.slogan2') }}</p>
       </div>
       <div class="propagate-target-bottom">
         <p>
@@ -14,14 +14,18 @@
       </div>
     </div>
     <div class="propagate-more">
-      <p>了解更多</p>
+      <p>{{ getText('common.buttons.learnMore') }}</p>
     </div>
 
   </div>
 </template>
 
 <script>
+import { getText } from "@/utils/language";
 export default {
+  setup() {
+    return { getText };
+  }
 }
 </script>
 <style lang="less" scoped>

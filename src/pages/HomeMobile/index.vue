@@ -1,7 +1,22 @@
 <template>
   <div class="home">
-    <BannerTitleAnimationMobile :titleImage="require('@/assets/images/home-title.png')" :isShowHeader="false"
-      :backgroundImg="require('@/assets/images/home-background.png')" />
+    <BannerTitleAnimationMobile :isShowHeader="false"
+      :backgroundImg="require('@/assets/images/home-background.png')">
+      <div class="banner-title-content">
+        <div class="banner-title-zh">
+          <span>{{ getText('bannerTitle.home.line1') }}</span>
+          <span class="orange">{{ getText('bannerTitle.home.line2') }}</span>
+        </div>
+        <div class="banner-title-en">
+          <span>Infinity from</span>
+          <span>Biomanufacturing</span>
+        </div>
+        <div class="banner-title-zh">
+          <span class="orange">{{ getText('bannerTitle.home.line3') }}</span>
+          <span>{{ getText('bannerTitle.home.line4') }}</span>
+        </div>
+      </div>
+    </BannerTitleAnimationMobile>
     <div class="dna-section mobile-sector">
       <div class="top-title">
         <div class="mint-text">MiNT BiO</div>
@@ -27,14 +42,14 @@
       <div class="title">
         <div class="infinite-title">
           <div class="infinite-title-row">
-            <span class="infinite-title-zh">生物</span>
-            <span class="infinite-title-zh orange">智造</span>
+            <span class="infinite-title-zh">{{ getText('home.hero.bio1') }}</span>
+            <span class="infinite-title-zh orange">{{ getText('home.hero.bio2') }}</span>
             <span class="infinite-title-en">
               <span>Infinity from</span>
               <span>Biomanufacturing</span>
             </span>
-            <span class="infinite-title-zh orange">无限</span>
-            <span class="infinite-title-zh">可能</span>
+            <span class="infinite-title-zh orange">{{ getText('home.hero.infinite1') }}</span>
+            <span class="infinite-title-zh">{{ getText('home.hero.infinite2') }}</span>
           </div>
         </div>
         <p class="product-description">{{ getText('home.hero.description') }}</p>
@@ -55,7 +70,7 @@
     </div>
     <div class="banner-section  border-gradient">
       <div class="title">
-        <span>您的选择和 </span><span class="orange-text"> 他们 </span><span> 一样</span>
+        <span>{{ getText('home.testimonialParts.part1') }}</span><span class="orange-text">{{ getText('home.testimonialParts.part2') }}</span><span>{{ getText('home.testimonialParts.part3') }}</span>
       </div>
       <img src="@/assets/images/banners-mobile.png" class="banner-img" />
     </div>
@@ -122,167 +137,52 @@ export default {
       bottomTip: ['Hangzhou', 'DNA', 'E 120.1552°'],
       productTopTip: ['China', 'MiNT BiO', 'Hangzhou'],
       advantageShow: false,
-      productList: [
-        {
-          isShow: false,
-          second: "[ 无豆粕日粮解决方案 ]",
-          imgSrc: require("../../assets/images/product-1.jpeg"),
-          advantage: [
-            "节省大豆",
-            "提供精准氨基酸",
-            "控制成本", 
-            "降氮减排"
-          ],
-          applications: "养殖业",
-          first: "[ 牧原集团 ]",
-          top: 0,
-          width: "50%",
-        },
-        {
-          isShow: false,
-          second: "[ 组氨酸 ]",
-          imgSrc: require("../../assets/images/product-2.jpg"),
-          advantage: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
-          applications: "食品、医药、工业、化妆品",
-          first: "[ 国家乳业创新中心 ]",
-        },
-        {
-          isShow: false,
-          second: "[ 生物可降解膜袋 ]",
-          imgSrc: require("../../assets/images/product-3.jpeg"),
-          advantage: ["强度高", "阻隔性高", "可生物降解"],
-          applications: "包装、快递",
-          first: "[ 唯品会 ]",
-        },
-        {
-          isShow: false,
-          second: "[ 生物可降解地膜 ]",
-          imgSrc: require("../../assets/images/product-4.jpeg"),
-          advantage: ["可调控降解", "机械性能优", "保温保墒性优"],
-          applications: "农业",
-          first: "[ 中国农科院 ]",
-        },
-        {
-          isShow: false,
-          second: "[ 生物可降解吸管杯材 ]",
-          imgSrc: require("../../assets/images/product-5.jpg"),
-          advantage: ["耐温性佳", "韧性强", "可生物降解"],
-          applications: "食品",
-          first: "",
-        },
-        {
-          isShow: false,
-          second: "[ 生物基可降解纤维 ]",
-          imgSrc: require("../../assets/images/product-6.jpg"),
-          advantage: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
-          applications: "纺织、医药、日用",
-          first: "",
-          objectFit: "contain",
-        },
-      ],
-      // 产品翻译映射
-      productTranslations: {
-        zh: {
-          products: [
-            {
-              name: "[ 无豆粕日粮解决方案 ]",
-              advantages: ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
-              applications: "养殖业",
-              first: "[ 牧原集团 ]"
-            },
-            {
-              name: "[ 组氨酸 ]", 
-              advantages: ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
-              applications: "食品、医药、工业、化妆品",
-              first: "[ 国家乳业创新中心 ]"
-            },
-            {
-              name: "[ 生物可降解膜袋 ]",
-              advantages: ["强度高", "阻隔性高", "可生物降解"], 
-              applications: "包装、快递",
-              first: "[ 唯品会 ]"
-            },
-            {
-              name: "[ 生物可降解地膜 ]",
-              advantages: ["可调控降解", "机械性能优", "保温保墒性优"],
-              applications: "农业",
-              first: "[ 中国农科院 ]"
-            },
-            {
-              name: "[ 生物可降解吸管杯材 ]",
-              advantages: ["耐温性佳", "韧性强", "可生物降解"],
-              applications: "食品",
-              first: ""
-            },
-            {
-              name: "[ 生物基可降解纤维 ]", 
-              advantages: ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
-              applications: "纺织、医药、日用",
-              first: ""
-            }
-          ]
-        },
-        en: {
-          products: [
-            {
-              name: "[ Soybean Meal-Free Ration Solutions ]",
-              advantages: ["Substantial reduction in soybean consumption", "Precise essential amino acid supplementation", "Cost-effective operation", "Reduced nitrogen excretion and carbon emissions"],
-              applications: "Animal Husbandry",
-              first: "[ Muyuan Group ]"
-            },
-            {
-              name: "[ Histidine ]",
-              advantages: ["Manufactured via advanced biosynthesis", "High fermentation efficiency", "High product purity", "Mature production process"],
-              applications: "Food, Pharmaceuticals, Industrial Applications, Cosmetics",
-              first: "[ National Dairy Innovation Center ]"
-            },
-            {
-              name: "[ Biodegradable Films & Bags ]",
-              advantages: ["High tensile strength", "Excellent barrier performance", "Biodegradable"],
-              applications: "Packaging, Express Logistics",
-              first: "[ Vipshop ]"
-            },
-            {
-              name: "[ Biodegradable Mulching Film ]",
-              advantages: ["Adjustable degradation rate", "Superior mechanical performance", "Excellent heat and moisture retention"],
-              applications: "Planting Industry",
-              first: "[ Chinese Academy of Agricultural Sciences ]"
-            },
-            {
-              name: "[ Biodegradable Materials for Straws & Cups ]",
-              advantages: ["Excellent thermal tolerance", "High toughness", "Biodegradable"],
-              applications: "Food",
-              first: ""
-            },
-            {
-              name: "[ Bio-based Degradable Fibers ]",
-              advantages: ["Green and non-toxic", "High moisture absorption", "Soft, cotton-like feel", "Antimicrobial", "Biodegradable"], 
-              applications: "Textiles, Pharmaceuticals, Daily Use Products",
-              first: ""
-            }
-          ]
-        }
-      },
+      productList: [],
+      productList: [],
       newsList: [],
       getImageUrl
     };
   },
   methods: {
     getText,
+    initializeProductList() {
+      const langResources = getText('products.list');
+      const images = [
+        { src: require("../../assets/images/product-1.jpeg"), top: 0, width: "50%" },
+        { src: require("../../assets/images/product-2.jpg") },
+        { src: require("../../assets/images/product-3.jpeg") },
+        { src: require("../../assets/images/product-4.jpeg") },
+        { src: require("../../assets/images/product-5.jpg") },
+        { src: require("../../assets/images/product-6.jpg"), objectFit: "contain" },
+      ];
+      if (Array.isArray(langResources)) {
+        this.productList = langResources.map((item, index) => ({
+          isShow: false,
+          second: item.name,
+          imgSrc: images[index]?.src,
+          advantage: item.advantages,
+          applications: item.applications,
+          first: item.friends,
+          top: images[index]?.top,
+          width: images[index]?.width,
+          objectFit: images[index]?.objectFit,
+        }));
+      }
+    },
     initializeCaseList() {
       this.caseList = [
         {
           get title() { return getText('home.sections.technology.title'); },
-          describe: "聚焦合成生物技术突破",
-          describe2: "引领生物智造创新",
+          get describe() { return getText('home.caseList.technology.describe'); },
+          get describe2() { return getText('home.caseList.technology.describe2'); },
           moveColor: "#FF7200",
           isShow: false,
           router: '/corporate',
         },
         {
           get title() { return getText('home.sections.platform.title'); },
-          describe: "独创 MiNT X Platform ",
-          describe2: "AI赋能生物智造",
+          get describe() { return getText('home.caseList.platform.describe'); },
+          get describe2() { return getText('home.caseList.platform.describe2'); },
           moveColor: "#254ad9",
           isShow: false,
           router: '/bioIntelligent',
@@ -290,7 +190,7 @@ export default {
         {
           get title() { return getText('home.sections.products.title'); },
           get describe() { return getText('nav.material'); },
-          describe2: "低成本高性能的环保新材料",
+          get describe2() { return getText('home.caseList.material.describe2'); },
           moveColor: "#3170d3",
           isShow: false,
           router: 'material',
@@ -298,15 +198,15 @@ export default {
         {
           get title() { return getText('home.sections.products.title'); },
           get describe() { return getText('nav.aminoAcid'); },
-          describe2: "高效生物合成20+种氨基酸",
+          get describe2() { return getText('home.caseList.aminoAcid.describe2'); },
           moveColor: "#3880f3",
           isShow: false,
           router: 'aminoAcid',
         },
         {
           get title() { return getText('home.sections.sustainability.title'); },
-          describe: "与合作伙伴共担ESG",
-          describe2: "责任共筑地球可持续未来",
+          get describe() { return getText('home.caseList.sustainability.describe'); },
+          get describe2() { return getText('home.caseList.sustainability.describe2'); },
           moveColor: "#42945f",
           isShow: false,
           router: 'vision',
@@ -349,24 +249,14 @@ export default {
     }
   },
   mounted() {
+    this.initializeProductList();
     this.initializeCaseList();
     this.getList();
     
     // 监听语言变化，重新初始化数据
     this.$watch(() => currentLanguage.value, () => {
       this.initializeCaseList();
-      
-      // 更新产品翻译
-      const currentLang = currentLanguage.value;
-      const translations = this.productTranslations[currentLang] || this.productTranslations.zh;
-      this.productList.forEach((product, index) => {
-        if (translations.products[index]) {
-          product.second = translations.products[index].name;
-          product.advantage = translations.products[index].advantages;
-          product.applications = translations.products[index].applications;
-          product.first = translations.products[index].first;
-        }
-      });
+      this.initializeProductList();
     });
   },
 };
@@ -607,6 +497,25 @@ export default {
       }
     }
 
+  }
+
+  .banner-title-content {
+    text-align: center;
+    .banner-title-zh {
+      font: 600 32px MiSans;
+      color: #ffffff;
+      letter-spacing: 4px;
+      span { display: inline; }
+      .orange { color: #FF7200; }
+    }
+    .banner-title-en {
+      font: 400 12px Montserrat;
+      color: rgba(241, 243, 247, 0.8);
+      margin: 4px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .banner-section {

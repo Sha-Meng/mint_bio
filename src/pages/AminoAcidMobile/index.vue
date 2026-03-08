@@ -1,20 +1,21 @@
 <template>
   <div class="aminoAcid">
-    <BannerTitle :titleImage="require('@/assets/AminoAcid/banner_title.png')" />
+    <BannerTitle>
+      <div class="banner-title-content banner-title-content-mobile">
+        <div class="banner-title-zh">{{ getText('bannerTitle.aminoAcid.line1') }}</div>
+        <div class="banner-title-en">{{ getText('bannerTitle.aminoAcid.line3') }}</div>
+        <div class="banner-title-zh">{{ getText('bannerTitle.aminoAcid.line2') }}</div>
+      </div>
+    </BannerTitle>
 
     <div class="aminoAcid-module1">
       <div class="aminoAcid-module1-content">
         <div class="aminoAcid-module1-content-top">
-          <p class="aminoAcid-module1-content-top-text1">生物合成</p>
-          <p class="aminoAcid-module1-content-top-text2">氨基酸</p>
+          <p class="aminoAcid-module1-content-top-text1">{{ getText('aminoAcid.title1') }}</p>
+          <p class="aminoAcid-module1-content-top-text2">{{ getText('aminoAcid.title2') }}</p>
         </div>
         <div class="aminoAcid-module1-content-bottom">
-          <span>高效AI蛋白设计</span>
-          <span>专利前体X</span>
-          <span>优化代谢网络</span>
-          <span>独家分离纯化工艺</span>
-          <span>国际领先的产酸率 & 提取率</span>
-          <span>持续降本</span>
+          <span v-for="(feat, i) in getText('aminoAcid.features')" :key="i">{{ feat }}</span>
         </div>
       </div>
     </div>
@@ -31,23 +32,23 @@
 
     <div class="aminoAcid-module3 border-gradient" :style="{ marginTop: '100px' }">
       <div class="aminoAcid-module3-title">
-        <span class="orange-text">应用</span>
-        <span>案例</span>
+        <span class="orange-text">{{ getText('aminoAcid.applicationCase') }}</span>
+        <span>{{ getText('aminoAcid.applicationCase2') }}</span>
       </div>
       <div class="aminoAcid-module3-content">
         <div class="second">
           <div class="second-left">
-            <p>牧原集团</p>
-            <p>& 元素驱动</p>
+            <p>{{ getText('aminoAcid.muyuanGroup') }}</p>
+            <p>{{ getText('aminoAcid.andMint') }}</p>
           </div>
           <p class="second-right">
-            [ 节豆日粮解决方案 ]
+            {{ getText('aminoAcid.knotWeedSolution') }}
           </p>
         </div>
         <ul class="third">
-          <li>合成必需氨基酸</li>
-          <li>营养供给精准高效</li>
-          <li>节约饲养成本</li>
+          <li>{{ getText('aminoAcid.benefit1') }}</li>
+          <li>{{ getText('aminoAcid.benefit2') }}</li>
+          <li>{{ getText('aminoAcid.benefit3') }}</li>
         </ul>
       </div>
       <Propagate />
@@ -56,11 +57,12 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import BannerTitle from '@/components/BannerTitle'
 import MouseScrollM from '@/components/MouseScrollM';
 import Propagate from '@/components/Propagate';
 import AaModuleContentMobile from "@/components/AaModuleContentMobile";
+import { getText } from "@/utils/language";
 
 
 export default {
@@ -71,57 +73,29 @@ export default {
     Propagate
   },
   setup() {
-    const module2Data = ref([
-      {
-        title: "生物合成 异亮氨酸",
-        topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-        introductionTitle1: "生物合成",
-        introductionTitle2: "异亮氨酸",
-        applyTexts: ["医药", "化学试剂", "饲料添加剂"],
-        advantages: [
-          "添加于饲料中，减少大豆用量，降低养殖成本",
-          "相较同类产品，具有大幅成本优势",
-          "相较行业平均水准，发酵速度快、效率高",
-        ],
-        imageUrl: ["assets/AminoAcid/module2_ele1.png"],
-      },
-      {
-        title: "生物合成 组氨酸",
-        topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-        introductionTitle1: "生物合成",
-        introductionTitle2: "组氨酸",
-        applyTexts: ["食品", "饲料", "生化试剂制造制药"],
-        advantages: ["相较同类产品，具有成本优势", "相较行业平均水准，发酵速度快、效率高", "相较化学合成法，产品纯度高"],
-        imageUrl: ["assets/AminoAcid/module2_ele2.png"],
-      },
-      // {
-      //   title: "生物合成 色氨酸",
-      //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-      //   introductionTitle1: "生物合成",
-      //   introductionTitle2: "色氨酸",
-      //   applyTexts: ["医药", "食品强化剂", "饲料添加剂"],
-      //   advantages: ["人体与动物必需氨基酸，应用场景广泛", "相较传统生产方法，效率更高、成本更低"],
-      //   imageUrl: ["assets/AminoAcid/module2_ele3.png"],
-      // },
-      // {
-      //   title: "生物合成 亮氨酸",
-      //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-      //   introductionTitle1: "生物合成",
-      //   introductionTitle2: "亮氨酸",
-      //   applyTexts: ["运动营养剂", "食品添加剂", "特殊医药用途食品"],
-      //   advantages: ["动物必需氨基酸之一", "相较传统水解法，生产过程更环保、更高效", "相较化学合成法，具有成本优势"],
-      //   imageUrl: ["assets/AminoAcid/module2_ele4.png"],
-      // },
-      // {
-      //   title: "生物合成 缬氨酸",
-      //   topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-      //   introductionTitle1: "生物合成",
-      //   introductionTitle2: "缬氨酸",
-      //   applyTexts: ["医药", "食品强化剂", "饲料添加剂"],
-      //   advantages: ["动物必需氨基酸之一", "提供饲料转化率，降低养殖成本", "相较化学合成法，具有成本优势"],
-      //   imageUrl: ["assets/AminoAcid/module2_ele5.png"],
-      // },
-    ]);
+    const module2Data = computed(() => {
+      const list = getText('aminoAcid.productList');
+      return [
+        {
+          title: list[1].fullName,
+          topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
+          introductionTitle1: list[1].prefix,
+          introductionTitle2: list[1].name,
+          applyTexts: list[1].fields,
+          advantages: list[1].advantages,
+          imageUrl: ["assets/AminoAcid/module2_ele1.png"],
+        },
+        {
+          title: list[0].fullName,
+          topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
+          introductionTitle1: list[0].prefix,
+          introductionTitle2: list[0].name,
+          applyTexts: list[0].fields,
+          advantages: list[0].advantages,
+          imageUrl: ["assets/AminoAcid/module2_ele2.png"],
+        },
+      ];
+    });
 
 
     const getTabStyleData = (index) => {
@@ -134,7 +108,8 @@ export default {
     };
     return {
       module2Data,
-      getTabStyleData
+      getTabStyleData,
+      getText,
     };
   },
 };
@@ -151,6 +126,26 @@ export default {
 
 .aminoAcid {
   padding: 60px 5px;
+
+  .banner-title-content-mobile {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .banner-title-zh {
+      font: 600 32px MiSans;
+      color: #ffffff;
+      letter-spacing: 2px;
+    }
+    .banner-title-en {
+      font: 600 10px Montserrat;
+      color: rgba(241, 243, 247, 0.8);
+      text-align: center;
+      width: 50px;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+  }
 
   &-module1 {
     padding-bottom: 60px;

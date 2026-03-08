@@ -6,12 +6,7 @@
       <div class="material-banner-content">
         <div class="material-banner-content-right">
           <ul class="material-banner-content-right-text">
-            <li>全新化学结构</li>
-            <li>可生物降解</li>
-            <li>可回收</li>
-            <li>高性能</li>
-            <li>高适配性</li>
-            <li>成本可控</li>
+            <li v-for="(feature, idx) in getText('newMaterial.features')" :key="idx">{{ feature }}</li>
           </ul>
         </div>
       </div>
@@ -23,15 +18,15 @@
     <div v-intersect="() => title1InView = true" class="case sector">
       <div v-if="title1InView" class="case-title animate__animated animate__fadeInUp">
         <div class="case-title-first">
-          <span class="orange-text">应用</span><span>案例</span>
+          <span class="orange-text">{{ getText('newMaterial.applicationCase') }}</span><span>{{ getText('newMaterial.applicationCase2') }}</span>
         </div>
         <div class="flex pt100">
           <div class="case-title-third">
-            <p>唯品会</p>
-            <p>&元素驱动</p>
+            <p>{{ getText('newMaterial.vipshop') }}</p>
+            <p>{{ getText('newMaterial.andMint') }}</p>
           </div>
           <div class="case-title-second">
-            <span class="orange-text">[ 生物降解快递袋 ]</span>
+            <span class="orange-text">{{ getText('newMaterial.expressCase') }}</span>
           </div>
         </div>
       </div>
@@ -53,11 +48,11 @@
     <div v-intersect="() => title2InView = true" class="case sector pt70">
       <div v-if="title2InView" class="case-title flex animate__animated animate__fadeInUp">
         <div class="case-title-third">
-          <p>中国农科院</p>
-          <p>& 元素驱动</p>
+          <p>{{ getText('newMaterial.xinjiangCaas') }}</p>
+          <p>{{ getText('newMaterial.caasAndMint') }}</p>
         </div>
         <div class="case-title-second">
-          <span class="orange-text">[ 全生物降解地膜 ]</span>
+          <span class="orange-text">{{ getText('newMaterial.mulchingCase') }}</span>
         </div>
       </div>
       <div class="case-list" ref="caseListSecond" @mousedown="startDrag($event, 'caseListSecond')"
@@ -77,11 +72,11 @@
 
     <div v-intersect="() => title3InView = true" class="question sector border-gradient">
       <div v-if="title3InView" class="title-first animate__animated animate__fadeInUp">
-        <span>常见</span><span class="orange-text question-code">？</span><span>问</span>
+        <span>{{ getText('newMaterial.faq') }}</span><span class="orange-text question-code">？</span><span>{{ getText('newMaterial.faq2') }}</span>
       </div>
       <div v-if="title3InView" class="title-second animate__animated animate__fadeInUp">
-        <span :style="{ opacity: 0 }">常见</span><span class="orange-text question-code"
-          :style="{ opacity: 0 }">？</span><span>题</span>
+        <span :style="{ opacity: 0 }">{{ getText('newMaterial.faq') }}</span><span class="orange-text question-code"
+          :style="{ opacity: 0 }">？</span><span>{{ getText('newMaterial.faq3') }}</span>
       </div>
       <el-collapse class="collapse" @change="handleChange">
         <el-collapse-item class="collapse-item" v-for="(item, index) in questionList" :key="index" :title="item.title"
@@ -97,6 +92,7 @@
 import BannerTitle from "@/components/BannerTitle";
 import MouseScroll from "@/components/MouseScroll";
 import { Plus, Minus } from "@element-plus/icons-vue";
+import { getText } from "@/utils/language";
 
 export default {
   name: "NewMaterial",
@@ -114,203 +110,111 @@ export default {
       Plus,
       Minus,
       activeNames: [],
-      modules: [
-        {
-          title: "PiX 001",
-          isRow: true,
-          topItems: ["Affordable", "Infinity"],
-          introductionTitle1: "PiX",
-          introductionTitle2: "001",
-          applyTexts: ["电商包装", "物流包装"],
-          advantages: [
-            "韧性好",
-            "强度高",
-            "阻隔性能优",
-            "承重性足",
-            "可搭竹粉等环保材料",
-          ],
-          imageUrl: [
-            {
-              url: "assets/NewMaterial/P001-1.png",
-              desc: "快递袋",
-            },
-            {
-              url: "assets/NewMaterial/P001-2.jpeg",
-              desc: "快递袋",
-            },
-            {
-              url: "assets/NewMaterial/P001-3.jpeg",
-              desc: "快递包装泡沫膜",
-            },
-          ],
-        },
-        {
-          title: "PiX 002",
-          isRow: true,
-          topItems: ["Affordable", "Infinity"],
-          introductionTitle1: "PiX",
-          introductionTitle2: "002",
-          applyTexts: ["吸管", "杯材", "瓶材"],
-          advantages: ["耐温耐冷", "使用温度 - 30 ℃-100℃", "货架期长"],
-          imageUrl: [
-            {
-              url: "assets/NewMaterial/P002-1.jpeg",
-              desc: "吸管",
-            },
-            {
-              url: "assets/NewMaterial/P002-2.jpeg",
-              desc: "杯子",
-            },
-            {
-              url: "assets/NewMaterial/P002-3.jpeg",
-              desc: "矿泉水瓶",
-            },
-          ],
-        },
-        {
-          title: "PiX 003",
-          isRow: true,
-          topItems: ["Affordable", "Infinity"],
-          introductionTitle1: "PiX",
-          introductionTitle2: "003",
-          applyTexts: ["日化产品", "文具玩具", "家具家电"],
-          advantages: ["强度高", "抗压性好", "适配性强"],
-          imageUrl: [
-            {
-              url: "assets/NewMaterial/P003-1.jpeg",
-              desc: "化妆品",
-            },
-            {
-              url: "assets/NewMaterial/P003-2.png",
-              desc: "笔",
-            },
-            {
-              url: "assets/NewMaterial/P003-3.png",
-              desc: "玩具",
-            },
-            {
-              url: "assets/NewMaterial/P003-4.png",
-              desc: "功能性家具",
-            },
-            {
-              url: "assets/NewMaterial/P003-5.png",
-              desc: "日用家具",
-            },
-            {
-              url: "assets/NewMaterial/P003-6.png",
-              desc: "白电",
-            },
-          ],
-        },
-        {
-          title: "PiX 004",
-          isRow: true,
-          topItems: ["Affordable", "Infinity"],
-          introductionTitle1: "PiX",
-          introductionTitle2: "004",
-          applyTexts: ["农业", "种植业"],
-          advantages: ["保温保墒", "横纵向拉伸性能优", "阻隔性好"],
-          imageUrl: [
-            {
-              url: "assets/NewMaterial/P004-1.jpeg",
-              desc: "地膜",
-            },
-            {
-              url: "assets/NewMaterial/P004-2.png",
-              desc: "地膜",
-            },
-            {
-              url: "assets/NewMaterial/P004-4.jpg",
-              desc: "棚膜",
-            },
-            {
-              url: "assets/NewMaterial/P004-3.png",
-              desc: "育苗盆",
-            },
-          ],
-        },
-        {
-          title: "PiX 005",
-          isRow: true,
-          topItems: ["Affordable", "Infinity"],
-          introductionTitle1: "PiX",
-          introductionTitle2: "005",
-          applyTexts: ["服装", "纺织"],
-          advantages: ["透气性好", "弹性佳", "舒适亲肤"],
-          imageUrl: [
-            {
-              url: "assets/NewMaterial/P005-1.jpg",
-              desc: "运动服",
-            },
-            {
-              url: "assets/images/product-6.jpg",
-              desc: "运动鞋",
-            },
-          ],
-        },
-      ],
-      caseList: [
-        {
-          imgSrc: require("@/assets/images/case-4.png"),
-          describe: "使用 PiX 001 打造，兼具性能、成本优势及环保性的快递袋。",
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/images/case-2.png"),
-          describe: "独创合成工艺进行低成本、高效率量产。",
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/images/case-1.png"),
-          describe: "即将正式在唯品会电商物流中投入使用。",
-          transform: "scale(1)",
-        },
-      ],
-      caseListSecond: [
-        {
-          imgSrc: require("@/assets/images/case-1.jpeg"),
-          describe: "PiX 004 全程护航新疆棉成长",
-          tips: "元素驱动与中国农业科学院农业环境与可持续发展研究所合作，在新疆进行棉花大田试验，现已完成棉花成长全周期实验。",
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/images/case-2.jpeg"),
-          describe: "可控生物降解，满足长期作物生长条件。",
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/images/case-3.jpeg"),
-          describe: "节水性能优异，水蒸气透过量远低于市面普通可降解地膜。",
-          transform: "scale(1)",
-        },
-      ],
-      questionList: [
-        {
-          title: "PiX新材料的原料是什么？有创新性吗？",
-          content:
-            "PiX材料在上游合成生物端创新，源自以CO<sub>2</sub>碳源、桔杆、非粮生物质利用生产的生物基原料。生物基含量最高可达100%",
-        },
-        {
-          title: "PiX 新材料的生产过程绿色、无毒、环保吗？",
-          content:
-            "是的。PiX材料源自生物发酵，从源头节碳减排。在生产过程中，利用了独创的合成工艺，亦无有毒有害气体、副产排出。",
-        },
-        {
-          title: "PiX新材料的降解条件是什么？可以在哪些环境下降解？",
-          content:
-            "主要采用堆肥降解。现阶段实验证明，PiX新材料在微生物丰度、高温高湿、紫外光老化等条件下，可实现降解，且降解周期可调控。",
-        },
-        {
-          title: "PiX新材料成本可控，体现在哪些方面？",
-          content: "材料生产采用了独创的合成工艺，单吨产品原料消耗比例更低，过程能耗更少，产品副产及催化剂用量更少，实现真正的降本增效。同时，PiX的普适性强，能够与竹粉、木浆等其他环保原料搭配生产，可根据需求定制性价比更高的解决方案。",
-        },
-      ],
       title1InView: false,
       title2InView: false,
       title3InView: false,
     };
   },
+  computed: {
+    modules() {
+      const cats = getText('newMaterial.categories') || [];
+      const imageUrls = [
+        [
+          { url: "assets/NewMaterial/P001-1.png" },
+          { url: "assets/NewMaterial/P001-2.jpeg" },
+          { url: "assets/NewMaterial/P001-3.jpeg" },
+        ],
+        [
+          { url: "assets/NewMaterial/P002-1.jpeg" },
+          { url: "assets/NewMaterial/P002-2.jpeg" },
+          { url: "assets/NewMaterial/P002-3.jpeg" },
+        ],
+        [
+          { url: "assets/NewMaterial/P003-1.jpeg" },
+          { url: "assets/NewMaterial/P003-2.png" },
+          { url: "assets/NewMaterial/P003-3.png" },
+          { url: "assets/NewMaterial/P003-4.png" },
+          { url: "assets/NewMaterial/P003-5.png" },
+          { url: "assets/NewMaterial/P003-6.png" },
+        ],
+        [
+          { url: "assets/NewMaterial/P004-1.jpeg" },
+          { url: "assets/NewMaterial/P004-2.png" },
+          { url: "assets/NewMaterial/P004-4.jpg" },
+          { url: "assets/NewMaterial/P004-3.png" },
+        ],
+        [
+          { url: "assets/NewMaterial/P005-1.jpg" },
+          { url: "assets/images/product-6.jpg" },
+        ],
+      ];
+      const titles = ["PiX 001", "PiX 002", "PiX 003", "PiX 004", "PiX 005"];
+      const nums = ["001", "002", "003", "004", "005"];
+      return cats.map((cat, i) => ({
+        title: titles[i],
+        isRow: true,
+        topItems: ["Affordable", "Infinity"],
+        introductionTitle1: "PiX",
+        introductionTitle2: nums[i],
+        applyTexts: cat.title,
+        advantages: cat.advantages,
+        imageUrl: (imageUrls[i] || []).map((img, j) => ({
+          url: img.url,
+          desc: (cat.items && cat.items[j]) || "",
+        })),
+      }));
+    },
+    caseList() {
+      const cases = getText('newMaterial.cases.express') || {};
+      return [
+        {
+          imgSrc: require("@/assets/images/case-4.png"),
+          describe: cases.step1 || "",
+          transform: "scale(1)",
+        },
+        {
+          imgSrc: require("@/assets/images/case-2.png"),
+          describe: cases.step2 || "",
+          transform: "scale(1)",
+        },
+        {
+          imgSrc: require("@/assets/images/case-1.png"),
+          describe: cases.step3 || "",
+          transform: "scale(1)",
+        },
+      ];
+    },
+    caseListSecond() {
+      const mulch = getText('newMaterial.cases.mulching') || {};
+      return [
+        {
+          imgSrc: require("@/assets/images/case-1.jpeg"),
+          describe: mulch.title || "",
+          tips: mulch.desc || "",
+          transform: "scale(1)",
+        },
+        {
+          imgSrc: require("@/assets/images/case-2.jpeg"),
+          describe: mulch.advantage1 || "",
+          transform: "scale(1)",
+        },
+        {
+          imgSrc: require("@/assets/images/case-3.jpeg"),
+          describe: mulch.advantage2 || "",
+          transform: "scale(1)",
+        },
+      ];
+    },
+    questionList() {
+      const faqList = getText('newMaterial.faqList') || [];
+      return faqList.map(item => ({
+        title: item.question,
+        content: item.answer,
+      }));
+    },
+  },
   methods: {
+    getText,
     handleChange(activeNames) {
       this.activeNames = activeNames;
     },
@@ -355,6 +259,7 @@ export default {
 
 .material {
   background-color: #11161b;
+
 
   &-banner {
     padding: 0 160px;

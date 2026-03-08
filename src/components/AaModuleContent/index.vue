@@ -67,7 +67,7 @@
 
             <div class="aminoAcid-module2-content-bottom-exhibit-match">
               <p class="aminoAcid-module2-content-bottom-exhibit-match-btn" @click="triggerPopover">
-                匹配顾问
+                {{ getText('common.labels.matchAdvisor') }}
               </p>
             </div>
           </div>
@@ -82,6 +82,7 @@ import { ref } from "vue";
 import { EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { getImageUrl } from "@/utils";
+import { getText } from "@/utils/language";
 import { throttle } from "lodash";
 
 import "swiper/css";

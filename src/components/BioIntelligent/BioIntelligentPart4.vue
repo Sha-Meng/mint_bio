@@ -5,68 +5,68 @@
 			<div class="content">
 				<div class="columnbox">
 					<div class="title">
-						<span class="label"> [ 原料 ] </span>
+						<span class="label"> {{ getText('bioIntelligent.platform.rawMaterial') }} </span>
 					</div>
 	
 					<div class="detail">
 						<div class="detail-list1">
-							<span class="label">底盘微生物</span>
+							<span class="label">{{ getText('bioIntelligent.platform.chassis') }}</span>
 						</div>
 	
 						<div class="detail-list2">
-							<span class="label">菲粮生物质</span>
+							<span class="label">{{ getText('bioIntelligent.platform.biomass') }}</span>
 						</div>
 					</div>
 	
 				</div>
 				<div class="columnbox">
 					<div class="title">
-						<span class="label">[ 发动机 ]<br />MiNT X Platform<br/>合成生物技术平台</span>
+						<span class="label">{{ getText('bioIntelligent.platform.engine') }}<br />MiNT X Platform<br/>{{ getText('bioIntelligent.platform.engineDesc') }}</span>
 					</div>
 	
 					<div class="detail">
 						<div class="detail-list3">
-							<span class="label">菌种优化</span>
+							<span class="label">{{ getText('bioIntelligent.platform.strainOpt') }}</span>
 						</div>
 	
 						<div class="detail-list4">
-							<span class="label">AI蛋白设计</span>
+							<span class="label">{{ getText('bioIntelligent.platform.aiProtein') }}</span>
 						</div>
 	
 						<div class="detail-list5">
-							<span class="label">分析筛选</span>
+							<span class="label">{{ getText('bioIntelligent.platform.screening') }}</span>
 						</div>
 					</div>
 	
 				</div>
 				<div class="columnbox">
 					<div class="title">
-						<span class="label"> [ 生物智造基地 ] </span>
+						<span class="label"> {{ getText('bioIntelligent.platform.base') }} </span>
 					</div>
 	
 					<div class="detail">
 						<div class="detail-list6">
-							<span class="label">提取纯化</span>
+							<span class="label">{{ getText('bioIntelligent.platform.extraction') }}</span>
 						</div>
 	
 						<div class="detail-list7">
-							<span class="label">发酵量产</span>
+							<span class="label">{{ getText('bioIntelligent.platform.fermentation') }}</span>
 						</div>
 	
 					</div>
 				</div>
 				<div class="columnbox">
 					<div class="title">
-						<span class="label"> [ 应用 ] </span>
+						<span class="label"> {{ getText('bioIntelligent.platform.application') }} </span>
 					</div>
 					
 					<div class="detail">
-						<BioIntelligentApplication class="applicationlist1" labeltext="饲料" picsrc="assets/Application/pig.png"></BioIntelligentApplication>
-						<BioIntelligentApplication class="applicationlist2" labeltext="包装" picsrc="assets/Application/package.png"></BioIntelligentApplication>
-						<BioIntelligentApplication class="applicationlist3" labeltext="地膜" picsrc="assets/Application/farm.png"></BioIntelligentApplication>
-						<BioIntelligentApplication class="applicationlist4" labeltext="家电" picsrc="assets/Application/electric.png"></BioIntelligentApplication>
-						<BioIntelligentApplication class="applicationlist5" labeltext="文具" picsrc="assets/Application/package.png"></BioIntelligentApplication>
-						<BioIntelligentApplication class="applicationlist6" labeltext="玩具" picsrc="assets/Application/toy.png"></BioIntelligentApplication>
+						<BioIntelligentApplication class="applicationlist1" :labeltext="getText('bioIntelligent.platform.feed')" picsrc="assets/Application/pig.png"></BioIntelligentApplication>
+						<BioIntelligentApplication class="applicationlist2" :labeltext="getText('bioIntelligent.platform.packaging')" picsrc="assets/Application/package.png"></BioIntelligentApplication>
+						<BioIntelligentApplication class="applicationlist3" :labeltext="getText('bioIntelligent.platform.mulchFilm')" picsrc="assets/Application/farm.png"></BioIntelligentApplication>
+						<BioIntelligentApplication class="applicationlist4" :labeltext="getText('bioIntelligent.platform.appliance')" picsrc="assets/Application/electric.png"></BioIntelligentApplication>
+						<BioIntelligentApplication class="applicationlist5" :labeltext="getText('bioIntelligent.platform.stationery')" picsrc="assets/Application/package.png"></BioIntelligentApplication>
+						<BioIntelligentApplication class="applicationlist6" :labeltext="getText('bioIntelligent.platform.toy')" picsrc="assets/Application/toy.png"></BioIntelligentApplication>
 					</div>
 				</div>
 	

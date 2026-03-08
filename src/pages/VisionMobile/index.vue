@@ -2,12 +2,33 @@
   <div class="vision">
     <BannerTitle>
       <div class="text-section">
-        <div>与合作伙伴</div>
-        <div>共担ESG责任</div>
+        <span>{{ getText('vision.esgPartner') }}</span>
+        <span>{{ getText('vision.esgResponsibility') }}</span>
       </div>
     </BannerTitle>
     <div class="vision-module1 ">
-      <img src="./images/banner1.png" alt="vision_banner1" />
+      <div class="vision-module1-banner">
+        <img src="./images/banner1.png" alt="vision_banner1" />
+        <div class="vision-module1-banner-text">
+          <svg viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <radialGradient id="visionBannerHighlightMobile" gradientUnits="userSpaceOnUse" cx="50" cy="15" r="34">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.42" />
+                <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.2" />
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <g class="vision-module1-banner-text-base" fill="#ECECEE" fill-opacity="0.58">
+              <text x="50" y="12.3" text-anchor="middle" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
+              <text x="50" y="20.8" text-anchor="middle" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
+            </g>
+            <g class="vision-module1-banner-text-highlight" fill="url(#visionBannerHighlightMobile)">
+              <text x="50" y="12.3" text-anchor="middle" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
+              <text x="50" y="20.8" text-anchor="middle" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
+            </g>
+          </svg>
+        </div>
+      </div>
     </div>
     <div class="vision-module2 ">
       <div class="vision-module2-item" v-for="(item, index) in impactData" :key="index">
@@ -22,10 +43,10 @@
     </div>
     <div class="vision-module3 ">
       <div class="vision-module3-title">
-        <span class="vision-module3-title-text1">生物智造</span>
-        <span class="vision-module3-title-text2">势在必行</span>
-        <p class="vision-module3-title-text3">据世界经合组织 (OECD) 的案例分析表明，</p>
-        <p class="vision-module3-title-text3"> 生物技术的应用可以</p>
+        <span class="vision-module3-title-text1">{{ getText('vision.title') }}</span>
+        <span class="vision-module3-title-text2">{{ getText('vision.subtitle') }}</span>
+        <p class="vision-module3-title-text3">{{ getText('vision.oecdIntro') }}</p>
+        <p class="vision-module3-title-text3"> {{ getText('vision.oecdIntro2') }}</p>
       </div>
       <div class="mouse-scroll">
         <MouseScrollM :modules="declineData" :originHeight="430">
@@ -41,21 +62,20 @@
       <div class="vision-module4-w">
         <div class="vision-module4-top">
           <div class="vision-module4-top-title">
-            <p class="vision-module4-top-title-text1">响应</p>
-            <p class="vision-module4-top-title-text2">号召</p>
+            <p class="vision-module4-top-title-text1">{{ getText('vision.respond') }}</p>
+            <p class="vision-module4-top-title-text2">{{ getText('vision.call') }}</p>
           </div>
           <div class="vision-module4-top-description">
             <img src="./images/semicolon_icon.png" alt="semicolon" />
             <p class="vision-module4-top-description-text">
-              生物制造是我国九大未来产业之一，<br />是创新、质优、高效能的新质生产力代表。
+              {{ getText('vision.nationalPolicy') }}
             </p>
           </div>
         </div>
         <div class="vision-module4-bottom">
           <div class="vision-module4-bottom-card border-white" v-for="item in cardData" :key="item.key">
             <div class="book-icon">
-              <img src="./images/book_icon.png" alt="book-icon" />
-
+              <img src="./images/book_icon.png" alt="policy" />
             </div>
             <div class="vision-module4-bottom-card-content">
               <p class="vision-module4-bottom-card-content-text1">
@@ -74,104 +94,41 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import VisionModule5 from "./VisionModule5.vue";
 import BannerTitle from '@/components/BannerTitle'
 import MouseScrollM from '@/components/MouseScrollM'
 import CrisisCard from "./CrisisCard";
+import { getText } from "@/utils/language";
 
 
 
-const cardData = ref([
-  {
-    key: 0,
-    title: "《“十四五”塑料污染治理行动方案》",
-    content:
-      "科学稳妥推广塑料替代产品。加大可降解塑料关键核心技术攻关和成果转化，不断提升产品质量和性能，降低应用成本。",
-  },
-  {
-    key: 1,
-    title: "《“十四五”生物经济发展规划》",
-    content:
-      "培育壮大生物经济支柱产业。加快生物技术广泛赋能健康、农业、能源、环保等产业，促进生物技术与信息技术深度融合，全面提升生物产业多样化水平，推动生物经济高质量发展。",
-  },
-  {
-    key: 2,
-    title: "《新产业标准化领航工程实施方案(2023-2035年)》",
-    content:
-      "聚焦元宇宙、脑机接口、量子信息、人形机器人、生成式人工智能、生物制造、未来显示、未来网络、新型储能等9大未来产业。",
-  },
-  {
-    key: 3,
-    title: "《加快非粮生物基材料创新发展三年行动方案》",
-    content:
-      "到 2025 年，非粮生物基材料产业基本形成自主创新能力强、产品体系不断丰富、绿色循环低碳的创新发展生态，非粮生物质原料利用和应用技术基本成熟，部分非粮生物基产品竞争力与化石基产品相当，高质量、可持续的供给和消费体系初步建立。",
-  },
-]);
-const declineData = ref(
-  [
-    {
-      key: 0,
-      name: "工业过程能耗 (下降)",
-      rate: "15%～88%",
-    },
-    {
-      key: 1,
-      name: "原料消耗 (下降)",
-      rate: "35%～75%",
-    },
-    {
-      key: 2,
-      name: "空气污染 (下降)",
-      rate: "50%～90%",
-    },
-    {
-      key: 3,
-      name: "水污染 (下降)",
-      rate: "33%～80%",
-    },
-    {
-      key: 4,
-      name: "生产成本 (下降)",
-      rate: "9%～90%",
-    },
-  ]
-)
+const cardData = computed(() => {
+  const policies = getText('vision.policies') || [];
+  return policies.map((p, i) => ({
+    key: i,
+    title: p.title,
+    content: p.content,
+  }));
+});
 
-const impactData = ref([
-  {
-    title: '白色污染',
-    imgSrc: require('./images/banner2_1.jpg'),
-    texts: [
-      '海洋飘浮着 5 亿+块不可降解的塑料垃圾',
-      '每人每年吞入 5万+个微塑料颗粒=50+张信用卡'
-    ]
-  },
-  {
-    title: '资源枯竭',
-    imgSrc: require('./images/banner2_2.jpg'),
-    texts: [
-      '地球土壤、土地和水资源状况持续恶化，均已“濒临极限”',
-      '到2050年，难以满足将近100亿全球人口的粮食需求'
-    ]
-  },
-  {
-    title: '气候危机',
-    imgSrc: require('./images/banner2_3.jpg'),
-    texts: [
-      '84%的碳排放来自工业和能源生产，导致全球变暖',
-      '近2/3人口超过500万的世界城市面临海平面上升的威胁'
-    ]
-  },
-  {
-    title: '生态破坏',
-    imgSrc: require('./images/banner2_4.jpg'),
-    texts: [
-      '传统化工生产方式的有毒化学助剂等，对生态系统造成了严重破坏。',
-      '全球约34%的农地受到人为土壤退化的影响，每年有12万+平方公里的土地进一步退化，严重威胁生物多样性和生态平衡。'
-    ]
-  },
-])
+const declineData = computed(() => {
+  const stats = getText('vision.oecdStats') || [];
+  return stats.map((s, i) => ({
+    key: i,
+    name: s.label,
+    rate: s.value,
+  }));
+});
+
+const impactData = computed(() => {
+  const cards = getText('vision.crisisCards') || [];
+  return cards.map((c, i) => ({
+    title: c.title,
+    imgSrc: require(`./images/banner2_${i + 1}.jpg`),
+    texts: c.items,
+  }));
+});
 
 </script>
 
@@ -185,22 +142,55 @@ const impactData = ref([
 .vision {
 
   .text-section {
-    font-size: 36px;
+    font-size: 22px;
     font-weight: 450;
-    line-height: 47.74px;
+    line-height: 1.4;
     text-align: center;
     color: #e8e8ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &-module1 {
     display: flex;
     justify-content: center;
-
-    img {
-      width: 370px;
-    }
-
     margin-bottom: 70px;
+
+    &-banner {
+      position: relative;
+      width: 370px;
+      container-type: inline-size;
+
+      img {
+        width: 100%;
+        display: block;
+      }
+
+      &-text {
+        position: absolute;
+        top: 53%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 82%;
+        z-index: 1;
+        pointer-events: none;
+
+        svg {
+          display: block;
+          width: 100%;
+          height: auto;
+          overflow: visible;
+        }
+
+        text {
+          font-family: 'MiSans VF', 'MiSans', sans-serif;
+          font-weight: 450;
+          font-size: 6.1px;
+          letter-spacing: 0;
+        }
+      }
+    }
   }
 
   &-module2 {

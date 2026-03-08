@@ -5,13 +5,13 @@
       <img class="mint-image" src="@/assets/images/mint.png" alt="knotWeed_mint" />
       <div class="knotWeed-title-text">
         <p class="knotWeed-title-text-top">
-          每年大豆进口量近
+          {{ getText('knotWeed.importIntro') }}
           <span>1亿</span>
-          吨
+          {{ getText('knotWeed.importUnit') }}
         </p>
         <p class="knotWeed-title-text-bottom">
           <span>52%</span>
-          进口大豆用于提供饲用蛋白
+          {{ getText('knotWeed.importPurpose') }}
         </p>
       </div>
     </div>
@@ -19,30 +19,30 @@
     <div v-intersect="() => module1InView = true" class="knotWeed-module1-w sector">
       <div v-if="module1InView" class="knotWeed-module1 animate__animated animate__zoomIn">
         <div class="knotWeed-module1-title animate__animated animate__fadeInUp">
-          <p>节豆日粮</p>
-          <p class="knotWeed-module1-title-replace">替代</p>
-          <p>大豆</p>
+          <p>{{ getText('knotWeed.title1') }}</p>
+          <p class="knotWeed-module1-title-replace">{{ getText('knotWeed.title2') }}</p>
+          <p>{{ getText('knotWeed.title3') }}</p>
         </div>
         <div class="knotWeed-module1-desc animate__animated animate__fadeInUp">
-          <p>提供动物生长的必要氨基酸</p>
+          <p>{{ getText('knotWeed.desc') }}</p>
         </div>
       </div>
     </div>
     <div v-intersect="() => module2InView = true" class="knotWeed-module2-w sector">
       <div v-if="module2InView" class="knotWeed-module2 animate__animated animate__zoomIn">
         <div class="knotWeed-module2-propagate animate__animated animate__fadeInUp">
-          <div class="knotWeed-module2-propagate-title">节豆日粮</div>
+          <div class="knotWeed-module2-propagate-title">{{ getText('knotWeed.label') }}</div>
           <div class="knotWeed-module2-propagate-target">
-            <p>生物智造</p>
-            <p>惠及每一个生命</p>
+            <p>{{ getText('knotWeed.slogan1') }}</p>
+            <p>{{ getText('knotWeed.slogan2') }}</p>
           </div>
         </div>
         <div class="knotWeed-module2-advantage">
           <div class="knotWeed-module2-advantage-content">
             <ul class="knotWeed-module2-advantage-content-text">
-              <li>合成必需氨基酸</li>
-              <li>营养供给精准高效</li>
-              <li>节约饲养成本</li>
+              <li>{{ getText('knotWeed.benefit1') }}</li>
+              <li>{{ getText('knotWeed.benefit2') }}</li>
+              <li>{{ getText('knotWeed.benefit3') }}</li>
             </ul>
           </div>
         </div>
@@ -54,10 +54,10 @@
       <div v-if="module3InView" class="knotWeed-module3 animate__animated animate__fadeInUp">
         <div class="knotWeed-module3-title-w">
           <div class="knotWeed-module3-title">
-            <p>节豆日粮助力</p>
-            <p class="">解决粮食安全“卡脖子问题”</p>
+            <p>{{ getText('knotWeed.helpTitle') }}</p>
+            <p class="">{{ getText('knotWeed.helpSubtitle') }}</p>
           </div>
-          <p class="knotWeed-module3-counselor" @click="triggerPopover">匹配顾问</p>
+          <p class="knotWeed-module3-counselor" @click="triggerPopover">{{ getText('knotWeed.matchAdvisor') }}</p>
         </div>
         <div class="knotWeed-module3-data">
           <div class="knotWeed-module3-data-item" v-for="item in knotData" :key="item.key">
@@ -73,37 +73,24 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import MiNTDivider from "@/components/Divider";
 import emitter from '@/event/event';
+import { getText } from "@/utils/language";
 
 export default {
   components: {
     MiNTDivider,
   },
   setup() {
-    const knotData = ref([
-      {
-        key: 0,
-        important: "2类",
-        content: "合成2类养猪氨基酸",
-      },
-      {
-        key: 1,
-        important: "100%",
-        content: "有望实现100%豆粕代替",
-      },
-      {
-        key: 2,
-        important: "1.5亿",
-        content: "节省1.5亿亩大豆种植面积",
-      },
-      {
-        key: 3,
-        important: "2000万",
-        content: "减少进口2000万吨大豆",
-      },
-    ]);
+    const knotData = computed(() => {
+      const stats = getText('knotWeed.stats') || [];
+      return stats.map((s, i) => ({
+        key: i,
+        important: s.number,
+        content: s.desc,
+      }));
+    });
 
     const module1InView = ref(false);
     const module2InView = ref(false);
@@ -118,7 +105,8 @@ export default {
       module1InView,
       module2InView,
       module3InView,
-      triggerPopover
+      triggerPopover,
+      getText
     };
   },
 };

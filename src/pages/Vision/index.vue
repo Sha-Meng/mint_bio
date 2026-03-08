@@ -4,6 +4,25 @@
     <div class="vision-module1 sector">
       <div class="vision-module1-banner">
         <img src="./images/banner1.png" alt="vision_banner1" />
+        <div class="vision-module1-banner-text">
+          <svg viewBox="0 0 100 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <radialGradient id="visionBannerHighlightPc" gradientUnits="userSpaceOnUse" cx="50" cy="15" r="34">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.42" />
+                <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.2" />
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <g class="vision-module1-banner-text-base" fill="#ECECEE" fill-opacity="0.58">
+              <text x="50" y="12.3" text-anchor="middle" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
+              <text x="50" y="20.8" text-anchor="middle" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
+            </g>
+            <g class="vision-module1-banner-text-highlight" fill="url(#visionBannerHighlightPc)">
+              <text x="50" y="12.3" text-anchor="middle" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
+              <text x="50" y="20.8" text-anchor="middle" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
     <div class="vision-module2 sector">
@@ -20,17 +39,17 @@
     <div class="vision-module3-w">
       <div v-intersect="() => title1InView = true" class="vision-module3 sector">
         <div v-if="title1InView" class="vision-module3-title animate__animated animate__fadeInUp">
-          <p class="vision-module3-title-text1">生物智造</p>
-          <p class="vision-module3-title-text2">势在必行</p>
+          <p class="vision-module3-title-text1">{{ getText('vision.title') }}</p>
+          <p class="vision-module3-title-text2">{{ getText('vision.subtitle') }}</p>
         </div>
         <div class="vision-module3-content">
           <div class="vision-module3-content-left">
             <p class="vision-module3-content-left-text">
-              据世界经合组织 (OECD) 的案例分析表明，<br />生物技术的应用可以
+              {{ getText('vision.oecdIntro') }}<br />{{ getText('vision.oecdIntro2') }}
             </p>
             <router-link :to="`/bioIntelligent`" class="vision-module3-content-left-more-w">
               <p class="vision-module3-content-left-more">
-                了解更多
+                {{ getText('common.buttons.learnMore') }}
               </p>
             </router-link>
             <div class="vision-module3-content-left-list-w">
@@ -58,20 +77,20 @@
       <div v-intersect="() => title2InView = true" class="vision-module4 sector border-gradient">
         <div v-if="title2InView" class="vision-module4-top animate__animated animate__fadeInUp">
           <div class="vision-module4-top-title">
-            <p class="vision-module4-top-title-text1">响应</p>
-            <p class="vision-module4-top-title-text2">号召</p>
+            <p class="vision-module4-top-title-text1">{{ getText('vision.respond') }}</p>
+            <p class="vision-module4-top-title-text2">{{ getText('vision.call') }}</p>
           </div>
           <div class="vision-module4-top-description">
             <img src="./images/semicolon_icon.png" alt="semicolon" />
             <p class="vision-module4-top-description-text">
-              生物制造是我国九大未来产业之一，<br />是创新、质优、高效能的新质生产力代表。
+              {{ getText('vision.nationalPolicy') }}
             </p>
           </div>
         </div>
         <div class="vision-module4-bottom">
-          <div v-for="item in cardData" :key="item.key" class="vision-module4-bottom-card hover-scale-transition"
-            @mousemove="cardHover(item)" @mouseleave="cardLeave(item)" :style="{ transform: item.transform }">
-            <img src="./images/book_icon.png" alt="book_icon" />
+          <div v-for="(item, index) in cardData" :key="item.key" class="vision-module4-bottom-card hover-scale-transition"
+            @mousemove="cardHover(item)" @mouseleave="cardLeave()" :style="{ transform: hoveredCardKey === item.key ? 'scale(1.05)' : 'scale(1)' }">
+            <img class="book-icon-img" src="./images/book_icon.png" alt="policy" />
             <div class="vision-module4-bottom-card-content">
               <p class="vision-module4-bottom-card-content-text1">
                 {{ item.title }}
@@ -89,106 +108,86 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 import VisionModule5 from "./VisionModule5.vue";
 import BannerTitle from "@/components/BannerTitle";
+import { getText } from "@/utils/language";
 
-const cardData = ref([
-  {
-    key: 0,
-    title: "《“十四五”塑料污染治理行动方案》",
-    content:
-      "科学稳妥推广塑料替代产品。加大可降解塑料关键核心技术攻关和成果转化，不断提升产品质量和性能，降低应用成本。",
-    transform: "scale(1)",
-  },
-  {
-    key: 1,
-    title: "《“十四五”生物经济发展规划》",
-    content:
-      "培育壮大生物经济支柱产业。加快生物技术广泛赋能健康、农业、能源、环保等产业，促进生物技术与信息技术深度融合，全面提升生物产业多样化水平，推动生物经济高质量发展。",
-    transform: "scale(1)",
-  },
-  {
-    key: 2,
-    title: "《新产业标准化领航工程实施方案(2023-2035年)》",
-    content:
-      "聚焦元宇宙、脑机接口、量子信息、人形机器人、生成式人工智能、生物制造、未来显示、未来网络、新型储能等9大未来产业。",
-    transform: "scale(1)",
-  },
-  {
-    key: 3,
-    title: "《加快非粮生物基材料创新发展三年行动方案》",
-    content:
-      "到 2025 年，非粮生物基材料产业基本形成自主创新能力强、产品体系不断丰富、绿色循环低碳的创新发展生态，非粮生物质原料利用和应用技术基本成熟，部分非粮生物基产品竞争力与化石基产品相当，高质量、可持续的供给和消费体系初步建立。",
-    transform: "scale(1)",
-  },
-]);
-const declineData = ref([
-  {
-    key: 0,
-    name: "工业过程能耗 (下降)",
-    rate: "15%～88%",
-  },
-  {
-    key: 1,
-    name: "原料消耗 (下降)",
-    rate: "35%～75%",
-  },
-  {
-    key: 2,
-    name: "空气污染 (下降)",
-    rate: "50%～90%",
-  },
-  {
-    key: 3,
-    name: "水污染 (下降)",
-    rate: "33%～80%",
-  },
-  {
-    key: 4,
-    name: "生产成本 (下降)",
-    rate: "9%～90%",
-  },
-]);
+const cardData = computed(() => {
+  const policies = getText('vision.policies') || [];
+  return policies.map((p, i) => ({
+    key: i,
+    title: p.title,
+    content: p.content,
+  }));
+});
 
-const impactData = ref([
-  {
-    title: '白色污染',
-    imgSrc: require('./images/banner2_1.jpg'),
-    texts: [
-      '海洋飘浮着 5 亿+块不可降解的塑料垃圾',
-      '每人每年吞入 5万+个微塑料颗粒=50+张信用卡'
-    ]
-  },
-  {
-    title: '资源枯竭',
-    imgSrc: require('./images/banner2_2.jpg'),
-    texts: [
-      '地球土壤、土地和水资源状况持续恶化，均已“濒临极限”',
-      '到2050年，难以满足将近100亿全球人口的粮食需求'
-    ]
-  },
-  {
-    title: '气候危机',
-    imgSrc: require('./images/banner2_3.jpg'),
-    texts: [
-      '84%的碳排放来自工业和能源生产，导致全球变暖',
-      '近2/3人口超过500万的世界城市面临海平面上升的威胁'
-    ]
-  },
-  {
-    title: '生态破坏',
-    imgSrc: require('./images/banner2_4.jpg'),
-    texts: [
-      '传统化工生产方式的有毒化学助剂等，对生态系统造成了严重破坏。',
-      '全球约34%的农地受到人为土壤退化的影响，每年有12万+平方公里的土地进一步退化，严重威胁生物多样性和生态平衡。'
-    ]
-  },
-])
+const declineData = computed(() => {
+  const stats = getText('vision.oecdStats') || [];
+  return stats.map((s, i) => ({
+    key: i,
+    name: s.label,
+    rate: s.value,
+  }));
+});
+
+const impactData = computed(() => {
+  const cards = getText('vision.crisisCards') || [];
+  return cards.map((c, i) => ({
+    title: c.title,
+    imgSrc: require(`./images/banner2_${i + 1}.jpg`),
+    texts: c.items,
+  }));
+});
+
 const highlightedIndex = ref(0);
 const hoverData = ref("15%～88%");
 const title1InView = ref(false);
 const title2InView = ref(false);
+const hoveredCardKey = ref(-1);
+
+// 卡片等高逻辑
+function syncPolicyCardHeight() {
+  nextTick(() => {
+    const cards = document.querySelectorAll('.vision-module4-bottom-card');
+    if (!cards.length) return;
+    cards.forEach(el => { el.style.height = 'auto'; });
+    nextTick(() => {
+      let maxH = 0;
+      cards.forEach(el => {
+        const h = el.offsetHeight;
+        if (h > maxH) maxH = h;
+      });
+      if (maxH > 0) {
+        cards.forEach(el => { el.style.height = maxH + 'px'; });
+      }
+    });
+  });
+}
+
+let resizeObserver = null;
+
+onMounted(() => {
+  syncPolicyCardHeight();
+  resizeObserver = new ResizeObserver(() => {
+    syncPolicyCardHeight();
+  });
+  const container = document.querySelector('.vision-module4-bottom');
+  if (container) {
+    resizeObserver.observe(container);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect();
+    resizeObserver = null;
+  }
+});
+
+watch(cardData, () => {
+  syncPolicyCardHeight();
+}, { flush: 'post' });
 
 function updateHoverData(data, index) {
   highlightedIndex.value = index;
@@ -196,10 +195,10 @@ function updateHoverData(data, index) {
 }
 
 function cardHover(card) {
-  card.transform = "scale(1.05)";
+  hoveredCardKey.value = card.key;
 }
-function cardLeave(card) {
-  card.transform = "scale(1)";
+function cardLeave() {
+  hoveredCardKey.value = -1;
 }
 </script>
 
@@ -207,14 +206,42 @@ function cardLeave(card) {
 @import "@/style/variable.less";
 
 .vision {
+
   &-module1 {
     margin-top: 5.4375rem;
 
     &-banner {
+      position: relative;
       width: 100%;
+      container-type: inline-size;
 
       img {
         width: 100%;
+        display: block;
+      }
+
+      &-text {
+        position: absolute;
+        top: 53%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 78%;
+        z-index: 1;
+        pointer-events: none;
+
+        svg {
+          display: block;
+          width: 100%;
+          height: auto;
+          overflow: visible;
+        }
+
+        text {
+          font-family: 'MiSans VF', 'MiSans', sans-serif;
+          font-weight: 450;
+          font-size: 6.6px;
+          letter-spacing: 0;
+        }
       }
     }
   }
@@ -333,7 +360,7 @@ function cardLeave(card) {
           &-w {
             text-align: center;
             width: 419px;
-            height: 328px;
+            min-height: 328px;
             border-radius: 20px;
             border: 1px solid transparent;
             background-image: linear-gradient(#181a1d, #12161b),
@@ -347,8 +374,13 @@ function cardLeave(card) {
           }
 
           li {
-            height: 63px;
-            line-height: 63px;
+            min-height: 63px;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 0;
+            box-sizing: border-box;
             font-size: 16px;
             font-weight: 500;
             color: #5d5f61;
@@ -511,13 +543,14 @@ function cardLeave(card) {
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
+      align-items: stretch;
       gap: 20px;
 
       &-card {
         display: flex;
         width: 49%;
-        height: 290px;
+        min-height: 290px;
+        box-sizing: border-box;
         font-size: 14px;
         color: #fff;
         border-radius: 20px;
@@ -530,27 +563,31 @@ function cardLeave(card) {
             rgba(255, 255, 255, 0.1) 93.02%);
         background-origin: border-box;
         background-clip: content-box, border-box;
+        overflow: hidden;
 
-        img {
+        .book-icon-img {
           width: 32px;
           height: 40px;
           margin-top: 36px;
           margin-left: 36px;
+          flex-shrink: 0;
         }
 
         &-content {
           margin-left: 33px;
+          padding-bottom: 36px;
+          overflow: hidden;
 
           &-text1 {
-            margin: 48px 52px 60px 0;
+            margin: 48px 52px 30px 0;
             font-size: 20px;
             font-weight: 500;
             color: #f1f3f7;
           }
 
           &-text2 {
-            margin-right: 102px;
-            margin-bottom: 56px;
+            margin-right: 36px;
+            margin-bottom: 0;
             font-size: 16px;
             color: #f1f3f7;
           }

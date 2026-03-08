@@ -1,15 +1,20 @@
 <template>
   <div>
-    <BannerTitleAnimationMobile :titleImage="require('@/assets/BioIntelligent/banner_title.png')"
-      :backgroundImg="require('@/assets/BioIntelligent/module1_bg.jpeg')" :isShowHeader="false" />
+    <BannerTitleAnimationMobile :backgroundImg="require('@/assets/BioIntelligent/module1_bg.jpeg')" :isShowHeader="false">
+      <div class="banner-title-content banner-title-content-mobile">
+        <div class="banner-title-zh">{{ getText('bannerTitle.bioIntelligent.line1') }}</div>
+        <div class="banner-title-zh highlight">{{ getText('bannerTitle.bioIntelligent.line2') }}</div>
+        <div class="banner-title-en">{{ getText('bannerTitle.bioIntelligent.line3') }}</div>
+      </div>
+    </BannerTitleAnimationMobile>
     <div class="line2 mt120"></div>
 
     <div class="part2">
       <div class="title">
         <span class="first-text">0~1</span>
-        <span class="orange-text">科研</span>
-        <span>到</span>
-        <span class="orange-text"> 产业</span>
+        <span class="orange-text">{{ getText('bioIntelligent.researchTitle') }}</span>
+        <span>{{ getText('bioIntelligent.to') }}</span>
+        <span class="orange-text"> {{ getText('bioIntelligent.industryTitle') }}</span>
         <span class="last-text">1~&infin;</span>
       </div>
       <div class="swiper-content2">
@@ -25,8 +30,8 @@
 
     <div class="part3">
       <div class="title">
-        <span class="first-text">一起了解</span>
-        <span class="orange-text">生物智造</span>
+        <span class="first-text">{{ getText('bioIntelligent.understandTitle1') }}</span>
+        <span class="orange-text">{{ getText('bioIntelligent.understandTitle2') }}</span>
       </div>
       <div class="swiper-content3">
         <Swiper :caseList="caseList2" :topTip="topTip3">
@@ -43,7 +48,7 @@
     </div>
     <VisionModule5 />
     <div class="part6">
-      <div class="title"><span>生物智造</span><span class="orange-text">基地</span></div>
+      <div class="title"><span>{{ getText('bioIntelligent.baseTitle') }}</span><span class="orange-text">{{ getText('bioIntelligent.baseSuffix') }}</span></div>
       <img src="@/assets/images/base-1.png" alt="">
       <img src="@/assets/images/base-2.png" alt="">
       <img src="@/assets/images/base-3.png" alt="">
@@ -57,6 +62,7 @@ import Swiper from "@/components/Swiper";
 import VisionModule5 from "@/pages/VisionMobile/VisionModule5";
 
 import BannerTitleAnimationMobile from "@/components/BannerTitleAnimationMobile";
+import { getText } from "@/utils/language";
 export default {
   name: "MintHome",
   components: {
@@ -69,57 +75,64 @@ export default {
   },
   data() {
     return {
-      caseList: [
-        {
-          title: "科研 0～1",
-          describe: "我们在实验室中进行基础研究和概念验证，打造能够高效生产目标产品的菌株及元件库。通过小试分析和工艺优化后，满足要求的工程微生物将被送往生物智造基地，进行量产验证和放大。",
-          imgSrc: require("@/assets/BioIntelligent/Laboratory.png"),
-
-        },
-        {
-          title: "产业 1～∞",
-          describe: "我们的生物智造基地将生产过程从实验室放大到中试及到产业规模。中试阶段，我们进一步优化生产过程，并进行精密的安全性和稳定性测试。通过中试验证的产品将进行大规模生产，我们将用世界顶级的设备和生产管理流程，对产品质量作出严格把控。",
-          imgSrc: require("@/assets/BioIntelligent/Industry.png"),
-
-        },
-      ],
-      caseList2: [
-        {
-          url: require("@/assets/BioIntelligent/swipper1.png"),
-          title: "可再生原料",
-          description: "源自微生物和秸秆、淀粉等非粮生物质。",
-        },
-        {
-          url: require("@/assets/BioIntelligent/swipper2.png"),
-          title: "AI蛋白质设计",
-          description: "深入融合AI技术，AI高效预测和设计分子结构。",
-        },
-        {
-          url: require("@/assets/BioIntelligent/swipper3.png"),
-          title: "科技引擎",
-          description: "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。",
-        }, {
-          url: require("@/assets/BioIntelligent/swipper3.png"),
-          title: "量产无忧",
-          description: "布局2个生物智造基地，到2025年底产能6万吨，成熟产品均已具备量产条件，并配备严格的质量管理流程。",
-        }, {
-          url: require("@/assets/BioIntelligent/swipper3.png"),
-          title: "应用无限",
-          description: "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。",
-        },
-      ],
       topTip: ['N 30.2741°', 'MiNT BiO', 'China'],
       bottomTip: ['Hangzhou', 'LAB&IND', 'E 120.1552°'],
       topTip3: ['China', 'MiNT BiO', 'Hangzhou'],
-
     };
   },
+  computed: {
+    caseList() {
+      return [
+        {
+          title: getText('bioIntelligent.research0to1Mobile'),
+          describe: getText('bioIntelligent.research0to1Desc'),
+          imgSrc: require("@/assets/BioIntelligent/Laboratory.png"),
+        },
+        {
+          title: getText('bioIntelligent.industry1toInfMobile'),
+          describe: getText('bioIntelligent.industry1toInfDesc'),
+          imgSrc: require("@/assets/BioIntelligent/Industry.png"),
+        },
+      ];
+    },
+    caseList2() {
+      const featureKeys = ['renewable', 'aiProtein', 'engine', 'massProduction', 'application'];
+      const featureUrls = [
+        require("@/assets/BioIntelligent/swipper1.png"),
+        require("@/assets/BioIntelligent/swipper2.png"),
+        require("@/assets/BioIntelligent/swipper3.png"),
+        require("@/assets/BioIntelligent/swipper3.png"),
+        require("@/assets/BioIntelligent/swipper3.png"),
+      ];
+      return featureKeys.map((key, i) => ({
+        url: featureUrls[i],
+        title: getText(`bioIntelligent.features.${key}.title`),
+        description: getText(`bioIntelligent.features.${key}.desc`),
+      }));
+    },
+  },
   methods: {
+    getText,
   },
 };
 </script>
 
 <style lang="less" scoped>
+.banner-title-content-mobile {
+  text-align: center;
+  .banner-title-zh {
+    font: 600 28px MiSans;
+    color: #ffffff;
+    letter-spacing: 2px;
+    &.highlight { color: #FF7200; }
+  }
+  .banner-title-en {
+    font: 400 12px Montserrat;
+    color: rgba(241, 243, 247, 0.8);
+    margin-top: 4px;
+  }
+}
+
 .part1 {
   width: 100%;
   height: 1282px;

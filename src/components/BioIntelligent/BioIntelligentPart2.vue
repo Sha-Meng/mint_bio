@@ -3,12 +3,12 @@
     <div v-intersect="() => titleInView = true">
       <div v-if="titleInView" class="label animate__animated animate__fadeInUp">
         <div class="label-top">
-          <span class="labelBig labelOrange mr120">科研</span>
-          <span class="labelBig labelOrange">产业</span>
+          <span class="labelBig labelOrange mr120">{{ getText('bioIntelligent.researchTitle') }}</span>
+          <span class="labelBig labelOrange">{{ getText('bioIntelligent.industryTitle') }}</span>
         </div>
         <div>
           <span class="labelSmall labelWhite">0~1</span>
-          <span class="labelBig labelWhite mlr30">到</span>
+          <span class="labelBig labelWhite mlr30">{{ getText('bioIntelligent.to') }}</span>
           <span class="labelSmall labelWhite">1~&infin;</span>
         </div>
       </div>
@@ -25,9 +25,9 @@
           class="card-item first-card-item"
           :style="{ opacity: card1Opacity }"
         >
-          <p class="card-item-title">科研 0~1</p>
+          <p class="card-item-title">{{ getText('bioIntelligent.research0to1') }}</p>
           <p class="card-item-content">
-            我们在实验室中进行基础研究和概念验证，打造能够高效生产目标产品的菌株及元件库。通过小试分析和工艺优化后，满足要求的工程微生物将被送往生物智造基地，进行量产验证和放大。
+            {{ getText('bioIntelligent.research0to1Desc') }}
           </p>
         </div>
       </div>
@@ -41,9 +41,9 @@
           class="card-item second-card-item"
           :style="{ opacity: card2Opacity }"
         >
-          <p class="card-item-title">产业 1~&infin;</p>
+          <p class="card-item-title">{{ getText('bioIntelligent.industry1toInf') }}</p>
           <p class="card-item-content">
-            我们的生物智造基地将生产过程从实验室放大到中试及到产业规模。中试阶段，我们进一步优化生产过程，并进行精密的安全性和稳定性测试。通过中试验证的产品将进行大规模生产，我们将用世界顶级的设备和生产管理流程，对产品质量作出严格把控。
+            {{ getText('bioIntelligent.industry1toInfDesc') }}
           </p>
         </div>
       </div>
@@ -53,6 +53,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { getText } from "@/utils/language";
 
 const card1Size = ref(69);
 const card2Size = ref(36);

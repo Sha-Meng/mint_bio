@@ -1,0 +1,598 @@
+{
+  "nav": {
+    "bioIntelligent": "生物智造",
+    "products": "产品",
+    "material": "生物降解新材料",
+    "aminoAcid": "生物合成氨基酸",
+    "knotWeed": "节豆日粮解决方案",
+    "aboutUs": "关于我们",
+    "corporate": "企业概况",
+    "vision": "企业愿景",
+    "news": "发展动态",
+    "contact": "联系我们",
+    "language": "中文",
+    "joinUs": "加入我们",
+    "downloadCenter": "下载中心"
+  },
+  "home": {
+    "sections": {
+      "technology": {
+        "title": "前沿\n科技力",
+        "subtitle": "与合作伙伴共担ESG责任，共筑地球可持续未来"
+      },
+      "platform": {
+        "title": "平台\n强赋能",
+        "subtitle": "独创MiNT X Platform, AI赋能生物智造"
+      },
+      "products": {
+        "title": "卓越\n产品力",
+        "materials": "系列高性能新型生态环保材料PiX",
+        "materialsDesc": "生物基、可降解、可回收",
+        "aminoAcids": "生物合成氨基酸",
+        "aminoAcidsDesc": "高效生物合成20+种氨基酸"
+      },
+      "sustainability": {
+        "title": "绿色\n可持续",
+        "subtitle": "与合作伙伴共担ESG责任，共筑地球可持续未来"
+      }
+    },
+    "hero": {
+      "bio1": "生物",
+      "bio2": "智造",
+      "infinite1": "无限",
+      "infinite2": "可能",
+      "tagline": "生物智造，无限可能",
+      "description": "元素驱动已打通研发，生产，下游产品转化的生物智造全链路。我们布局多个应用领域，并与下游龙头企业合作打造自有工厂，发展可能性无限的生物智造产品矩阵。"
+    },
+    "caseList": {
+      "technology": {
+        "describe": "聚焦合成生物技术突破",
+        "describe2": "引领生物智造创新"
+      },
+      "platform": {
+        "describe": "独创 MiNT X Platform ",
+        "describe2": "AI赋能生物智造"
+      },
+      "material": {
+        "describe2": "低成本高性能的环保新材料"
+      },
+      "aminoAcid": {
+        "describe2": "高效生物合成20+种氨基酸"
+      },
+      "sustainability": {
+        "describe": "与合作伙伴共担ESG",
+        "describe2": "责任共筑地球可持续未来"
+      }
+    },
+    "testimonial": "您的选择和 他们 一样",
+    "testimonialParts": {
+      "part1": "您的选择和 ",
+      "part2": " 他们 ",
+      "part3": " 一样"
+    }
+  },
+  "products": {
+    "list": [
+      {
+        "name": "[ 无豆粕日粮解决方案 ]",
+        "advantages": ["节省大豆", "提供精准氨基酸", "控制成本", "降氮减排"],
+        "applications": "养殖业",
+        "friends": "[ 牧原集团 ]"
+      },
+      {
+        "name": "[ 组氨酸 ]",
+        "advantages": ["生物合成", "发酵效率高", "产品纯度高", "工艺成熟"],
+        "applications": "食品、医药、工业、化妆品",
+        "friends": "[ 国家乳业创新中心 ]"
+      },
+      {
+        "name": "[ 生物可降解膜袋 ]",
+        "advantages": ["强度高", "阻隔性高", "可生物降解"],
+        "applications": "包装、快递",
+        "friends": "[ 唯品会 ]"
+      },
+      {
+        "name": "[ 生物可降解地膜 ]",
+        "advantages": ["可调控降解", "机械性能优", "保温保墒性优"],
+        "applications": "农业",
+        "friends": "[ 中国农科院 ]"
+      },
+      {
+        "name": "[ 生物可降解吸管杯材 ]",
+        "advantages": ["耐温性佳", "韧性强", "可生物降解"],
+        "applications": "食品",
+        "friends": ""
+      },
+      {
+        "name": "[ 生物基可降解纤维 ]",
+        "advantages": ["绿色无毒", "吸湿性佳", "舒适棉感", "抑菌", "可生物降解"],
+        "applications": "纺织、医药、日用",
+        "friends": ""
+      }
+    ]
+  },
+  "contact": {
+    "title": "洽谈合作",
+    "subtitle": "感谢您对元素驱动的关注，如您对生物智造产品 & 解决方案有兴趣或疑问，",
+    "instruction": "使用1分钟填写下方表格，我们将尽快安排工作人员与您建联。",
+    "alternativeContact": "您也可以通过以下渠道找到我们",
+    "advisors": {
+      "aminoAcid": "氨基酸产品顾问",
+      "materials": "新材料产品顾问"
+    },
+    "wechat": "扫码添加",
+    "email": "邮箱：mkt@mint-bio.com",
+    "followUs": "关注公众号了解",
+    "followUsDesc": "公司动向、产品信息、行业新闻、前沿进展",
+    "followUsItems": {
+      "companyUpdates": "公司动向",
+      "productInfo": "产品信息",
+      "industryNews": "行业新闻",
+      "frontierProgress": "前沿进展"
+    }
+  },
+  "footer": {
+    "slogan": "生物智造惠及每一个生命",
+    "sections": {
+      "biomanufacturing": "生物智造",
+      "joinUs": "加入我们"
+    },
+    "aboutUs": "关于我们",
+    "corporate": "企业介绍",
+    "visionResponsibility": "愿景与责任",
+    "contactAdvisor": "联系顾问",
+    "address": "总部地址",
+    "addressLine1": "西投·云城犀谷3号楼",
+    "addressLine2": "浙江省杭州市西湖区西园七路3号",
+    "copyright": "© 2024 元素驱动(杭州)生物科技有限公司",
+    "icp": "浙ICP备2024085355号",
+    "downloadCenter": "下载中心"
+  },
+  "common": {
+    "buttons": {
+      "learnMore": "了解更多",
+      "submit": "提交",
+      "contact": "联系我们",
+      "more": "更多",
+      "back": "返回"
+    },
+    "actions": {
+      "moreNews": "更多动态"
+    },
+    "labels": {
+      "inDevelopment": "在研产品",
+      "performanceAdvantages": "性能优势",
+      "applicationAreas": "应用领域",
+      "partners": "合作伙伴",
+      "testimonial": "您的选择和他们一样",
+      "address": "总部地址",
+      "contactAdvisor": "联系顾问",
+      "matchAdvisor": "匹配顾问"
+    },
+    "forms": {
+      "name": "姓名",
+      "email": "邮箱",
+      "phone": "电话",
+      "message": "留言",
+      "description": "请简单描述您的问题",
+      "placeholders": {
+        "name": "您的姓名...",
+        "email": "您的邮箱...",
+        "phone": "您的电话...",
+        "message": "您的留言...",
+        "messageWithDesc": "您的留言...(请简单描述您的问题)"
+      },
+      "validation": {
+        "required": "请填写完整信息",
+        "invalidEmail": "请输入有效的邮箱地址",
+        "invalidPhone": "请输入有效的手机号码",
+        "submitSuccess": "提交成功",
+        "formatError": "请求格式错误，请检查输入信息"
+      }
+    }
+  },
+  "vision": {
+    "bannerLine1": "万千生命赖以生存的地球",
+    "bannerLine2": "正在面临诸多挑战",
+    "title": "生物智造",
+    "subtitle": "势在必行",
+    "oecdIntro": "据世界经合组织 (OECD) 的案例分析表明，",
+    "oecdIntro2": "生物技术的应用可以使工业过程能耗、原料消耗、空气污染、水污染、生产成本实现 15%～88% 的下降。",
+    "respond": "响应",
+    "call": "号召",
+    "nationalPolicy": "生物制造是我国九大未来产业之一，是创新、质优、高效能的新质生产力代表。",
+    "title60": "的物质生产",
+    "subtitle60": "可通过生物制造方式实现",
+    "productSolution": "生物智造 [ 产品解决方案 ]",
+    "productSolutionDesc": "匹配元素驱动现有产品，并针对性您的应用领域针对性优化。",
+    "customSolution": "生物智造 [ 定制解决方案 ]",
+    "customSolutionDesc": "元素驱动将针对您的需求，进行菌种定制、优化、产品延展等生物智造全流程服务。",
+    "matchAdvisor": "匹配顾问",
+    "customProcess": "定制流程",
+    "step1": "沟通需求",
+    "step2": "菌种定制",
+    "step3": "小试中试",
+    "step4": "工艺优化",
+    "step5": "量产交付",
+    "esgPartner": "与合作伙伴",
+    "esgResponsibility": "共担ESG责任",
+    "policies": [
+      {
+        "title": "《\"十四五\"塑料污染治理行动方案》",
+        "content": "科学稳妥推广塑料替代产品。加大可降解塑料关键核心技术攻关和成果转化，不断提升产品质量和性能，降低应用成本。"
+      },
+      {
+        "title": "《\"十四五\"生物经济发展规划》",
+        "content": "培育壮大生物经济支柱产业。加快生物技术广泛赋能健康、农业、能源、环保等产业，促进生物技术与信息技术深度融合，全面提升生物产业多样化水平，推动生物经济高质量发展。"
+      },
+      {
+        "title": "《新产业标准化领航工程实施方案(2023-2035年)》",
+        "content": "聚焦元宇宙、脑机接口、量子信息、人形机器人、生成式人工智能、生物制造、未来显示、未来网络、新型储能等9大未来产业。"
+      },
+      {
+        "title": "《加快非粮生物基材料创新发展三年行动方案》",
+        "content": "到 2025 年，非粮生物基材料产业基本形成自主创新能力强、产品体系不断丰富、绿色循环低碳的创新发展生态，非粮生物基材料原料利用和应用技术基本成熟，部分非粮生物基产品竞争力与化石基产品相当，高质量、可持续的供给和消费体系初步建立。"
+      }
+    ],
+    "oecdStats": [
+      { "label": "工业过程能耗 (下降)", "value": "15%-80%" },
+      { "label": "原料消耗 (下降)", "value": "35%-75%" },
+      { "label": "空气污染 (下降)", "value": "50%-90%" },
+      { "label": "水污染 (下降)", "value": "33%-80%" },
+      { "label": "生产成本 (下降)", "value": "9%-90%" }
+    ],
+    "crisisCards": [
+      {
+        "title": "白色污染",
+        "items": [
+          "海洋飘浮着 5 亿+块不可降解的塑料垃圾",
+          "每人每年吞入 5万+个微塑料颗粒=50+张信用卡"
+        ]
+      },
+      {
+        "title": "资源枯竭",
+        "items": [
+          "地球土壤、土地和水资源状况持续恶化，均已\"濒临极限\"",
+          "到2050年，难以满足将近100亿全球人口的粮食需求"
+        ]
+      },
+      {
+        "title": "气候危机",
+        "items": [
+          "84%的碳排放来自工业和能源生产，导致全球变暖",
+          "近2/3人口超过500万的世界城市面临海平面上升的威胁"
+        ]
+      },
+      {
+        "title": "生态破坏",
+        "items": [
+          "传统化工生产方式的有毒化学助剂等，对生态系统造成了严重破坏。",
+          "全球约34%的农地受到人为土壤退化的影响，每年有12万+平方公里的土地进一步退化，严重威胁生物多样性和生态平衡。"
+        ]
+      }
+    ],
+    "biomanufacturingImperative": "生物制造势在必行"
+  },
+  "aminoAcid": {
+    "title1": "生物合成",
+    "title2": "氨基酸",
+    "features": [
+      "高效AI蛋白设计",
+      "专利前体X",
+      "优化代谢网络",
+      "独家分离纯化工艺",
+      "国际领先的产酸率 & 提取率",
+      "持续降本"
+    ],
+    "applicationCase": "应用",
+    "applicationCase2": "案例",
+    "muyuanGroup": "牧原集团",
+    "andMint": "& 元素驱动",
+    "knotWeedSolution": "[ 节豆日粮解决方案 ]",
+    "benefit1": "合成必需氨基酸",
+    "benefit2": "营养供给精准高效",
+    "benefit3": "节约饲养成本",
+    "knotWeedLabel": "节豆日粮",
+    "slogan1": "生物智造",
+    "slogan2": "惠及每一个生命",
+    "productList": [
+      {
+        "fullName": "生物合成 组氨酸",
+        "prefix": "生物合成",
+        "name": "组氨酸",
+        "fields": ["食品", "饲料", "生化试剂制造制药"],
+        "advantages": ["相较同类产品，具有成本优势", "相较行业平均水准，发酵速度快、效率高", "相较化学合成法，产品纯度高"]
+      },
+      {
+        "fullName": "生物合成 异亮氨酸",
+        "prefix": "生物合成",
+        "name": "异亮氨酸",
+        "fields": ["医药", "化学试剂", "饲料添加剂"],
+        "advantages": ["添加于饲料中，减少大豆用量，降低养殖成本", "相较同类产品，具有大幅成本优势", "相较行业平均水准，发酵速度快、效率高"]
+      }
+    ]
+  },
+  "newMaterial": {
+    "features": ["全新化学结构", "可生物降解", "可回收", "高性能", "高适配性", "成本可控"],
+    "applicationCase": "应用",
+    "applicationCase2": "案例",
+    "vipshop": "唯品会",
+    "andMint": "&元素驱动",
+    "expressCase": "[ 生物降解快递袋 ]",
+    "caas": "中国农科院",
+    "caasAndMint": "& 元素驱动",
+    "mulchingCase": "[ 全生物降解地膜 ]",
+    "xinjiangCaas": "新疆农科院",
+    "faq": "常见",
+    "faq2": "问",
+    "faq3": "题",
+    "categories": [
+      {
+        "title": ["电商包装", "物流包装"],
+        "advantages": ["韧性好", "强度高", "阻隔性能优", "承重性足", "可搭竹粉等环保材料"],
+        "items": ["快递袋", "快递袋", "快递包装泡沫膜"]
+      },
+      {
+        "title": ["吸管", "杯材", "瓶材"],
+        "advantages": ["耐温耐冷", "使用温度 - 30 ℃-100℃", "货架期长"],
+        "items": ["吸管", "杯子", "矿泉水瓶"]
+      },
+      {
+        "title": ["日化产品", "文具玩具", "家具家电"],
+        "advantages": ["强度高", "抗压性好", "适配性强"],
+        "items": ["化妆品", "笔", "玩具", "功能性家具", "日用家具", "白电"]
+      },
+      {
+        "title": ["农业", "种植业"],
+        "advantages": ["保温保墒", "横纵向拉伸性能优", "阻隔性好"],
+        "items": ["地膜", "地膜", "棚膜", "育苗盆"]
+      },
+      {
+        "title": ["服装", "纺织"],
+        "advantages": ["透气性好", "弹性佳", "舒适亲肤"],
+        "items": ["运动服", "运动鞋"]
+      }
+    ],
+    "cases": {
+      "express": {
+        "step1": "使用 PiX 001 打造，兼具性能、成本优势及环保性的快递袋。",
+        "step2": "独创合成工艺进行低成本、高效率量产。",
+        "step3": "即将正式在唯品会电商物流中投入使用。"
+      },
+      "mulching": {
+        "title": "PiX 004 全程护航新疆棉成长",
+        "desc": "元素驱动与中国农业科学院农业环境与可持续发展研究所合作，在新疆进行棉花大田试验，现已完成棉花成长全周期实验。",
+        "advantage1": "可控生物降解，满足长期作物生长条件。",
+        "advantage2": "节水性能优异，水蒸气透过量远低于市面普通可降解地膜。"
+      }
+    },
+    "faqList": [
+      {
+        "question": "PiX新材料的原料是什么？有创新性吗？",
+        "answer": "PiX材料在上游合成生物端创新，源自以CO<sub>2</sub>碳源、桔杆、非粮生物质利用生产的生物基原料。生物基含量最高可达100%"
+      },
+      {
+        "question": "PiX 新材料的生产过程绿色、无毒、环保吗？",
+        "answer": "是的。PiX材料源自生物发酵，从源头节碳减排。在生产过程中，利用了独创的合成工艺，亦无有毒有害气体、副产排出。"
+      },
+      {
+        "question": "PiX新材料的降解条件是什么？可以在哪些环境下降解？",
+        "answer": "主要采用堆肥降解。现阶段实验证明，PiX新材料在微生物丰度、高温高湿、紫外光老化等条件下，可实现降解，且降解周期可调控。"
+      },
+      {
+        "question": "PiX新材料成本可控，体现在哪些方面？",
+        "answer": "材料生产采用了独创的合成工艺，单吨产品原料消耗比例更低，过程能耗更少，产品副产及催化剂用量更少，实现真正的降本增效。同时，PiX的普适性强，能够与竹粉、木浆等其他环保原料搭配生产，可根据需求定制性价比更高的解决方案。"
+      }
+    ]
+  },
+  "knotWeed": {
+    "importIntro": "每年大豆进口量近",
+    "importUnit": "吨",
+    "importPurpose": "进口大豆用于提供饲用蛋白",
+    "title1": "节豆日粮",
+    "title2": "替代",
+    "title3": "大豆",
+    "desc": "提供动物生长的必要氨基酸",
+    "label": "节豆日粮",
+    "slogan1": "生物智造",
+    "slogan2": "惠及每一个生命",
+    "benefit1": "合成必需氨基酸",
+    "benefit2": "营养供给精准高效",
+    "benefit3": "节约饲养成本",
+    "helpTitle": "节豆日粮助力",
+    "helpSubtitle": "解决粮食安全\"卡脖子问题\"",
+    "matchAdvisor": "匹配顾问",
+    "stats": [
+      { "number": "2类", "desc": "合成2类养猪氨基酸" },
+      { "number": "100%", "desc": "有望实现100%豆粕代替" },
+      { "number": "1.5亿", "desc": "节省1.5亿亩大豆种植面积" },
+      { "number": "2000万", "desc": "减少进口2000万吨大豆" }
+    ]
+  },
+  "corporate": {
+    "intro1": "元素驱动（MiNT BiO）是一家集技术研发、生产应用推广为一体的合成生物科技公司，由西湖大学张科春教授于2021年8月创办，总部位于浙江杭州。",
+    "intro2": "公司配备世界领先的研发团队及行业顶级的产业化团队，自主打造了合成生物全链条专利技术体系MiNT X Platform，围绕氨基酸和生物可降解新材料两大产品方向，实现降本增效、绿色生产的生物\"智造\"。",
+    "intro3": "作为西湖大学新质生产力培育平台重点支持项目，元素驱动在河南和浙江布局了两大生物智造基地，以实际行动推进\"双碳\"目标，助力地球可持续发展。",
+    "founders": {
+      "zhang": {
+        "name": "张科春",
+        "title": "创始人&首席科学家",
+        "position1": "西湖大学教授",
+        "position2": "牧原实验室主任",
+        "bio": "创始人张科春教授本科毕业于中国科学技术大学，博士毕业于加州大学伯克利分校，曾在华盛顿大学和劳伦斯国家实验室从事研究工作。2020年加入西湖大学创建生物制造和新材料实验室。"
+      },
+      "liu": {
+        "name": "刘旻昊",
+        "title": "董事长 & 联合创始人",
+        "titleMobile": "联合创始人&创始董事",
+        "position1": "西湖大学校长特别顾问",
+        "position1Mobile": "西湖大学校长助理",
+        "position2": "西湖大学未来产业研究中心副主任",
+        "position3": "新质生产力培育平台负责人",
+        "position4Mobile": "西湖大学董事会秘书",
+        "position5Mobile": "杭州市西湖教育基金会副理事长",
+        "bio1": "刘旻昊2011年毕业于英国帝国理工学院获得博士学位，并于2012至2014年期间在牛津大学从事研究工作。回国后曾就任于浙江西湖高等研究院，担任行政办公室主任。",
+        "bio2": "自2014年起，刘旻昊参与西湖大学筹办，历任校长助理、董事会秘书、杭州市西湖教育基金会副理事长等职务。"
+      }
+    },
+    "achievements": [
+      "深度参与西湖大学0-1筹建，积累丰富管理经验，建立良好企业关系",
+      "发起新质生产力平台，孵化未来产业，充当科学家与产业的翻译官，助力科研成果落地",
+      "推动产学研合作，推动科技创新与产业创新结合，为企业发展提供科研解决方案",
+      "发起并参与公益项目，为科学家提供良好发展平台，为可持续发展作出贡献"
+    ],
+    "frontend": "前端",
+    "research": "科研",
+    "breakthrough": "攻坚",
+    "backend": "后端",
+    "landing": "落地",
+    "massProduction": "量产",
+    "roadDesc1": "从实验室走向生产线",
+    "roadDesc2": "是合成生物行业必经之路",
+    "roadDesc3": "迈向生物智造时代",
+    "roadDesc4": "元素驱动已做好准备",
+    "roadDescMobile1": "从实验室走向生产线是合成生物行业必经之路",
+    "roadDescMobile2": "迈向生物智造时代，元素驱动已做好准备。",
+    "timeline": [
+      { "year": "2021", "desc": "创办于杭州" },
+      { "year": "2023.05", "desc": "与牧原集团战略合作完成首批饲料添加氨基酸量产交付。" },
+      { "year": "2023.08", "desc": "与商汤科技达成战略合作推动AI+合成生物前沿创新。" },
+      { "year": "2023.10", "desc": "异亮氨酸300吨量产水平转化工艺优化成熟。" },
+      { "year": "2024.01", "desc": "与牧原集团合资成立河南牧元安粮公司。" },
+      { "year": "2024.04", "desc": "首次入围杭州市准独角兽榜单。" },
+      { "year": "2024.05", "desc": "河南牧元安粮年产3万吨项目开工。" },
+      { "year": "2024.06", "desc": "与建德市签约年产15万吨元素新材料项目,打造生物降解材料全产业链标杆。" },
+      { "year": "2024.09", "desc": "建德元素智造项目开工，一期年产3万吨, 计划2025年底投产。" },
+      { "year": "2024.12", "desc": "完成A轮融资" },
+      { "year": "2025.06", "desc": "牧元安粮工厂正式试产、元素智造工厂结顶" },
+      { "year": "2025.07", "desc": "获评浙江省专精特新中小企业" }
+    ],
+    "futureTitle": "迎接生物智造时代",
+    "futureDesc": "60%的物质生产可通过生物制造方式实现, 合成生物带来的经济价值可达万亿元规模。",
+    "rdCenter": "研发中心",
+    "rdCenterDesc": "承担前端科研、实验及小试。",
+    "rdTeam": "科研团队",
+    "rdTeamMobile": "中心团队",
+    "rdTeamDesc": "跨科学人才合作，探索前沿技术。"
+  },
+  "bioIntelligent": {
+    "researchTitle": "科研",
+    "industryTitle": "产业",
+    "to": "到",
+    "understandTitle1": "一起了解",
+    "understandTitle1Part1": "一起",
+    "understandTitle1Part2": "了解",
+    "understandTitle2": "生物智造",
+    "baseTitle": "生物智造",
+    "baseSuffix": "基地",
+    "research0to1": "科研 0~1",
+    "research0to1Mobile": "科研 0～1",
+    "research0to1Desc": "我们在实验室中进行基础研究和概念验证，打造能够高效生产目标产品的菌株及元件库。通过小试分析和工艺优化后，满足要求的工程微生物将被送往生物智造基地，进行量产验证和放大。",
+    "industry1toInf": "产业 1~∞",
+    "industry1toInfMobile": "产业 1～∞",
+    "industry1toInfDesc": "我们的生物智造基地将生产过程从实验室放大到中试及到产业规模。中试阶段，我们进一步优化生产过程，并进行精密的安全性和稳定性测试。通过中试验证的产品将进行大规模生产，我们将用世界顶级的设备和生产管理流程，对产品质量作出严格把控。",
+    "features": {
+      "renewable": { "title": "可再生原料", "desc": "源自微生物和秸秆、淀粉等非粮生物质。" },
+      "aiProtein": { "title": "AI蛋白质设计", "desc": "深入融合AI技术，AI高效预测和设计分子结构。" },
+      "engine": { "title": "科技引擎", "desc": "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。" },
+      "massProduction": { "title": "量产无忧", "desc": "布局2个生物智造基地，到2025年底产能6万吨，成熟产品均已具备量产条件，并配备严格的质量管理流程。" },
+      "application": { "title": "应用无限", "desc": "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。" }
+    },
+    "platform": {
+      "rawMaterial": "[ 原料 ]",
+      "chassis": "底盘微生物",
+      "biomass": "菲粮生物质",
+      "engine": "[ 发动机 ]",
+      "engineDesc": "合成生物技术平台",
+      "strainOpt": "菌种优化",
+      "aiProtein": "AI蛋白设计",
+      "screening": "分析筛选",
+      "base": "[ 生物智造基地 ]",
+      "extraction": "提取纯化",
+      "fermentation": "发酵量产",
+      "application": "[ 应用 ]",
+      "feed": "饲料",
+      "packaging": "包装",
+      "mulchFilm": "地膜",
+      "appliance": "家电",
+      "stationery": "文具",
+      "toy": "玩具"
+    },
+    "future": {
+      "line1": "未来60%的物质",
+      "line2": "可以通过生物制造生产"
+    },
+    "bases": {
+      "muyuan": {
+        "name": "牧元安粮工厂",
+        "location": "河南·南阳",
+        "area": "占地（亩）",
+        "capacity1": "一期年产能（吨）",
+        "capacity2": "二期年产能（吨）"
+      },
+      "hq": {
+        "name": "元素总部",
+        "location": "杭州·西湖区",
+        "patents": "研发专利",
+        "team": "名校硕博研发团队",
+        "rdCenter": "研发中心"
+      },
+      "jiande": {
+        "name": "元素智造工厂",
+        "location": "浙江·建德",
+        "area1": "一期占地（亩）",
+        "capacity1": "一期年产能（吨）",
+        "area2": "二期占地（亩）",
+        "capacity2": "二期年产能（吨）"
+      }
+    }
+  },
+  "bannerTitle": {
+    "home": {
+      "line1": "生物",
+      "line2": "智造",
+      "line3": "无限",
+      "line4": "可能"
+    },
+    "corporate": {
+      "line1": "元素驱动",
+      "line2": "MiNT BiO"
+    },
+    "bioIntelligent": {
+      "line1": "释放生物",
+      "line2": "[智造力]",
+      "line3": "Unleashing the power of"
+    },
+    "aminoAcid": {
+      "line1": "氨基酸",
+      "line2": "生物造",
+      "line3": "Brilliant BioAmino"
+    },
+    "vision": {
+      "line1": "与合作伙伴",
+      "line2": "共担ESG责任"
+    },
+    "newMaterial": {
+      "line1": "可塑",
+      "line2": "之材",
+      "line3": "Affordable Infinity"
+    }
+  },
+  "propagate": {
+    "title": "节豆日粮",
+    "slogan1": "生物智造",
+    "slogan2": "惠及每一个生命"
+  },
+  "mouseScroll": {
+    "line1": "生物制造",
+    "line2": "势在必行"
+  },
+  "news": {
+    "title": "发展",
+    "title2": "动态",
+    "subtitle": "实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。",
+    "downloadBrochure": "下载品牌手册",
+    "all": "全部",
+    "moreNews": "更多动态"
+  }
+}
