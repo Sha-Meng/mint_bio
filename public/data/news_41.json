@@ -1,0 +1,60 @@
+{
+  "id": 41,
+  "title": "双喜临门，元素驱动入选浙江省“科技新小龙”与“企业研究院”认定｜MiNT 进行时",
+  "categorylabel": "#MiNT 进行时",
+  "categorycolor": "#FF7200",
+  "time": "2025/12/10",
+  "overviewtitle": "双喜临门，元素驱动入选浙江省“科技新小龙”与“企业研究院”认定",
+  "sections": [
+    {
+      "headPic": [
+        "assets/News/new_head_1.jpg",
+        "assets/News/new_head_2.jpg"
+      ],
+      "contents": [
+        {
+          "quote": [
+            {
+              "strongText": "近日，元素驱动（杭州）生物科技有限公司凭借在合成生物领域的硬核科技实力与高成长性表现，成功入选<span class='orange-text'>浙江省“科技新小龙企业”</span>及<span class='orange-text'>“浙江省企业研究院”</span>名单。"
+            },
+            {
+              "desc": "这标志着公司的科技创新能力、产业转化潜力及未来发展前景，获得了浙江省的高度认可与重点支持。"
+            }
+          ]
+        },
+        {
+          "pic": "assets/News/202604/news41_pic_2.jpg"
+        },
+        {
+          "desc": "此次入选的两项名单均具有极高的含金量与严格的遴选标准。浙江省“科技新小龙企业”旨在发掘和培育一批具有核心技术突破能力、引领产业变革的新锐科技企业，以加快发展新质生产力、加快建设创新浙江。“浙江省企业研究院”认定名单则是对企业已建立较高层次、较高水平的企业研发机构的认可，省企业研究院是产业科技创新的中坚力量，旨在提升技术创新能力，突破产业关键技术，增强核心竞争力。"
+        },
+        {
+          "strongText": "斩获两项省级认定，证明了元素驱动始终坚持以源头创新驱动产业发展的路径获得了认可。作为西湖大学重点孵化的合成生物高科技成果转化项目与浙江省专精特新中小企业，元素驱动已建立起从技术研发到产业化落地的完整闭环，并与牧原集团和唯品会牵手布局两个<span class='orange-text'>万吨级量产工厂</span>，高效地将科研成果推向产业线。"
+        },
+        {
+          "strongText": "浙江省正将合成生物产业作为优先发展的未来产业进行布局，致力于打造具有国际影响力的产业创新高地。作为该赛道的先行者，元素驱动将继续依托强大的自主研发平台，深耕<span class='orange-text'>绿色生物合成氨基酸</span>与<span class='orange-text'>高性能新型生态材料</span>领域，加速推进绿色创新产品的商业化进程。"
+        },
+        {
+          "desc": "元素驱动始终致力于以硬核科技与标杆产品赋能经济绿色转型，为我国生物制造经济发展、“双碳”目标实现及具有中国壁垒的技术和产品体系构建作出贡献，创造显著社会价值与经济价值。"
+        }
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ]
+    }
+  ],
+  "_meta": {
+    "sourceUrl": "https://mp.weixin.qq.com/s/9Fw61o3YgMHVMAIxKoAdgQ",
+    "fetchedAt": "2026-04-23T14:16:00.499Z",
+    "imageCount": 2,
+    "keptImages": 1,
+    "filteredSmall": 0,
+    "filteredBanner": 1,
+    "footerTrimmed": 6,
+    "descCount": 2,
+    "strongCount": 2,
+    "picCount": 1,
+    "quoteCount": 1
+  }
+}

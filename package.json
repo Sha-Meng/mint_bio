@@ -36,6 +36,7 @@
     "less": "^4.2.1",
     "less-loader": "^12.2.0",
     "mozjpeg": "^8.0.0",
+    "node-html-parser": "^7.1.0",
     "pngquant": "^4.2.0",
     "postcss-pxtorem": "^6.1.0",
     "sass": "^1.82.0",

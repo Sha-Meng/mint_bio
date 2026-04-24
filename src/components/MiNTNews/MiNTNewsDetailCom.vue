@@ -32,7 +32,7 @@
 
         <div class="sections">
           <div v-for="section in props.info.sections" :key="section.id">
-            <MiNTNewsDetailSection :info="section"></MiNTNewsDetailSection>
+            <MiNTNewsDetailSection :info="section" :categorycolor="props.info.categorycolor"></MiNTNewsDetailSection>
           </div>
         </div>
       </div>

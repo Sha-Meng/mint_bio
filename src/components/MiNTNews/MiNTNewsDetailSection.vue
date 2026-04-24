@@ -38,6 +38,22 @@
 		  <div v-html="content.strongText" class="new-strongText"></div>
 		</div>
 
+		<div v-if="content.richHtml" class="rich-html" v-html="content.richHtml"></div>
+
+		<div v-if="content.quote && content.quote.length" class="section-quote" :style="{ borderLeftColor: props.categorycolor }">
+		  <div v-for="(q, qi) in content.quote" :key="qi">
+		    <div v-if="q.pic" class="pic">
+		      <img :src="getImageUrl(q.pic)" />
+		    </div>
+		    <div v-if="q.desc" class="section-desc">
+		      <span>{{ q.desc }}</span>
+		    </div>
+		    <div v-if="q.strongText" class="section-desc">
+		      <div v-html="q.strongText" class="new-strongText"></div>
+		    </div>
+		  </div>
+		</div>
+
       </div>
     </div>
 
@@ -57,6 +73,10 @@ const props = defineProps({
   info: {
     Object,
     required: true,
+  },
+  categorycolor: {
+    type: String,
+    default: '#e75a29',
   },
 });
 </script>
@@ -156,6 +176,37 @@ const props = defineProps({
 
 
     }
+
+    .rich-html {
+      margin-top: 50px;
+      width: 100%;
+    }
+
+    .section-quote {
+      margin-top: 50px;
+      padding: 4px 0 4px 24px;
+      border-left: 3px solid #e75a29;
+
+      // 引用块内部第一个 desc/strongText 不再额外 margin-top，避免和 padding 叠加
+      > div:first-child .section-desc,
+      > div:first-child .pic {
+        margin-top: 0;
+      }
+
+      // 引用块内块间距收紧
+      .section-desc {
+        margin-top: 20px;
+      }
+
+      .pic {
+        margin: 20px 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
 }
 
@@ -206,6 +257,30 @@ const props = defineProps({
           color: white;
           font-size: 14px;
           line-height: 23px;
+        }
+      }
+
+      .rich-html {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      .section-quote {
+        margin-top: 20px;
+        padding: 4px 0 4px 12px;
+        border-left: 2px solid #e75a29;
+
+        .section-desc {
+          margin-top: 10px;
+        }
+
+        > div:first-child .section-desc,
+        > div:first-child .pic {
+          margin-top: 0;
+        }
+
+        .pic {
+          margin: 10px 0;
         }
       }
 

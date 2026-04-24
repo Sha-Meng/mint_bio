@@ -6,7 +6,9 @@ import 'element-plus/dist/index.css'
 import 'animate.css'
 import "@/assets/font/font.css";
 import directives from './utils/directives'
-import { i18nPlugin } from './utils/language'
+import { i18nPlugin, initializeLanguage } from './utils/language'
+
+initializeLanguage()
 
 const app = createApp(App)
 
@@ -15,3 +17,4 @@ app.use(ElementPlus)
 app.use(directives)
 app.use(i18nPlugin)
 app.mount('#app')
+

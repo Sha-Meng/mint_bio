@@ -1,0 +1,38 @@
+{
+  "id": 44,
+  "title": "加入我们｜元素驱动2026年度招聘正式启动",
+  "categorylabel": "#MiNT 进行时",
+  "categorycolor": "#FF7200",
+  "time": "2026/03/11",
+  "overviewtitle": "加入我们",
+  "sections": [
+    {
+      "headPic": [
+        "assets/News/new_head_1.jpg",
+        "assets/News/new_head_2.jpg"
+      ],
+      "contents": [
+        {
+          "nopaddingpic": "assets/News/202604/news44_full.png"
+        }
+      ],
+      "footerPic": [
+        "assets/News/new_footer_1.jpg",
+        "assets/News/new_footer_2.jpg"
+      ]
+    }
+  ],
+  "_meta": {
+    "sourceUrl": "https://mp.weixin.qq.com/s/PJDmBvlbYxcK8yxDV8MN1Q",
+    "fetchedAt": "2026-04-23T14:31:05.078Z",
+    "imageCount": 30,
+    "keptImages": 12,
+    "filteredSmall": 18,
+    "filteredBanner": 0,
+    "footerTrimmed": 0,
+    "descCount": 41,
+    "strongCount": 45,
+    "picCount": 12,
+    "quoteCount": 0
+  }
+}
