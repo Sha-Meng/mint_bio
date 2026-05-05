@@ -355,12 +355,12 @@
     ],
     "cases": {
       "express": {
-        "step1": "使用 PiX 001 打造，兼具性能、成本优势及环保性的快递袋。",
+        "step1": "使用 PiX 膜袋材料 打造，兼具性能、成本优势及环保性的快递袋。",
         "step2": "独创合成工艺进行低成本、高效率量产。",
         "step3": "即将正式在唯品会电商物流中投入使用。"
       },
       "mulching": {
-        "title": "PiX 004 全程护航新疆棉成长",
+        "title": "PiX 地膜材料 全程护航新疆棉成长",
         "desc": "元素驱动与中国农业科学院农业环境与可持续发展研究所合作，在新疆进行棉花大田试验，现已完成棉花成长全周期实验。",
         "advantage1": "可控生物降解，满足长期作物生长条件。",
         "advantage2": "节水性能优异，水蒸气透过量远低于市面普通可降解地膜。"
@@ -416,15 +416,15 @@
     "founders": {
       "zhang": {
         "name": "Zhang Kechun",
-        "title": "Founder & Chief Scientist",
+        "title": "Founder & Chairman of Scientific Advisory Committee",
         "position1": "Professor at Westlake University",
         "position2": "Director of Muyuan Laboratory",
         "bio": "Professor Zhang Kechun, the founder, received his bachelor's degree from the University of Science and Technology of China and his Ph.D. from the University of California, Berkeley. He conducted research at the University of Washington and Lawrence National Laboratory. In 2020, he joined Westlake University to establish the Biomanufacturing and New Materials Laboratory."
       },
       "liu": {
         "name": "Liu Minhao",
-        "title": "Chairman & Co-founder",
-        "titleMobile": "Co-founder & Founding Director",
+        "title": "Co-founder\nChairman & CEO",
+        "titleMobile": "Co-founder\nChairman & CEO",
         "position1": "Special Advisor to the President of Westlake University",
         "position1Mobile": "Assistant to the President of Westlake University",
         "position2": "Deputy Director of the Future Industry Research Center of Westlake University",
@@ -473,7 +473,21 @@
     "rdCenterDesc": "Responsible for frontier research, experimentation, and pilot testing.",
     "rdTeam": "R&D Team",
     "rdTeamMobile": "Core Team",
-    "rdTeamDesc": "Cross-disciplinary talent collaboration, exploring cutting-edge technologies."
+    "rdTeamDesc": "Cross-disciplinary talent collaboration, exploring cutting-edge technologies.",
+    "honors": [
+      { "line1": "杭州市高新技术", "line2": "企业研发中心" },
+      { "line1": "浙江省", "line2": "专精特新中小企业" },
+      { "line1": "浙江省", "line2": "科技型中小企业" },
+      { "line1": "浙江省", "line2": "创新型中小企业" },
+      { "line1": "杭州市西湖区", "line2": "高校经济新锐企业" },
+      { "line1": "西湖区", "line2": "英才A类项目" },
+      { "line1": "西湖区", "line2": "高校经济标杆项目" },
+      { "line1": "杭州市", "line2": "准独角兽榜单企业" },
+      { "line1": "浙江省", "line2": "企业研究院" },
+      { "line1": "浙江省", "line2": "\u201C科技新小龙\u201D" },
+      { "line1": "杭州市", "line2": "新雏鹰企业" },
+      { "line1": "杭州市", "line2": "准独角兽榜单" }
+    ]
   },
   "bioIntelligent": {
     "researchTitle": "科研",
@@ -495,7 +509,7 @@
       "renewable": { "title": "可再生原料", "desc": "源自微生物和秸秆、淀粉等非粮生物质。" },
       "aiProtein": { "title": "AI蛋白质设计", "desc": "深入融合AI技术，AI高效预测和设计分子结构。" },
       "engine": { "title": "科技引擎", "desc": "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。" },
-      "massProduction": { "title": "量产无忧", "desc": "布局2个生物智造基地，到2025年底产能6万吨，成熟产品均已具备量产条件，并配备严格的质量管理流程。" },
+      "massProduction": { "title": "量产无忧", "desc": "布局2个生物智造基地，成熟产品均已具备量产条件，并配备严格的质量管理流程。" },
       "application": { "title": "应用无限", "desc": "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。" }
     },
     "platform": {

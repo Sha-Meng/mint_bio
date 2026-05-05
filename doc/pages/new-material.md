@@ -27,7 +27,7 @@
 | PC | `MouseScroll` + 页面内 `modules` 配置 |
 | 移动端 | `MouseScrollM` + `AaModuleContentMobile` |
 
-**数据**：`modules[]` - PiX 001~005 的应用场景、优势、图片列表
+**数据**：`modules[]` - PiX 膜袋材料~纤维材料 的应用场景、优势、图片列表
 
 图片路径示例：`assets/NewMaterial/P001-1.png`（通过 `getImageUrl()` 解析）
 

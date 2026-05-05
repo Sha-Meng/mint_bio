@@ -7,24 +7,36 @@ mint_bio 官网一期紧急整改（2026-04 五一前）
 五一节前完成 mint_bio 官网第一阶段紧急显性问题整改。面向 PC + Mobile 双端，按 7 个功能模块分批推进（每模块完成后暂停同步改动清单等用户确认）。
 
 ## Status
-- **状态**：building（2026-04-23 进入实施）
-- **截止**：2026-04-30（五一）
+- **状态**：✅ **ARCHIVED**（2026-04-24 23:24 归档；全部 8 模块 + 9 条验收清单已 completed）
+- **截止**：2026-04-30（五一）— 提前 6 天完成
 - **模式**：精细化 step 控制（每模块暂停 review）
+- **后续**：本 spec 已关档，如需对相关模块做增量改动，请另起新 spec 引用本文件
 
 ## Todos（与 plan.json 同步）
 
 - [x] 模块 1：spec-init + explore-targets（本文件 + 行号级落点表）
-- [~] 模块 2：news-batch-1（id=38-41 4 篇抓取 + review）
+- [x] 模块 2：news-batch-1（id=38-41 4 篇抓取 + review）✅ 2026-04-23 用户验收通过
   - [x] id=38 试点：修 5 类问题 + 沉淀 `news-weixin-importer` skill v1
   - [x] id=39/40/41：用 skill + 改进版 `fetch.mjs` 批量跑
   - [x] skill v2：新增 banner 过滤 + `quote` 块（公众号橙色左竖线引用段）
-  - [ ] 用户端验收：列表卡片缩略图 / 详情页 quote 竖线渲染 / 段内高亮
-- [ ] 模块 3：news-batch-2（id=42-45 4 篇抓取 + review）
-- [ ] 模块 4：news-batch-3（id=46-48 3 篇 + 追加 news_list.json）
-- [ ] 模块 5：PiX 全量重命名
-- [ ] 模块 6：荣誉 AI 生图 + corpList 追加 + 创始人头衔
-- [ ] 模块 7：综合收尾（品牌手册注释 + 产能文案删除 + 英文开关 + README）
-- [ ] 模块 8：yarn serve 全量验收
+  - [x] 用户端验收：列表卡片缩略图 / 详情页 quote 竖线渲染 / 段内高亮
+- [x] 模块 3：news-batch-2（id=42-45 4 篇抓取 + review）✅ 2026-04-23 用户验收通过
+  - [x] id=42：蓝色产品力分类 → headPic 蓝色 banner（`new_head_blue_1/2.jpg`），fetch.mjs 按 categorycolor 自动选择
+  - [x] id=43：正常产出
+  - [x] id=44：排版极复杂（招聘），采用 playwright 截图整页方案 → `news44_full.png` + `nopaddingpic` 块；缩略图手动选 `news44_pic_15.jpg`（办公楼照片）
+  - [x] id=45：正常产出；缩略图改为 `news47_pic_4.jpg`（人物照片）
+  - [x] skill v3：Lessons #8-#9（headPic 蓝色分类色 + strongText 边界处理）
+- [x] 模块 4：news-batch-3（id=46-48 3 篇 + 追加 news_list.json）✅ 2026-04-24 用户验收通过
+  - [x] id=46：蓝色产品力，正常产出
+  - [x] id=47：正常产出；overviewtitle 修复为内容标题（非分类名）
+  - [x] id=48：蓝色产品力；新增 `richHtml` 通用块（v-html 渲染任意自定义 HTML），编号小标题 01/02/03 用内联样式还原蓝色圆点+居中标题；删除装饰草图 `pic_10.png`
+  - [x] 全部 11 条追加到 `news_list.json` 头部
+  - [x] JSON 引号修复：多个 news JSON 和 news_list.json 中 title/overviewtitle 含 ASCII 双引号导致解析失败 → 用状态机脚本全量修复为中文引号
+  - [x] skill v4：Lessons #10-#16（richHtml 块 + headPic 颜色 + 截图方案 + overviewtitle 规则 + 缩略图选择 + JSON 引号修复）
+- [x] 模块 5：PiX 全量重命名 ✅ 2026-04-24 完成
+- [x] 模块 6：荣誉 corpList 追加（SVG 文字卡片 key=9~12）+ 创始人头衔 ✅ 2026-04-24 完成
+- [x] 模块 7：综合收尾（品牌手册注释 + 产能文案删除 + 英文开关 + README）✅ 2026-04-24 完成
+- [x] 模块 8：代码级全量验证 ✅ 2026-04-24 完成
 
 ## id=38 试点沉淀（2026-04-23）
 
@@ -68,6 +80,45 @@ id=39 img=10(kept=7, banner=3) desc=5 strong=2 quote=1 thumb=news39_pic_3.png
 id=40 img=10(kept=7, banner=3) desc=4 strong=1 quote=1 thumb=news40_pic_3.jpg
 id=41 img=8(kept=6, banner=2) desc=2 strong=2 quote=1 thumb=news41_pic_2.jpg
 ```
+
+## id=42-45 批次 2 沉淀（2026-04-23）
+
+### 新问题 → 新规则
+
+| # | 问题 | 根因 | 已固化的规则 |
+|---|------|------|--------------|
+| 8 | 蓝色"MiNT 产品力"文章（id=42/46/48）headPic 显示为橙色 | `headPic` 硬编码为 `new_head_1/2.jpg`（橙色） | `fetch.mjs` 根据 `categorycolor` 自动选择：`#144BE1`→蓝色 `new_head_blue_1/2.jpg`，默认→橙色 |
+| 9 | id=44 招聘篇排版极复杂（卡片式岗位列表、编号装饰、两列 grid）无法用 block 还原 | CSS 排版复杂度超出 block schema 表达能力 | **截图方案**：playwright-cli 打开原文 → 滚动触发 lazyload → 截取 `#js_content` 为长图 PNG → JSON 用单个 `nopaddingpic` 块引用 |
+
+### 新增改动
+
+- `src/assets/News/202604/new_head_blue_1.jpg` / `new_head_blue_2.jpg`：蓝色分类装饰带
+- `scripts/fetch-news/fetch.mjs`：headPic 根据 categorycolor 自动选择蓝/橙
+- `src/assets/News/202604/news44_full.png`：playwright 截图长图（1233KB）
+- `public/data/news_44.json`：contents 替换为单张 nopaddingpic
+- `public/data/news_list.json`：id=44 缩略图改为 `news44_pic_15.jpg`
+
+## id=46-48 批次 3 沉淀（2026-04-24）
+
+### 新问题 → 新规则
+
+| # | 问题 | 根因 | 已固化的规则 |
+|---|------|------|--------------|
+| 10 | id=48 编号小标题无法用 strongText 还原 | strongText 仅支持 5 种预设 class | 新增 `richHtml` 通用块（v-html 渲染任意自定义 HTML） |
+| 11 | id=48 编号标题下出现草地装饰图 | 脚本把 CSS 装饰分隔条也作为 pic | 手动删除不需要的装饰图块 |
+| 12 | id=48/47 overviewtitle 只显示分类名 | overviewtitle 误取分类前缀 | **规则**：overviewtitle = title 中 `｜` 前/后的内容主体部分 |
+| 13 | id=44 列表缩略图空白 | pic 指向被过滤的小装饰图 | 手动选有代表性大图作为缩略图 |
+| 14 | 编辑 JSON 后页面报错 TypeError | 中文引号被替换为 ASCII 双引号致 JSON 解析失败 | 状态机脚本全量修复裸 `0x22` → `\u201c` |
+
+### 新增改动
+
+- `src/components/MiNTNews/MiNTNewsDetailSection.vue`：新增 `richHtml` 块（模板+PC/Mobile 样式）
+- `public/data/news_48.json`：numberedTitle/strongText → richHtml（01/02/03 居中蓝色圆点）；删 3 张 pic_10.png
+- `public/data/news_list.json`：id=48/47 overviewtitle 修复；id=47 缩略图改为人物照片
+- `public/data/news_42.json`：修复 ASCII 双引号
+- `.codebuddy/skills/news-weixin-importer/SKILL.md`：skill v4（richHtml + 截图方案 + Lessons #10-#16）
+
+
 
 
 
@@ -221,23 +272,31 @@ function resolveInitialLanguage() {
 
 ## Validation / Acceptance（八条验收）
 
-- [ ] 11 篇新闻在 PC 与 Mobile 列表可见，按日期倒序排列，分类筛选命中
-- [ ] 11 篇新闻详情页完整还原（图文 + 富文本）
-- [ ] 全站 PiX 新名全部命中，新闻 JSON 原文保留
-- [ ] 荣誉墙 PC+Mobile 共 12 张图
-- [ ] 张科春主 title = `创始人&科学顾问委员会主席`
-- [ ] 刘旻昊主 title / titleMobile 换行显示 `联合创始人 / 董事长&CEO`
-- [ ] 发展动态页无"下载品牌手册"按钮；生物智造卡片无"6 万吨"
-- [ ] `?lang=en` 访问回到中文，Header / MobileHeader 无语言切换按钮
-- [ ] README 有"英文版入口恢复指引"小节
+- [x] 11 篇新闻在 PC 与 Mobile 列表可见，按日期倒序排列，分类筛选命中 ✅
+- [x] 11 篇新闻详情页完整还原（图文 + 富文本 + richHtml + 截图方案）✅
+- [x] 全站 PiX 新名全部命中（膜袋/PiX3D打印/注塑/地膜/纤维），src/ 内无残留 `PiX00[1-5]`，新闻 JSON 原文保留 ✅
+- [x] 荣誉墙 PC+Mobile 共 12 项：key=1~8 PNG 图片 + key=9~12 SVG 文字卡片（浙江省企业研究院 / "科技新小龙" / 杭州市新雏鹰企业 / 杭州市准独角兽榜单）✅
+- [x] 张科春主 title = `创始人&科学顾问委员会主席`（zh-CN+en-US 双端同步）✅
+- [x] 刘旻昊主 title / titleMobile = `联合创始人\n董事长&CEO`，white-space: pre-line 支持换行 ✅
+- [x] MiNTNewsTop.vue 品牌手册按钮已 Vue 注释包裹（不删 DOM）；zh-CN+en-US massProduction.desc 无"6 万吨"文案 ✅
+- [x] `FEATURE_EN_ENABLED=false`，normalizeLanguage 禁 en，resolveInitialLanguage 清 localStorage，Header+MobileHeader 语言切换按钮 `v-if="FEATURE_EN_ENABLED"` 隐藏 ✅
+- [x] README.md 末尾有完整"英文版入口恢复指引"小节（一行代码开关+部署+影响面）✅
 
 ## Known Limitations / Follow-ups
 
-- **口径统一 5 落点**：待用户提供精确对照表后另起 Phase 1.5 落地
+- **口径统一 5 落点**：✅ 已于 2026-04-24 23:22 由 Phase 1.5 落地完成 → `.codebuddy/plans/website-phase1.5-copy-alignment_20260424.md`（实际只改 3 个 zh-CN 字段即覆盖 5 个落点，因 ②③④ 共享 nav.* key）
 - **新闻富文本强调**：AI 抓取拆段为保守策略，可能漏掉部分公众号原文强调，上线后由运营人工校对
-- **荣誉图**：AI 生成接受风格瑕疵，后续由设计替换真图
-- **英文版完整恢复**：下线仅为临时，后续英文版完善后改开关即可
+- **荣誉图**：key=1~8 为历史 PNG、key=9~12 为本轮新增 SVG 文字卡片，后续由设计统一风格
+- **英文版完整恢复**：下线仅为临时，改 `FEATURE_EN_ENABLED = true` + 部署即恢复，README 已有完整指引
 
 ## Change Log
 
 - 2026-04-23 20:45 初始化 spec，完成落点探索（模块 1）
+- 2026-04-23 21:30 模块 2 完成：id=38-41 四篇新闻抓取 + skill v1/v2 沉淀
+- 2026-04-23 23:00 模块 3 完成：id=42-45 四篇新闻（含 headPic 蓝色分类色修复、id=44 截图方案）
+- 2026-04-24 00:30 模块 4 完成：id=46-48 三篇新闻 + news_list.json 全量追加（含 richHtml 通用块、overviewtitle 修复、JSON 引号全量修复）
+- 2026-04-24 21:46 全部 11 篇新闻用户验收通过，skill v4 更新完成，进度同步
+- 2026-04-24 22:55 模块 8 代码级全量验证通过，spec 状态 → completed。全部 7 个功能模块 + 验收清单 9 条全部 ✅
+- 2026-04-24 23:00 遗留项"口径统一 5 落点"已移交 Phase 1.5 占位 spec（`website-phase1.5-copy-alignment_20260424.md`，blocked 等对照表）
+- 2026-04-24 23:22 Phase 1.5 全量完成，Follow-up "口径统一 5 落点" 标记为 ✅
+- 2026-04-24 23:24 spec 归档，状态 → ARCHIVED

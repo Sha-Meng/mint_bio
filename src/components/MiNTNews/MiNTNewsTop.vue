@@ -16,6 +16,7 @@
       <div class="desc">
         实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。
       </div>
+      <!-- 品牌手册按钮暂时隐藏，恢复时取消注释即可
       <div class="button">
         <div class="button-btn">
           <p>下载品牌手册</p>
@@ -24,6 +25,7 @@
           </div>
         </div>
       </div>
+      -->
     </div>
   </div>
 </template>

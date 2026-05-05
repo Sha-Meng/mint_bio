@@ -52,7 +52,9 @@
 				effect="dark" popper-class="header-popover" :popper-options="popperOptions">
 				<div class="popover-content">
 					<div class="popover-content-close" @click="visible = !visible">
-						<img src="./images/close.png" alt="close" />
+						<svg class="close-icon" width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="close" role="button">
+							<path d="M17 17 L37 37 M37 17 L17 37" stroke="#f1f3f7" stroke-width="2.5" stroke-linecap="round" />
+						</svg>
 					</div>
 					<div class="popover-content-menu">
 						<div class="popover-content-menu-item">
@@ -87,18 +89,18 @@
               <p>下载中心</p>
             </div> -->
 					</div>
-					<div class="popover-content-language">
-						<p class="popover-content-language-cn" 
-						   :class="{ 'active-language': isChinese() }"
-						   @click="switchToCN">{{ getText('nav.language', 'zh') }}</p>
-						<p class="popover-content-language-en"
-						   :class="{ 'active-language': !isChinese() }"
-						   @click="switchToEN">{{ getText('nav.language', 'en') }}</p>
-					</div>
+				<div v-if="FEATURE_EN_ENABLED" class="popover-content-language">
+					<p class="popover-content-language-cn" 
+					   :class="{ 'active-language': isChinese() }"
+					   @click="switchToCN">{{ getText('nav.language', 'zh') }}</p>
+					<p class="popover-content-language-en"
+					   :class="{ 'active-language': !isChinese() }"
+					   @click="switchToEN">{{ getText('nav.language', 'en') }}</p>
+				</div>
 				</div>
 				<template #reference>
 					<div class="menu" @click="visible = !visible">
-						<img src="./images/menu.png" alt="Menu" />
+						<img :src="require('@/components/Header/images/menu.png')" alt="Menu" />
 					</div>
 				</template>
 			</el-popover>
@@ -124,7 +126,7 @@
 		debounce
 	} from "lodash";
 	import emitter from "@/event/event";
-	import { currentLanguage, switchLanguage, isChinese, getText } from "@/utils/language";
+	import { currentLanguage, switchLanguage, isChinese, getText, FEATURE_EN_ENABLED } from "@/utils/language";
 
 	const router = useRouter();
 	const route = useRoute();
@@ -304,6 +306,19 @@
 			img {
 				width: 54px;
 				height: 54px;
+			}
+
+			.close-icon {
+				width: 54px;
+				height: 54px;
+				cursor: pointer;
+				transition: transform 0.25s ease, opacity 0.25s ease;
+				opacity: 0.85;
+
+				&:hover {
+					opacity: 1;
+					transform: rotate(90deg);
+				}
 			}
 		}
 

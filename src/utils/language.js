@@ -2,6 +2,9 @@ import { ref } from 'vue'
 import zhCN from '@/i18n/zh-CN.json'
 import enUS from '@/i18n/en-US.json'
 
+// 英文入口功能开关（设为 true 可恢复英文版入口，详见 README.md "英文版入口恢复指引"）
+export const FEATURE_EN_ENABLED = false
+
 // 语言资源
 const resources = { zh: zhCN, en: enUS }
 const LANGUAGE_STORAGE_KEY = 'language'
@@ -10,6 +13,8 @@ const DEFAULT_LANGUAGE = 'zh'
 const SUPPORTED_LANGUAGES = ['zh', 'en']
 
 function normalizeLanguage(lang) {
+  // 开关关闭时，en 视为无效语言
+  if (!FEATURE_EN_ENABLED && lang === 'en') return null
   return SUPPORTED_LANGUAGES.includes(lang) ? lang : null
 }
 
@@ -71,6 +76,15 @@ function applyLanguage(lang) {
 }
 
 function resolveInitialLanguage() {
+  // 开关关闭时直接返回默认语言，并清理可能残留的英文 localStorage
+  if (!FEATURE_EN_ENABLED) {
+    try {
+      if (localStorage.getItem(LANGUAGE_STORAGE_KEY) === 'en') {
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, DEFAULT_LANGUAGE)
+      }
+    } catch (e) { /* ignore */ }
+    return DEFAULT_LANGUAGE
+  }
   return getLanguageFromUrl() || getStoredLanguage() || DEFAULT_LANGUAGE
 }
 
@@ -119,6 +133,7 @@ export const i18nPlugin = {
 
 // 默认导出保持兼容性
 export default {
+  FEATURE_EN_ENABLED,
   currentLanguage,
   initializeLanguage,
   getText,

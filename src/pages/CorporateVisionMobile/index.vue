@@ -147,7 +147,7 @@
     </div> -->
     <div class="project">
         <div v-for="item in corpList" :key="item.key" class="project-image">
-          <img :src="item.imgSrc" alt="" />
+          <HonorCard :line1="item.line1" :line2="item.line2" :uid-key="item.key" />
         </div>
       </div>
     <div class="banner-sector">
@@ -158,12 +158,13 @@
 
 <script>
 import BannerTitleAnimationMobile from "@/components/BannerTitleAnimationMobile";
+import HonorCard from "@/components/HonorCard";
 import { computed } from "vue";
 import { getText } from "@/utils/language";
 
 export default {
   name: " CorporateVision",
-  components: { BannerTitleAnimationMobile },
+  components: { BannerTitleAnimationMobile, HonorCard },
   setup() {
     const timeList = computed(() => {
       const timeline = getText('corporate.timeline');
@@ -197,7 +198,18 @@ export default {
       },
     ]);
 
-    return { titleStyle: { top: "47%" }, getText, timeList, cardList };
+    const HONOR_KEYS = [8, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12];
+    const corpList = computed(() => {
+      const honors = getText('corporate.honors');
+      if (!Array.isArray(honors)) return [];
+      return honors.map((h, index) => ({
+        key: HONOR_KEYS[index],
+        line1: h.line1,
+        line2: h.line2,
+      }));
+    });
+
+    return { titleStyle: { top: "47%" }, getText, timeList, cardList, corpList };
   },
   data() {
     return {
@@ -206,48 +218,6 @@ export default {
       sliderPosition: 0,
       imgSrc: require("@/assets/images/scientific.png"),
       activeIndex: 0,
-      corpList: [
-        {
-          imgSrc: require("@/assets/CorporateVision/corp8.png"),
-          key: 8,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp1.png"),
-          key: 1,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp2.png"),
-          key: 2,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp3.png"),
-          key: 3,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp4.png"),
-          key: 4,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp5.png"),
-          key: 5,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp6.png"),
-          key: 6,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: require("@/assets/CorporateVision/corp7.png"),
-          key: 7,
-          transform: "scale(1)",
-        },
-      ],
       isPrevDisabled: true,
       isNextDisabled: false,
       timelineElement: null,
@@ -429,6 +399,7 @@ export default {
         width: 180px;
         height: 210px;
         margin-top: 20px;
+        white-space: pre-line;
         position: relative;
 
         img {
@@ -463,6 +434,7 @@ export default {
 
     .margin-bottom {
       margin-bottom: 20px;
+      white-space: pre-line;
     }
 
     &-item {
@@ -708,6 +680,11 @@ export default {
   // &-image:nth-child(n) {
   //   margin-right: 0;
   // }
+}
+
+.honor-svg {
+  width: 100%;
+  height: 100%;
 }
 
 .banner-sector {

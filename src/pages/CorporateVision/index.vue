@@ -146,8 +146,8 @@
     <div v-intersect="() => (title3InView = true)" class="project-w border-gradient">
       <div v-if="title3InView" class="project animate__animated animate__fadeInUp">
         <div v-for="item in corpList" :key="item.key" class="project-image hover-scale-transition"
-          @mousemove="cardHover(item)" @mouseleave="cardLeave(item)" :style="{ transform: item.transform }">
-          <img :src="getImageUrl(item.imgSrc)" alt="" />
+          @mousemove="cardHover(item)" @mouseleave="cardLeave(item)" :style="{ transform: transformMap[item.key] || 'scale(1)' }">
+          <HonorCard :line1="item.line1" :line2="item.line2" :uid-key="item.key" />
         </div>
       </div>
     </div>
@@ -160,13 +160,13 @@
 
 <script>
 import BannerTitleAnimation from "@/components/BannerTitleAnimation";
+import HonorCard from "@/components/HonorCard";
 import { onMounted, computed } from "vue";
-import { getImageUrl } from "@/utils";
 import { getText } from "@/utils/language";
 
 export default {
   name: " CorporateVision",
-  components: { BannerTitleAnimation },
+  components: { BannerTitleAnimation, HonorCard },
   setup() {
 
     const handleIntersection = (entries, observer) => {
@@ -225,54 +225,25 @@ export default {
       },
     ]);
 
-    return { titleStyle: { top: "47%" }, getText, timeList, cardList };
+    // 荣誉条目展示顺序对应的 key（稳定用于 SVG filter/gradient 唯一 id 及 hover 缩放状态）
+    const HONOR_KEYS = [8, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12];
+    const corpList = computed(() => {
+      const honors = getText('corporate.honors');
+      if (!Array.isArray(honors)) return [];
+      return honors.map((h, index) => ({
+        key: HONOR_KEYS[index],
+        line1: h.line1,
+        line2: h.line2,
+      }));
+    });
+
+    return { titleStyle: { top: "47%" }, getText, timeList, cardList, corpList };
   },
   data() {
     return {
       imgSrc: require("@/assets/images/scientific.png"),
       activeIndex: 0,
-      corpList: [
-        {
-          imgSrc: "assets/CorporateVision/corp8.png",
-          key: 8,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp1.png",
-          key: 1,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp2.png",
-          key: 2,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp3.png",
-          key: 3,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp4.png",
-          key: 4,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp5.png",
-          key: 5,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp6.png",
-          key: 6,
-          transform: "scale(1)",
-        },
-        {
-          imgSrc: "assets/CorporateVision/corp7.png",
-          key: 7,
-          transform: "scale(1)",
-        },
-      ],
+      transformMap: {},
       isPrevDisabled: true,
       isNextDisabled: false,
       timelineElement: null,
@@ -321,12 +292,11 @@ export default {
       }
     },
     cardHover(card) {
-      card.transform = "scale(1.05)";
+      this.transformMap = { ...this.transformMap, [card.key]: "scale(1.05)" };
     },
     cardLeave(card) {
-      card.transform = "scale(1)";
+      this.transformMap = { ...this.transformMap, [card.key]: "scale(1)" };
     },
-    getImageUrl,
   },
 };
 </script>
@@ -492,6 +462,7 @@ export default {
 
     .margin-bottom {
       margin-bottom: 20px;
+      white-space: pre-line;
     }
 
     &-item {
@@ -671,6 +642,11 @@ export default {
   &-image:nth-child(4n) {
     margin-right: 0;
   }
+}
+
+.honor-svg {
+  width: 100%;
+  height: 100%;
 }
 
 .banner-sector {

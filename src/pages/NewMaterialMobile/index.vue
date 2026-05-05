@@ -160,8 +160,8 @@ export default {
           { url: "assets/images/product-6.jpg" },
         ],
       ];
-      const titles = ["PiX 001", "PiX 002", "PiX 003", "PiX 004", "PiX 005"];
-      const nums = ["001", "002", "003", "004", "005"];
+      const titles = ["PiX 膜袋材料", "PiX3D 打印材料", "PiX 注塑材料", "PiX 地膜材料", "PiX 纤维材料"];
+      const nums = ["膜袋材料", "3D 打印材料", "注塑材料", "地膜材料", "纤维材料"];
       return cats.map((cat, i) => ({
         title: titles[i],
         isRow: true,
