@@ -125,9 +125,7 @@ export default {
           { url: "assets/NewMaterial/P001-3.jpeg" },
         ],
         [
-          { url: "assets/NewMaterial/P002-1.jpeg" },
-          { url: "assets/NewMaterial/P002-2.jpeg" },
-          { url: "assets/NewMaterial/P002-3.jpeg" },
+          { url: "assets/NewMaterial/P002-new.jpg" },
         ],
         [
           { url: "assets/NewMaterial/P003-1.jpeg" },
@@ -150,17 +148,18 @@ export default {
       ];
       const titles = ["PiX 膜袋材料", "PiX3D 打印材料", "PiX 注塑材料", "PiX 地膜材料", "PiX 纤维材料"];
       const nums = ["膜袋材料", "3D 打印材料", "注塑材料", "地膜材料", "纤维材料"];
+      // i === 1 对应 PiX 3D 打印材料卡片，按需求隐藏 applyTexts(吸管/杯材/瓶材) 与 advantages(耐温耐冷...) 文字
       return cats.map((cat, i) => ({
         title: titles[i],
         isRow: true,
         topItems: ["Affordable", "Infinity"],
         introductionTitle1: "PiX",
         introductionTitle2: nums[i],
-        applyTexts: cat.title,
-        advantages: cat.advantages,
+        applyTexts: i === 1 ? [] : cat.title,
+        advantages: i === 1 ? [] : cat.advantages,
         imageUrl: (imageUrls[i] || []).map((img, j) => ({
           url: img.url,
-          desc: (cat.items && cat.items[j]) || "",
+          desc: i === 1 ? "" : ((cat.items && cat.items[j]) || ""),
         })),
       }));
     },

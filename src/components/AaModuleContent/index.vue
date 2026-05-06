@@ -38,7 +38,7 @@
           </div>
           <div class="aminoAcid-module2-content-bottom-exhibit">
             <div v-if="imageUrl.length === 1" class="aminoAcid-module2-content-bottom-exhibit-image">
-              <img :src="getImageUrl(imageUrl[0])" alt="" />
+              <img :src="getImageUrl(imageUrl[0].url)" alt="" />
             </div>
 
             <div v-else class="swiper-content">

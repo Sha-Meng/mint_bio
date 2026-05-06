@@ -8,6 +8,10 @@ node_modules
 # local env files
 .env.local
 .env.*.local
+scripts/.env.migration
+
+# Directus 迁移脚本运行缓存（含 file-index.json / article-index.json / 历次 report）
+scripts/.migration-cache/
 
 # Log files
 npm-debug.log*

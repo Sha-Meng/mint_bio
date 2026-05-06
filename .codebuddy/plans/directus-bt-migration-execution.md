@@ -15,7 +15,7 @@ todos:
 - [ ] 完成前端切流与验收
 
 ## Current Status
-- **Phase 1 / Phase 2 / Phase 4 已收官**；Phase 3 部分完成（本地卷+CDN 缓存未做）。
+- **Phase 1 / Phase 2 / Phase 4 已收官**；Phase 3 部分完成（本地卷+CDN 缓存未做）；**Phase 5 历史数据已全量入库**（48/48），待人工抽检验收。
 - **当前入口**：生产域名 `https://cms.mint-bio.cn`（DNS → 101.200.45.52 → 宝塔 Nginx → `127.0.0.1:8055` Directus `11.17.4` 容器）。
 - **Phase 4 完工状态（2026-05-05）**：
   - 4A 媒体库 folder 树（22 个）✅
@@ -25,7 +25,15 @@ todos:
   - 4E Editor 角色 + Editor Policy（宽松版权限：news_articles 全权 / news_categories 仅读 / directus_files CRUD / 系统集合 App Access Minimum）✅
   - 4F 测试 Editor 账号 + 4G 端到端验收 ✅
   - **4H 双语策略放宽**：`title_en` / `content_blocks_en` 改为可空，前端 lang=en 走 fallback 中文（plan 4.0/4.1/4.2/4.6/5.2/6.0 同步更新）✅
-- **下一步**：进入 **Phase 5（历史数据迁移）**。已产出冻结版字段映射表 [`news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md)（48 篇逐条映射 + EditorJS block 类型映射 + 媒体上传规则）；下一动作：后台扩充 `news_categories` 至 4 条 → 编写 `scripts/migrate-news-to-directus.mjs`。可选先做 cover/Block Editor Image 的 folder 动态路径优化（Phase 4 收尾长尾，不阻塞 Phase 5）。
+- **Phase 5 状态（2026-05-05）**：
+  - 5.1 冻结版字段映射表 ✅（[`news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md)，48 篇逐条）
+  - 5.2.1 分类扩展 v4 终版（4 条 mint-runtime / mint-products / mint-biomanufacturing / mint-vision）✅，后台用户已建好
+  - 5.2.2 EditorJS block 映射规则 ✅（含 cover v2 修订：listItem.pic 优先）
+  - 5.3 迁移脚本 `scripts/migrate-news-to-directus.mjs` + README ✅
+  - **5.4 全量真跑完成**（report-1777990658995.json）：attempted=48 / created=45 / skipped=3 / failed=0；error_log=[]；media uploaded=344 + cacheHit=164 + failed=0；分布 runtime:32 / products:8 / biomanufacturing:4 / vision:4 = 48；article-index size=48 ✅
+  - **5.5 人工抽检验收 ⏳ 待下次会话**：抽检 5 篇 PC+Mobile（id=48 富文本徽章 / id=1 视频+strongText / id=11 多视频+stretched / id=19 长摘要 / id=30 list 兜底 cover），README plan 5.3 验收清单
+  - 5.6 _en 字段缺失清单（48 篇全空，前端 fallback 中文不阻塞）⏳ 待运营按 P0/P1/P2 优先级人工补
+- **Phase 4 收尾长尾**（不阻塞）：4.8 文本颜色高亮调色盘扩展（已归档候选方案 + 落地步骤）；上传默认目录动态路径模板；Phase 3 残项 /assets/* CDN 缓存。
 
 
 
@@ -34,6 +42,7 @@ todos:
 - `phase_2_directus_deployment` = `done`
 - `phase_3_database_and_storage` = `partial`（本地卷已打通，`/assets/*` CDN 缓存策略未做）
 - `phase_4_content_model_and_permissions` = `done` ✅（2026-05-05 完工，4A-4H 全部通过）
+- `phase_5_data_migration` = `data_loaded`（48/48 入库，待人工抽检验收 5 篇 PC+Mobile）
 
 
 
@@ -265,8 +274,73 @@ news/2026/01 ~ 12/
 - [x] **4E 完成**：建 `Editor` 角色 + `Editor Policy`（宽松版：news_articles 全权 / news_categories 仅读 / directus_files CRUD / 系统集合 App Access Minimum）
 - [x] 建好 4.5 的 folder 树（22 个 folder：`news/_legacy` + `news/2024` + `news/2025/01-12` + `news/2026/01-05`）
 - [ ] **长尾（不阻塞 Phase 5）**：在 `news_articles` 上配置上传默认目录为 `news/{当前年}/{当前月}/`（cover 字段 + Block Editor Image 字段当前 Folder = `news` 顶层，需测 Directus 是否支持动态路径模板，不支持则用 Flow 或前端 hook 兜底）
+- [ ] **长尾（不阻塞 Phase 5；详见 4.8 节）**：为 Block Editor `paragraph` tool 加文本颜色高亮按钮，让运营像 Word 那样选中文字点调色盘改色，对齐工程现有 4 色（`.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text`）+ 加粗 `.strong-text` 共 5 个预设
 - [x] **4F+4G 完成**：`editor-test@mint-bio.cn` 测试账号 + Editor Role 绑定 + 6 case 端到端验收全过
 - [x] **4H 完成**：双语策略放宽——`title_en` / `content_blocks_en` 改为可空（Nullable 留勾 + 取消 Required），前端 lang=en 走 fallback 中文（Phase 6/7 mapper 实现，见 plan 6.0）
+
+#### 4.8 文本颜色高亮（运营友好交互，长尾决策）
+
+**[2026-05-05 决策]** Phase 5 真迁 3 篇验收时发现：旧数据里 `<span class='orange-text'>...</span>` 等内联色彩 HTML 虽然能在 Directus Block Editor 中**保存原样不丢**（已用 API 直接 GET 验证 P1/P3 数据 `hasSpan: true`），但后台编辑器**视觉上不显示颜色**且**没有"调色盘"按钮**让运营选中文字改色（EditorJS 默认 paragraph 的内联工具栏只有 Bold/Italic/Underline/Link 四个）。运营如要新加色彩强调，必须切到 Raw HTML 块手写 `<span>`，对非技术运营不友好。
+
+**目标**：让运营像 Word 一样，选中正文 → 浮出工具栏点"调色盘" → 选橙/蓝/绿/灰绿 4 色之一即可上色，与工程现有 `.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text` CSS 类样式 100% 对齐（详见 `src/components/MiNTNews/MiNTNewsDetailSection.vue` 全局样式块）。
+
+##### 候选方案
+
+| 方案 | 实现难度 | 运维成本 | 与现有数据兼容性 | 备注 |
+|---|---|---|---|---|
+| **A. Fork `dimitrov-adrian/directus-extension-editorjs-interface` + 集成 `editorjs-text-color-plugin@^2.0.4`** | 中 | 中（自维护 fork） | ✅ 完全兼容（同一个 paragraph block，data.text 仍是 HTML） | **首选**。npm 包活跃维护，4+ 项目使用，开箱即用调色盘 UI。改 5 行 EditorJS tools 注册代码，npm pack → 装到服务器 `/data/mintbio/directus/extensions/`。 |
+| B. 上游提 PR 等合并 | 低 | 极低 | 同 A | 上游响应未知，时间不可控 |
+| C. 切换到 `formfcw/directus-extension-flexible-editor`（TipTap） | 高 | 高 | ❌ 不兼容（TipTap 数据模型与 EditorJS 完全不同），需重写迁移脚本 | 不推荐——会推翻 4D 已落地的 Block Editor 方案 |
+| D. 写完全自定义的 inline tool（不依赖 npm 包） | 高 | 中 | 同 A | 重复造轮子 |
+
+**选 A**。
+
+##### 落地步骤（Phase 5 全量迁完后启动）
+
+1. 本机 `git clone https://github.com/dimitrov-adrian/directus-extension-editorjs-interface`，切到与服务器版本一致的 tag
+2. `npm i editorjs-text-color-plugin@^2.0.4` 加为依赖
+3. 在源码 `src/interface.vue` 的 EditorJS tools 注册段补：
+   ```js
+   import ColorPlugin from 'editorjs-text-color-plugin';
+   // ...
+   tools: {
+     // ... 已有 9 个 tool
+     Color: {
+       class: ColorPlugin,
+       config: {
+         colorCollections: ['#e75a29', '#2d5bf6', '#74d887', '#6bbea9'], // orange/blue/green/blue-green
+         defaultColor: '#e75a29',
+         type: 'text',
+         customPicker: true,
+       },
+     },
+     Marker: {
+       class: ColorPlugin,
+       config: { type: 'marker', defaultColor: '#FFBF00' }, // 可选，二级高亮
+     },
+   }
+   ```
+4. `npm run build` → 产出 `dist/` 目录
+5. 服务器 `/data/mintbio/directus/extensions/` 下放 fork 版本目录，重启 Directus 容器
+6. **数据兼容性验证**：开 1 篇老文章，确认现有 `<span class='orange-text'>` 仍正确渲染颜色；选中一段新文字，调色盘改橙色，保存，API GET 检查 `data.text` 是否含 `<span style="color: #e75a29">` 或 `<span class="orange-text">`（取决于插件输出策略，需测）
+7. **前端样式对齐**：如果插件输出的是 inline `style="color: #..."` 而非 `class="..."`，则 `MiNTNewsDetailSection.vue` 用 `v-html` 直接渲染即可（颜色 inline 生效）；如果输出 `class`，则 class 名称需与 `.orange-text` 等对齐（可能需要调整插件配置或加映射 CSS）
+
+##### 暂时的兼容策略（在长尾完成前）
+
+- **历史 48 篇**：当冷数据，运营不动，前端 `v-html` 渲染颜色 100% 正常 ✅
+- **新文章**：
+  - 默认用 Bold（粗体）做强调，不依赖颜色 — 满足 80% 场景
+  - 必须用品牌橙强调时，运营切到 Raw HTML 块手写 `<span class='orange-text'>...</span>`（README 已在 4.8 完成后会同步加运营文档）
+  - 极个别场景找不到出口，请技术补单条
+
+##### 验收标准（4.8 落地后）
+
+- [ ] 运营在 Block Editor 中新建 paragraph，选中文字 → 工具栏出现调色盘按钮
+- [ ] 4 色按钮颜色与工程 `.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text` 完全一致
+- [ ] 任选一篇老文章打开，原 `<span class='orange-text'>` 渲染颜色正确（视觉验证）
+- [ ] 任选一篇老文章打开，选中已有彩色文字 → 改成另一色 → 保存 → API GET 检查 `data.text` HTML 仍合法
+- [ ] 前端站点（Phase 7 切流后）展示对照——同一篇文章新旧两种 span 都能正确渲染颜色
+
 
 ---
 
@@ -297,18 +371,63 @@ news/2026/01 ~ 12/
 | — | `content_blocks_en` | **可空**：默认全部留 `null`；后续运营按需补；前端 lang=en 走 fallback 显示中文 |
 | — | `status` | 全部置 `published` |
 
-#### 5.2.1 分类映射（决策 A：扩展为 4 条）
+#### 5.2.1 分类映射（决策 A：扩展为 4 条 — 最终确定版）
 
-> **[2026-05-05]** Phase 4 后台仅预建了 `company-news` / `industry-news` 2 条占位分类，与源数据 4 类标签不匹配。Phase 5 启动前需扩充为 4 条（旧 2 条删除或归档）：
+> **[2026-05-05 v4]** Phase 4 后台预建的 `company-news` / `industry-news` 2 条占位与源数据 4 类标签不匹配。Phase 5 启动前需扩充为 4 条（旧 2 条删除或归档；后台已建好）。**v4 校正**：用户偏好"进行时 = Runtime"，工程 i18n 旧 key `updates` / 旧文案 `MiNT Updates` 整体改名为 `runtime` / `MiNT Runtime`，使 Directus slug ↔ i18n key 完全对称、无需 mapper 解耦表。改名前已确认工程 `src/` 内无任何代码引用 `categories.updates`，重命名零侵入。
 
-| 源 `categorylabel` | 新 `news_categories.slug` | `name_zh` | `name_en`（fallback） | 数量 |
-|---|---|---|---|---|
-| `#MiNT 进行时` / `#Mint 进行时` | `mint-runtime` | `MiNT 进行时` | `MiNT Live` *（待用户确认）* | 28 |
-| `#MiNT 产品力` | `mint-product` | `MiNT 产品力` | `MiNT Product` *（待用户确认）* | 8 |
-| `#MiNT 智造力` / `#MiNT 制造力`（历史脏拼写） | `mint-manufacturing` | `MiNT 智造力` | `MiNT Manufacturing` *（待用户确认）* | 5 |
-| `#MiNT Vision` / `#Mint Vision` | `mint-vision` | `MiNT Vision` | `MiNT Vision` | 4 |
+| 源 `categorylabel`（含历史脏拼写） | `news_categories.slug` | `name_zh` | `name_en` | 前端 i18n key | 数量（按 news_list.json 统计） |
+|---|---|---|---|---|---|
+| `#MiNT 进行时` / `#Mint 进行时` | `mint-runtime` | `MiNT 进行时` | `MiNT Runtime` | `news.categories.runtime` | 32 |
+| `#MiNT 产品力` | `mint-products` | `MiNT 产品力` | `MiNT Products` | `news.categories.products`（新增） | 8 |
+| `#MiNT 智造力` / `#MiNT 制造力`（历史脏拼写） | `mint-biomanufacturing` | `MiNT 智造力` | `MiNT Biomanufacturing` | `news.categories.biomanufacturing` ✅ 已有 | 4 |
+| `#MiNT Vision` / `#Mint Vision` | `mint-vision` | `MiNT Vision` | `MiNT Vision` | `news.categories.vision`（新增） | 4 |
 
-> 历史脏拼写（`#Mint`/`#MiNT 制造力`）在迁移脚本里做 case-insensitive + alias 归一化。`name_en` 候选仅作占位，**严格遵守 i18n 规则**：未在 `doc/zh-en/` 出现的字段保留 `null`，留空待用户补充。
+**命名决策依据**：
+
+- **slug 与 i18n key 完全对称**：`mint-<slug-suffix>` 对应 `news.categories.<slug-suffix>`（runtime / products / biomanufacturing / vision），前端无需额外 mapper 表，直接用 `slug.replace(/^mint-/, '')` 取后缀作为 i18n key。
+- `MiNT Runtime` / `MiNT 进行时`：工程 i18n 旧 key 名 `updates` 与中文"进行时"语义不直对，v4 整体改名后中英文一致直译。改动范围：`src/i18n/modules/news/zh-CN.json` 和 `en-US.json` 的 `categories.updates` → `categories.runtime`，`MiNT Updates` 字面量 → `MiNT Runtime`（含 sampleNews 4 处文案）。
+- `mint-biomanufacturing / MiNT Biomanufacturing`：完全复用工程现有 `categories.biomanufacturing`。**注意不用 `Manufacturing`**——工程内 `MiNT Manufacturing` 已固定指代"元素智造"工厂项目（见 `en-US.json:464-465, 555`），分类层用 `Biomanufacturing` 更精确表达"生物智造"且避免歧义。
+- `mint-products / MiNT Products`：工程现有 `categories.innovation = #MiNT 创新力` 与源数据 `#MiNT 产品力` 字面量不一致，**不复用**；按 Runtime 同样的"名词复数"风格新增；Phase 7 前端 i18n 时也需要在 `src/i18n/modules/news/*.json` 里同步补 `categories.products` 这一对 key。
+- `mint-vision / MiNT Vision`：源标签字面量本身即英文，`zh` 沿用 `MiNT Vision`（源数据未给中文译名）；Phase 7 同步在 `src/i18n/modules/news/*.json:categories.vision` 补 key。
+
+**与工程 i18n 的同步动作**（v4 已部分落地）：
+
+1. ✅ 已改：`src/i18n/modules/news/zh-CN.json` 和 `en-US.json` 的 `categories.updates` → `categories.runtime`，`MiNT Updates` 字面量 → `MiNT Runtime`（en-US.json 含 sampleNews 4 处后缀同步改）。
+2. ⏳ 待做（Phase 7）：在 `categories` 节点新增 `products` / `vision` 两个 key：
+
+```jsonc
+// zh-CN.json
+"categories": {
+  "runtime": "#MiNT 进行时",
+  "biomanufacturing": "#MiNT 智造力",
+  "products": "#MiNT 产品力",      // 待新增
+  "vision": "#MiNT Vision",         // 待新增
+  "innovation": "#MiNT 创新力",     // 历史 key，新闻分类不用，但保留以防其他位置引用
+  "all": "全部动态"
+}
+// en-US.json 同结构 → MiNT Runtime / MiNT Biomanufacturing / MiNT Products / MiNT Vision / MiNT Innovation / All News
+```
+
+3. ⏳ 待做（Phase 7）：前端 mapper（如 `src/api/news.js`）把 Directus 拉到的 `category.slug` 转 i18n key：
+
+```js
+// 由于 slug ↔ i18n key 完全对称，直接 strip 'mint-' 前缀即可，无需查表
+function categoryLabel(slug, t) {
+  const key = slug.replace(/^mint-/, '');
+  return t(`news.categories.${key}`);
+}
+```
+
+**历史脏拼写归一化**（迁移脚本侧 alias 表）：
+
+| 原 categorylabel | 归一化后 slug |
+|---|---|
+| `#MiNT 进行时`、`#Mint 进行时` | `mint-runtime` |
+| `#MiNT 产品力` | `mint-products` |
+| `#MiNT 智造力`、`#MiNT 制造力` | `mint-biomanufacturing` |
+| `#MiNT Vision`、`#Mint Vision` | `mint-vision` |
+
+> 实际数量分布（脚本运行时统计为准）：mint-runtime 约 28-32 / mint-products 约 8 / mint-biomanufacturing 约 4-5（含 id 4/10/11/35）/ mint-vision 4（id 13/29/30/32），合计 48 ✅。
 
 #### 5.2.2 旧 content 形态 → EditorJS block 类型映射（决策 B）
 
@@ -319,7 +438,7 @@ news/2026/01 ~ 12/
 | `pic` | `image` | `data.file.url=/assets/<uuid>` + `stretched=false` + `caption=""`，前后默认 50px 间距 |
 | `nopaddingpic` | `image` | 同上但 `stretched=true`（Phase 7 前端 mapper 识别此布尔，渲染无 padding 模式）；caption 留空 |
 | `desc` | `paragraph` | `data.text=desc`（纯文本，不带 HTML 标签） |
-| `strongText` | `paragraph` | `data.text=strongText`（**保留 `<span class='orange-text'>...</span>` 等内联 HTML**，前端 v-html 渲染时 CSS 类名仍生效，需在 Phase 7 渲染器全局引入这几个 class 样式） |
+| `strongText` | `paragraph` | `data.text=strongText`（**保留 `<span class='orange-text'>...</span>` 等内联 HTML**，前端 v-html 渲染时 CSS 类名仍生效，需在 Phase 7 渲染器全局引入这几个 class 样式）。**注意**：Directus Block Editor 后台默认不显示这些 class 的颜色（EditorJS 默认 paragraph 工具栏只支持 Bold/Italic/Underline/Link），但**数据保存原样不丢**（已 API 验证 hasSpan=true）。运营友好的颜色调色盘按钮见 4.8 长尾任务。 |
 | `richHtml` | `raw` | `data.html=richHtml`，原 HTML 完整保留（仅 Admin 可二次编辑，Editor 角色禁写但前端无差别渲染） |
 | `quote[]` 数组 | `quote` 1 个 + `paragraph` N 个 | 第 1 项的 desc/strongText 作为 quote.text，其余项续接为普通 paragraph，前面加 1 个 `delimiter` 视觉分割 |
 | `video`+`poster` | `raw` | `data.html=<video controls poster="<cdn>/<poster_uuid>"><source src="/video/News/.../*.mov"></video>`。**视频文件不上传到 Directus**（保留 .mov 为站点静态资源 `/video/News/...`，仅 poster 静态图作为普通文件上传到 directus_files 取 uuid）；空 `video:""` 占位（如 news_45 标注待补）跳过该 block 并写入报告 `pending_videos` |
@@ -333,13 +452,10 @@ news/2026/01 ~ 12/
 #### 5.3 迁移 Todo
 
 - [x] **2026-05-05 完成**：输出冻结版字段映射表 [`.codebuddy/plans/news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md)，包含每条旧 id 的目标 slug、目标 category、双语缺失项清单 + 旧 content 形态 → EditorJS block 类型映射 + 媒体上传规则 + 验证清单
-- [ ] **下一步**：在 Directus 后台扩充 `news_categories` 至 4 条（旧 2 条占位删除/归档；按映射表 5.2.1 建 `mint-runtime` / `mint-product` / `mint-manufacturing` / `mint-vision` 4 条）
-- [ ] 编写并运行 `scripts/migrate-news-to-directus.mjs`：
-  - [ ] 第 1 步：递归上传 `src/assets/News/**` 到 `news/_legacy/`，输出 `<旧路径> → <file_id>` 索引
-  - [ ] 第 2 步：解析每个 `news_<id>.json`，按 5.2 映射生成 `news_articles` payload，正文里的图片路径替换为 `file_id`
-  - [ ] 第 3 步：通过 Directus REST API 批量创建文章；失败回滚（按 legacy_id 删）
-  - [ ] 第 4 步：输出迁移报告 `migration-report-<date>.json`：成功条数 / 失败条数 / 缺译字段清单
-- [ ] 抽检 5 篇（首页常显的 + 含视频的 + 含双图并排的），PC + 移动端预览
+- [x] **2026-05-05 完成**：在 Directus 后台扩充 `news_categories` 至 4 条（旧 2 条占位删除/归档；按映射表 5.2.1 v4 建 `mint-runtime` / `mint-products` / `mint-biomanufacturing` / `mint-vision` 4 条，name_en 分别为 MiNT Runtime / MiNT Products / MiNT Biomanufacturing / MiNT Vision）
+- [x] **2026-05-05 完成**：编写 `scripts/migrate-news-to-directus.mjs`（自包含，0 第三方依赖，Node 18+），含：(1) `.env.migration` 加载 + DirectusClient REST 封装 + dry-run 模式；(2) 媒体上传模块 MediaUploader（路径 → file_id 缓存到 `scripts/.migration-cache/file-index.json`，`news/_legacy/` folder uuid 自动查询，`assets/{News,images}/*` 跨目录路径解析）；(3) 正文转换 buildBlocks（按 5.2.2 决策实现 `pic/nopaddingpic→image stretched 区分` / `desc→paragraph` / `strongText→paragraph 保留 <span class>` / `richHtml→raw` / `quote[]→delimiter+quote+paragraphs+delimiter` / `video+poster→raw 内嵌 <video> 兼容空 video 占位写入 pending_videos` / `headPic[0]→cover` 单独抽出，`headPic[1..n]+contents+footerPic` 顺序拼装 + 无正文 14 篇空 paragraph 兜底）；(4) 文章创建模块（payload 严格按 plan 4.2/5.2 映射，slug=`news-<legacy_id>`，publish_at ISO 8601 +08:00，`_en` 字段全 null，status=published，featured=false）；(5) 幂等控制（article-index.json 命中即跳过，保护运营手工编辑）；(6) 增量报告（pending_videos / pending_no_content / pending_en_translations / category_distribution / error_log，含每次运行 ts 后缀）。CLI 支持 `--dry-run` `--limit=N` `--ids=1,11,45` 三种模式。`scripts/MIGRATE-NEWS-README.md` 含 7 节操作说明（前置条件/命令/推荐执行顺序 4 步/缓存与回滚/已知 pending/故障排查/项目铁律）。Node syntax check 通过、缺 env 友好报错验证通过。`.gitignore` 已加 `scripts/.migration-cache/`。
+- [x] **2026-05-05 完成**：用户配 Static Access Token + 写入 `scripts/.env.migration`，按 README 推荐流程执行 dry-run 全量 → 真迁 3 篇（id=1,11,45）后台抽检 → cover 来源修订（v2：listItem.pic 优先）+ 删除旧 3 篇重跑 → **全量真跑 48/48 入库**（report-1777990658995.json：created=45 / skipped=3 / failed=0 / error_log=[] / failed_uploads=[] / media uploaded=344 + cacheHit=164 + failed=0）
+- [ ] **【下次会话】抽检 5 篇 PC+Mobile**（id=48 富文本徽章 / id=1 视频+strongText / id=11 多视频+stretched / id=19 长摘要 / id=30 list 兜底 cover），按 README plan 5.3 验收清单
 - [ ] 把 `_en` 字段缺失项整理为待办交回用户**按需**补；不补也不阻塞（前端 fallback 中文）
 
 ### Phase 6 - 官网读接口适配
@@ -403,11 +519,14 @@ news/2026/01 ~ 12/
 
 ## Next Actions
 1. **Phase 4 全部完成** ✅（4A-4G + 数据脏修复 + 4H 双语放宽）
-2. **Phase 5 启动**：冻结版字段映射表已产出 ✅ → **下一动作**：在 Directus 后台扩充 `news_categories` 至 4 条（删/归档旧 `company-news`+`industry-news` 占位，新建 `mint-runtime`/`mint-product`/`mint-manufacturing`/`mint-vision`），随后编写 `scripts/migrate-news-to-directus.mjs`
-3. **Phase 4 收尾长尾（可选，不阻塞 Phase 5）**：
-   - cover 字段 / Block Editor Image 字段的 Folder 当前是 `news` 顶层，可细化为按 `news/{YYYY}/{MM}/` 分（需测 Directus 动态路径模板支持，不支持则用 Flow 或前端 hook 兜底）
+2. **Phase 5 数据已全量入库** ✅（48/48，0 错误，0 上传失败）。**【下次会话第一步】**：人工抽检 5 篇 PC+Mobile（id=48/1/11/19/30），按 README plan 5.3 验收清单。抽检通过后 Phase 5 闭环。
+3. **Phase 5 收尾（不阻塞 Phase 6）**：用户按 P0/P1/P2 优先级在 Directus 后台手工补 `_en` 字段（前端 lang=en 走 fallback 中文不阻塞）；id=45 视频缺占位（pending_videos[45]）后续从公众号下载 mp4 → 放到 `public/video/News/202604/news45_video1.mov` → 后台编辑 news-45 加 raw block
+4. **Phase 4 收尾长尾（可选，不阻塞 Phase 6）**：
+   - **4.8 文本颜色高亮**：fork `dimitrov-adrian/directus-extension-editorjs-interface` + 集成 `editorjs-text-color-plugin@^2.0.4`，给运营 Word 风格调色盘（详见 plan 4.8 节落地步骤 + 验收标准）
+   - cover/Block Editor Image 字段 Folder 细化 `news/{YYYY}/{MM}/`
    - Phase 3 残项 `/assets/*` CDN 缓存策略
-4. **关键依赖**：4.3 节的 EditorJS 真实结构 + 5.2 节的字段映射表 + [`news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md) 冻结契约 + 6.0 节的双语 fallback 策略，是 Phase 5/6/7 的契约基线，迁移脚本和前端 mapper 必须严格对齐
+5. **Phase 6 启动条件**：抽检通过后即可。直连 Directus REST 验证 + 输出契约文档 `news-api-contract_<date>.md` + 实现 4 个端点（latest/list/detail/categories）。
+6. **关键依赖**：4.3 节 EditorJS 真实结构 + 5.2 节字段映射表 + 冻结映射表 + 6.0 节双语 fallback 策略 + 4.8 节颜色插件契约（如落地）= Phase 6/7 的契约基线。
 
 
 
@@ -448,6 +567,11 @@ news/2026/01 ~ 12/
 - 2026-05-05：Phase 4 完成 4D（block 编辑器）。**方案演化路径**：原计划 Repeater + Conditions（8 种 block sub-field 按 type 显隐）→ 实测发现 Directus 11 Repeater 的 sub-fields 不支持字段级 Conditions（只有 5 个 tab：Schema/Field/Interface/Display/Validation，无 Conditions tab）→ 备选方案 A'（Repeater 全字段裸露 5 种 block）→ 备选方案 B（Builder M2A，5 个独立 block 集合）→ **最终方案 C：EditorJS Block Editor**（Directus 11.17 内置 Notion 风格块编辑器）。落地详情：`content_blocks_zh / content_blocks_en` 两个字段都用 Block Editor 接口，启用 9 种 toolbar block（Header / Paragraph / Image / List / Embed / Quote / Underline / Delimiter / Raw HTML），Root Folder=`news`，Required+Nullable 留勾。**实测产出真实 JSON 样本**（已写入 plan 4.3）：EditorJS 标准 `{ time, blocks: [{id, type, data}], version: "2.31.2" }` 结构，5 种 block 全部产出真实数据。**关键发现**：(a) List 实际类型是 `nestedlist` 而非 `list`，data 结构为 `items: [{content, items: []}]` 递归（Directus 11 默认装 NestedList 插件）；(b) Image 的 file id 路径是 `block.data.file.fileId`（不是直接的 `file_id`），同时 `data.file.url = /assets/<uuid>` 可直接拼 CDN；(c) Paragraph 的加粗斜体是 HTML 标签 `<b>/<i>` 内联在 `data.text` 里。**数据脏问题**（待 4E 前修）：(1) phase4-test-article 的 `slug` / `title_en` 头部混入 `\t` Tab 字符，Directus Regex 校验未拦截前缀空白；(2) `_seo_desc_en` 字段 Key 拼写多了下划线前缀，需删除重建为 `seo_desc_en`；(3) Content Blocks En 区目前是脏中文测试数据，可保留至 Phase 5 真迁移时清理。Block Editor 数据结构是 Phase 5 迁移脚本和 Phase 6 前端 mapper 的关键契约，已固化在 4.3 节。
 - 2026-05-05：**Phase 4 完工收口**（4D 后修 + 4E 角色权限 + 4F 测试账号 + 4G 端到端验收 + 4H 双语放宽）。**4D 后修**：phase4-test-article 的 slug / title_en 头部 Tab 字符清理；`_seo_desc_en` 字段删除重建为 `seo_desc_en`。**4E Editor 角色 + Editor Policy**：宽松版权限矩阵（运营人数少，不细拆 Custom Access），news_articles 5 动作全允许 / news_categories 仅 Read（防误删分类破坏外键）/ directus_files CRUD（Block Editor 上传依赖）/ directus_folders CRU / directus_users Read / 系统集合走 App Access Minimum 默认。Policy 通过 Roles → Editor 关联。**4F 测试账号**：`editor-test@mint-bio.cn` 创建并绑定 Editor Role，密码 `Editor@2026`。**4G 端到端验收**：6 个 case 全过 —— Editor 登录看不见 Settings 写权限 / 能编辑 phase4-test-article / 能上传图片到 news folder / 能新建文章自动作者归属 / Activity & Revisions 显示 Editor / 改 schema 被禁。**4H 双语策略放宽**（用户决策）：原"中文+英文均必填"改为"中文必填 + 英文可空 + 前端 fallback 中文"。具体：`news_articles.title_en` 和 `news_articles.content_blocks_en` 改为 Nullable+取消 Required；plan 4.0/4.1/4.2/4.6/5.2/6.0 同步更新；新增 6.0 节双语 Fallback 策略，给出 Phase 7 前端 mapper 的 `pickLang(item, lang)` 实现伪代码。Phase 4 全部目标达成，进入 Phase 5（历史数据迁移）窗口。
 - 2026-05-05：**Phase 5 入口契约冻结**。完整扫描 `public/data/news_list.json` + `news_1.json~news_48.json` 共 48 篇 + 详情样本 4 篇（id 1/3/11/45/48），结合 `MiNTNewsDetailSection.vue` 渲染契约（覆盖 `pic / nopaddingpic / desc / strongText / richHtml / quote[] / video+poster / headPic[] / footerPic[]` 全部字段形态），决策两项关键映射规则：(A) 分类扩展：旧 `company-news / industry-news` 2 条占位与源数据 4 类标签不匹配，需扩为 `mint-runtime / mint-product / mint-manufacturing / mint-vision` 4 条（含历史脏拼写 `#Mint`/`#MiNT 制造力` 归一化）；(B) 旧 content 字段 → EditorJS block 映射：`pic/nopaddingpic→image`（用 stretched 区分）/ `desc→paragraph` / `strongText→paragraph 保留 <span class> 内联 HTML` / `richHtml→raw` / `quote[]→quote+paragraphs+delimiter` / `video+poster→raw 内嵌 <video>`（视频文件保持站点静态 /video/News/*.mov 不上传 Directus）/ `headPic[0]→cover, headPic[1..n] 与 footerPic 转 image blocks`。两项决策写入 plan 5.2.1 / 5.2.2。最终冻结版映射表 [`.codebuddy/plans/news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md) 完整列出 48 篇逐条映射（slug=`news-<legacy_id>` / category / publish_at 标准化 ISO 8601 北京时间 / cover 来源含 14 篇 headPic 空 fallback / 4 篇含视频 1 篇视频缺占位）+ 媒体上传规则（图片去重、`news/_legacy/` 目录、`assets/images/*` 跨目录兼容）+ 双语缺失项清单（48 篇 _en 全空，i18n 规则禁脚本翻译，待用户按 P0/P1/P2 优先级补）+ 验收 5 抽检 case。Phase 5 下一动作：Directus 后台扩 `news_categories` → 编写 `scripts/migrate-news-to-directus.mjs`。
+- 2026-05-05：**Phase 5 分类命名 v2/v3/v4 校正**。三轮迭代敲定最终命名：v2 提议复用工程已有 i18n key（slug=`mint-updates` / name_en=`MiNT Updates`）；v3 用户偏好"进行时=runtime"，slug 改 `mint-runtime`、i18n key 仍保留 `updates`，引入 mapper 解耦表；v4 用户进一步要求 name_en 也用 `MiNT Runtime`。考虑到工程 `src/` 内**无任何代码**引用 `news.categories.updates` 这个 i18n key（`grep` 验证），重命名零侵入，最终方案改为 slug ↔ i18n key 完全对称：`mint-runtime` ↔ `runtime`，`mint-products` ↔ `products`，`mint-biomanufacturing` ↔ `biomanufacturing`，`mint-vision` ↔ `vision`，前端 mapper 直接 `slug.replace(/^mint-/, '')` 即可，无需查表。同步落地：`src/i18n/modules/news/zh-CN.json` 与 `en-US.json` 把 `categories.updates` 重命名为 `categories.runtime`，文案 `#MiNT Updates` → `#MiNT 进行时` / `#MiNT Runtime`，并把 en-US.json sampleNews 4 处后缀 `MiNT Updates` 同步改为 `MiNT Runtime`。后台 4 条 `news_categories` 用户已建好（slug+name_zh+name_en：mint-runtime/MiNT 进行时/MiNT Runtime、mint-products/MiNT 产品力/MiNT Products、mint-biomanufacturing/MiNT 智造力/MiNT Biomanufacturing、mint-vision/MiNT Vision/MiNT Vision），sort=10/20/30/40，status=published。plan 5.2.1 / Current Status / Next Actions / 5.3 Todo 同步更新到 v4 终版。下一动作：编写 `scripts/migrate-news-to-directus.mjs`。
+- 2026-05-05：**Phase 5 迁移脚本交付**。产出 `scripts/migrate-news-to-directus.mjs`（自包含 0 第三方依赖，Node 18+，660+ 行）严格按 plan 5.2 / 5.2.1 v4 / 5.2.2 / 6.0 + 冻结映射表实现：(1) `.env.migration` 加载 + DirectusClient 含 dry-run 模式；(2) MediaUploader 路径→file_id 缓存到 `scripts/.migration-cache/file-index.json`，自动查询 `news/_legacy` folder uuid，跨目录 `assets/{News,images}/*` 路径解析；(3) buildBlocks 转换源 9 种字段形态到 EditorJS（`pic→image stretched=false` / `nopaddingpic→image stretched=true` / `desc→paragraph 纯文本` / `strongText→paragraph 保留 <span class>` / `richHtml→raw` / `quote[]→delimiter+quote+paragraphs+delimiter` / `video+poster→raw 内嵌 <video> 兼容空 video 占位写入 pending_videos` / `headPic[0]→cover 单独抽出` / `headPic[1..n]+contents+footerPic 顺序拼装` / 14 篇无正文塞空 paragraph 兜底）；(4) 文章 payload 严格按 plan 4.2 + 5.2 v4（slug=`news-<legacy_id>`，publish_at ISO 8601 +08:00，`_en` 全 null，status=published，featured=false）；(5) 幂等控制 article-index.json 命中即跳过；(6) 增量报告 含 pending_videos / pending_no_content / pending_en_translations / category_distribution / error_log / uploader_stats / 时间戳。CLI 支持 `--dry-run` `--limit=N` `--ids=1,11,45`。配套交付 `scripts/MIGRATE-NEWS-README.md` 7 节文档（前置条件 / 命令 / 推荐 4 步执行流程 / 缓存与回滚 / pending 项 / 故障排查 / 项目铁律）。`.gitignore` 已加 `scripts/.migration-cache/`。`node --check` syntax pass、缺 env 友好报错验证通过、本机 Node v24.12.0 ≥ 18 兼容性确认。下一动作：用户配 Static Access Token + 写入 `scripts/.env.migration`，执行 README 4 步推荐流程。
+- 2026-05-05：**Phase 5 dry-run + 真迁 3 篇验证迭代**。Step 1 全量 dry-run 第一轮报告暴露 4 类 bug：(1) 6 篇分类归一化失败（`#MiNT产品力` 无空格 / `MiNT 进行时` 缺 # / `#MiNT进行时` 无空格 等脏拼写未覆盖）；(2) id=34/35/36/37 误报 80 个 video 占位（fetch.mjs 抓取产物所有 content 项都填 `video:""` 占位字段，脚本 `if (item.video !== undefined)` 误判）；(3) dry-run 假 file_id `__dry-run-file-...` 污染了 file-index.json / article-index.json 缓存，会让下次真跑误命中跳过；(4) 2 张图源数据指错路径（news_2.json 引用 `news_2.jpg` 实际是 `.png`，news_25.json 引用 `news_7_2.png` 实际是 `news_7_2png.jpeg`）。修复：(a) `categoryLabelToSlug` 升级为"去 # + 移除所有空白 + 转小写"，alias key 改为无空格规范形式；(b) video 分支拆三种情况——真有视频走 raw block / 显式 `_note` 占位写 pending / 空字符串无 `_note` 完全忽略落到下面分支；(c) dry-run 模式下 `saveJsonCache` 跳过 file/article index 缓存写盘；(d) 直接修源 JSON 把两条错路径改对；(e) 同时给 MediaUploader 加 `failedPaths` 列表，进报告 `failed_uploads` 字段方便定位。第二轮 dry-run：48/48 全过、`error_log: []`、media 上传 362/失败 0、分类分布 32/8/4/4 = 48 ✅、pending_videos 仅 [45]。Step 2 真迁 3 篇（ids=1,11,45）也 3/3 成功。**但抽检发现 cover 设计问题**：原方案 `cover = sections[0].headPic[0]` 大量取到公共橙/蓝色装饰横幅 `new_head_*.jpg`（多篇共用同一张），与现有 `MiNTNewsList.vue` / `MiNTNewsTop.vue` 用 `news_list.json` 的 `pic` 字段（每篇独立配的主图）不一致。**修订决策（写入 plan 5.2.2）**：cover 来源改为 `listItem.pic` 优先 → fallback `headPic[0]`；同时 `headPic` 全部进正文 image blocks（不再单独抽 [0]）。通过 API DELETE 已迁的 3 篇 + 清空 article-index.json + 重跑 `--ids=1,11,45` 验证：3/3 成功，新 cover URL 检验对应 `news_1.png` / `news_11.jpg` / `news45_pic_2.jpg`（每篇独立主图），与前端列表页一致 ✅。
+- 2026-05-05：**Phase 4.8 文本颜色高亮归档为长尾任务**（非本次实现）。Phase 5 真迁验收时发现：旧数据 `<span class='orange-text'>` 等内联色 HTML 在 Directus Block Editor 后台**视觉上不显示颜色**且**没有调色盘按钮**让运营选中文字改色（EditorJS 默认 paragraph 内联工具栏只 Bold/Italic/Underline/Link 4 个），但**数据保存原样不丢**（已 API 验证 P1/P3 hasSpan=true）。前端 `MiNTNewsDetailSection.vue` 用 v-html 渲染时 `.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text` CSS 类样式 100% 生效。**用户反馈需要 Word 风格调色盘交互**，调研后选 npm 包 `editorjs-text-color-plugin@^2.0.4`（活跃维护，4+ 项目使用），落地路径需 fork `dimitrov-adrian/directus-extension-editorjs-interface` 加 5 行 EditorJS tools 注册代码 + 改 Directus extensions 目录 + 重启容器。归档为 plan 4.8 长尾任务（含候选方案对比 / 落地步骤 / 验收标准 / 暂时兼容策略）。**暂时兼容策略**：历史 48 篇当冷数据，运营不动；新文章用 Bold 替代色彩做强调；极个别需要色彩的文章切 Raw HTML 块手写 span。Phase 5 全量迁完后启动 4.8。
+- 2026-05-05：**Phase 5 全量真跑完成 ✅**。最终命令 `node scripts/migrate-news-to-directus.mjs`（不带任何参数 = 全量真跑）一次成功。报告 `report-1777990658995.json`：attempted=48 / created=45 / skipped=3（id=1/11/45 已在前一轮真迁批次入库，本轮 article-index 命中跳过）/ failed=0；error_log=[]；media uploaded=344 + cacheHit=164 + failed=0；failed_uploads=[]；分类分布 runtime:30+products:8+biomanufacturing:3+vision:4=45（本轮新建 45 + 之前批次 3 = 48 ✅，之前批次 3 篇分布 runtime:2+biomanufacturing:1）；article-index size=48 ✅。pending_videos:[] 是预期行为（id=45 早批次已记入 report-1777989921402.json）；pending_no_content:[] ✅；pending_en_translations 累计 48 篇待运营按 P0/P1/P2 优先级人工补。Phase 5 数据全部入库，状态推进到 `data_loaded`，待人工抽检验收 5 篇 PC+Mobile（id=48/1/11/19/30，README plan 5.3 验收清单）后正式闭环。**已知遗留**：(1) id=45 视频缺占位，待用户从公众号下载 mp4 后在后台手工补 raw block；(2) 全部 48 篇 `_en` 字段空，前端走 fallback 中文不阻塞访问；(3) 4.8 颜色调色盘扩展待 Phase 5 闭环后启动。下次会话从抽检验收 5 篇起步。
 
 
 
