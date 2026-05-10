@@ -9,8 +9,18 @@ module.exports = defineConfig({
 			'/api': {
 				target: 'http://101.200.45.52:8080',
 				changeOrigin: true,
+			},
+			'/directus-api': {
+				target: 'https://cms.mint-bio.cn',
+				changeOrigin: true,
+				pathRewrite: { '^/directus-api': '' },
+			},
+			'/video': {
+				target: 'http://www.mint-bio.cn',
+				changeOrigin: true,
 			}
 		}
+
 	},
 	chainWebpack: config => {
 		config.resolve.alias.set('vue', '@vue/compat')

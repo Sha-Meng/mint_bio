@@ -29,7 +29,8 @@
 
 <script setup>
 import { ref, onMounted, computed, defineProps } from "vue";
-import axios from "axios";
+import { fetchNewsList } from "@/api/news";
+
 
 import MiNTNewsListPreview from "./MiNTNewsListPreview.vue";
 
@@ -103,10 +104,7 @@ const newsList = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get("/data/news_list.json");
-    if (response.status === 200) {
-      newsList.value = response.data;
-    }
+    newsList.value = await fetchNewsList();
   } catch (error) {
     console.error("Error fetching news data:", error);
   }

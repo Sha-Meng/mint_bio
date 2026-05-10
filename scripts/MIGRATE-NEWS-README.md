@@ -59,8 +59,10 @@ $env:DIRECTUS_TOKEN = "<token>"
 | 单条试运行（id=11，含视频 + nopaddingpic） | `node scripts/migrate-news-to-directus.mjs --dry-run --ids=11` |
 | 几条小批量真迁（验证一切正常后） | `node scripts/migrate-news-to-directus.mjs --ids=1,11,45` |
 | 全量正式执行 | `node scripts/migrate-news-to-directus.mjs` |
+| 全量结构审计（旧 JSON ↔ Directus 已入库数据） | `node scripts/audit-news-migration.mjs` |
 
-> ⚠️ 没有 `--dry-run` 即真实写 Directus。**强烈建议先全量 dry-run 检查无错，再真跑**。
+> ⚠️ 没有 `--dry-run` 即真实写 Directus。**强烈建议先全量 dry-run 检查无错，再真跑；真跑后必须执行全量结构审计**。
+
 
 ---
 
@@ -121,15 +123,30 @@ node scripts/migrate-news-to-directus.mjs
 
 幂等：已成功的 3 篇会从 `article-index.json` 命中跳过；已上传的图从 `file-index.json` 命中跳过。预计耗时（48 篇 + 350-400 张图，假设宽带 2MB/s 上传）：3-8 分钟。
 
-### Step 4：抽检 5 篇 PC + Mobile（plan 5.3 验收清单）
+### Step 4：全量结构审计（必跑）
 
-- id 48（首页置顶最新）：cover、richHtml 数字徽章块 01/02/03 渲染保持原视觉
-- id 1（含视频 + strongText 复杂样式）：视频可播放、`orange-text` 高亮生效
-- id 11（双图并排 + nopaddingpic）：图片间距对比验证 stretched=true 渲染正确
-- id 19（含 overviewcontent 长摘要）：summary_zh 取的是长版本不是 title
-- id 30（无正文 list 项）：content_blocks_zh 仅 1 个 image block（cover）+ 1 个空 paragraph 兜底，详情页不报错
+```pwsh
+node scripts/audit-news-migration.mjs
+```
+
+期望输出：
+
+- `source=48 directus=48`
+- `errors=0 warnings=0`
+- 报告写入 `scripts/.migration-cache/audit-report-<ts>.json`
+
+审计覆盖：legacy_id / slug / title / summary / category / status / publish date / cover file_id / block type 序列 / image file_id 序列 / `stretched` flags / raw 数量 / inline class 保留。
+
+### Step 5：抽检 5 篇 PC + Mobile（plan 5.3 验收清单）
+
+- id 48（首页置顶最新）：cover、richHtml 数字徽章块 01/02/03 已作为 raw block 保留；后台 Block Editor 可能不呈现最终颜色，最终以前端 `v-html` 视觉回归为准
+- id 1（含视频 + strongText 复杂样式）：视频可播放、`orange-text` 高亮在前端生效
+- id 11（多视频 + nopaddingpic）：不要求人工识别 JSON；运行审计脚本确认 `image.stretched=true` 数量，前端视觉回归再确认无 padding 效果
+- id 19（含 overviewcontent 长摘要）：summary_zh 取的是 `news_list.json` 的长版本，不是 title
+- id 30（完整详情图文）：源文件 `news_30.json` 实际存在完整正文和多张图片，详情页应按完整图文渲染；不再作为“无正文 list 兜底”样例
 
 ---
+
 
 ## 4. 缓存与回滚
 

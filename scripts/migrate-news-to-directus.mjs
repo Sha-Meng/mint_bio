@@ -599,12 +599,12 @@ async function main() {
       if (!title_zh) throw new Error('title_zh 缺失');
 
       const summary_zh =
-        (detail && detail.overviewcontent) || // news_19 长摘要
-        merged.overviewtitle ||
-        listItem.overviewtitle ||
-        title_zh;
+        (detail && detail.overviewcontent) ||
+        listItem.overviewcontent || // news_19 长摘要来自 news_list.json
+        null;
 
       const publish_at = timeToIso(merged.time || listItem.time);
+
       if (!publish_at) throw new Error(`publish_at 解析失败：time="${merged.time || listItem.time}"`);
 
       // 正文 + cover（cover 优先用 listItem.pic = 工程列表页缩略图字段）

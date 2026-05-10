@@ -43,8 +43,9 @@
 		<div v-if="content.quote && content.quote.length" class="section-quote" :style="{ borderLeftColor: props.categorycolor }">
 		  <div v-for="(q, qi) in content.quote" :key="qi">
 		    <div v-if="q.pic" class="pic">
-		      <img :src="getImageUrl(q.pic)" />
+		      <img :src="getImageUrl(q.pic)" loading="lazy" />
 		    </div>
+
 		    <div v-if="q.desc" class="section-desc">
 		      <span>{{ q.desc }}</span>
 		    </div>

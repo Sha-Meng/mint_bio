@@ -1,7 +1,8 @@
 <template>
   <router-link :to="`/mintNews/detail/${props.info.id}`" class="news-preview-container">
     <div class="pic">
-      <img :src="getImageUrl(props.info.pic)" />
+      <img :src="getImageUrl(props.info.pic)" loading="lazy" />
+
     </div>
     <div class="newsinfo">
       <span :style="{ color: props.info.categorycolor }">

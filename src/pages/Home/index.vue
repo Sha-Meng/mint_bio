@@ -112,9 +112,10 @@
 <script setup>
 import { ref, reactive, onMounted, computed, watch } from "vue";
 import BannerTitleAnimation from "@/components/BannerTitleAnimation";
-import axios from "axios";
 import { getImageUrl } from "@/utils/index";
 import { getText, currentLanguage } from "@/utils/language";
+import { fetchLatestNews } from "@/api/news";
+
 
 
 const lineDivides = reactive([
@@ -300,14 +301,7 @@ const cardLeave = (card) => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get("/data/news_list.json");
-    if (response.status === 200) {
-      const rawNews = response.data.slice(0, 6);
-      newsList.value = rawNews;
-      newsList.value.forEach((news) => {
-        news.transform = 'scale(1)';
-      });
-    }
+    newsList.value = await fetchLatestNews(6);
   } catch (error) {
     console.error("Error fetching news data:", error);
   }

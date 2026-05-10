@@ -23,8 +23,9 @@
         </div>
 
         <div class="pic" v-if="getImageUrl(props.info.pic)">
-          <img :src="getImageUrl(props.info.pic)" />
+          <img :src="getImageUrl(props.info.pic)" loading="lazy" />
         </div>
+
 
         <div class="overview">
           <span class="overview-content"> {{ props.info.abstract }} </span>

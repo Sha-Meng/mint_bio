@@ -1,6 +1,7 @@
 name: News Migration Mapping (冻结版)
 date: 2026-05-05
-status: frozen — Phase 5 入口契约
+status: frozen — Phase 5 入口契约；2026-05-10 审计校正版
+
 related-plan: directus-bt-migration-execution.md (5.1 / 5.2 / 5.2.1 / 5.2.2)
 
 ## overview
@@ -24,7 +25,8 @@ related-plan: directus-bt-migration-execution.md (5.1 / 5.2 / 5.2.1 / 5.2.2)
 | `#MiNT 智造力` / `#MiNT 制造力` | `mint-biomanufacturing` |
 | `#MiNT Vision` / `#Mint Vision` | `mint-vision` |
 
-> 脚本侧用 `categorylabel.replace(/^#/, '').trim().toLowerCase()` 归一化后查表。
+> 脚本侧用 `categorylabel.replace(/^#/, '').replace(/\s+/g, '').toLowerCase()` 归一化后查表，兼容 `#MiNT产品力`、`MiNT 进行时` 等缺空格/缺 `#` 脏数据。
+
 
 ### 3. publish_at 标准化
 
@@ -32,13 +34,17 @@ related-plan: directus-bt-migration-execution.md (5.1 / 5.2 / 5.2.1 / 5.2.2)
 
 ### 4. cover 字段
 
-`cover = upload(sections[0].headPic[0])`。如 `headPic[]` 为空数组（news_2 / news_20-33 等无 sections.headPic 字段或空数组），fallback 用 `pic`（即 news_list.json 列表封面图，路径同源）。
+**2026-05-05 v2 修订，2026-05-10 审计确认**：`cover = upload(news_list.pic)` 优先，保证首页 / 列表缩略图与旧站一致；仅当 `news_list.pic` 缺失时 fallback `sections[0].headPic[0]`。`headPic[]` 不再被单独抽作 cover，而是全部按顺序进入正文 image blocks。
+
+> 下方逐条表中早期写作的 `sections[0].headPic[0]` cover 来源仅保留历史参考；实际脚本与 Directus 线上数据均以 `news_list.pic` 优先规则为准，并已由 `scripts/audit-news-migration.mjs` 校验 cover file_id。
+
 
 ### 5. summary_zh
 
 源数据存在两种摘要字段：`overviewtitle`（短）、`overviewcontent`（长，仅 news_19 有）。映射规则：
 
-- `summary_zh = overviewcontent || overviewtitle || title`（按优先级回落）
+- `summary_zh = detail.overviewcontent || news_list.overviewcontent || overviewtitle || title`（按优先级回落；2026-05-10 已修复 id=19 漏读 `news_list.overviewcontent` 的问题）
+
 - `summary_en` 全部置 `null`（前端 fallback 中文）
 
 ### 6. 双语字段策略
@@ -91,7 +97,8 @@ related-plan: directus-bt-migration-execution.md (5.1 / 5.2 / 5.2.1 / 5.2.2)
 | 33 | news-33 | mint-runtime | 2024-06-06T08:00 | 合成生物赋能新质生产力，张科春教授畅谈生物智造的历史与未来 | news_list.pic = `assets/News/news_15.jpg` | headPic 空（无 news_33.json，仅 list 项）→ cover=fallback news_list.pic |
 | 32 | news-32 | mint-vision | 2024-06-14T08:00 | 它在你看不见的地方，影响你的生活、健康和寿命 | news_list.pic = `assets/News/news_14.jpg` | headPic 空 → fallback；**无正文**（仅 list 项，content_blocks_zh 仅含 1 个 image block = cover） |
 | 31 | news-31 | mint-runtime | 2024-06-19T08:00 | 元素驱动董事长刘旻昊博士荣获"建德城市人才合伙人"称号 | news_list.pic = `assets/News/news_13.jpg` | 同 32（与 id 20 重题 但保留各自记录） |
-| 30 | news-30 | mint-vision | 2025-01-17T08:00 | 九部门联合发文，推动非粮生物基材料发展 | news_list.pic = `assets/News/news_12.jpg` | 同 32 |
+| 30 | news-30 | mint-vision | 2025-01-17T08:00 | 九部门联合发文，推动非粮生物基材料发展 | news_list.pic = `assets/News/news_12.jpg` | **2026-05-10 校正**：源文件 `news_30.json` 实际存在完整详情（headPic + strongText + 12 张正文图 + footerPic），不是无正文兜底样例 |
+
 | 29 | news-29 | mint-vision | 2024-08-02T08:00 | 这届奥运，没它不行！ | news_list.pic = `assets/News/news_11.jpg` | 同 32 |
 | 28 | news-28 | mint-runtime | 2024-09-21T08:00 | 姚高员市长调研重点产业赛道企业，莅临元素驱动指导 | news_list.pic = `assets/News/news_10.jpg` | 同 32 |
 | 27 | news-27 | mint-runtime | 2025-01-17T08:00 | 周扬区长莅临元素驱动调研指导 | news_list.pic = `assets/News/news_09.jpg` | 同 32 |
@@ -127,7 +134,8 @@ related-plan: directus-bt-migration-execution.md (5.1 / 5.2 / 5.2.1 / 5.2.2)
 - 总数：48 篇 ✅（id 1-48 全覆盖，无缺号）
 - 分类分布：mint-runtime=28 / mint-products=8 / mint-biomanufacturing=4（id 4/10/11/35）/ mint-vision=4（id 13/29/30/32），合计 44。差额 4 篇待复核（mint-products 实为 8 篇 含 id 8/14/17/25/26/42/46/48；mint-runtime 实为 32 篇）→ **以脚本运行时归一化结果为准，本表不强约束**。
 - 含视频文章：4 篇（id 1 / 3 / 11 / 45），其中 45 视频缺
-- headPic 空 fallback：14 篇（id 19-33，除 id 21）
+- cover 规则：实际以 `news_list.pic` 优先，`headPic` 仅作为 fallback；48 篇 cover file_id 已由 `audit-report-1778395347338.json` 校验通过
+
 
 ---
 
@@ -173,20 +181,27 @@ related-plan: directus-bt-migration-execution.md (5.1 / 5.2 / 5.2.1 / 5.2.2)
 
 ## 验证 / Acceptance
 
-迁移脚本运行后产出 `migration-report-<date>.json` 必须包含：
+迁移脚本运行后产出 `report-<ts>.json` 必须包含：
 
 - `total_articles_attempted: 48`
-- `total_articles_created: 48`（如失败需列出失败 legacy_id）
-- `total_files_uploaded: <去重后图片数>`（预估 350-400 张）
-- `pending_videos: ["news-45"]`（视频缺占位）
-- `pending_en_translations: [<48 篇 legacy_id 全列>]`
-- `category_distribution: { 'mint-runtime': N, 'mint-products': N, 'mint-biomanufacturing': N, 'mint-vision': N }`
+- `total_articles_failed: 0`
+- `failed_uploads: []`
+- `pending_en_translations: [<48 篇 legacy_id 全列或分批报告累计全列>]`
+- `category_distribution` 四类累计为 48（如分批迁移，需合并前批次）
 - `error_log: []`（如有 4xx/5xx）
+
+真迁后必须运行全量结构审计：
+
+```pwsh
+node scripts/audit-news-migration.mjs
+```
+
+验收标准：`source=48 directus=48 errors=0 warnings=0`。审计覆盖 slug/title/summary/category/status/publish date/cover file_id/block type 序列/image file_id 序列/`stretched` flags/raw 数量/inline class 保留。
 
 抽检验收清单（PC + Mobile 双端）：
 
-1. id 48（首页置顶最新）：cover、richHtml 数字徽章块 01/02/03 渲染保持原视觉
+1. id 48（首页置顶最新）：cover、richHtml 数字徽章块 01/02/03 已作为 raw block 保留，最终以前端 `v-html` 视觉回归为准
 2. id 1（含视频 + strongText 复杂样式）：视频可播放、`orange-text` 高亮生效
-3. id 11（双图并排 + nopaddingpic）：图片间距对比验证 stretched=true 渲染正确
-4. id 19（含 overviewcontent 长摘要）：summary_zh 取的是长版本不是 title
-5. id 30（无正文 list 项）：content_blocks_zh 仅 1 个 image block，详情页不报错
+3. id 11（多视频 + nopaddingpic）：审计脚本确认 `image.stretched=true`，前端视觉回归确认无 padding 效果
+4. id 19（含 overviewcontent 长摘要）：summary_zh 取的是 `news_list.overviewcontent` 长版本不是 title
+5. id 30（完整详情图文）：按 `news_30.json` 完整详情渲染，不再作为“无正文 list 兜底”样例

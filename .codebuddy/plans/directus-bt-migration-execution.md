@@ -10,9 +10,11 @@ todos:
 - [x] 完成宝塔站点与 Directus 部署
 - [~] 完成数据库与媒体目录配置（本地卷完成，`/assets/*` CDN 缓存未做）
 - [x] 完成内容模型与权限配置
-- [ ] 完成历史数据迁移
+- [x] 完成历史数据迁移
 - [ ] 完成官网读接口适配
 - [ ] 完成前端切流与验收
+- [ ] 完成最终全站回归验证
+
 
 ## Current Status
 - **Phase 1 / Phase 2 / Phase 4 已收官**；Phase 3 部分完成（本地卷+CDN 缓存未做）；**Phase 5 历史数据已全量入库**（48/48），待人工抽检验收。
@@ -25,15 +27,17 @@ todos:
   - 4E Editor 角色 + Editor Policy（宽松版权限：news_articles 全权 / news_categories 仅读 / directus_files CRUD / 系统集合 App Access Minimum）✅
   - 4F 测试 Editor 账号 + 4G 端到端验收 ✅
   - **4H 双语策略放宽**：`title_en` / `content_blocks_en` 改为可空，前端 lang=en 走 fallback 中文（plan 4.0/4.1/4.2/4.6/5.2/6.0 同步更新）✅
-- **Phase 5 状态（2026-05-05）**：
-  - 5.1 冻结版字段映射表 ✅（[`news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md)，48 篇逐条）
+- **Phase 5 状态（2026-05-10）**：
+  - 5.1 冻结版字段映射表 ✅（[`news-migration-mapping_20260505.md`](./news-migration-mapping_20260505.md)，48 篇逐条；2026-05-10 同步 cover v2 / id=30 校正）
   - 5.2.1 分类扩展 v4 终版（4 条 mint-runtime / mint-products / mint-biomanufacturing / mint-vision）✅，后台用户已建好
   - 5.2.2 EditorJS block 映射规则 ✅（含 cover v2 修订：listItem.pic 优先）
-  - 5.3 迁移脚本 `scripts/migrate-news-to-directus.mjs` + README ✅
+  - 5.3 迁移脚本 `scripts/migrate-news-to-directus.mjs` + README ✅；2026-05-10 修正 `summary_zh` 优先级，补 `listItem.overviewcontent`
   - **5.4 全量真跑完成**（report-1777990658995.json）：attempted=48 / created=45 / skipped=3 / failed=0；error_log=[]；media uploaded=344 + cacheHit=164 + failed=0；分布 runtime:32 / products:8 / biomanufacturing:4 / vision:4 = 48；article-index size=48 ✅
-  - **5.5 人工抽检验收 ⏳ 待下次会话**：抽检 5 篇 PC+Mobile（id=48 富文本徽章 / id=1 视频+strongText / id=11 多视频+stretched / id=19 长摘要 / id=30 list 兜底 cover），README plan 5.3 验收清单
-  - 5.6 _en 字段缺失清单（48 篇全空，前端 fallback 中文不阻塞）⏳ 待运营按 P0/P1/P2 优先级人工补
+  - **5.5 全量结构审计完成** ✅：新增并执行 `scripts/audit-news-migration.mjs`，逐篇比对旧 JSON 与 Directus 48 篇的 slug/title/summary/category/cover/block 类型序列/image fileId/stretched/raw/html class；先发现唯一差异 id=19 `summary_zh` 未取 `news_list.overviewcontent`，已 PATCH 修正；最终报告 `scripts/.migration-cache/audit-report-1778387635035.json`：source=48 / directus=48 / errors=0 / warnings=0。
+  - 5.6 抽检结论：id=48 的 `richHtml` 已作为 3 个 `raw` block 入库，后台 Block Editor 不一定视觉渲染 inline style / class，前端需在 Phase 7 渲染器用 `v-html` 保真；id=11 的 `nopaddingpic` 已审计为 14 个 `image.stretched=true`；id=30 不是“无正文 list 兜底”，源文件 `news_30.json` 实际存在完整正文与 15 张图，原抽检说明已校正。
+  - 5.7 _en 字段缺失清单（48 篇全空，前端 fallback 中文不阻塞）⏳ 待运营按 P0/P1/P2 优先级人工补
 - **Phase 4 收尾长尾**（不阻塞）：4.8 文本颜色高亮调色盘扩展（已归档候选方案 + 落地步骤）；上传默认目录动态路径模板；Phase 3 残项 /assets/* CDN 缓存。
+
 
 
 
@@ -42,7 +46,12 @@ todos:
 - `phase_2_directus_deployment` = `done`
 - `phase_3_database_and_storage` = `partial`（本地卷已打通，`/assets/*` CDN 缓存策略未做）
 - `phase_4_content_model_and_permissions` = `done` ✅（2026-05-05 完工，4A-4H 全部通过）
-- `phase_5_data_migration` = `data_loaded`（48/48 入库，待人工抽检验收 5 篇 PC+Mobile）
+- `phase_5_data_migration` = `audited_passed`（48/48 入库；全量结构审计 errors=0 / warnings=0；id=19 摘要已修正）
+- `phase_6_read_api_adaptation` = `implemented_behind_flag`（契约文档 + `src/api/news.js` + 首页/列表/详情读取适配已完成；Public 只读已生效；本地经 `/directus-api` 代理可灰度；生产同源代理与 Directus 图片 CDN 缓存待）
+- `phase_7_frontend_cutover` = `local_regression_in_progress`（Directus 模式本地回归中；默认生产仍 `VUE_APP_USE_DIRECTUS=false`）
+
+
+
 
 
 
@@ -455,8 +464,11 @@ function categoryLabel(slug, t) {
 - [x] **2026-05-05 完成**：在 Directus 后台扩充 `news_categories` 至 4 条（旧 2 条占位删除/归档；按映射表 5.2.1 v4 建 `mint-runtime` / `mint-products` / `mint-biomanufacturing` / `mint-vision` 4 条，name_en 分别为 MiNT Runtime / MiNT Products / MiNT Biomanufacturing / MiNT Vision）
 - [x] **2026-05-05 完成**：编写 `scripts/migrate-news-to-directus.mjs`（自包含，0 第三方依赖，Node 18+），含：(1) `.env.migration` 加载 + DirectusClient REST 封装 + dry-run 模式；(2) 媒体上传模块 MediaUploader（路径 → file_id 缓存到 `scripts/.migration-cache/file-index.json`，`news/_legacy/` folder uuid 自动查询，`assets/{News,images}/*` 跨目录路径解析）；(3) 正文转换 buildBlocks（按 5.2.2 决策实现 `pic/nopaddingpic→image stretched 区分` / `desc→paragraph` / `strongText→paragraph 保留 <span class>` / `richHtml→raw` / `quote[]→delimiter+quote+paragraphs+delimiter` / `video+poster→raw 内嵌 <video> 兼容空 video 占位写入 pending_videos` / `headPic[0]→cover` 单独抽出，`headPic[1..n]+contents+footerPic` 顺序拼装 + 无正文 14 篇空 paragraph 兜底）；(4) 文章创建模块（payload 严格按 plan 4.2/5.2 映射，slug=`news-<legacy_id>`，publish_at ISO 8601 +08:00，`_en` 字段全 null，status=published，featured=false）；(5) 幂等控制（article-index.json 命中即跳过，保护运营手工编辑）；(6) 增量报告（pending_videos / pending_no_content / pending_en_translations / category_distribution / error_log，含每次运行 ts 后缀）。CLI 支持 `--dry-run` `--limit=N` `--ids=1,11,45` 三种模式。`scripts/MIGRATE-NEWS-README.md` 含 7 节操作说明（前置条件/命令/推荐执行顺序 4 步/缓存与回滚/已知 pending/故障排查/项目铁律）。Node syntax check 通过、缺 env 友好报错验证通过。`.gitignore` 已加 `scripts/.migration-cache/`。
 - [x] **2026-05-05 完成**：用户配 Static Access Token + 写入 `scripts/.env.migration`，按 README 推荐流程执行 dry-run 全量 → 真迁 3 篇（id=1,11,45）后台抽检 → cover 来源修订（v2：listItem.pic 优先）+ 删除旧 3 篇重跑 → **全量真跑 48/48 入库**（report-1777990658995.json：created=45 / skipped=3 / failed=0 / error_log=[] / failed_uploads=[] / media uploaded=344 + cacheHit=164 + failed=0）
-- [ ] **【下次会话】抽检 5 篇 PC+Mobile**（id=48 富文本徽章 / id=1 视频+strongText / id=11 多视频+stretched / id=19 长摘要 / id=30 list 兜底 cover），按 README plan 5.3 验收清单
+- [x] **2026-05-10 完成：全量结构自测**。新增 `scripts/audit-news-migration.mjs`，比对 48 篇 Directus 数据与旧 JSON：文章数、legacy_id、slug、title、summary、category、status、publish date、cover file_id、block type 序列、image file_id 序列、`stretched` flags、raw 数量、inline class 保留。最新 `audit-report-1778395347338.json`：errors=0 / warnings=0。
+- [x] **2026-05-10 完成：抽检问题修正**。id=19 `summary_zh` 已从错误的标题修正为 `news_list.overviewcontent` 长摘要；迁移脚本同步修复优先级：`detail.overviewcontent || listItem.overviewcontent || overviewtitle || title`。
+- [x] **2026-05-10 完成：抽检说明校正**。id=48 的 `richHtml` 已入库为 3 个 raw block（含 inline style，非 `.orange-text`，后台视觉不代表前端最终效果）；id=11 的 `nopaddingpic` 由审计脚本确认 14 个 `image.stretched=true`；id=30 源文件实际有完整详情，不再作为“无正文 list 兜底”样例。
 - [ ] 把 `_en` 字段缺失项整理为待办交回用户**按需**补；不补也不阻塞（前端 fallback 中文）
+
 
 ### Phase 6 - 官网读接口适配
 
@@ -486,15 +498,20 @@ function categoryLabel(slug, t) {
 - **测试要求**：迁移完一篇纯中文文章（_en 全空），lang=en 访问详情页应正常显示中文，列表页标题不能为空。
 
 
-- [ ] 确定接入方式：直连 Directus（推荐 MVP）或 在阿里云上加 Node BFF
-- [ ] 输出契约文档 `.codebuddy/plans/news-api-contract_<date>.md`
-- [ ] `GET /api/news/latest?lang=zh|en&limit=N` → 首页用
-- [ ] `GET /api/news/list?lang=&category=&page=&pageSize=` → 列表用
-- [ ] `GET /api/news/detail?lang=&key=<slug-or-legacy_id>` → 详情用，**同时支持 slug 和 legacy_id 查询**
-- [ ] `GET /api/news/categories?lang=` → 分类列表
-- [ ] 返回 JSON 结构与前端 `MiNTNews*` 现有 props 形状对齐，便于切流时 diff 最小
-- [ ] CORS / 缓存头（`Cache-Control: s-maxage=60, stale-while-revalidate=300`）
-- [ ] 联调：用 Postman / curl 跑一遍契约文档全部 case
+- [x] 确定接入方式：先直连 Directus REST（MVP），失败时回退旧静态 JSON；若 Public 只读权限不开放再补 Node BFF
+- [x] 输出契约文档 `.codebuddy/plans/news-api-contract_20260510.md`
+- [x] `fetchLatestNews(limit)` → 首页用；Directus mode 映射 `GET /items/news_articles?sort=-featured,-publish_at&limit=N`
+- [x] `fetchNewsList({category, limit})` → 列表用；返回旧 `news_list.json` 兼容结构
+- [x] `fetchNewsDetail(key)` → 详情用，支持 `legacy_id` 与 `slug`，并把 EditorJS blocks 转回旧组件可渲染的 `sections[].contents[]`
+- [x] `fetchNewsCategories()` → 分类列表候选；当前页面仍保留旧固定分类，避免扩大改动面
+- [x] 返回 JSON 结构与前端 `MiNTNews*` 现有 props 形状对齐；`VUE_APP_USE_DIRECTUS=false` 默认旧数据源
+- [~] CORS / 缓存头：本地开发已通过 `vue.config.js` 的 `/directus-api` 代理绕开 localhost CORS；生产切流方案已输出 `.codebuddy/plans/news-production-cutover_20260510.md`；正式生产需主站 `/directus-api` 同源反代与 Directus 图片 CDN 缓存
+
+- [x] 本地验证：`npm run build` 通过；`node scripts/audit-news-migration.mjs` 通过（audit-report-1778401120845.json，errors=0 / warnings=0）
+- [x] 性能首轮优化：Directus 列表缩略图使用 `width=800&height=500&fit=cover&format=webp&quality=80`（典型封面从 711KB 降到约 33KB）；详情图片使用 `width=1200&format=webp&quality=85`；视频 poster 使用 `width=960&format=webp&quality=80`；详情页“更多动态”由全量 48 条降为最新 6 条；新闻卡片与详情图启用 `loading="lazy"`
+
+
+
 
 ### Phase 7 - 前端切流与验收
 
@@ -510,23 +527,82 @@ function categoryLabel(slug, t) {
 - [ ] 正式切流到生产
 - [ ] 切流稳定 2 周后清理 `public/data/news_*.json` + `src/assets/News/**`（保留 git 历史）
 
+### Phase 8 - 最终回归验证与交接
+
+> 目标：在正式切流前后，用可重复的全量数据审计 + PC/Mobile 视觉回归 + 回滚演练，证明新 Directus 数据源不会破坏旧页面展示效果。
+
+#### 8.1 数据一致性回归
+
+- [ ] 每次 Phase 6/7 关键改动后运行 `node scripts/audit-news-migration.mjs`，要求 `errors=0 / warnings=0`
+- [ ] 校验 48 篇：legacy_id / slug / title / summary / category / cover / block type 序列 / image fileId 序列 / `stretched` flags / raw HTML / inline class 保留
+- [ ] 校验 Directus `/assets/<uuid>` 可访问，抽样图片 transformation（如 `?width=800&format=webp`）正常
+- [ ] 校验 Directus 图片 CDN 缓存：生产资源 URL 走 `www.mint-bio.cn/directus-api/assets/*` 或独立 CDN 域名，响应头无 `no-cache` 冲突，二次请求命中 CDN/浏览器缓存
+
+- [ ] 校验 `_en` 字段为空时英文站点走中文 fallback，标题和正文不空白
+
+#### 8.2 页面视觉回归（切流前）
+
+- [ ] 在 `VUE_APP_USE_DIRECTUS=false` 与 `true` 两套数据源下，对比首页新闻区、新闻列表页、新闻详情页 PC + Mobile
+- [ ] 重点样例：id=48 richHtml 徽章 / id=1 视频 + `.orange-text` / id=11 多视频 + `stretched=true` 图片 / id=19 长摘要 / id=30 完整详情图文
+- [ ] 验证 `paragraph` 的 `.orange-text/.blue-text/.green-text/.blue-green-text/.strong-text` 样式在前端 `v-html` 中生效
+- [ ] 验证 `raw` block（视频、富 HTML）在前端渲染，不以 Directus 后台编辑器的视觉预览作为最终依据
+
+#### 8.3 路由、缓存与回滚
+
+- [ ] 旧链接 `/MiNTNews/<legacy_id>` 全部可达；新链接 `/MiNTNews/<slug>` 可达；不存在时有安全兜底
+- [ ] 验证运行时开关 `VUE_APP_USE_DIRECTUS=false` 可一键回到旧 `public/data/*.json` 数据源
+- [ ] 记录生产切流、回滚、CDN 刷新和 Directus 后台操作交接步骤
+- [ ] 切流后 48h 观察无异常，再进入“稳定 2 周后清理旧静态数据”的后续动作
+
+#### 8.4 Directus 后台发布流程验收
+
+- [ ] 使用 Editor/Admin 账号测试新闻新增、编辑、删除/归档、草稿保存、发布流程
+- [ ] 验证新建新闻的列表页、详情页、首页最新动态读取结果与发布状态一致
+- [ ] 验证已发布新闻改为 draft/archived 后前端不再展示，恢复 published 后重新展示
+- [ ] 验证上传图片、视频 raw block、图片封面、category、publish_at、featured 等字段在前端渲染符合预期
+- [ ] 验证误删/误改的回滚路径：Directus Revisions、前端 `VUE_APP_USE_DIRECTUS=false` 回滚包、CDN 刷新步骤
+
+#### 8.5 全量客观 Review（2026-05-10 新增）
+
+- [ ] 基于旧静态数据源与 Directus 数据源完成 48 篇 PC/Mobile 实际效果全量对比，所有不一致点按 P0/P1/P2/P3 汇总
+- [ ] 对 `src/api/news.js`、新闻页面/组件、`vue.config.js`、迁移/审计脚本、切流文档做深度代码 review
+- [ ] 修复或显式接受 review 中 P0/P1 项后，才允许进入正式生产切流
+
 ## Blockers / Risks
+
+
+
 - 当前阻塞：无。
+- 风险 0（已收敛 2026-05-10）：Directus 后台 Block Editor 不等于最终前端渲染器；`raw` block / inline style / `.orange-text` 等在后台可能不显示最终视觉，但 API 数据完整。Phase 7 必须以前端 `v-html` 渲染和视觉回归为准。
+- 风险 0.5（已部分收敛）：匿名 Directus REST 已从 403 修复为 200；本地通过 `/directus-api` 代理解决 CORS。生产若跨域直连 `cms.mint-bio.cn` 仍需 CORS，推荐改为主站同源反代 `/directus-api`。
+- 风险 0.6（已收敛 2026-05-10）：Directus assets CDN 缓存规则已配置，`/directus-api/assets/*` transform 图片响应头已变为 `Cache-Control: max-age=2592000`，二次请求出现 `X-Cache: HIT TCP_MEM_HIT`、`X-Swift-CacheTime: 2592000`，图片 CDN 缓存生效。
+- 风险 0.7（已收敛 2026-05-10）：CDN 边缘 HTTPS 证书已部署，公网 `https://www.mint-bio.cn` / `https://mint-bio.cn` 首页、新闻 API、分类 API、图片 transform 均返回 200；`www` 与裸域的 `/directus-api/assets/*` 缩略图二次请求均可命中 CDN。
+- 风险 0.8（已收敛 2026-05-10）：Directus raw video 中 poster 原始值为 `poster="/assets/<uuid>"`，前端旧归一化会把 transform query 拼到 `/assets/` 与 uuid 之间导致封面缺失；已改为按 uuid 正则重写为 `/directus-api/assets/<uuid>?width=960&format=webp&quality=80`。
+
+
 - 风险 1（已处置 2026-05-05）：`8055` 端口公网暴露问题已通过 docker-compose ports 改为 `127.0.0.1:8055:8055` 完成收敛；`ss` 仅监听 127.0.0.1，公网 `curl 101.200.45.52:8055` 超时，宝塔反代 `https://cms.mint-bio.cn/server/health` 仍 200。
+
+
+
 - 风险 2：若后续升级 Directus（当前 `11.14.1`，上游已 `11.17.4`）或重装容器，`www:www / 755-644` 权限会保持，但要注意升级 compose 时的 env 注入方式是否仍一致。
 - 风险 3：若未来 Docker 网桥网段变化，`172.18.0.%` 的 MySQL 授权可能再次失效；首启稳定后可再评估是否改为更宽但受控的 host 策略。
 - 风险 4：Directus 占位页曾因浏览器对早期 917 字节的 `index.html` 生成过 ETag 缓存而回显，非服务端问题；若日后出现类似"域名首页变静态页"需先排除浏览器/CDN 缓存。
 
 ## Next Actions
 1. **Phase 4 全部完成** ✅（4A-4G + 数据脏修复 + 4H 双语放宽）
-2. **Phase 5 数据已全量入库** ✅（48/48，0 错误，0 上传失败）。**【下次会话第一步】**：人工抽检 5 篇 PC+Mobile（id=48/1/11/19/30），按 README plan 5.3 验收清单。抽检通过后 Phase 5 闭环。
-3. **Phase 5 收尾（不阻塞 Phase 6）**：用户按 P0/P1/P2 优先级在 Directus 后台手工补 `_en` 字段（前端 lang=en 走 fallback 中文不阻塞）；id=45 视频缺占位（pending_videos[45]）后续从公众号下载 mp4 → 放到 `public/video/News/202604/news45_video1.mov` → 后台编辑 news-45 加 raw block
-4. **Phase 4 收尾长尾（可选，不阻塞 Phase 6）**：
-   - **4.8 文本颜色高亮**：fork `dimitrov-adrian/directus-extension-editorjs-interface` + 集成 `editorjs-text-color-plugin@^2.0.4`，给运营 Word 风格调色盘（详见 plan 4.8 节落地步骤 + 验收标准）
-   - cover/Block Editor Image 字段 Folder 细化 `news/{YYYY}/{MM}/`
-   - Phase 3 残项 `/assets/*` CDN 缓存策略
-5. **Phase 6 启动条件**：抽检通过后即可。直连 Directus REST 验证 + 输出契约文档 `news-api-contract_<date>.md` + 实现 4 个端点（latest/list/detail/categories）。
-6. **关键依赖**：4.3 节 EditorJS 真实结构 + 5.2 节字段映射表 + 冻结映射表 + 6.0 节双语 fallback 策略 + 4.8 节颜色插件契约（如落地）= Phase 6/7 的契约基线。
+2. **Phase 5 数据迁移结构验收完成** ✅：48/48 入库；最新全量审计 `audit-report-1778401120845.json` 为 errors=0 / warnings=0；id=19 长摘要已修正；后续视觉一致性放入 Phase 7/8 回归。
+3. **Phase 6 前端读适配已完成（默认关闭）** ✅：契约文档 `news-api-contract_20260510.md`、`src/api/news.js`、首页/列表/详情接入已完成；默认 `VUE_APP_USE_DIRECTUS=false`，旧静态 JSON 不受影响；Public 只读已生效，本地用 `/directus-api` 代理。
+4. **Phase 7 当前停止点**：Directus 模式本地重点页面已由用户确认；生产 `https://www.mint-bio.cn/directus-api` 与 `https://mint-bio.cn/directus-api` 新闻/分类/图片均 200；Directus 图片 transform 二次请求 CDN 命中；灰度站已修复超大 cover 坏图、detail/1 视频 poster URL 拼接问题、id=32 空摘要被标题兜底导致的重复行问题。
+5. **后续优先级**：上传最新 `VUE_APP_USE_DIRECTUS=true` 的 `dist/` 灰度包，复查 id=5/id=32 缩略图、detail/1 视频封面、id=32 标题下方不再重复显示摘要，再按 Phase 8 最终回归清单验证后正式切流。
+
+
+
+
+
+6. **不阻塞主线的收尾**：用户按 P0/P1/P2 补 `_en` 字段；id=45 缺视频后续补 raw block；4.8 颜色调色盘、上传默认目录作为长尾任务。
+
+
+
 
 
 
@@ -572,13 +648,13 @@ function categoryLabel(slug, t) {
 - 2026-05-05：**Phase 5 dry-run + 真迁 3 篇验证迭代**。Step 1 全量 dry-run 第一轮报告暴露 4 类 bug：(1) 6 篇分类归一化失败（`#MiNT产品力` 无空格 / `MiNT 进行时` 缺 # / `#MiNT进行时` 无空格 等脏拼写未覆盖）；(2) id=34/35/36/37 误报 80 个 video 占位（fetch.mjs 抓取产物所有 content 项都填 `video:""` 占位字段，脚本 `if (item.video !== undefined)` 误判）；(3) dry-run 假 file_id `__dry-run-file-...` 污染了 file-index.json / article-index.json 缓存，会让下次真跑误命中跳过；(4) 2 张图源数据指错路径（news_2.json 引用 `news_2.jpg` 实际是 `.png`，news_25.json 引用 `news_7_2.png` 实际是 `news_7_2png.jpeg`）。修复：(a) `categoryLabelToSlug` 升级为"去 # + 移除所有空白 + 转小写"，alias key 改为无空格规范形式；(b) video 分支拆三种情况——真有视频走 raw block / 显式 `_note` 占位写 pending / 空字符串无 `_note` 完全忽略落到下面分支；(c) dry-run 模式下 `saveJsonCache` 跳过 file/article index 缓存写盘；(d) 直接修源 JSON 把两条错路径改对；(e) 同时给 MediaUploader 加 `failedPaths` 列表，进报告 `failed_uploads` 字段方便定位。第二轮 dry-run：48/48 全过、`error_log: []`、media 上传 362/失败 0、分类分布 32/8/4/4 = 48 ✅、pending_videos 仅 [45]。Step 2 真迁 3 篇（ids=1,11,45）也 3/3 成功。**但抽检发现 cover 设计问题**：原方案 `cover = sections[0].headPic[0]` 大量取到公共橙/蓝色装饰横幅 `new_head_*.jpg`（多篇共用同一张），与现有 `MiNTNewsList.vue` / `MiNTNewsTop.vue` 用 `news_list.json` 的 `pic` 字段（每篇独立配的主图）不一致。**修订决策（写入 plan 5.2.2）**：cover 来源改为 `listItem.pic` 优先 → fallback `headPic[0]`；同时 `headPic` 全部进正文 image blocks（不再单独抽 [0]）。通过 API DELETE 已迁的 3 篇 + 清空 article-index.json + 重跑 `--ids=1,11,45` 验证：3/3 成功，新 cover URL 检验对应 `news_1.png` / `news_11.jpg` / `news45_pic_2.jpg`（每篇独立主图），与前端列表页一致 ✅。
 - 2026-05-05：**Phase 4.8 文本颜色高亮归档为长尾任务**（非本次实现）。Phase 5 真迁验收时发现：旧数据 `<span class='orange-text'>` 等内联色 HTML 在 Directus Block Editor 后台**视觉上不显示颜色**且**没有调色盘按钮**让运营选中文字改色（EditorJS 默认 paragraph 内联工具栏只 Bold/Italic/Underline/Link 4 个），但**数据保存原样不丢**（已 API 验证 P1/P3 hasSpan=true）。前端 `MiNTNewsDetailSection.vue` 用 v-html 渲染时 `.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text` CSS 类样式 100% 生效。**用户反馈需要 Word 风格调色盘交互**，调研后选 npm 包 `editorjs-text-color-plugin@^2.0.4`（活跃维护，4+ 项目使用），落地路径需 fork `dimitrov-adrian/directus-extension-editorjs-interface` 加 5 行 EditorJS tools 注册代码 + 改 Directus extensions 目录 + 重启容器。归档为 plan 4.8 长尾任务（含候选方案对比 / 落地步骤 / 验收标准 / 暂时兼容策略）。**暂时兼容策略**：历史 48 篇当冷数据，运营不动；新文章用 Bold 替代色彩做强调；极个别需要色彩的文章切 Raw HTML 块手写 span。Phase 5 全量迁完后启动 4.8。
 - 2026-05-05：**Phase 5 全量真跑完成 ✅**。最终命令 `node scripts/migrate-news-to-directus.mjs`（不带任何参数 = 全量真跑）一次成功。报告 `report-1777990658995.json`：attempted=48 / created=45 / skipped=3（id=1/11/45 已在前一轮真迁批次入库，本轮 article-index 命中跳过）/ failed=0；error_log=[]；media uploaded=344 + cacheHit=164 + failed=0；failed_uploads=[]；分类分布 runtime:30+products:8+biomanufacturing:3+vision:4=45（本轮新建 45 + 之前批次 3 = 48 ✅，之前批次 3 篇分布 runtime:2+biomanufacturing:1）；article-index size=48 ✅。pending_videos:[] 是预期行为（id=45 早批次已记入 report-1777989921402.json）；pending_no_content:[] ✅；pending_en_translations 累计 48 篇待运营按 P0/P1/P2 优先级人工补。Phase 5 数据全部入库，状态推进到 `data_loaded`，待人工抽检验收 5 篇 PC+Mobile（id=48/1/11/19/30，README plan 5.3 验收清单）后正式闭环。**已知遗留**：(1) id=45 视频缺占位，待用户从公众号下载 mp4 后在后台手工补 raw block；(2) 全部 48 篇 `_en` 字段空，前端走 fallback 中文不阻塞访问；(3) 4.8 颜色调色盘扩展待 Phase 5 闭环后启动。下次会话从抽检验收 5 篇起步。
-
-
-
-
-
-
-
-
-
-
+- 2026-05-10：**Phase 5 全量自测与抽检问题收口**。根据用户抽检反馈，确认：(1) id=48 `richHtml` 已在 Directus 中作为 3 个 `raw` block 保存，且包含 inline style；正文强调色 class 为 `blue-text`，非 `.orange-text`；后台 Block Editor 视觉预览不作为最终渲染依据，Phase 7 前端 `v-html` 回归验证为准；(2) id=11 `nopaddingpic` 已迁移为 14 个 `image.stretched=true`，通过 API/审计脚本核对，不要求运营在后台人工看 JSON；(3) id=19 `summary_zh` 确实错误取了标题，原因是迁移脚本只检查 `detail.overviewcontent`，漏了 `news_list.overviewcontent`。已修复 `scripts/migrate-news-to-directus.mjs` 优先级并 PATCH 线上 Directus id=19 摘要；(4) 新增 `scripts/audit-news-migration.mjs` 全量审计脚本，最终报告 `audit-report-1778387863746.json` 显示 48/48、errors=0、warnings=0；(5) 在 plan 增补 Phase 8 最终回归验证，要求页面切流前做数据审计 + PC/Mobile 新旧视觉对比 + 回滚验证。
+- 2026-05-10：**Phase 6 官网读接口适配完成（默认关闭）**。新增契约文档 `.codebuddy/plans/news-api-contract_20260510.md`；新增 `src/api/news.js` 统一新闻读取层，支持 `fetchLatestNews` / `fetchNewsList` / `fetchNewsDetail` / `fetchNewsCategories`，用 `VUE_APP_USE_DIRECTUS=true` 切 Directus，默认 false 走旧静态 JSON；Directus 请求失败会 fallback 静态 JSON。已接入 PC/Mobile 首页、PC/Mobile 新闻列表、PC/Mobile 新闻详情；`getImageUrl/getVideoUrl` 增加绝对 URL 兼容。验证：匿名 REST 当前 403（需 Public Role 只读或 BFF 后才能灰度）、`npm run build` 通过、`node scripts/audit-news-migration.mjs` 最新报告 `audit-report-1778395347338.json` 为 errors=0 / warnings=0。
+- 2026-05-10：**Phase 6 本地灰度问题修复**。用户本地开启 `VUE_APP_USE_DIRECTUS=true` 后出现 localhost → cms CORS，导致自动 fallback 静态 JSON；id=1 视频随后访问本地 `/video/News/...` 404。处理：`vue.config.js` 新增 `/directus-api` → `https://cms.mint-bio.cn` 开发代理、`/video` → `http://www.mint-bio.cn` 视频代理；`src/api/news.js` 开发环境默认 Directus URL 改 `/directus-api`，并把 Directus raw HTML 中 `https://www.mint-bio.cn/video/...` 规范化为同源 `/video/...`。验证：生产视频 HTTP 路径存在（`news1_video1.mov` 200，约 124.6MB）；`npm run build` 通过；最新数据审计 `audit-report-1778399670921.json` errors=0 / warnings=0。用户需重启 `npm run serve` 让代理生效。
+- 2026-05-10：**Phase 7 本地回归性能首轮优化**。用户反馈 Directus 模式列表缩略图刷新慢、详情页打开慢。定位：列表卡片直接加载 Directus 原图（典型 cover `news_1.png` 约 711KB），详情页同时拉全量“更多动态”48 条并触发大量缩略图加载。处理：`src/api/news.js` 为列表/详情/poster 分别添加 Directus transform（列表缩略图典型降至约 33KB WebP）；`NewsCardPreview.vue`、`MiNTNewsDetailSection.vue`、`MiNTNewsDetailCom.vue` 图片增加 `loading="lazy"`。曾短暂把详情页“更多动态”限制为 6 条，用户指出不能改变逻辑和表现，已恢复为全量 `fetchNewsList()`。验证：`npm run build` 通过；最新数据审计 `audit-report-1778401120845.json` errors=0 / warnings=0。
+- 2026-05-10：**今日归档停止点**。已将“Directus 图片支持 CDN”写入 Phase 7/8 与 `news-api-contract_20260510.md` 后续规划：生产建议 `www.mint-bio.cn/directus-api/assets/*` 同源代理到 `cms.mint-bio.cn/assets/*`，CDN 对带 query 的 transform 图片做长缓存，去除 `no-cache` 冲突并验证 CDN 命中。当前代码默认 `VUE_APP_USE_DIRECTUS=false`，不影响生产；本地 Directus 灰度仍需继续做 PC/Mobile 视觉回归。
+- 2026-05-10：**继续推进：生产切流方案文档与默认同源代理收口**。用户确认本地 Directus 重点页面已通过。新增 `.codebuddy/plans/news-production-cutover_20260510.md`，记录生产 `/directus-api` 同源代理、Directus 图片 CDN、灰度构建变量、回滚和验收清单；`src/api/news.js` 默认 Directus URL 从环境区分改为统一 `/directus-api`，使本地与生产最终拓扑一致。验证：`npm run build` 通过；最新数据审计 `audit-report-1778419577520.json` errors=0 / warnings=0。用户已在宝塔主站配置 `/directus-api` 反代并在阿里云 CDN 部署 HTTPS 证书；公网验证 `https://www.mint-bio.cn`、新闻 API、分类 API、图片 transform 均 200。随后用户配置 `/directus-api/assets/*` CDN 缓存规则；二次验证缩略图/详情图均 `X-Cache: HIT TCP_MEM_HIT`、`X-Swift-CacheTime: 2592000`，Directus 图片 CDN 缓存生效。下一步进入 `VUE_APP_USE_DIRECTUS=true` 灰度构建与 Phase 8 最终回归。
+- 2026-05-10：**灰度站缩略图缺失修复**。用户反馈部分新闻缩略图坏图，定位到 id=5（`news_5.jpg`，6240x4160，约 9.1MB）和 id=32（6732x4432）cover 原图过大，Directus 对其 `width/height` transform 返回 `400 ILLEGAL_ASSET_TRANSFORMATION`。修复：`src/api/news.js` 的列表/详情字段展开 `cover.id,width,height,filesize,type`，超过 `MAX_TRANSFORM_PIXELS=24000000` 的图片跳过 transform 直接用原图 URL，避免坏图；详情 image block 也改为携带 file 元信息判断。验证：模拟 48 篇 cover，id=5/id=32 fallback original，bad=0；`npm run build` 通过；最新审计 `audit-report-1778425643809.json` errors=0 / warnings=0。后续优化建议：在 Directus 后台把这两张超大 cover 替换为压缩版，以恢复 CDN transform 优化。
+- 2026-05-10：**detail/1 视频封面缺失修复**。用户反馈 `detail/1` 视频缺少缩略图。定位：Directus 中 raw video 保存为 `poster="/assets/9d9e8575-a80c-436e-bdc0-ec91e591bc77"`，而 `normalizeRichHtml()` 旧实现通过 placeholder 拼前缀，实际会生成 `/directus-api/assets/?width=960&format=webp&quality=80<uuid>` 这类错误 URL。修复：`src/api/news.js` 改为按 quoted `/assets/<uuid>` 正则重写，输出 `/directus-api/assets/<uuid>?width=960&format=webp&quality=80`；视频源仍从 `https://www.mint-bio.cn/video/...` 规范化为同源 `/video/...`。验证：poster transform 资源 `https://www.mint-bio.cn/directus-api/assets/9d9e8575-a80c-436e-bdc0-ec91e591bc77?width=960&format=webp&quality=80` 返回 `200 image/webp`；`src/api/news.js` lints=0；Directus 灰度变量下 `npm run build` 通过。
+- 2026-05-10：**id=32 详情页重复标题行修复**。用户反馈灰度站 id=32 标题下方多出一行同标题文案。定位：旧静态 `news_32.json` 的 `overviewcontent` 为空，迁移脚本曾把空摘要 fallback 为 `overviewtitle/title` 写入 `summary_zh`，Directus mode 前端再把 `summary_zh` 渲染到详情页 abstract，导致旧站没有的重复行。修复：`src/api/news.js` 增加 `normalizeSummary()`，当摘要为空或与标题完全相同时视为空摘要；`overviewtitle` 仍回退标题，`overviewcontent` 为空，保持旧站表现。同步修正 `scripts/migrate-news-to-directus.mjs`，未来迁移不再把标题写入空摘要字段。验证：`src/api/news.js` lints=0；`node --check scripts/migrate-news-to-directus.mjs` 通过；Directus 灰度变量下 `npm run build` 通过。
+- 2026-05-11：**今日最终归档 / 默认构建验证 / 全量 review 入口**。用户确认抽检结束但尚未全量检查，要求补充新闻新增、编辑、删除/归档、草稿、发布流程测试项，并启动 subagent 做客观全量 review。已在 Phase 8 新增 8.4 Directus 后台发布流程验收、8.5 全量客观 Review；subagent 只读 review 结论：可进入最终全量回归，但不建议直接切生产，P0 为新文章 `legacy_id` 为空导致详情链接风险、旧 48 篇 draft/delete 后静态 fallback 仍可能展示；P1/P2 详见会话摘要。默认构建验证：清除 `VUE_APP_USE_DIRECTUS` / `VUE_APP_DIRECTUS_URL` / `VUE_APP_DIRECTUS_ASSET_URL` 后执行 `npm run build` 通过；代码层 `USE_DIRECTUS = process.env.VUE_APP_USE_DIRECTUS === "true"`，未设置环境变量时生产包仍走旧静态 JSON 数据源。

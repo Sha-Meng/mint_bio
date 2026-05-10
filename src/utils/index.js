@@ -1,4 +1,6 @@
 export function getImageUrl(picPath) {
+    if (!picPath) return "";
+    if (/^(https?:)?\/\//.test(picPath) || picPath.startsWith("/")) return picPath;
     try {
         return require(`@/${picPath}`);
     } catch (e) {
@@ -7,6 +9,8 @@ export function getImageUrl(picPath) {
     }
 }
 export function getVideoUrl(videoPath) {
+    if (!videoPath) return "";
+    if (/^(https?:)?\/\//.test(videoPath) || videoPath.startsWith("/")) return videoPath;
     try {
         return require(`@/${videoPath}`);
     } catch (e) {

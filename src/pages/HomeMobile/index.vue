@@ -106,9 +106,10 @@
 <script>
 import BannerTitleAnimationMobile from "@/components/BannerTitleAnimationMobile";
 import Swiper from "@/components/Swiper";
-import axios from "axios";
 import { getImageUrl } from "@/utils/index";
 import { getText, currentLanguage } from "@/utils/language";
+import { fetchLatestNews } from "@/api/news";
+
 
 
 export default {
@@ -235,18 +236,13 @@ export default {
     },
     async getList() {
       try {
-        const response = await axios.get("/data/news_list.json");
-        if (response.status === 200) {
-          this.newsList = response.data.slice(0, 6);
-          this.newsList.forEach((news) => {
-            news.transform = 'scale(1)';
-          });
-        }
+        this.newsList = await fetchLatestNews(6);
       } catch (error) {
         console.error("Error fetching news data:", error);
       }
 
     }
+
   },
   mounted() {
     this.initializeProductList();

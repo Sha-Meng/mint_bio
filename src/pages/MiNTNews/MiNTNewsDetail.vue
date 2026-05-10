@@ -11,7 +11,8 @@
 <script>
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import axios from "axios";
+import { fetchNewsDetail, fetchNewsList } from "@/api/news";
+
 import MiNTNewsDetailCom from "@/components/MiNTNews/MiNTNewsDetailCom.vue";
 import MiNTNewsListPreview from "@/components/MiNTNews/MiNTNewsListPreview.vue";
 import MiNTDivider from "@/components/Divider";
@@ -33,15 +34,7 @@ export default {
 
     async function loadConfigById(configIdValue) {
       try {
-        const url = `/data/news_${configIdValue}.json`;
-        console.log('configIdValue', configIdValue);
-        const response = await axios.get(url);
-        if (response.status === 200) {
-          configData.value = response.data;
-        } else {
-          error.value = true;
-          errorMessage.value = `Failed to load config with status code: ${response.status}`;
-        }
+        configData.value = await fetchNewsDetail(configIdValue);
       } catch (err) {
         error.value = true;
         errorMessage.value = `Error loading config: ${err.message}`;
@@ -52,14 +45,13 @@ export default {
 
     async function fetchNewsData() {
       try {
-        const response = await axios.get("/data/news_list.json");
-        if (response.status === 200) {
-          newsList.value = response.data;
-        }
+        newsList.value = await fetchNewsList();
       } catch (error) {
+
         console.error("Error fetching news data:", error);
       }
     }
+
     // 监视 route.params.configId 的变化
     watch(
       () => route.params.configId,
