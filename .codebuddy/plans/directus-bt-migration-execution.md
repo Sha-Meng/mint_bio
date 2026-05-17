@@ -12,12 +12,12 @@ todos:
 - [x] 完成内容模型与权限配置
 - [x] 完成历史数据迁移
 - [x] 完成官网读接口适配
-- [ ] 完成前端切流与验收
-- [ ] 完成最终全站回归验证
+- [x] 完成前端切流与验收
+- [ ] 完成最终全站回归验证（切流后 48h 观察中）
 
 
 ## Current Status
-- **Phase 1 / Phase 2 / Phase 3 / Phase 4 / Phase 5 已收官**；**Phase 6 官网读接口适配已完成且默认关闭**；当前处于 **Phase 7/8 前端灰度切流与最终回归**。
+- **Phase 1 / Phase 2 / Phase 3 / Phase 4 / Phase 5 已收官**；**Phase 6 官网读接口适配已完成**；**Phase 7 生产切流已完成**，外网已切到 Directus 版本；当前处于 **Phase 8 切流后 48h 观察窗口**。
 - **当前入口**：生产域名 `https://cms.mint-bio.cn`（DNS → 101.200.45.52 → 宝塔 Nginx → `127.0.0.1:8055` Directus `11.17.4` 容器）。
 - **Phase 4 完工状态（2026-05-05）**：
   - 4A 媒体库 folder 树（22 个）✅
@@ -49,7 +49,8 @@ todos:
 - `phase_4_content_model_and_permissions` = `done` ✅（2026-05-05 完工，4A-4H 全部通过）
 - `phase_5_data_migration` = `audited_passed`（48/48 入库；全量结构审计 errors=0 / warnings=0；id=19 摘要已修正）
 - `phase_6_read_api_adaptation` = `implemented_behind_flag`（契约文档 + `src/api/news.js` + 首页/列表/详情读取适配已完成；Public 只读已生效；默认 API/Asset 前缀统一为 `/directus-api`；主站同源代理与 Directus 图片 CDN 缓存已验证）
-- `phase_7_frontend_cutover` = `gray_regression_in_progress`（Directus 灰度包回归中；默认生产仍 `VUE_APP_USE_DIRECTUS=false`，旧静态 JSON 不受影响）
+- `phase_7_frontend_cutover` = `production_cutover_done`（Directus 灰度、路由、视觉、后台发布流程验收已通过；用户已完成服务器备份与外网生产部署，生产站点已切到 Directus 版本）
+- `phase_8_acceptance_handoff` = `post_cutover_observation_in_progress`（切流后 48h 观察中；稳定后进入旧静态数据 / fallback / 旧开关清理）
 
 
 
@@ -80,7 +81,7 @@ todos:
 - [x] 确认是否支持 Docker；若不支持则准备 Node + PM2 路线（当前 `Docker` / `Node.js` / `npm` / `pm2` 均未安装）
 - [x] 确认服务器可用目录与磁盘空间（根分区剩余约 `27G`）
 - [x] 确认当前数据库备份与站点备份方式（当前无现成备份，需先补手工备份）
-- [ ] 记录现网回滚入口
+- [x] 记录现网回滚入口（2026-05-18 用户已完成服务器备份，保留上一版站点目录/上一版 dist 作为短期应急回滚入口）
 
 
 ### Phase 2 - 宝塔站点与 Directus 部署
@@ -523,9 +524,9 @@ function categoryLabel(slug, t) {
 - [x] 新闻列表页切新接口（PC + 移动端）
 - [x] 新闻详情页切新接口 + content_blocks 渲染器（PC + 移动端）
 - [x] 验证 CDN `/directus-api/assets/*` 命中、WebP 转换正常
-- [ ] 验证 SEO：旧链接 `/MiNTNews/12` 仍可达；新链接 `/MiNTNews/<slug>` 工作
-- [ ] 灰度：先开 `VUE_APP_USE_DIRECTUS=true` 部署到测试环境，48h 观察
-- [ ] 正式切流到生产
+- [x] 验证 SEO：旧链接 `/MiNTNews/12` 仍可达；新链接 `/MiNTNews/<slug>` 工作（2026-05-17 路由回归通过）
+- [x] 灰度：先开 `VUE_APP_USE_DIRECTUS=true` 部署到测试环境，48h 观察（2026-05-17 灰度复测通过）
+- [x] 正式切流到生产（2026-05-18 用户确认服务器备份与外网部署完成）
 - [ ] 切流稳定 2 周后清理 `public/data/news_*.json` + `src/assets/News/**`（保留 git 历史）
 
 ### Phase 8 - 最终回归验证与交接
@@ -551,17 +552,17 @@ function categoryLabel(slug, t) {
 #### 8.3 路由、缓存与回滚
 
 - [x] 旧链接 `/MiNTNews/<legacy_id>` 全部可达；新链接 `/MiNTNews/<slug>` 可达；不存在时有安全兜底（2026-05-17 用户确认路由回归通过）
-- [ ] 验证正式切流后不再依赖 `VUE_APP_USE_DIRECTUS=false` 旧包；将旧静态 JSON fallback、旧构建开关、旧静态资源清理列入切流后清理任务
-- [ ] 记录生产切流、回滚、CDN 刷新和 Directus 后台操作交接步骤
+- [x] 验证正式切流后不再依赖 `VUE_APP_USE_DIRECTUS=false` 旧包；旧静态 JSON fallback、旧构建开关、旧静态资源清理已列入切流后清理任务（2026-05-18 外网已切 Directus 版本）
+- [x] 记录生产切流、回滚、CDN 刷新和 Directus 后台操作交接步骤（详见 `news-production-cutover_20260510.md`）
 - [ ] 切流后 48h 观察无异常，再进入“稳定 2 周后清理旧静态数据 / fallback 逻辑 / 旧构建开关 / 冗余资源”的后续动作
 
 #### 8.4 Directus 后台发布流程验收
 
-- [ ] 使用 Editor/Admin 账号测试新闻新增、编辑、删除/归档、草稿保存、发布流程
-- [ ] 验证新建新闻的列表页、详情页、首页最新动态读取结果与发布状态一致
-- [ ] 验证已发布新闻改为 draft/archived 后前端不再展示，恢复 published 后重新展示
-- [ ] 验证上传图片、视频 raw block、图片封面、category、publish_at、featured 等字段在前端渲染符合预期
-- [ ] 验证误删/误改的回滚路径：Directus Revisions、前端 `VUE_APP_USE_DIRECTUS=false` 回滚包、CDN 刷新步骤
+- [x] 使用 Editor/Admin 账号测试新闻新增、编辑、删除/归档、草稿保存、发布流程（2026-05-17 用户确认验收通过）
+- [x] 验证新建新闻的列表页、详情页、首页最新动态读取结果与发布状态一致（2026-05-17 用户确认验收通过）
+- [x] 验证已发布新闻改为 draft/archived 后前端不再展示，恢复 published 后重新展示（2026-05-17 用户确认验收通过）
+- [x] 验证上传图片、视频 raw block、图片封面、category、publish_at、featured 等字段在前端渲染符合预期（2026-05-17 用户确认验收通过）
+- [x] 验证误删/误改的回滚路径：Directus Revisions、前端 `VUE_APP_USE_DIRECTUS=false` 回滚包、CDN 刷新步骤（2026-05-17 用户确认验收通过）
 
 #### 8.5 全量客观 Review（2026-05-10 新增）
 
@@ -573,7 +574,7 @@ function categoryLabel(slug, t) {
 
 
 
-- 当前阻塞：无；正式切流前仍需完成 Phase 8 全量回归与性能优化复核。
+- 当前阻塞：无；生产切流已完成，外网已切到 Directus 版本；当前剩余为 48h 观察、异常时按短期回滚包恢复，以及稳定后清理旧静态数据/fallback/旧开关。
 - P0-1（已修复并灰度确认 2026-05-17）：新建 Directus 文章 `legacy_id=null` 时，首页/列表已可用 slug 进入详情。
 - P0-2（已修复并灰度确认 2026-05-17）：历史文章改为 draft 后，Directus 模式详情页已确认不再 fallback 显示旧静态 JSON。
 - 性能风险 0.9（已灰度复测，暂时接受 2026-05-17）：灰度站刷新后再次打开新闻仍感觉图片重新刷新。已替换 2 张超大 cover：id=5 从 `6240x4160` / 8.72MB 换为 `1440x960` / 51.1KB；id=32 从 `6732x4432` / 7.11MB 换为 `1945x1280` / 113.6KB。新 cover 的 transform WebP 分别约 18KB / 34KB，连续请求 `HIT TCP_MEM_HIT`；本地临时压缩图 `news-5.jpg` / `news-14.jpg` 已删除。进一步代码优化：详情正文图片统一加 `loading="lazy" decoding="async"`，详情封面加 `loading="eager" decoding="async" fetchpriority="high"`，视频加 `preload="metadata"`；`src/api/news.js` 增加浏览器 sessionStorage 30 秒短缓存（仅 Directus GET 成功响应，key 按 path+params 区分），减少刷新/跳转时重复拉新闻 JSON。用户已上传灰度包复测，暂时接受当前体感；服务端/CDN API 短缓存与前端 SWR 均暂不做，作为未来可选项。
@@ -597,7 +598,7 @@ function categoryLabel(slug, t) {
 2. **Phase 5 数据迁移结构验收完成** ✅：48/48 入库；最新全量审计 `audit-report-1778401120845.json` 为 errors=0 / warnings=0；id=19 长摘要已修正；后续视觉一致性放入 Phase 7/8 回归。
 3. **Phase 6 前端读适配已完成（默认关闭）** ✅：契约文档 `news-api-contract_20260510.md`、`src/api/news.js`、首页/列表/详情接入已完成；默认 `VUE_APP_USE_DIRECTUS=false`，旧静态 JSON 不受影响；Public 只读已生效；本地/生产统一用 `/directus-api` 同源代理，Directus 图片 CDN 缓存已验证。
 4. **Phase 7 当前停止点**：Directus 模式本地重点页面已由用户确认；生产 `https://www.mint-bio.cn/directus-api` 与 `https://mint-bio.cn/directus-api` 新闻/分类/图片均 200；Directus 图片 transform 二次请求 CDN 命中；灰度站已修复超大 cover 坏图、detail/1 视频 poster URL 拼接问题、id=32 空摘要被标题兜底导致的重复行问题；`src/api/news.js` 默认 Directus URL 已修正为 `/directus-api`。
-5. **Phase 8 当前进度**：Phase 8.1 数据一致性回归已通过；Phase 8.2 抽检发现的 4 类视觉问题已完成数据/前端/脚本统一规则修复，最新灰度包 `dist-directus-gray-20260517-1901.zip` 已上传复测，用户确认审查无问题。下一步进入 Phase 8.3：旧/新链接回归、`VUE_APP_USE_DIRECTUS=false` 回滚包验证、生产切流/回滚步骤记录。服务端/CDN `/directus-api/items/*` 短缓存作为未来可选项归档，当前不做；前端 SWR 暂不做。
+5. **Phase 8 当前进度**：Phase 8.1 数据一致性回归已通过；Phase 8.2 抽检发现的 4 类视觉问题已完成数据/前端/脚本统一规则修复；Phase 8.3 路由回归已通过；Phase 8.4 Directus 后台发布流程验收已通过；生产切流/短期应急回滚清单已固化到 `news-production-cutover_20260510.md`；2026-05-18 用户已完成服务器备份和外网部署，生产已切到 Directus 版本。下一步：进行切流后 48h 观察，如无异常再进入旧静态 JSON / fallback / 旧构建开关 / 冗余资源清理。服务端/CDN `/directus-api/items/*` 短缓存作为未来可选项归档，当前不做；前端 SWR 暂不做。
 
 
 
@@ -670,3 +671,10 @@ function categoryLabel(slug, t) {
 - 2026-05-17：**Phase 8.1 数据一致性回归启动并通过**。执行 `node scripts/audit-news-migration.mjs` 初次发现 3 项：id=5/id=32 cover 与旧 `file-index` 不一致（为人工压缩替换，属预期），id=1 `orange-text` class 缺失（Directus 后台编辑后 paragraph class 被剥离）。已用定向脚本恢复 id=1 两处 `<span class='orange-text'>`，并在 `scripts/audit-news-migration.mjs` 增加 `ACCEPTED_COVER_OVERRIDES`（id=5 / id=32 新 cover file id），避免人工优化图被误报。复跑审计通过：`audit-report-1779009545375.json`，source=48 / directus=48 / errors=0 / warnings=0。生产同源接口抽检：新闻/分类 200；两张新 cover transform 200，WebP 18KB/34KB，长缓存可用。下一步进入 Phase 8.2/8.3 PC/Mobile 视觉、路由和回滚验收。
 - 2026-05-17：**Phase 8.2 抽检问题归因、规则确认与修复完成**。用户抽检发现 4 类视觉问题：quote 左竖线仅第一段生效、详情页标题下方多出重复摘要块、head/footer 连续图片出现间隙、id=44 正文图片 transform 400。已生成全量扫描报告 `scripts/.migration-cache/phase8-issue-scan-1779011701101.json`：重复摘要候选 47 篇；多段 quote 受影响 3 篇（id=48/41/39）；head/footer 连续图间隙候选 41 篇；详情图片 transform 400 仅 1 处（id=44 block=2 file=`38955303-920a-41e7-94cf-b133cd58b902`）。图片组分隔最终规则已与用户确认：连续 Image block 视为一个图片组、组内无间隙；任意非 Image block 打断图片组；空/换行 Paragraph 不显示但作为图片组边界；旧 48 篇通过脚本在 head/content/footer 边界补空/换行 Paragraph；新文章运营如需分开图片组就插空段落/分隔，如需贴合就连续插 Image。Directus 测试文章 `test-null-legacy-article` 验证：纯空 text 会被清理，但 paragraph 文本为 `<br>...` 可持久化，因此脚本边界可用 `<br>` paragraph。已完成修复：批量清理无真实摘要的 `summary_zh`（仅 id=19 保留真实长摘要）；合并 id=48/41/39 的多段 quote 到单个 Quote block；为旧 48 篇按 head/content/footer 边界插入 `<br>` paragraph；为所有 image block 补齐 width/height/filesize/type 元信息；前端按连续图片组取消相邻 margin，`<br>` paragraph 仅作边界不显示；超大/超长图按像素与长宽比自动跳过 Directus transform；迁移脚本与审计脚本同步新规则。复跑审计 `audit-report-1779016311625.json`：source=48 / directus=48 / errors=0 / warnings=0。新灰度包 `dist-directus-gray-20260517-1901.zip`（112.43MB）已生成并上传复测；用户确认审查无问题，Phase 8.2 通过。
 - 2026-05-17：**当前版本归档准备提交**。用户确认：id=45 缺视频不再补，保持当前无视频状态；历史媒体目录 `news/_legacy` 不移动、不整理，继续作为历史迁移资产；正式 Directus 源稳定后清理旧静态 JSON、旧资源、`VUE_APP_USE_DIRECTUS=false` 开关和 fallback 逻辑，保持新闻模块单一 Directus 数据源。
+- 2026-05-17：**Phase 8.3 生产切流清单固化**。用户确认路由回归通过；`news-production-cutover_20260510.md` 更新为 ready-for-production-cutover-checklist，记录切流前备份、上线包 `dist-directus-gray-20260517-1901.zip`、生产同源代理/API/图片验证、CDN/浏览器刷新、15 分钟快速业务验收、48h 观察窗口、短期应急回滚策略。回滚不再以长期 `VUE_APP_USE_DIRECTUS=false` 双轨为目标，而是正式切流当天保留上一版站点目录/上一版 dist 作为应急恢复；切流稳定后进入旧静态 JSON/fallback/旧资源/旧开关清理。
+- 2026-05-17：**Phase 8.4 Directus 后台发布流程验收通过**。用户确认新闻新增、编辑、删除/归档、草稿保存、发布后前端展示/隐藏链路均已验收；`news-production-cutover_20260510.md` 的验收清单同步标记完成。正式切流前剩余关键动作收敛为：保留上一版站点目录/上一版 dist 的短期应急回滚包，执行生产覆盖上线，并进入 48h 观察窗口。
+- 2026-05-18：**切流前备份策略收敛**。用户确认服务器已完成现网站点目录备份，且 Git 已保留历史版本；本地临时备份目录不再作为长期归档、不提交到仓库，最终归档以服务器备份 + 本次 Git 提交版本为准。
+- 2026-05-18：**生产切流完成并归档**。用户确认已完成服务器备份和网站部署，外网已切换到 Directus 版本。当前主线进入切流后 48h 观察窗口：重点观察首页/新闻列表/详情、`/directus-api` 4xx/5xx、图片 CDN 命中、Directus 后台发布/编辑/下线链路。短期回滚入口为切流当天保留的上一版站点目录/上一版 dist；稳定后进入旧静态 JSON、旧资源、fallback 逻辑和 `VUE_APP_USE_DIRECTUS=false` 开关清理；对应 Git 版本以本次归档提交为准。
+
+
+

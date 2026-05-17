@@ -1,7 +1,7 @@
 name: News Directus Production Cutover Plan
 phase: Phase 7/8 - 前端切流与最终回归
 date: 2026-05-10
-status: draft - proxy/CDN and P0 code fixes done, waiting for full regression
+status: production-cutover-completed - 48h observation in progress
 
 ## overview
 
@@ -11,9 +11,16 @@ status: draft - proxy/CDN and P0 code fixes done, waiting for full regression
 
 - Directus 后台：`https://cms.mint-bio.cn` → 宝塔 Nginx → `127.0.0.1:8055`。
 - Directus Public Policy：`news_articles` / `news_categories` / `directus_files` 已开放只读，匿名 REST 返回 200。
-- 本地 Directus 模式重点页面已由用户确认。
-- 前端默认仍为 `VUE_APP_USE_DIRECTUS=false`，不影响当前生产。
+- Directus 灰度包 `dist-directus-gray-20260517-1901.zip` 已上传复测，用户确认审查无问题。
+- Phase 8.1 数据一致性审计通过：`audit-report-1779016311625.json`，source=48 / directus=48 / errors=0 / warnings=0。
+- Phase 8.2 页面视觉回归通过：quote、摘要、连续图片、长图 transform 400 等抽检问题已修复。
+- Phase 8.3 路由回归通过：旧 legacy_id 链接、新 slug 链接、新建文章 slug 链接均已确认。
+- Directus 后台发布流程验收通过：新闻新增、编辑、删除/归档、草稿保存、发布后前端展示/隐藏链路均已确认。
+- 生产服务器现网站点目录备份已由用户完成；本地临时备份目录不保留、不提交，归档以服务器备份 + Git 历史版本为准。
+- 外网生产站点已切换到 Directus 版本，当前进入切流后 48h 观察窗口；对应 Git 版本以本次归档提交为准。
+- 主站 `/directus-api` 新闻/分类/图片代理已验证，Directus 图片 transform 可命中 CDN。
 - `src/api/news.js` 默认 Directus API/Asset 前缀为 `/directus-api`。
+- 正式切流稳定后，旧静态 JSON/fallback/`VUE_APP_USE_DIRECTUS=false` 兼容路径将清理，新闻模块最终保持单一 Directus 数据源。
 
 ## Production Target Topology
 
@@ -123,50 +130,100 @@ Cache-Control: no-cache
 
 处理策略：`VUE_APP_USE_DIRECTUS=true` 时区分“网络/API 异常”和“业务未命中”。只有网络错误、无响应或 5xx 等系统级异常允许 fallback 到旧静态 JSON；Directus 明确返回空列表、详情未命中、文章非 `published` 或 4xx 时不再 fallback 静态详情，详情页会清空旧内容，避免被下线的旧 48 篇重新展示。
 
-## Cutover Steps
+## Production Cutover Checklist
 
-1. 服务器侧新增 `/directus-api` 同源代理。
-2. 验证主站域名下可匿名访问：
-   ```text
-   https://www.mint-bio.cn/directus-api/items/news_articles?limit=1&fields=legacy_id,slug,title_zh,status
-   https://www.mint-bio.cn/directus-api/assets/<uuid>?width=800&format=webp
-   ```
-3. 配置 Directus 图片 CDN 缓存，并验证 CDN 命中。
-4. 本地执行：
-   ```pwsh
-   npm run build
-   node scripts/audit-news-migration.mjs
-   ```
-5. 使用 `VUE_APP_USE_DIRECTUS=true` 构建测试包。
-6. 部署到测试/灰度环境。
-7. 按 Phase 8 清单做 PC + Mobile 视觉回归。
-8. 观察 48h。
-9. 生产切流。
+### 0. 切流前备份
 
-## Rollback
+1. 在宝塔/服务器上备份当前生产站点目录（例如 `/www/wwwroot/mint-bio.cn`），保留为 `pre-directus-cutover-YYYYMMDD-HHmm`。
+2. 保留当前线上可用 dist 包或站点目录副本，作为短期应急回滚包。
+3. 不删除 Directus 数据、不删除旧 `public/data` 与旧资源；旧兼容路径等切流稳定后再统一清理。
 
-若灰度或生产异常：
+### 1. 上线包
 
-1. 重新构建：
-   ```env
-   VUE_APP_USE_DIRECTUS=false
-   ```
-2. 部署旧静态 JSON 数据源版本。
-3. 保留 Directus 数据，不删除；问题修复后可再次切换。
+1. 使用已通过灰度验收的 Directus 包：`dist-directus-gray-20260517-1901.zip`。
+2. 解压后确认包内根层级直接包含：`index.html`、`js/`、`css/`、`static/`、`reset.css`，不要多套一层 `dist/`。
+3. 覆盖生产站点目录。
+
+### 2. 生产同源代理与资源验证
+
+切流后立即验证：
+
+```text
+https://www.mint-bio.cn/directus-api/items/news_articles?limit=1&fields=legacy_id,slug,title_zh,status
+https://www.mint-bio.cn/directus-api/items/news_categories?limit=1&fields=slug,name_zh,status
+https://www.mint-bio.cn/directus-api/assets/b5215e42-9573-45a4-a56a-f3b626e26ea2?width=800&height=500&fit=cover&format=webp&quality=80
+https://www.mint-bio.cn/directus-api/assets/4a4b8dc5-806a-41d1-a888-296be91d683b?width=800&height=500&fit=cover&format=webp&quality=80
+```
+
+期望：API 返回 200；图片返回 200 + `image/webp` + 长缓存。
+
+### 3. CDN/浏览器刷新
+
+正式生产域名已在 CDN 账号中时，刷新：
+
+```text
+https://www.mint-bio.cn/
+https://www.mint-bio.cn/index.html
+https://www.mint-bio.cn/js/
+https://www.mint-bio.cn/css/
+https://www.mint-bio.cn/reset.css
+```
+
+如 CDN 不支持目录刷新，则刷新对应文件 URL；浏览器用无痕窗口或 Ctrl+F5 验证。
+
+### 4. 快速业务验收
+
+切流后 15 分钟内完成：
+
+```text
+/mintNews
+/mintNews/detail/1
+/mintNews/detail/news-1
+/mintNews/detail/48
+/mintNews/detail/news-48
+/mintNews/detail/test-null-legacy-article
+```
+
+重点检查：PC/Mobile 首页新闻区、列表、详情、视频、quote、连续图片、长图、slug 新文章。
+
+### 5. 观察窗口
+
+切流后观察 48h：
+
+- 新闻首页/列表/详情是否正常。
+- Directus 后台发布/编辑/下线是否符合预期。
+- `/directus-api` 是否有 4xx/5xx 异常。
+- 图片 CDN 是否持续命中。
+- 如无异常，再进入切流后清理任务。
+
+## Emergency Rollback
+
+正式切流当天保留短期应急回滚能力，但不再把旧静态 JSON 作为长期兼容路线。
+
+若生产异常：
+
+1. 立即恢复切流前备份的生产站点目录或上一版 dist 包。
+2. 刷新 CDN：首页、`index.html`、`js/`、`css/`、`reset.css`。
+3. 验证首页、新闻列表、新闻详情恢复到切流前状态。
+4. 保留 Directus 数据，不删除、不回滚 CMS 数据。
+5. 记录异常 URL、浏览器控制台错误、接口响应和截图，再修复后重新灰度。
+
+> 说明：`VUE_APP_USE_DIRECTUS=false` 旧包、静态 JSON fallback 和旧资源仅作为切流前历史兼容能力；正式 Directus 源稳定后会进入清理任务，不长期维护双数据源。
 
 ## Acceptance Checklist
 
-- [ ] `/directus-api/items/news_articles` 主站同源返回 200。
-- [ ] `/directus-api/items/news_categories` 主站同源返回 200。
-- [ ] `/directus-api/assets/<uuid>?width=800&format=webp` 主站同源返回 200。
-- [ ] Directus 图片响应头命中 CDN 或至少具备可缓存策略。
-- [ ] `VUE_APP_USE_DIRECTUS=true` 构建包 PC/Mobile 新闻页面视觉一致。
-- [ ] 旧链接 `/mintNews/detail/1` 可达。
-- [ ] 新链接 `/mintNews/detail/news-1` 可达。
-- [ ] id=48 / 1 / 11 / 19 / 30 样例通过，其中 id=1 需确认视频可播放且 poster 缩略图显示。
-- [ ] id=32 灰度回归：列表缩略图正常，详情页标题下方不再重复显示同标题摘要行。
-- [ ] Directus 后台流程：新闻新增、编辑、删除/归档、草稿保存、发布后前端展示/隐藏链路验证通过。
-
-
-- [ ] `VUE_APP_USE_DIRECTUS=false` 回滚包验证通过。
+- [x] `/directus-api/items/news_articles` 主站同源返回 200。
+- [x] `/directus-api/items/news_categories` 主站同源返回 200。
+- [x] `/directus-api/assets/<uuid>?width=800&format=webp` 主站同源返回 200。
+- [x] Directus 图片响应头命中 CDN 或至少具备可缓存策略。
+- [x] `VUE_APP_USE_DIRECTUS=true` 构建包 PC/Mobile 新闻页面视觉一致。
+- [x] 旧链接 `/mintNews/detail/1` 可达。
+- [x] 新链接 `/mintNews/detail/news-1` 可达。
+- [x] id=48 / 1 / 11 / 19 / 30 样例通过，其中 id=1 需确认视频可播放且 poster 缩略图显示。
+- [x] id=32 灰度回归：列表缩略图正常，详情页标题下方不再重复显示同标题摘要行。
+- [x] 新建 `legacy_id=null` 新闻后，首页/列表链接使用 slug 并可进入详情。
+- [x] 已发布历史新闻改为 draft 或删除后，Directus 模式详情不再 fallback 展示旧静态 JSON。
+- [x] Directus 后台流程：新闻新增、编辑、删除/归档、草稿保存、发布后前端展示/隐藏链路验证通过。
+- [x] 正式切流当天保留上一版站点目录/上一版 dist 的短期应急回滚包。
+- [ ] 切流稳定后清理旧静态 JSON、旧资源、fallback 逻辑和 `VUE_APP_USE_DIRECTUS=false` 开关。
 
