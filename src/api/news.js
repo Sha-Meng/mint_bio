@@ -1,15 +1,74 @@
 import axios from "axios";
 import { currentLanguage } from "@/utils/language";
 
-const DEFAULT_DIRECTUS_URL = process.env.NODE_ENV === "development" ? "/directus-api" : "https://cms.mint-bio.cn";
+const DEFAULT_DIRECTUS_URL = "/directus-api";
 const DIRECTUS_URL = (process.env.VUE_APP_DIRECTUS_URL || DEFAULT_DIRECTUS_URL).replace(/\/$/, "");
 const DIRECTUS_ASSET_URL = (process.env.VUE_APP_DIRECTUS_ASSET_URL || DIRECTUS_URL).replace(/\/$/, "");
 const USE_DIRECTUS = process.env.VUE_APP_USE_DIRECTUS === "true";
+const DIRECTUS_API_CACHE_TTL = 30 * 1000;
+const DIRECTUS_API_CACHE_PREFIX = "mintbio:directus-api:";
+
+class NewsNotFoundError extends Error {
+  constructor(key) {
+    super(`News article not found: ${key}`);
+    this.name = "NewsNotFoundError";
+  }
+}
+
+function shouldFallbackToStatic(error) {
+  if (error?.name === "NewsNotFoundError") return false;
+  const status = error?.response?.status;
+  if (!status) return true;
+  return status >= 500;
+}
+
+function canUseBrowserCache() {
+  return typeof window !== "undefined" && !!window.sessionStorage;
+}
+
+function getDirectusCacheKey(path, params) {
+  const search = new URLSearchParams(
+    Object.entries(params || {})
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, value]) => [key, String(value)])
+  ).toString();
+  return `${DIRECTUS_API_CACHE_PREFIX}${path}?${search}`;
+}
+
+function readDirectusCache(key) {
+  if (!canUseBrowserCache()) return null;
+  try {
+    const cached = window.sessionStorage.getItem(key);
+    if (!cached) return null;
+    const parsed = JSON.parse(cached);
+    if (!parsed || Date.now() > parsed.expiresAt) {
+      window.sessionStorage.removeItem(key);
+      return null;
+    }
+    return parsed.data;
+  } catch (error) {
+    window.sessionStorage.removeItem(key);
+    return null;
+  }
+}
+
+function writeDirectusCache(key, data) {
+  if (!canUseBrowserCache()) return;
+  try {
+    window.sessionStorage.setItem(key, JSON.stringify({
+      expiresAt: Date.now() + DIRECTUS_API_CACHE_TTL,
+      data,
+    }));
+  } catch (error) {
+    // sessionStorage 可能被禁用或空间不足，忽略即可
+  }
+}
 
 const THUMB_TRANSFORM = { width: 800, height: 500, fit: "cover", format: "webp", quality: 80 };
 const DETAIL_TRANSFORM = { width: 1200, format: "webp", quality: 85 };
 const POSTER_TRANSFORM = { width: 960, format: "webp", quality: 80 };
 const MAX_TRANSFORM_PIXELS = 24000000;
+const MAX_TRANSFORM_RATIO = 4;
 
 const COVER_FIELDS = ["cover.id", "cover.width", "cover.height", "cover.filesize", "cover.type"].join(",");
 
@@ -136,7 +195,8 @@ function canTransformAsset(asset) {
   const width = Number(asset.width || 0);
   const height = Number(asset.height || 0);
   if (!width || !height) return true;
-  return width * height <= MAX_TRANSFORM_PIXELS;
+  const ratio = Math.max(width / height, height / width);
+  return width * height <= MAX_TRANSFORM_PIXELS && ratio <= MAX_TRANSFORM_RATIO;
 }
 
 function getAssetUrl(fileIdOrUrl, transform = null) {
@@ -160,6 +220,14 @@ function hasHtml(value) {
   return /<[^>]+>/.test(String(value || ""));
 }
 
+function isImageGroupBreakText(value) {
+  const normalized = String(value || "")
+    .replace(/<br\s*\/?\s*>/gi, "")
+    .replace(/&nbsp;/gi, "")
+    .trim();
+  return normalized === "";
+}
+
 function normalizeRichHtml(html) {
   return String(html || "")
     .replace(/https?:\/\/www\.mint-bio\.cn\/video\//g, "/video/")
@@ -180,6 +248,7 @@ function blockToContent(block) {
     }
     case "paragraph": {
       const text = data.text || "";
+      if (isImageGroupBreakText(text)) return { imageGroupBreak: true };
       if (!text.trim()) return null;
       return hasHtml(text) ? { strongText: text } : { desc: text };
     }
@@ -209,6 +278,7 @@ function mapArticleToListItem(item) {
   return {
     id: item.legacy_id,
     slug: item.slug,
+    detailKey: item.slug || item.legacy_id,
     title,
     category: category.value,
     categorylabel: lang === "en" ? category.labelEn : category.labelZh,
@@ -253,7 +323,11 @@ async function fetchStaticNewsList({ limit, category } = {}) {
     list = list.filter((item) => item.category === category);
   }
   if (limit) list = list.slice(0, limit);
-  return list.map((item) => ({ ...item, transform: item.transform || "scale(1)" }));
+  return list.map((item) => ({
+    ...item,
+    detailKey: item.slug || item.id,
+    transform: item.transform || "scale(1)",
+  }));
 }
 
 async function fetchStaticNewsDetail(key) {
@@ -262,8 +336,14 @@ async function fetchStaticNewsDetail(key) {
 }
 
 async function directusGet(path, params = {}) {
+  const cacheKey = getDirectusCacheKey(path, params);
+  const cached = readDirectusCache(cacheKey);
+  if (cached !== null) return cached;
+
   const response = await axios.get(`${DIRECTUS_URL}${path}`, { params });
-  return response.data?.data;
+  const data = response.data?.data;
+  writeDirectusCache(cacheKey, data);
+  return data;
 }
 
 async function fetchDirectusNewsList({ limit, category } = {}) {
@@ -299,7 +379,7 @@ async function fetchDirectusNewsDetail(key) {
 
   const data = await directusGet("/items/news_articles", params);
   const item = Array.isArray(data) ? data[0] : null;
-  if (!item) throw new Error(`News article not found: ${key}`);
+  if (!item) throw new NewsNotFoundError(key);
   return mapArticleToDetail(item);
 }
 
@@ -326,6 +406,7 @@ export async function fetchNewsList(options = {}) {
   try {
     return await fetchDirectusNewsList(options);
   } catch (error) {
+    if (!shouldFallbackToStatic(error)) throw error;
     console.warn("Directus news list unavailable, fallback to static JSON:", error);
     return fetchStaticNewsList(options);
   }
@@ -340,6 +421,7 @@ export async function fetchNewsDetail(key, options = {}) {
   try {
     return await fetchDirectusNewsDetail(key);
   } catch (error) {
+    if (!shouldFallbackToStatic(error)) throw error;
     console.warn("Directus news detail unavailable, fallback to static JSON:", error);
     return fetchStaticNewsDetail(key);
   }
@@ -357,6 +439,7 @@ export async function fetchNewsCategories(options = {}) {
   try {
     return await fetchDirectusCategories();
   } catch (error) {
+    if (!shouldFallbackToStatic(error)) throw error;
     console.warn("Directus news categories unavailable, fallback to local categories:", error);
     return fetchNewsCategories({ source: "static" });
   }

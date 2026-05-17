@@ -76,7 +76,7 @@
     </div>
     <div class="new-section mobile-sector border-gradient">
       <div class="new-item" v-for="(item, index) in newsList" :key="index">
-        <router-link :to="`/mintNews/detail/${item.id}`">
+        <router-link :to="`/mintNews/detail/${item.detailKey || item.slug || item.id}`">
           <div class="img-box">
             <img :src="getImageUrl(item.pic)" alt="" class="new-img" />
 

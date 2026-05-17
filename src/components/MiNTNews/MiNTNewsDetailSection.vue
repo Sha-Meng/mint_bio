@@ -2,24 +2,25 @@
   <div class="section-container">
     <div class="section-head" v-if="props.info.headPic">
       <div v-for="pic in props.info.headPic" :key="pic">
-        <img :src="getImageUrl(pic)" />
+        <img :src="getImageUrl(pic)" loading="lazy" decoding="async" />
       </div>
     </div>
 
     <div class="section-content">
-      <div v-for="content in props.info.contents" :key="content.id">
-        <div v-if="content.pic" class="pic">
-          <img :src="getImageUrl(content.pic)" />
+      <div v-for="(content, index) in props.info.contents" :key="content.id || index">
+        <div v-if="content.imageGroupBreak" class="image-group-break"></div>
+        <div v-if="content.pic" :class="imageContentClass('pic', index)">
+          <img :src="getImageUrl(content.pic)" loading="lazy" decoding="async" />
         </div>
 		
-		<div v-if="content.nopaddingpic" class="nopaddingpic">
-		  <img :src="getImageUrl(content.nopaddingpic)" />
+		<div v-if="content.nopaddingpic" :class="imageContentClass('nopaddingpic', index)">
+		  <img :src="getImageUrl(content.nopaddingpic)" loading="lazy" decoding="async" />
 		</div>
 		
 		<div v-if="content.video" class="video">
-			<video width="100%" controls :poster="getImageUrl(content.poster)">
+			<video width="100%" controls preload="metadata" :poster="getImageUrl(content.poster)">
 			  <source :src="content.video" type="video/mp4" >
-			您的浏览器不支持 video 标签。
+			  您的浏览器不支持 video 标签。
 			</video>
 		</div>
 		
@@ -43,7 +44,7 @@
 		<div v-if="content.quote && content.quote.length" class="section-quote" :style="{ borderLeftColor: props.categorycolor }">
 		  <div v-for="(q, qi) in content.quote" :key="qi">
 		    <div v-if="q.pic" class="pic">
-		      <img :src="getImageUrl(q.pic)" loading="lazy" />
+		      <img :src="getImageUrl(q.pic)" loading="lazy" decoding="async" />
 		    </div>
 
 		    <div v-if="q.desc" class="section-desc">
@@ -60,7 +61,7 @@
 
     <div class="section-footer" v-if="props.info.footerPic">
       <div v-for="pic in props.info.footerPic" :key="pic">
-        <img :src="getImageUrl(pic)" />
+        <img :src="getImageUrl(pic)" loading="lazy" decoding="async" />
       </div>
     </div>
   </div>
@@ -68,7 +69,6 @@
 
 <script setup>
 import { getImageUrl } from "@/utils/index";
-import { getVideoUrl } from "@/utils/index";
 
 const props = defineProps({
   info: {
@@ -80,6 +80,21 @@ const props = defineProps({
     default: '#e75a29',
   },
 });
+
+function isImageContent(content) {
+  return Boolean(content && (content.pic || content.nopaddingpic));
+}
+
+function imageContentClass(baseClass, index) {
+  const contents = props.info.contents || [];
+  return [
+    baseClass,
+    {
+      'image-adjacent-prev': isImageContent(contents[index - 1]),
+      'image-adjacent-next': isImageContent(contents[index + 1]),
+    },
+  ];
+}
 </script>
 <style>
 .new-strongText {
@@ -135,9 +150,21 @@ const props = defineProps({
   .section-content {
     width: 100%;
 
+    .image-group-break {
+      display: none;
+    }
+
     .pic {
       width: 100%;
       margin: 50px 0px;
+
+      &.image-adjacent-prev {
+        margin-top: 0;
+      }
+
+      &.image-adjacent-next {
+        margin-bottom: 0;
+      }
 
       img {
         width: 100%;

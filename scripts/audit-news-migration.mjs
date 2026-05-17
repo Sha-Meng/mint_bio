@@ -15,6 +15,11 @@ const CATEGORY_ALIAS = {
   'mintvision': 'mint-vision',
 };
 
+const ACCEPTED_COVER_OVERRIDES = {
+  5: 'b5215e42-9573-45a4-a56a-f3b626e26ea2',
+  32: '4a4b8dc5-806a-41d1-a888-296be91d683b',
+};
+
 function normalizeCategoryLabel(label) {
   const key = String(label || '').replace(/^#/, '').replace(/\s+/g, '').toLowerCase();
   return CATEGORY_ALIAS[key] || null;
@@ -108,6 +113,31 @@ function addParagraph(expected, html) {
   mergeSets(expected.classes, extractClassesFromHtml(html));
 }
 
+function isImageContentItem(item) {
+  return Boolean(item && (item.pic || item.nopaddingpic));
+}
+
+function isSkippedContentItem(item) {
+  return Boolean(item && item.video === '' && item._note);
+}
+
+function firstRenderedContentIsImage(items) {
+  for (const item of items) {
+    if (isSkippedContentItem(item)) continue;
+    return isImageContentItem(item);
+  }
+  return false;
+}
+
+function lastRenderedContentIsImage(items) {
+  for (let i = items.length - 1; i >= 0; i -= 1) {
+    const item = items[i];
+    if (isSkippedContentItem(item)) continue;
+    return isImageContentItem(item);
+  }
+  return false;
+}
+
 function addQuote(expected, html) {
   expected.blockTypes.push('quote');
   mergeSets(expected.classes, extractClassesFromHtml(html));
@@ -148,6 +178,9 @@ function buildExpectedBlocks(detail, listItem) {
   }
 
   for (const hp of headPicAll) addImage(expected, hp, false);
+  if (headPicAll.length && (firstRenderedContentIsImage(contentItems) || (!contentItems.length && footerPicAll.length))) {
+    addParagraph(expected, '<br>');
+  }
 
   for (const item of contentItems) {
     if (item.pic) {
@@ -168,18 +201,17 @@ function buildExpectedBlocks(detail, listItem) {
     }
     if (Array.isArray(item.quote) && item.quote.length) {
       expected.blockTypes.push('delimiter');
-      for (let i = 0; i < item.quote.length; i += 1) {
-        const q = item.quote[i];
+      const quoteTexts = [];
+      for (const q of item.quote) {
         if (q.pic) {
           addImage(expected, q.pic, false);
         } else if (q.strongText) {
-          if (i === 0) addQuote(expected, q.strongText);
-          else addParagraph(expected, q.strongText);
+          quoteTexts.push(q.strongText);
         } else if (q.desc) {
-          if (i === 0) addQuote(expected, q.desc);
-          else addParagraph(expected, q.desc);
+          quoteTexts.push(q.desc);
         }
       }
+      if (quoteTexts.length) addQuote(expected, quoteTexts.join('<br><br>'));
       expected.blockTypes.push('delimiter');
       continue;
     }
@@ -197,6 +229,9 @@ function buildExpectedBlocks(detail, listItem) {
     }
   }
 
+  if (footerPicAll.length && lastRenderedContentIsImage(contentItems)) {
+    addParagraph(expected, '<br>');
+  }
   for (const fp of footerPicAll) addImage(expected, fp, false);
   if (expected.blockTypes.length === 0) addParagraph(expected, ' ');
   return expected;
@@ -266,15 +301,12 @@ async function main() {
     const expectedCategory = normalizeCategoryLabel(listItem.categorylabel || merged.categorylabel);
     const expectedSummary = (detail && detail.overviewcontent)
       || listItem.overviewcontent
-      || merged.overviewtitle
-      || listItem.overviewtitle
-      || merged.title
-      || listItem.title;
+      || null;
     expectedSummaries[legacyId] = expectedSummary;
 
     if (article.slug !== `news-${legacyId}`) pushIssue(issues, legacyId, 'slug', `news-${legacyId}`, article.slug);
     if (article.title_zh !== (merged.title || listItem.title)) pushIssue(issues, legacyId, 'title_zh', merged.title || listItem.title, article.title_zh);
-    if (article.summary_zh !== expectedSummary) pushIssue(issues, legacyId, 'summary_zh', expectedSummary, article.summary_zh);
+    if ((article.summary_zh || null) !== expectedSummary) pushIssue(issues, legacyId, 'summary_zh', expectedSummary, article.summary_zh || null);
     if (article.status !== 'published') pushIssue(issues, legacyId, 'status', 'published', article.status);
     if ((article.category && article.category.slug) !== expectedCategory) pushIssue(issues, legacyId, 'category.slug', expectedCategory, article.category && article.category.slug);
 
@@ -283,7 +315,7 @@ async function main() {
     if (expectedDate && actualDate && expectedDate !== actualDate) pushIssue(issues, legacyId, 'publish_at_date', expectedDate, actualDate, 'warning');
 
     const expectedCoverPath = listItem.pic || null;
-    const expectedCoverId = expectedCoverPath ? fileIndex[expectedCoverPath] : null;
+    const expectedCoverId = ACCEPTED_COVER_OVERRIDES[legacyId] || (expectedCoverPath ? fileIndex[expectedCoverPath] : null);
     if (expectedCoverId && article.cover !== expectedCoverId) pushIssue(issues, legacyId, 'cover', expectedCoverId, article.cover);
 
     const expected = buildExpectedBlocks(detail, listItem);

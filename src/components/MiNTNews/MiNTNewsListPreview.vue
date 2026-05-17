@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="newslist">
-    <div v-for="news in props.filteredNews" :key="news.id" class="newsbox hover-scale-transition"
+    <div v-for="news in props.filteredNews" :key="news.detailKey || news.slug || news.id" class="newsbox hover-scale-transition"
       @mousemove="cardHover(news)" @mouseleave="cardLeave(news)" :style="{ transform: news.transform }">
       <!-- 展示新闻内容 -->
       <NewsCardPreview :info="news"> </NewsCardPreview>

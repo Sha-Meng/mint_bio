@@ -25,17 +25,11 @@ status: draft / implemented behind feature flag
 
 ## Known Server Requirement
 
-2026-05-10 本机验证匿名访问：
+2026-05-10 后续已收敛：
 
-- `GET https://cms.mint-bio.cn/items/news_articles?...` 返回 `403 FORBIDDEN`
-- `GET https://cms.mint-bio.cn/items/news_categories?...` 返回 `403 FORBIDDEN`
-
-因此正式启用 `VUE_APP_USE_DIRECTUS=true` 前，必须二选一：
-
-1. 在 Directus Public Role 上只开放 `published` 新闻与分类的只读权限；或
-2. 增加薄 BFF，由服务器持有只读 token，前端只访问官网同源 `/api/news/*`。
-
-MVP 当前代码不把 Directus token 暴露给浏览器。
+- Directus Public Role 已对 `published` 新闻、分类和文件开放只读，匿名 REST 返回 200。
+- 本地与生产均优先通过主站同源 `/directus-api` 访问 Directus，避免浏览器跨域 CORS。
+- `src/api/news.js` 默认 API/Asset 前缀为 `/directus-api`；MVP 当前代码不把 Directus token 暴露给浏览器。
 
 ## Environment Variables
 
@@ -109,6 +103,8 @@ MVP 当前代码不把 Directus token 暴露给浏览器。
 
 - 旧 `legacy_id`：`48`
 - 新 `slug`：`news-48`
+
+Directus 模式下，列表项会提供 `detailKey = slug || legacy_id`，首页/列表卡片应优先使用 `detailKey` / `slug` 生成详情链接，避免新文章 `legacy_id=null` 时无法跳转。
 
 返回：旧 `news_<id>.json` 兼容对象。
 
@@ -184,7 +180,7 @@ GET /items/news_categories
 - `node scripts/audit-news-migration.mjs` 输出 `source=48 directus=48 errors=0 warnings=0`。
 - `VUE_APP_USE_DIRECTUS=false` 下页面保持旧静态数据。
 - `VUE_APP_USE_DIRECTUS=true` 且 Directus 可匿名读时，列表 / 首页 / 详情能读取 Directus。
-- Directus 403 或网络失败时，页面回退旧静态 JSON，不空白。
+- Directus 网络错误、代理无响应或 5xx 时页面可回退旧静态 JSON；Directus 明确业务未命中、非 `published` 或 4xx 时不回退，避免下线文章被旧静态数据重新展示。
 
 ### Visual regression
 

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/mintNews/detail/${props.info.id}`" class="news-preview-container">
+  <router-link :to="`/mintNews/detail/${props.info.detailKey || props.info.slug || props.info.id}`" class="news-preview-container">
     <div class="pic">
       <img :src="getImageUrl(props.info.pic)" loading="lazy" />
 

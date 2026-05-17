@@ -1,7 +1,7 @@
 name: News Directus Production Cutover Plan
 phase: Phase 7/8 - 前端切流与最终回归
 date: 2026-05-10
-status: draft - waiting for server-side proxy/CDN configuration
+status: draft - proxy/CDN and P0 code fixes done, waiting for full regression
 
 ## overview
 
@@ -108,6 +108,20 @@ Cache-Control: no-cache
 /directus-api/assets/<uuid>?width=800&height=500&fit=cover&format=webp&quality=80
 /directus-api/assets/<uuid>?width=1200&format=webp&quality=85
 ```
+
+## P0 Fix Plan Before Cutover
+
+### P0-1 新文章 `legacy_id=null` 链接风险
+
+状态：代码已修复，待灰度验收。
+
+处理策略：列表/首页卡片的详情链接统一优先使用 `detailKey` / `slug`，仅历史 1~48 兼容场景继续保留 `legacy_id`。验收时需新增或使用一篇 `legacy_id=null` 的 Directus 测试文章，确认列表、首页、详情新链接均可达。
+
+### P0-2 draft/delete 后静态 fallback 误展示风险
+
+状态：代码已修复，待灰度验收。
+
+处理策略：`VUE_APP_USE_DIRECTUS=true` 时区分“网络/API 异常”和“业务未命中”。只有网络错误、无响应或 5xx 等系统级异常允许 fallback 到旧静态 JSON；Directus 明确返回空列表、详情未命中、文章非 `published` 或 4xx 时不再 fallback 静态详情，详情页会清空旧内容，避免被下线的旧 48 篇重新展示。
 
 ## Cutover Steps
 

@@ -84,7 +84,7 @@
         @mousemove="cardHover(item)" @mouseleave="cardLeave(item)" :style="{ transform: item.transform }">
         <div class="img-box">
           <img :src="getImageUrl(item.pic)" alt="" class="new-img" />
-          <router-link :to="`/mintNews/detail/${item.id}`">
+          <router-link :to="`/mintNews/detail/${item.detailKey || item.slug || item.id}`">
             <div class="overlay">
               <div class="overlay-content">
                 <div class="button-more">{{ getText('common.buttons.learnMore') }}</div>

@@ -33,6 +33,10 @@ export default {
     const newsList = ref([]);
 
     async function loadConfigById(configIdValue) {
+      loading.value = true;
+      error.value = false;
+      errorMessage.value = "";
+      configData.value = null;
       try {
         configData.value = await fetchNewsDetail(configIdValue);
       } catch (err) {

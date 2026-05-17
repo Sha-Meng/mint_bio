@@ -345,6 +345,30 @@ function makeImageBlock(fileId, { stretched = false, caption = '', meta = {} } =
 function makeParagraphBlock(text) {
   return { id: nanoid(10), type: 'paragraph', data: { text: cleanInlineHtml(text) } };
 }
+function makeImageGroupBreakBlock() {
+  return makeParagraphBlock('<br>');
+}
+function isImageContentItem(item) {
+  return Boolean(item && (item.pic || item.nopaddingpic));
+}
+function isSkippedContentItem(item) {
+  return Boolean(item && item.video === '' && item._note);
+}
+function firstRenderedContentIsImage(items) {
+  for (const item of items) {
+    if (isSkippedContentItem(item)) continue;
+    return isImageContentItem(item);
+  }
+  return false;
+}
+function lastRenderedContentIsImage(items) {
+  for (let i = items.length - 1; i >= 0; i -= 1) {
+    const item = items[i];
+    if (isSkippedContentItem(item)) continue;
+    return isImageContentItem(item);
+  }
+  return false;
+}
 function makeQuoteBlock(text, captionText = '') {
   return {
     id: nanoid(10),
@@ -414,6 +438,9 @@ async function buildBlocks(raw, uploader, report, legacyId, coverPriorityPath) {
     const fid = await uploader.upload(headPicAll[i]);
     if (fid) blocks.push(makeImageBlock(fid, { stretched: false }));
   }
+  if (headPicAll.length && (firstRenderedContentIsImage(contentItems) || (!contentItems.length && footerPicAll.length))) {
+    blocks.push(makeImageGroupBreakBlock());
+  }
 
   // contents[] 顺序映射
   for (const item of contentItems) {
@@ -453,19 +480,18 @@ async function buildBlocks(raw, uploader, report, legacyId, coverPriorityPath) {
     // 3. quote[] 数组
     if (Array.isArray(item.quote) && item.quote.length) {
       blocks.push(makeDelimiterBlock());
-      for (let i = 0; i < item.quote.length; i++) {
-        const q = item.quote[i];
+      const quoteTexts = [];
+      for (const q of item.quote) {
         if (q.pic) {
           const fid = await uploader.upload(q.pic);
           if (fid) blocks.push(makeImageBlock(fid, { stretched: false }));
         } else if (q.strongText) {
-          if (i === 0) blocks.push(makeQuoteBlock(q.strongText));
-          else blocks.push(makeParagraphBlock(q.strongText));
+          quoteTexts.push(q.strongText);
         } else if (q.desc) {
-          if (i === 0) blocks.push(makeQuoteBlock(q.desc));
-          else blocks.push(makeParagraphBlock(q.desc));
+          quoteTexts.push(q.desc);
         }
       }
+      if (quoteTexts.length) blocks.push(makeQuoteBlock(quoteTexts.join('<br><br>')));
       blocks.push(makeDelimiterBlock());
       continue;
     }
@@ -488,6 +514,9 @@ async function buildBlocks(raw, uploader, report, legacyId, coverPriorityPath) {
   }
 
   // footerPic → 末尾 image blocks
+  if (footerPicAll.length && lastRenderedContentIsImage(contentItems)) {
+    blocks.push(makeImageGroupBreakBlock());
+  }
   for (const fp of footerPicAll) {
     const fid = await uploader.upload(fp);
     if (fid) blocks.push(makeImageBlock(fid, { stretched: false }));
