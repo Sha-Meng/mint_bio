@@ -107,25 +107,7 @@ function imageContentClass(baseClass, index) {
 	font-weight: bold;
 }
 
-.orange-text {
-  color: #e75a29;
-  font-weight: 800;
-
-}
-
-.blue-text {
-  color: #2d5bf6;
-  font-weight: 800;
-
-}
-
-.green-text {
-  color: #74d887;
-  font-weight: 800;
-}
-
-.blue-green-text {
-  color: #6bbea9;
+.mint-color-shortcode {
   font-weight: 800;
 }
 </style>

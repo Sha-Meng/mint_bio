@@ -4,8 +4,8 @@ description: >
   This skill should be used when the user is planning, executing, resuming, or troubleshooting
   the mint_bio news backend migration to a self-hosted Directus setup on Tencent Cloud with BaoTa
   (BT) panel. It covers BaoTa-based deployment, Nginx/site configuration, MySQL/database reuse,
-  media directory setup, CDN integration, phased migration execution, blocker handling, and
-  long-term progress tracking across multiple sessions.
+  media directory setup, CDN integration, phased migration execution, news color shortcode handling,
+  blocker handling, and long-term progress tracking across multiple sessions.
 ---
 
 # Directus BT Migration Coach
@@ -20,6 +20,7 @@ Trigger this skill when any of the following is true:
 
 - The user wants to execute or continue the `Directus + 阿里云服务器/数据库 + 工程外媒体目录 + CDN` migration
 - The user mentions `宝塔`, `BaoTa`, `BT 面板`, `Directus`, `Nginx`, `MySQL`, `CDN`, `部署`, `迁移`, `切流`, or `回滚`
+- The user mentions Directus news body color handling, `[color=...]...[/color]` shortcodes, legacy `.orange-text` / `<font color>` / `span style=color` cleanup, or the paused editor color palette route
 - The user asks for step-by-step deployment guidance, migration guidance, environment setup, or progress continuation
 - The user wants to know what to do next in the migration or how to resume unfinished work
 
@@ -34,6 +35,7 @@ Treat the following as the default confirmed baseline unless the user explicitly
 - Scope: focus on the news module MVP, not a general page builder or large content platform
 - Cost constraint: avoid new subscription-based services
 - Operation mode: browser-based maintenance for non-technical operators
+- News color long-tail decision: keep Directus `11.17.4` native `input-block-editor`; use frontend-rendered color shortcodes for text color instead of deploying a custom editor palette Interface
 
 ## Required Files
 
@@ -142,6 +144,19 @@ Default rollback principle:
 - keep old static JSON flow available until the new CMS flow is verified
 - avoid deleting old data sources during the first cutover
 - prefer configuration switches over destructive replacement
+
+### Step 8: Handle News Color Shortcodes
+
+When working on the 4.8 news body color long-tail task, use the confirmed shortcode route:
+
+- Keep `news_articles.content_blocks_zh` and `content_blocks_en` on Directus native `input-block-editor`; do not switch them to `Editor.js Brand Palette` or another custom palette Interface.
+- Treat previous custom Interface experiments as paused research only, because real `news_articles` editing showed toolbar / conversion menu floating-layer issues.
+- Use `[color=<safe-color>]...[/color]` as the operator-facing syntax in normal paragraph / quote text.
+- Support flexible but validated color values: HEX, controlled `rgb()/rgba()/hsl()/hsla()`, and documented brand aliases. Reject arbitrary CSS such as `url()`, `var()`, `expression`, semicolons, or extra style declarations.
+- Render valid shortcodes in the frontend mapper before `desc` / `strongText` branching so colored text reaches the existing `v-html` path; leave malformed shortcodes visible as original text.
+- Normalize old news content to the new shortcode form. Convert legacy `.orange-text`, `.blue-text`, `.green-text`, `.blue-green-text`, `<font color>`, and `span style=color` color semantics to `[color=...]...[/color]` instead of preserving multiple authoring formats.
+- Require dry-run, backup, apply, and audit steps before writing normalized content back to Directus. The final audit must report zero legacy color authoring patterns in `news_articles.content_blocks_zh/en`, except explicitly documented manual-review exclusions.
+- After data normalization and acceptance, remove frontend legacy color compatibility selectors and keep only the shortcode rendering path plus documented special Raw HTML exclusions.
 
 ## BaoTa-Specific Guidance
 

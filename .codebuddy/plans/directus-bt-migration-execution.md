@@ -36,7 +36,7 @@ todos:
   - **5.5 全量结构审计完成** ✅：新增并执行 `scripts/audit-news-migration.mjs`，逐篇比对旧 JSON 与 Directus 48 篇的 slug/title/summary/category/cover/block 类型序列/image fileId/stretched/raw/html class；先发现唯一差异 id=19 `summary_zh` 未取 `news_list.overviewcontent`，已 PATCH 修正；最终报告 `scripts/.migration-cache/audit-report-1778387635035.json`：source=48 / directus=48 / errors=0 / warnings=0。
   - 5.6 抽检结论：id=48 的 `richHtml` 已作为 3 个 `raw` block 入库，后台 Block Editor 不一定视觉渲染 inline style / class，前端需在 Phase 7 渲染器用 `v-html` 保真；id=11 的 `nopaddingpic` 已审计为 14 个 `image.stretched=true`；id=30 不是“无正文 list 兜底”，源文件 `news_30.json` 实际存在完整正文与 15 张图，原抽检说明已校正。
   - 5.7 _en 字段缺失清单（48 篇全空，前端 fallback 中文不阻塞）⏳ 待运营按 P0/P1/P2 优先级人工补
-- **Phase 4 收尾长尾**（不阻塞）：4.8 文本颜色高亮调色盘扩展（已归档候选方案 + 落地步骤）；上传默认目录动态路径模板。
+- **Phase 4 收尾长尾**（不阻塞）：4.8 文本颜色已明确改为短代码路线：保持 Directus `11.17.4` 原生 `input-block-editor`，由前端渲染 `[color=<色值>]...[/color]`，并要求把旧新闻中的 `.orange-text` / `<font color>` / `span style=color` 统一迁移为短代码后做零残留审计；上传默认目录动态路径模板仍待后续。
 - **当前运行方式**：`src/api/news.js` 已统一默认 Directus API/Asset 前缀为 `/directus-api`，并固定走 Directus REST；生产不显式配置 `VUE_APP_DIRECTUS_URL` 时也不会直连 `cms.mint-bio.cn`；旧静态 JSON fallback 已移除。
 
 
@@ -285,72 +285,69 @@ news/2026/01 ~ 12/
 - [x] **4E 完成**：建 `Editor` 角色 + `Editor Policy`（宽松版：news_articles 全权 / news_categories 仅读 / directus_files CRUD / 系统集合 App Access Minimum）
 - [x] 建好 4.5 的 folder 树（22 个 folder：`news/_legacy` + `news/2024` + `news/2025/01-12` + `news/2026/01-05`）
 - [ ] **长尾（不阻塞 Phase 5）**：在 `news_articles` 上配置上传默认目录为 `news/{当前年}/{当前月}/`（cover 字段 + Block Editor Image 字段当前 Folder = `news` 顶层，需测 Directus 是否支持动态路径模板，不支持则用 Flow 或前端 hook 兜底）
-- [ ] **长尾（不阻塞 Phase 5；详见 4.8 节）**：为 Block Editor `paragraph` tool 加文本颜色高亮按钮，让运营像 Word 那样选中文字点调色盘改色，对齐工程现有 4 色（`.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text`）+ 加粗 `.strong-text` 共 5 个预设
+- [ ] **长尾（不阻塞 Phase 5；详见 4.8 节）**：新闻正文颜色能力已改为短代码方案。保持正式字段使用原生 `input-block-editor`，新增前端 `[color=<安全色值>]...[/color]` 渲染能力，并提供旧新闻颜色写法统一迁移脚本 / 审计，最终要求 Directus 新闻正文不残留 `.orange-text`、`<font color>`、`span style=color` 等旧作者写法。
 - [x] **4F+4G 完成**：`editor-test@mint-bio.cn` 测试账号 + Editor Role 绑定 + 6 case 端到端验收全过
 - [x] **4H 完成**：双语策略放宽——`title_en` / `content_blocks_en` 改为可空（Nullable 留勾 + 取消 Required），前端 lang=en 走 fallback 中文（Phase 6/7 mapper 实现，见 plan 6.0）
 
-#### 4.8 文本颜色高亮（运营友好交互，长尾决策）
+#### 4.8 文本颜色高亮（短代码路线，长尾决策）
 
-**[2026-05-05 决策]** Phase 5 真迁 3 篇验收时发现：旧数据里 `<span class='orange-text'>...</span>` 等内联色彩 HTML 虽然能在 Directus Block Editor 中**保存原样不丢**（已用 API 直接 GET 验证 P1/P3 数据 `hasSpan: true`），但后台编辑器**视觉上不显示颜色**且**没有"调色盘"按钮**让运营选中文字改色（EditorJS 默认 paragraph 的内联工具栏只有 Bold/Italic/Underline/Link 四个）。运营如要新加色彩强调，必须切到 Raw HTML 块手写 `<span>`，对非技术运营不友好。
+**[2026-05-23 阶段性归档]** 第三方 `Editor.js Brand Palette` 自定义 Interface 已在测试字段 `palette_test.block` 中验证可用，但切到 `news_articles` 真实旧文章 / 测试文章场景后出现工具栏、转换菜单浮层错乱和选项不消失等 UI 兼容问题。因此正式字段继续保持 Directus `11.17.4` 原生 `input-block-editor`，不再把自定义调色盘 Interface 作为正式路线。
 
-**目标**：让运营像 Word 一样，选中正文 → 浮出工具栏点"调色盘" → 选橙/蓝/绿/灰绿 4 色之一即可上色，与工程现有 `.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text` CSS 类样式 100% 对齐（详见 `src/components/MiNTNews/MiNTNewsDetailSection.vue` 全局样式块）。
+**[2026-05-24 决策]** 颜色能力改为短代码方案：运营在普通 paragraph / quote 文本中输入 `[color=<安全色值>]...[/color]`，前端映射时转换为受控 inline HTML 展示。该方案不改 Directus 后台、不改 `news_articles` 表结构、不部署自定义 Interface，并支持比旧 4 品牌色更灵活的色值。
 
-##### 候选方案
+##### 短代码语法
 
-| 方案 | 实现难度 | 运维成本 | 与现有数据兼容性 | 备注 |
-|---|---|---|---|---|
-| **A. Fork `dimitrov-adrian/directus-extension-editorjs-interface` + 集成 `editorjs-text-color-plugin@^2.0.4`** | 中 | 中（自维护 fork） | ✅ 完全兼容（同一个 paragraph block，data.text 仍是 HTML） | **首选**。npm 包活跃维护，4+ 项目使用，开箱即用调色盘 UI。改 5 行 EditorJS tools 注册代码，npm pack → 装到服务器 `/data/mintbio/directus/extensions/`。 |
-| B. 上游提 PR 等合并 | 低 | 极低 | 同 A | 上游响应未知，时间不可控 |
-| C. 切换到 `formfcw/directus-extension-flexible-editor`（TipTap） | 高 | 高 | ❌ 不兼容（TipTap 数据模型与 EditorJS 完全不同），需重写迁移脚本 | 不推荐——会推翻 4D 已落地的 Block Editor 方案 |
-| D. 写完全自定义的 inline tool（不依赖 npm 包） | 高 | 中 | 同 A | 重复造轮子 |
+```text
+[color=#e75a29]重点文字[/color]
+[color=#AABBCC]任意 HEX 颜色[/color]
+[color=rgb(255,0,0)]RGB 红色[/color]
+[color=rgba(255,0,0,0.8)]半透明红色[/color]
+[color=hsl(210,80%,50%)]HSL 色值[/color]
+[color=orange]品牌橙别名[/color]
+```
 
-**选 A**。
+##### 安全边界
 
-##### 落地步骤（Phase 5 全量迁完后启动）
+- 支持 HEX、受控 `rgb()/rgba()/hsl()/hsla()` 和已文档化品牌别名。
+- 拒绝任意 CSS 注入：`url()`、`var()`、`expression`、分号、额外 style 声明等均不得进入输出 HTML。
+- 非法、未闭合、嵌套异常短代码按原文显示，不生成破碎 HTML。
+- 第一版优先覆盖 paragraph / quote；Raw HTML 是否解析短代码需单独确认。
 
-1. 本机 `git clone https://github.com/dimitrov-adrian/directus-extension-editorjs-interface`，切到与服务器版本一致的 tag
-2. `npm i editorjs-text-color-plugin@^2.0.4` 加为依赖
-3. 在源码 `src/interface.vue` 的 EditorJS tools 注册段补：
-   ```js
-   import ColorPlugin from 'editorjs-text-color-plugin';
-   // ...
-   tools: {
-     // ... 已有 9 个 tool
-     Color: {
-       class: ColorPlugin,
-       config: {
-         colorCollections: ['#e75a29', '#2d5bf6', '#74d887', '#6bbea9'], // orange/blue/green/blue-green
-         defaultColor: '#e75a29',
-         type: 'text',
-         customPicker: true,
-       },
-     },
-     Marker: {
-       class: ColorPlugin,
-       config: { type: 'marker', defaultColor: '#FFBF00' }, // 可选，二级高亮
-     },
-   }
-   ```
-4. `npm run build` → 产出 `dist/` 目录
-5. 服务器 `/data/mintbio/directus/extensions/` 下放 fork 版本目录，重启 Directus 容器
-6. **数据兼容性验证**：开 1 篇老文章，确认现有 `<span class='orange-text'>` 仍正确渲染颜色；选中一段新文字，调色盘改橙色，保存，API GET 检查 `data.text` 是否含 `<span style="color: #e75a29">` 或 `<span class="orange-text">`（取决于插件输出策略，需测）
-7. **前端样式对齐**：如果插件输出的是 inline `style="color: #..."` 而非 `class="..."`，则 `MiNTNewsDetailSection.vue` 用 `v-html` 直接渲染即可（颜色 inline 生效）；如果输出 `class`，则 class 名称需与 `.orange-text` 等对齐（可能需要调整插件配置或加映射 CSS）
+##### 旧新闻统一改造要求
 
-##### 暂时的兼容策略（在长尾完成前）
+旧新闻中已经存在的颜色作者写法必须统一迁移为短代码，不作为长期兼容格式残留：
 
-- **历史 48 篇**：当冷数据，运营不动，前端 `v-html` 渲染颜色 100% 正常 ✅
-- **新文章**：
-  - 默认用 Bold（粗体）做强调，不依赖颜色 — 满足 80% 场景
-  - 必须用品牌橙强调时，运营切到 Raw HTML 块手写 `<span class='orange-text'>...</span>`（README 已在 4.8 完成后会同步加运营文档）
-  - 极个别场景找不到出口，请技术补单条
+| 旧写法 | 新写法 |
+|---|---|
+| `<span class="orange-text">text</span>` | `[color=#e75a29]text[/color]` |
+| `<span class="blue-text">text</span>` | `[color=#2d5bf6]text[/color]` |
+| `<span class="green-text">text</span>` | `[color=#74d887]text[/color]` |
+| `<span class="blue-green-text">text</span>` | `[color=#6bbea9]text[/color]` |
+| `<font color="#xxxxxx">text</font>` | `[color=#xxxxxx]text[/color]` |
+| `<span style="color: ...">text</span>` | `[color=<规范化色值>]text[/color]` |
 
-##### 验收标准（4.8 落地后）
+执行要求：
 
-- [ ] 运营在 Block Editor 中新建 paragraph，选中文字 → 工具栏出现调色盘按钮
-- [ ] 4 色按钮颜色与工程 `.orange-text` / `.blue-text` / `.green-text` / `.blue-green-text` 完全一致
-- [ ] 任选一篇老文章打开，原 `<span class='orange-text'>` 渲染颜色正确（视觉验证）
-- [ ] 任选一篇老文章打开，选中已有彩色文字 → 改成另一色 → 保存 → API GET 检查 `data.text` HTML 仍合法
-- [ ] 前端站点（Phase 7 切流后）展示对照——同一篇文章新旧两种 span 都能正确渲染颜色
+1. 先实现前端短代码渲染，保证新格式可展示。
+2. 提供 Directus 内容规范化脚本，支持 `dry-run` / `apply`。
+3. 写入前必须备份 Directus 数据库或至少导出待改文章内容。
+4. apply 后执行专项审计，要求 `news_articles.content_blocks_zh/en` 中不再残留 `.orange-text/.blue-text/.green-text/.blue-green-text`、`<font color>`、`style=color` 等旧颜色作者写法；复杂 Raw HTML 无法安全转换时列入人工复核清单。
+5. 前端旧兼容样式只作为过渡安全网，不再作为运营写作规范。
+
+##### 验收标准
+
+- [x] `src/api/news.js` 在 paragraph / quote 映射阶段支持 `[color=...]...[/color]`，并在 `hasHtml()` / `desc` 分流前完成转换。
+- [x] 短代码解析工具严格校验色值并转义普通文本，非法短代码原样显示。
+- [x] 旧新闻颜色 class / `<font color>` / `span style=color` 规范化脚本已实现，支持 dry-run 统计并可安全转换为短代码。
+- [x] 2026-05-24 已执行 dry-run：`articles=51 / changed=29 / manual=3 / residues=3`，报告 `scripts/.migration-cache/color-shortcode-report-1779557267011.json`；3 条人工复核均来自 `legacy_id=48` 的 `raw` HTML 复杂内联样式块。
+- [x] 2026-05-24 用户确认：`legacy_id=48` 的 `content_blocks_zh.blocks[18/21/24].data.html` 是特殊设计 Raw HTML，保留原内联样式，不纳入本次短代码改造和零残留阻塞。
+- [x] 2026-05-24 排除特殊 Raw HTML 后重新 dry-run：`articles=51 / changed=29 / manual=0 / residues=0`，报告 `scripts/.migration-cache/color-shortcode-report-1779557652343.json`。
+- [x] 2026-05-24 已执行 `--apply`：`articles=51 / changed=29 / manual=0 / residues=0`，报告 `scripts/.migration-cache/color-shortcode-report-1779557864027.json`；自动备份 `scripts/.migration-cache/color-shortcode-backup-1779557861238.json`。
+- [x] apply 后专项审计通过：`--audit-only` 返回 `articles=51 / changed=0 / manual=0 / residues=0`，报告 `scripts/.migration-cache/color-shortcode-report-1779557896436.json`；再次 dry-run 返回 `changed=0 / manual=0 / residues=0`，报告 `scripts/.migration-cache/color-shortcode-report-1779557906149.json`。
+- [x] 官网新闻详情页验收通过：新短代码、旧内容改造结果、无颜色普通段落均正常显示（2026-05-24 用户确认）。
+- [x] 归档清理完成：删除两个 `directus-native-block-editor-color-interface_*(未完成).md` 临时计划，归档为 `news-color-shortcode_20260524.md`；清理旧 `.orange-text/.blue-text/.green-text/.blue-green-text`、`<font color>`、固定 `span style=color` 前端兼容样式，仅保留 `.mint-color-shortcode`。
+- [x] 本地构建验证通过：`npm run build` 成功（仅既有 Browserslist / `::v-deep` / 资源体积 warning）；新增 JS 定向 ESLint 通过。
+- [x] 自定义 `Editor.js Brand Palette` 不再作为正式字段路线；正式字段保持原生 `input-block-editor`。
 
 
 ---
@@ -574,7 +571,7 @@ function categoryLabel(slug, t) {
 
 
 
-- 当前阻塞：无；Directus 迁移主线已收官。生产新闻模块已固定为 Directus 单一数据源；旧静态 JSON、旧新闻图片资源、`VUE_APP_USE_DIRECTUS` 双轨开关与失败 fallback 已移除。后续风险主要是 Directus/API/同源反代成为新闻模块运行必需依赖；短期回滚仍依赖服务器备份或 Git 历史恢复旧包。
+- 当前阻塞：无；Directus 迁移主线已收官。生产新闻模块已固定为 Directus 单一数据源；旧静态 JSON、旧新闻图片资源、`VUE_APP_USE_DIRECTUS` 双轨开关与失败 fallback 已移除。后续风险主要是 Directus/API/同源反代成为新闻模块运行必需依赖；短期回滚仍依赖服务器备份或 Git 历史恢复旧包。4.8 调色盘属于后台体验长尾：前端兼容与部署文档已补，实际调色盘按钮仍需在服务器部署自定义 Interface 后才能验收。
 - P0-1（已修复并灰度确认 2026-05-17）：新建 Directus 文章 `legacy_id=null` 时，首页/列表已可用 slug 进入详情。
 - P0-2（已修复并灰度确认 2026-05-17）：历史文章改为 draft 后，Directus 模式详情页已确认不再 fallback 显示旧静态 JSON。
 - 性能风险 0.9（已灰度复测，暂时接受 2026-05-17）：灰度站刷新后再次打开新闻仍感觉图片重新刷新。已替换 2 张超大 cover：id=5 从 `6240x4160` / 8.72MB 换为 `1440x960` / 51.1KB；id=32 从 `6732x4432` / 7.11MB 换为 `1945x1280` / 113.6KB。新 cover 的 transform WebP 分别约 18KB / 34KB，连续请求 `HIT TCP_MEM_HIT`；本地临时压缩图 `news-5.jpg` / `news-14.jpg` 已删除。进一步代码优化：详情正文图片统一加 `loading="lazy" decoding="async"`，详情封面加 `loading="eager" decoding="async" fetchpriority="high"`，视频加 `preload="metadata"`；`src/api/news.js` 增加浏览器 sessionStorage 30 秒短缓存（仅 Directus GET 成功响应，key 按 path+params 区分），减少刷新/跳转时重复拉新闻 JSON。用户已上传灰度包复测，暂时接受当前体感；服务端/CDN API 短缓存与前端 SWR 均暂不做，作为未来可选项。
@@ -599,7 +596,7 @@ function categoryLabel(slug, t) {
 3. **Phase 8 最终回归与切流后清理完成** ✅：`src/api/news.js` 已移除 `VUE_APP_USE_DIRECTUS` 旧双轨开关、静态 JSON 读取函数和 Directus 失败 fallback；新闻模块固定 Directus 单一数据源。
 4. **旧资源清理完成** ✅：删除 `public/data/news_*.json` / `public/data/news_list.json` / `public/data/news_1.data`；删除 `src/assets/News/**` 中已迁移新闻图片，仅保留仍被详情页背景引用的 `Grid.png`；历史可从 Git 恢复。
 5. **验证结论** ✅：`npm run build` 通过；`src/` 内已无 `/data/news_*`、`news_list.json`、`VUE_APP_USE_DIRECTUS` 或旧新闻资源运行时引用（除 `Grid.png`）。
-6. **后续长尾（不阻塞主线）**：运营按需补 `_en` 字段；id=45 缺视频确认不再补；Directus 历史媒体目录 `news/_legacy` 保留；4.8 颜色调色盘、上传默认目录动态模板作为后续优化任务。
+6. **后续长尾（不阻塞主线）**：运营按需补 `_en` 字段；id=45 缺视频确认不再补；Directus 历史媒体目录 `news/_legacy` 保留；4.8 颜色调色盘已完成前端兼容与部署文档，下一步是在 Directus 服务器部署 `Editor.js Brand Palette` 自定义 Interface 并做后台验收；上传默认目录动态模板作为后续优化任务。
 
 ## Execution Log
 - 2026-03-22：完成新闻系统现状分析，确认新闻后台改造方向。
@@ -656,6 +653,14 @@ function categoryLabel(slug, t) {
 - 2026-05-18：**切流前备份策略收敛**。用户确认服务器已完成现网站点目录备份，且 Git 已保留历史版本；本地临时备份目录不再作为长期归档、不提交到仓库，最终归档以服务器备份 + 本次 Git 提交版本为准。
 - 2026-05-18：**生产切流完成并归档**。用户确认已完成服务器备份和网站部署，外网已切换到 Directus 版本。当前主线进入切流后 48h 观察窗口：重点观察首页/新闻列表/详情、`/directus-api` 4xx/5xx、图片 CDN 命中、Directus 后台发布/编辑/下线链路。短期回滚入口为切流当天保留的上一版站点目录/上一版 dist；稳定后进入旧静态 JSON、旧资源、fallback 逻辑和 `VUE_APP_USE_DIRECTUS=false` 开关清理；对应 Git 版本以本次归档提交为准。
 - 2026-05-23：**Phase 8 收官 / Directus 单源化清理完成**。继续迁移时先跑最终审计，发现 id=1 因后台二次编辑导致 1 段 paragraph 缺失且 `.orange-text` class 被剥离；已用源 `public/data/news_1.json` 恢复该段与两处 orange 高亮，复跑 `node scripts/audit-news-migration.mjs` 通过：`audit-report-1779523427685.json`，source=48 / directus=48 / errors=0 / warnings=0。随后将 `src/api/news.js` 固定为 Directus 单一数据源，移除 `VUE_APP_USE_DIRECTUS` 旧双轨开关、静态 JSON 读取函数与 Directus 失败 fallback；删除 `public/data/news_*.json` / `news_list.json` / `news_1.data`，删除 `src/assets/News/**` 旧新闻资源并保留 `Grid.png`；清理 `MiNTNewsList.vue` 中旧静态图片注释。验证：生产同源新闻/分类 API 与 assets transform 返回 200；`npm run build` 通过；`src/` 内无旧静态新闻运行时引用。**清理后说明**：`scripts/audit-news-migration.mjs` 依赖已删除的旧 `public/data/news_list.json` 与 `news_*.json`，因此清理后再次运行出现 ENOENT 属预期；最终客观审计以清理前报告 `audit-report-1779523427685.json` 为准。用户确认旧链接兼容不再作为验收要求，其他线上验证均已通过。Directus 迁移主线收官，后续仅剩 `_en` 补文、4.8 颜色调色盘、上传默认目录动态模板等长尾优化。
+- 2026-05-23：**4.8 调色盘优化补充**。本地完成两项可落地准备：(1) `MiNTNewsDetailSection.vue` 前端详情页新增对 `editorjs-text-color-plugin` 常见输出 `<font color="...">` 与 `<span style="color: ...">` 的 4 色兼容样式，并兼容旧品牌色 `#FF7200/#144BE1/#007D30`；(2) 新增 `scripts/DIRECTUS-COLOR-PALETTE-README.md`，固化自定义 `Editor.js Brand Palette` Interface 的 fork 补丁、构建部署、后台切换、验收与回滚步骤。由于当前会话无服务器执行边界，Directus 后台真正出现调色盘按钮仍待在服务器部署扩展后验收。
+- 2026-05-23：**4.8 调色盘扩展本地构建完成**。按用户要求在 `D:\UGit\directus-extension-editorjs-mint-color` 克隆 `dimitrov-adrian/directus-extension-editorjs-interface` 并改造为独立 Interface：`id=extension-editorjs-mint-color`、`name=Editor.js Brand Palette`、默认 tools/choices 增加 `color`、`get-tools.ts` 集成 `editorjs-text-color-plugin@2.0.4`，固定 4 色 `#e75a29/#2d5bf6/#74d887/#6bbea9` 且 `customPicker=false`。本地 `npm install && npm i --save-dev editorjs-text-color-plugin@2.0.4 && npm run build` 成功，产物 `dist/index.js` 已生成；同时整理上传包 `D:\UGit\directus-extension-editorjs-mint-color-upload\` 与 `D:\UGit\directus-extension-editorjs-mint-color-upload.zip`（仅含 `package.json` + `dist/index.js`，避免上传 `node_modules`）。下一步：上传 zip 到服务器 `/data/mintbio/directus/extensions/directus-extension-editorjs-mint-color/`，修权限并重启 Directus 后做后台测试字段验收。
+- 2026-05-23：**4.8 调色盘服务器部署调试进展**。服务器已完成数据库与扩展目录备份，扩展上传到 `/data/mintbio/directus/extensions/directus-extension-editorjs-mint-color/` 并被 Directus 加载；期间修复三类兼容问题：`host` 从 `^v9.9.0` 改为 `^11.0.0` 以匹配 Directus `11.17.4`、修复构建产物中 `sche is not defined`（源 `src/index.ts` 尾部截断）、兼容 EditorJS 实例无 `focus/destroy` 方法导致的 Create Item 运行时错误。用户反馈当前 `Editor.js Brand Palette` 已出现；下一步仅在 `palette_test.block` 测试字段完成输入、选中文字、4 色上色、保存刷新验证，暂不切正式 `news_articles.content_blocks_zh/en`。
+- 2026-05-23：**4.8 调色盘阶段性归档 / 暂停正式切换**。用户反馈 `palette_test.block` 测试字段已通过；随后在 `news_articles` 测试文章场景验证时发现真实旧文章编辑界面出现工具栏/转换菜单浮层错乱、选项不消失等 UI 兼容问题。该测试发生在测试文章，不影响正式正文内容。当前结论：`Editor.js Brand Palette` 可保留为测试扩展，但**不用于正式 `news_articles.content_blocks_zh/en`**；正式字段应保持或回滚为 Directus 原生 `input-block-editor`。4.8 作为长尾优化暂停，后续若继续需要调色盘，应优先研究对原生 `input-block-editor` 的更小范围增强或其他官方兼容方案，而不是替换整套 EditorJS Interface。
+
+
+
+
 
 
 

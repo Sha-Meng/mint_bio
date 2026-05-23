@@ -1,4 +1,5 @@
 import axios from "axios";
+import { renderColorShortcodes } from "@/utils/colorShortcode";
 import { currentLanguage } from "@/utils/language";
 
 const DEFAULT_DIRECTUS_URL = "/directus-api";
@@ -223,6 +224,13 @@ function normalizeRichHtml(html) {
     );
 }
 
+function mapInlineTextContent(text) {
+  const value = String(text || "");
+  const colorResult = renderColorShortcodes(value, { preserveHtml: hasHtml(value) });
+  if (colorResult.changed) return { strongText: colorResult.html };
+  return hasHtml(value) ? { strongText: value } : { desc: value };
+}
+
 function blockToContent(block) {
   const data = block?.data || {};
 
@@ -236,13 +244,13 @@ function blockToContent(block) {
       const text = data.text || "";
       if (isImageGroupBreakText(text)) return { imageGroupBreak: true };
       if (!text.trim()) return null;
-      return hasHtml(text) ? { strongText: text } : { desc: text };
+      return mapInlineTextContent(text);
     }
     case "quote": {
       const text = data.text || "";
       if (!text.trim()) return null;
       return {
-        quote: [hasHtml(text) ? { strongText: text } : { desc: text }],
+        quote: [mapInlineTextContent(text)],
       };
     }
     case "raw": {
