@@ -4,7 +4,6 @@ import { currentLanguage } from "@/utils/language";
 const DEFAULT_DIRECTUS_URL = "/directus-api";
 const DIRECTUS_URL = (process.env.VUE_APP_DIRECTUS_URL || DEFAULT_DIRECTUS_URL).replace(/\/$/, "");
 const DIRECTUS_ASSET_URL = (process.env.VUE_APP_DIRECTUS_ASSET_URL || DIRECTUS_URL).replace(/\/$/, "");
-const USE_DIRECTUS = process.env.VUE_APP_USE_DIRECTUS === "true";
 const DIRECTUS_API_CACHE_TTL = 30 * 1000;
 const DIRECTUS_API_CACHE_PREFIX = "mintbio:directus-api:";
 
@@ -13,13 +12,6 @@ class NewsNotFoundError extends Error {
     super(`News article not found: ${key}`);
     this.name = "NewsNotFoundError";
   }
-}
-
-function shouldFallbackToStatic(error) {
-  if (error?.name === "NewsNotFoundError") return false;
-  const status = error?.response?.status;
-  if (!status) return true;
-  return status >= 500;
 }
 
 function canUseBrowserCache() {
@@ -131,12 +123,6 @@ const CATEGORY_MAP = {
     color: "#007D30",
   },
 };
-
-function shouldUseDirectus(source = "auto") {
-  if (source === "directus") return true;
-  if (source === "static") return false;
-  return USE_DIRECTUS;
-}
 
 function getLang() {
   return currentLanguage.value === "en" ? "en" : "zh";
@@ -310,31 +296,6 @@ function mapArticleToDetail(item) {
   };
 }
 
-function staticDetailKey(key) {
-  const normalized = String(key || "");
-  const match = normalized.match(/^news-(\d+)$/);
-  return match ? match[1] : normalized;
-}
-
-async function fetchStaticNewsList({ limit, category } = {}) {
-  const response = await axios.get("/data/news_list.json");
-  let list = response.data || [];
-  if (category && category !== "all") {
-    list = list.filter((item) => item.category === category);
-  }
-  if (limit) list = list.slice(0, limit);
-  return list.map((item) => ({
-    ...item,
-    detailKey: item.slug || item.id,
-    transform: item.transform || "scale(1)",
-  }));
-}
-
-async function fetchStaticNewsDetail(key) {
-  const response = await axios.get(`/data/news_${staticDetailKey(key)}.json`);
-  return response.data;
-}
-
 async function directusGet(path, params = {}) {
   const cacheKey = getDirectusCacheKey(path, params);
   const cached = readDirectusCache(cacheKey);
@@ -402,49 +363,21 @@ async function fetchDirectusCategories() {
 }
 
 export async function fetchNewsList(options = {}) {
-  if (!shouldUseDirectus(options.source)) return fetchStaticNewsList(options);
-  try {
-    return await fetchDirectusNewsList(options);
-  } catch (error) {
-    if (!shouldFallbackToStatic(error)) throw error;
-    console.warn("Directus news list unavailable, fallback to static JSON:", error);
-    return fetchStaticNewsList(options);
-  }
+  return fetchDirectusNewsList(options);
 }
 
 export async function fetchLatestNews(limit = 6, options = {}) {
   return fetchNewsList({ ...options, limit });
 }
 
-export async function fetchNewsDetail(key, options = {}) {
-  if (!shouldUseDirectus(options.source)) return fetchStaticNewsDetail(key);
-  try {
-    return await fetchDirectusNewsDetail(key);
-  } catch (error) {
-    if (!shouldFallbackToStatic(error)) throw error;
-    console.warn("Directus news detail unavailable, fallback to static JSON:", error);
-    return fetchStaticNewsDetail(key);
-  }
+export async function fetchNewsDetail(key) {
+  return fetchDirectusNewsDetail(key);
 }
 
-export async function fetchNewsCategories(options = {}) {
-  if (!shouldUseDirectus(options.source)) {
-    return Object.entries(CATEGORY_MAP).map(([slug, meta]) => ({
-      slug,
-      value: meta.value,
-      label: getLang() === "en" ? meta.labelEn : meta.labelZh,
-      color: meta.color,
-    }));
-  }
-  try {
-    return await fetchDirectusCategories();
-  } catch (error) {
-    if (!shouldFallbackToStatic(error)) throw error;
-    console.warn("Directus news categories unavailable, fallback to local categories:", error);
-    return fetchNewsCategories({ source: "static" });
-  }
+export async function fetchNewsCategories() {
+  return fetchDirectusCategories();
 }
 
 export function isDirectusNewsEnabled() {
-  return USE_DIRECTUS;
+  return true;
 }

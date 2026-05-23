@@ -100,58 +100,6 @@ const getHighlightColor = (value) => {
   }
 };
 
-// 假设这是你的新闻数据数组
-// const newsItems = ref([
-//   {
-//     id: 1,
-//     title: "低豆粕日粮助力全面绿色转型",
-//     category: "production",
-//     categorylabel: "#MiNT产品力",
-//     categorycolor: "#144BE1",
-//     time: "2024/09/21",
-//     pic: require("@/assets/News/news01.png"),
-//     overviewtitle: "向“新”而创——元素驱动的生物智造之路",
-//     overviewcontent:
-//       "“高起点、小而精、研究型”，以这种办学定位成长起来的西湖大学，既聚焦“从0到1”关键核心技术突破，又不忘为师生搭建产业化平台。让“实验室”牵手“生产线”，让更多科研成果转变成产业“成品”，生物合成科技公司元素驱动就是其中的佼佼者。",
-//   },
-//   {
-//     id: 2,
-//     title: "新闻2",
-//     category: "production",
-//     categorylabel: "#MiNT产品力",
-//     categorycolor: "#144BE1",
-//     time: "2024/09/21",
-//     pic: require("@/assets/News/news02.png"),
-//   },
-//   {
-//     id: 3,
-//     title: "周扬区长莅临元素驱动调研指导",
-//     category: "runtime",
-//     categorylabel: "#MiNT进行时",
-//     categorycolor: "#FF7200",
-//     time: "2024/09/21",
-//     pic: require("@/assets/News/news03.png"),
-//   },
-//   {
-//     id: 4,
-//     title: "中央首次部署！加快经济社会发展全面绿色转型",
-//     category: "vision",
-//     categorylabel: "#MiNT vision",
-//     categorycolor: "#007D30",
-//     time: "2024/09/21",
-//     pic: require("@/assets/News/news04.png"),
-//   },
-//   {
-//     id: 5,
-//     title: "姚高员市长调研重点产业赛道企业，莅临元素驱动指导",
-//     category: "runtime",
-//     categorylabel: "#MiNT进行时",
-//     categorycolor: "#FF7200",
-//     time: "2024/09/21",
-//     pic: require("@/assets/News/news03.png"),
-//   },
-// ]);
-
 const newsList = ref([]);
 
 
