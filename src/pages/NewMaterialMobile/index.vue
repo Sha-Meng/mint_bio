@@ -158,15 +158,14 @@ export default {
           { url: "assets/images/product-6.jpg" },
         ],
       ];
-      const titles = ["PiX 膜袋材料", "PiX3D 打印材料", "PiX 注塑材料", "PiX 地膜材料", "PiX 纤维材料"];
-      const nums = ["膜袋材料", "3D 打印材料", "注塑材料", "地膜材料", "纤维材料"];
+      const moduleCards = getText('newMaterial.moduleCards') || [];
       // i === 1 对应 PiX 3D 打印材料卡片，按需求隐藏 applyTexts(吸管/杯材/瓶材) 与 advantages(耐温耐冷...) 文字
       return cats.map((cat, i) => ({
-        title: titles[i],
+        title: moduleCards[i]?.title || "",
         isRow: true,
         topItems: ["Affordable", "Infinity"],
         introductionTitle1: "PiX",
-        introductionTitle2: nums[i],
+        introductionTitle2: moduleCards[i]?.shortName || "",
         applyTexts: i === 1 ? [] : cat.title,
         advantages: i === 1 ? [] : cat.advantages,
         imageUrl: (imageUrls[i] || []).map((img, j) => ({

@@ -189,6 +189,9 @@
         "submitSuccess": "Submitted successfully",
         "formatError": "Request format error, please check your input"
       }
+    },
+    "media": {
+      "videoUnsupported": ""
     }
   },
   "vision": {
@@ -314,6 +317,13 @@
   },
   "newMaterial": {
     "features": ["全新化学结构", "可生物降解", "可回收", "高性能", "高适配性", "成本可控"],
+    "moduleCards": [
+      { "title": "", "shortName": "" },
+      { "title": "", "shortName": "" },
+      { "title": "", "shortName": "" },
+      { "title": "", "shortName": "" },
+      { "title": "", "shortName": "" }
+    ],
     "applicationCase": "应用",
     "applicationCase2": "案例",
     "vipshop": "唯品会",
@@ -387,6 +397,7 @@
   },
   "knotWeed": {
     "importIntro": "每年大豆进口量近",
+    "importAmount": "",
     "importUnit": "吨",
     "importPurpose": "进口大豆用于提供饲用蛋白",
     "title1": "节豆日粮",
@@ -607,6 +618,12 @@
     "subtitle": "实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。",
     "downloadBrochure": "下载品牌手册",
     "all": "全部",
-    "moreNews": "更多动态"
+    "moreNews": "更多动态",
+    "categories": {
+      "runtime": "#MiNT Runtime",
+      "products": "#MiNT Products",
+      "biomanufacturing": "#MiNT Biomanufacturing",
+      "vision": "#MiNT Vision"
+    }
   }
 }

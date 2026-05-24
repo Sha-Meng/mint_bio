@@ -8,13 +8,17 @@ import "@/assets/font/font.css";
 import directives from './utils/directives'
 import { i18nPlugin, initializeLanguage } from './utils/language'
 
-initializeLanguage()
+async function bootstrap() {
+  await initializeLanguage()
 
-const app = createApp(App)
+  const app = createApp(App)
 
-app.use(router)
-app.use(ElementPlus)
-app.use(directives)
-app.use(i18nPlugin)
-app.mount('#app')
+  app.use(router)
+  app.use(ElementPlus)
+  app.use(directives)
+  app.use(i18nPlugin)
+  app.mount('#app')
+}
+
+bootstrap()
 

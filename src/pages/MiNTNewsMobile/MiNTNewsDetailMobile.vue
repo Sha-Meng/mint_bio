@@ -4,7 +4,7 @@
     </MiNTNewsDetailCom>
     <MiNTDivider :content="'+'"></MiNTDivider>
     <div class="more-dynamic">
-      更多动态
+      {{ getText('news.moreNews') }}
     </div>
     <MiNTNewsListMobile class="news-preview" :filteredNews="newsList" :isDetail="true" />
   </div>
@@ -14,6 +14,7 @@
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { fetchNewsDetail, fetchNewsList } from "@/api/news";
+import { getText } from "@/utils/language";
 
 import MiNTNewsDetailCom from "@/components/MiNTNews/MiNTNewsDetailCom.vue";
 import MiNTNewsListMobile from "@/components/MiNTNews/MiNTNewsListMobile.vue";
@@ -84,6 +85,7 @@ export default {
       error,
       errorMessage,
       newsList,
+      getText,
     };
   },
 };

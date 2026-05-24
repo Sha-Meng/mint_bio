@@ -89,7 +89,7 @@
               <p>下载中心</p>
             </div> -->
 					</div>
-				<div v-if="FEATURE_EN_ENABLED" class="popover-content-language">
+				<div v-if="isEnglishEnabled()" class="popover-content-language">
 					<p class="popover-content-language-cn" 
 					   :class="{ 'active-language': isChinese() }"
 					   @click="switchToCN">{{ getText('nav.language', 'zh') }}</p>
@@ -100,7 +100,7 @@
 				</div>
 				<template #reference>
 					<div class="menu" @click="visible = !visible">
-						<img :src="require('@/components/Header/images/menu.png')" alt="Menu" />
+						<img :src="menuIcon" alt="Menu" />
 					</div>
 				</template>
 			</el-popover>
@@ -126,7 +126,10 @@
 		debounce
 	} from "lodash";
 	import emitter from "@/event/event";
-	import { currentLanguage, switchLanguage, isChinese, getText, FEATURE_EN_ENABLED } from "@/utils/language";
+	import { currentLanguage, switchLanguage, isChinese, getText, isEnglishEnabled } from "@/utils/language";
+	import arrowUpIcon from "@/components/Header/images/arrow_up.png";
+	import arrowDownIcon from "@/components/Header/images/arrow_down.png";
+	import menuIcon from "@/components/Header/images/menu.png";
 
 	const router = useRouter();
 	const route = useRoute();
@@ -167,8 +170,8 @@
 					router: "knotWeed"
 				},
 			],
-			iconUp: require("@/components/Header/images/arrow_up.png"),
-			iconDown: require("@/components/Header/images/arrow_down.png"),
+			iconUp: arrowUpIcon,
+			iconDown: arrowDownIcon,
 		},
 		{
 			key: 2,
@@ -187,8 +190,8 @@
 					router: "vision"
 				},
 			],
-			iconUp: require("@/components/Header/images/arrow_up.png"),
-			iconDown: require("@/components/Header/images/arrow_down.png"),
+			iconUp: arrowUpIcon,
+			iconDown: arrowDownIcon,
 		},
 		{
 			key: 3,

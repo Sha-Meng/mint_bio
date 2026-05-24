@@ -8,18 +8,18 @@
         <img src="@/assets/images/grid1.png" mode="aspectFill" />
       </div>
       <div class="title">
-        <text label1>发展&nbsp;&nbsp;&nbsp;&nbsp;动态</text>
+        <text label1>{{ getText('news.title') }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getText('news.title2') }}</text>
       </div>
       <div class="sub">
         <text class="sub"> & </text>
       </div>
       <div class="desc">
-        实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。
+        {{ getText('news.subtitle') }}
       </div>
       <!-- 品牌手册按钮暂时隐藏，恢复时取消注释即可
       <div class="button">
         <div class="button-btn">
-          <p>下载品牌手册</p>
+          <p>{{ getText('news.downloadBrochure') }}</p>
           <div class="button-btn-img">
             <img src="@/assets/images/download.png" alt="download" />
           </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script setup>
+import { getText } from "@/utils/language";
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,7 @@
       <div class="radio-group" @change="handleRadioChange" v-if="!props.isDetail">
         <label class="radio">
           <input type="radio" value="all" v-model="selectedOption" class="custom-news-radio" />
-          <div :class="{ selectedradio: isSelected('all'), 'all-radio': true }">全部</div>
+          <div :class="{ selectedradio: isSelected('all'), 'all-radio': true }">{{ getText('news.all') }}</div>
         </label>
         <div class="radio-list">
           <label class="radio" v-for="item in options" :key="item.value">
@@ -29,7 +29,8 @@
 
 <script setup>
 import { ref, onMounted, computed, defineProps } from "vue";
-import { fetchNewsList } from "@/api/news";
+import { fetchNewsCategories, fetchNewsList } from "@/api/news";
+import { getText } from "@/utils/language";
 
 
 import MiNTNewsListPreview from "./MiNTNewsListPreview.vue";
@@ -42,25 +43,7 @@ const props = defineProps({
   }
 });
 const selectedOption = ref("all");
-const options = ref([
-  {
-    value: "production",
-    label: "#MiNT产品力",
-  },
-  {
-    value: "runtime",
-    label: "#MiNT进行时",
-  },
-  {
-    value: "vision",
-    label: "#MiNT Vision",
-  },
-  {
-  	value: "manufacture",
-  	label: "#MiNT智造力"
-  }
-  // 可以添加更多分类选项
-]);
+const options = ref([]);
 
 // 处理单选框值改变的事件
 const handleRadioChange = (event) => {
@@ -95,6 +78,8 @@ const getHighlightColor = (value) => {
       return "#144BE1";
     case "vision":
       return "#007D30";
+    case "manufacture":
+      return "#7455F6";
     default:
       return "";
   }
@@ -103,10 +88,21 @@ const getHighlightColor = (value) => {
 const newsList = ref([]);
 
 onMounted(async () => {
-  try {
-    newsList.value = await fetchNewsList();
-  } catch (error) {
-    console.error("Error fetching news data:", error);
+  const [categoriesResult, listResult] = await Promise.allSettled([
+    fetchNewsCategories(),
+    fetchNewsList(),
+  ]);
+
+  if (categoriesResult.status === "fulfilled") {
+    options.value = categoriesResult.value;
+  } else {
+    console.error("Error fetching news categories:", categoriesResult.reason);
+  }
+
+  if (listResult.status === "fulfilled") {
+    newsList.value = listResult.value;
+  } else {
+    console.error("Error fetching news data:", listResult.reason);
   }
 });
 </script>

@@ -2,8 +2,8 @@
   <div class="biointelligentpart6v2 sector">
     <div v-intersect="() => titleInView = true">
       <div v-if="titleInView" class="title animate__animated animate__fadeInUp">
-        <span class="label1"> 生物智造&nbsp;&nbsp; </span>
-        <span class="label2"> 基 <br />地 </span>
+        <span class="label1"> {{ getText('bioIntelligent.baseTitle') }}&nbsp;&nbsp; </span>
+        <span class="label2">{{ getText('bioIntelligent.baseSuffix') }}</span>
       </div>
     </div>
 
@@ -40,19 +40,19 @@
         @mouseout="handleMouseOut(1)"
       >
         <div class="box-title">
-          <p>元素总部<br />杭州·西湖区</p>
+          <p>{{ getText('bioIntelligent.bases.hq.name') }}<br />{{ getText('bioIntelligent.bases.hq.location') }}</p>
         </div>
         <div class="box-data-w" :class="{ visible: expandedIndex === 1 }">
           <div class="box-data">
-            <p class="box-data-top">研发专利</p>
+            <p class="box-data-top">{{ getText('bioIntelligent.bases.hq.patents') }}</p>
             <p class="box-data-bottom">40+</p>
           </div>
           <div class="box-data">
-            <p class="box-data-top">名校硕博研发团队</p>
+            <p class="box-data-top">{{ getText('bioIntelligent.bases.hq.team') }}</p>
             <p class="box-data-bottom">30+</p>
           </div>
           <div class="box-data">
-            <p class="box-data-top">研发中心</p>
+            <p class="box-data-top">{{ getText('bioIntelligent.bases.hq.rdCenter') }}</p>
             <p class="box-data-bottom">3,000m²+</p>
           </div>
         </div>

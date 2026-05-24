@@ -1,21 +1,40 @@
 import { ref } from 'vue'
 import zhCN from '@/i18n/zh-CN.json'
 import enUS from '@/i18n/en-US.json'
+import { loadSiteI18nRuntime } from '@/api/siteI18n'
 
-// 英文入口功能开关（设为 true 可恢复英文版入口，详见 README.md "英文版入口恢复指引"）
-export const FEATURE_EN_ENABLED = false
-
-// 语言资源
-const resources = { zh: zhCN, en: enUS }
 const LANGUAGE_STORAGE_KEY = 'language'
 const LANGUAGE_QUERY_KEY = 'lang'
 const DEFAULT_LANGUAGE = 'zh'
 const SUPPORTED_LANGUAGES = ['zh', 'en']
 
+const bundledResources = { zh: zhCN, en: enUS }
+const defaultSettings = {
+  feature_en_enabled: false,
+  content_version: 0
+}
+
+export const currentLanguage = ref(DEFAULT_LANGUAGE)
+export const runtimeSettings = ref({ ...defaultSettings })
+export const i18nResourceVersion = ref(0)
+export const isI18nRuntimeReady = ref(false)
+
+function isSupportedLanguage(lang) {
+  return SUPPORTED_LANGUAGES.includes(lang)
+}
+
+export function isEnglishEnabled() {
+  return runtimeSettings.value.feature_en_enabled === true
+}
+
+function getDefaultLanguage() {
+  return DEFAULT_LANGUAGE
+}
+
 function normalizeLanguage(lang) {
-  // 开关关闭时，en 视为无效语言
-  if (!FEATURE_EN_ENABLED && lang === 'en') return null
-  return SUPPORTED_LANGUAGES.includes(lang) ? lang : null
+  if (!isSupportedLanguage(lang)) return null
+  if (lang === 'en' && !isEnglishEnabled()) return null
+  return lang
 }
 
 function getStoredLanguage() {
@@ -53,7 +72,7 @@ function syncLanguageToUrl(lang) {
   }
 
   const url = new URL(window.location.href)
-  const targetLang = normalizeLanguage(lang) || DEFAULT_LANGUAGE
+  const targetLang = normalizeLanguage(lang) || getDefaultLanguage()
 
   if (targetLang === 'en') {
     url.searchParams.set(LANGUAGE_QUERY_KEY, 'en')
@@ -68,7 +87,7 @@ function syncLanguageToUrl(lang) {
 }
 
 function applyLanguage(lang) {
-  const targetLang = normalizeLanguage(lang) || DEFAULT_LANGUAGE
+  const targetLang = normalizeLanguage(lang) || getDefaultLanguage()
   currentLanguage.value = targetLang
   persistLanguage(targetLang)
   syncLanguageToUrl(targetLang)
@@ -76,40 +95,114 @@ function applyLanguage(lang) {
 }
 
 function resolveInitialLanguage() {
-  // 开关关闭时直接返回默认语言，并清理可能残留的英文 localStorage
-  if (!FEATURE_EN_ENABLED) {
+  if (!isEnglishEnabled()) {
     try {
       if (localStorage.getItem(LANGUAGE_STORAGE_KEY) === 'en') {
-        localStorage.setItem(LANGUAGE_STORAGE_KEY, DEFAULT_LANGUAGE)
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, getDefaultLanguage())
       }
     } catch (e) { /* ignore */ }
-    return DEFAULT_LANGUAGE
+    return getDefaultLanguage()
   }
-  return getLanguageFromUrl() || getStoredLanguage() || DEFAULT_LANGUAGE
+  return getLanguageFromUrl() || getStoredLanguage() || getDefaultLanguage()
 }
 
-// 语言状态管理
-export const currentLanguage = ref(resolveInitialLanguage())
+export const runtimeResources = ref({ zh: {}, en: {} })
 
-export function initializeLanguage() {
-  return applyLanguage(resolveInitialLanguage())
-}
-
-// 获取嵌套对象属性
 function getNestedProperty(obj, path) {
   if (!obj || !path) return undefined
   return path.split('.').reduce((current, key) => current?.[key], obj)
 }
 
-// 同步获取翻译文本
+function isPlainObject(value) {
+  return Object.prototype.toString.call(value) === '[object Object]'
+}
+
+function cloneValue(value) {
+  if (Array.isArray(value)) return value.map(cloneValue)
+  if (isPlainObject(value)) {
+    return Object.keys(value).reduce((result, key) => {
+      result[key] = cloneValue(value[key])
+      return result
+    }, {})
+  }
+  return value
+}
+
+function isEmptyOverride(value) {
+  return value === undefined || value === null || value === ''
+}
+
+function mergeValue(base, override) {
+  if (isEmptyOverride(override)) return cloneValue(base)
+  if (Array.isArray(base) || Array.isArray(override)) {
+    const result = Array.isArray(base) ? base.map(cloneValue) : []
+    if (Array.isArray(override)) {
+      override.forEach((item, index) => {
+        result[index] = mergeValue(result[index], item)
+      })
+      return result
+    }
+    return cloneValue(override)
+  }
+  if (isPlainObject(base) || isPlainObject(override)) {
+    const result = isPlainObject(base) ? cloneValue(base) : {}
+    if (isPlainObject(override)) {
+      Object.keys(override).forEach((key) => {
+        result[key] = mergeValue(result[key], override[key])
+      })
+      return result
+    }
+    return cloneValue(override)
+  }
+  return cloneValue(override)
+}
+
+function getResolvedValue(key, lang) {
+  const normalizedLang = isSupportedLanguage(lang) ? lang : DEFAULT_LANGUAGE
+  const localZh = getNestedProperty(bundledResources.zh, key)
+  const localCurrent = getNestedProperty(bundledResources[normalizedLang], key)
+  const runtimeZh = getNestedProperty(runtimeResources.value.zh, key)
+  const runtimeCurrent = getNestedProperty(runtimeResources.value[normalizedLang], key)
+
+  return mergeValue(
+    mergeValue(
+      mergeValue(localZh, localCurrent),
+      runtimeZh
+    ),
+    runtimeCurrent
+  )
+}
+
+export async function refreshI18nResources() {
+  try {
+    const payload = await loadSiteI18nRuntime()
+    runtimeSettings.value = {
+      ...defaultSettings,
+      ...(payload.settings || {})
+    }
+    runtimeResources.value = payload.resources || { zh: {}, en: {} }
+  } catch (error) {
+    runtimeSettings.value = { ...defaultSettings }
+    runtimeResources.value = { zh: {}, en: {} }
+  } finally {
+    isI18nRuntimeReady.value = true
+    i18nResourceVersion.value += 1
+  }
+}
+
+export async function initializeLanguage() {
+  applyLanguage(resolveInitialLanguage())
+  await refreshI18nResources()
+  return applyLanguage(resolveInitialLanguage())
+}
+
 export function getText(key, forceLang = null) {
-  const lang = forceLang || currentLanguage.value
-  const res = resources[lang] || resources.zh
-  const text = getNestedProperty(res, key)
+  i18nResourceVersion.value
+  const lang = isSupportedLanguage(forceLang) ? forceLang : currentLanguage.value
+  const text = getResolvedValue(key, lang)
   return text !== undefined ? text : key
 }
 
-// 切换语言
 export function switchLanguage(lang) {
   const normalizedLang = normalizeLanguage(lang)
   if (normalizedLang) {
@@ -117,28 +210,35 @@ export function switchLanguage(lang) {
   }
 }
 
-// 判断是否为中文
 export function isChinese() {
   return currentLanguage.value === 'zh'
 }
 
-// Vue 插件 - 全局注入
 export const i18nPlugin = {
   install(app) {
     app.config.globalProperties.$t = getText
     app.config.globalProperties.$lang = currentLanguage
-    app.provide('i18n', { getText, currentLanguage, switchLanguage, isChinese })
+    app.provide('i18n', {
+      getText,
+      currentLanguage,
+      switchLanguage,
+      isChinese,
+      isEnglishEnabled,
+      refreshI18nResources
+    })
   }
 }
 
-// 默认导出保持兼容性
 export default {
-  FEATURE_EN_ENABLED,
   currentLanguage,
+  runtimeSettings,
+  i18nResourceVersion,
+  isI18nRuntimeReady,
   initializeLanguage,
+  refreshI18nResources,
   getText,
   switchLanguage,
   isChinese,
+  isEnglishEnabled,
   i18nPlugin
 }
-

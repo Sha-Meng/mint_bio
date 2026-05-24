@@ -45,7 +45,7 @@
                 <p>下载中心</p>
               </div> -->
             </div>
-            <div v-if="FEATURE_EN_ENABLED" class="popover-mobile-content-language">
+            <div v-if="isEnglishEnabled()" class="popover-mobile-content-language">
               <p class="popover-mobile-content-language-cn" 
                  :class="{ 'active-language': currentLanguage === 'zh' }"
                  @click="toggleToCN">CN</p>
@@ -69,7 +69,7 @@
 <script setup>
 import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { currentLanguage, switchLanguage, getText, FEATURE_EN_ENABLED } from '@/utils/language';
+import { currentLanguage, switchLanguage, getText, isEnglishEnabled } from '@/utils/language';
 
 const router = useRouter();
 

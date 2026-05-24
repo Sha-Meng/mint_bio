@@ -189,6 +189,9 @@
         "submitSuccess": "提交成功",
         "formatError": "请求格式错误，请检查输入信息"
       }
+    },
+    "media": {
+      "videoUnsupported": "您的浏览器不支持 video 标签。"
     }
   },
   "vision": {
@@ -314,6 +317,13 @@
   },
   "newMaterial": {
     "features": ["全新化学结构", "可生物降解", "可回收", "高性能", "高适配性", "成本可控"],
+    "moduleCards": [
+      { "title": "PiX 膜袋材料", "shortName": "膜袋材料" },
+      { "title": "PiX3D 打印材料", "shortName": "3D 打印材料" },
+      { "title": "PiX 注塑材料", "shortName": "注塑材料" },
+      { "title": "PiX 地膜材料", "shortName": "地膜材料" },
+      { "title": "PiX 纤维材料", "shortName": "纤维材料" }
+    ],
     "applicationCase": "应用",
     "applicationCase2": "案例",
     "vipshop": "唯品会",
@@ -387,6 +397,7 @@
   },
   "knotWeed": {
     "importIntro": "每年大豆进口量近",
+    "importAmount": "1亿",
     "importUnit": "吨",
     "importPurpose": "进口大豆用于提供饲用蛋白",
     "title1": "节豆日粮",
@@ -607,6 +618,12 @@
     "subtitle": "实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。",
     "downloadBrochure": "下载品牌手册",
     "all": "全部",
-    "moreNews": "更多动态"
+    "moreNews": "更多动态",
+    "categories": {
+      "runtime": "#MiNT进行时",
+      "products": "#MiNT产品力",
+      "biomanufacturing": "#MiNT智造力",
+      "vision": "#MiNT Vision"
+    }
   }
 }

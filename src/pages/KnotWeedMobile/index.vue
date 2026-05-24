@@ -5,7 +5,7 @@
       <div class="knotWeed-title-text">
         <div class="knotWeed-title-text-top">
           {{ getText('knotWeed.importIntro') }}
-          <span>1亿</span>
+          <span>{{ getText('knotWeed.importAmount') }}</span>
           {{ getText('knotWeed.importUnit') }}
         </div>
         <div class="knotWeed-title-text-bottom">
@@ -19,13 +19,13 @@
       <img class="mint-image" src="@/assets/images/mint.png" alt="knotWeed_mint" />
       <div class="knotWeed-title-text">
         <p class="knotWeed-title-text-top">
-          每年大豆进口量近
-          <span>1亿</span>
-          吨
+          {{ getText('knotWeed.importIntro') }}
+          <span>{{ getText('knotWeed.importAmount') }}</span>
+          {{ getText('knotWeed.importUnit') }}
         </p>
         <p class="knotWeed-title-text-bottom">
           <span>52%</span>
-          进口大豆用于提供饲用蛋白
+          {{ getText('knotWeed.importPurpose') }}
         </p>
       </div>
     </div> -->

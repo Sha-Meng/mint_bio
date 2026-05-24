@@ -3,7 +3,7 @@
     <MiNTNewsDetailCom v-if="configData" :info="configData">
     </MiNTNewsDetailCom>
     <MiNTDivider :content="'+'"></MiNTDivider>
-    <div class="more-dynamic">更多动态</div>
+    <div class="more-dynamic">{{ getText('news.moreNews') }}</div>
     <MiNTNewsListPreview class="news-preview" :filteredNews="newsList"></MiNTNewsListPreview>
   </div>
 </template>
@@ -12,6 +12,7 @@
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { fetchNewsDetail, fetchNewsList } from "@/api/news";
+import { getText } from "@/utils/language";
 
 import MiNTNewsDetailCom from "@/components/MiNTNews/MiNTNewsDetailCom.vue";
 import MiNTNewsListPreview from "@/components/MiNTNews/MiNTNewsListPreview.vue";
@@ -81,6 +82,7 @@ export default {
       error,
       errorMessage,
       newsList,
+      getText,
     };
   },
 };

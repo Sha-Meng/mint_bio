@@ -13,6 +13,9 @@ scripts/.env.migration
 # Directus 迁移脚本运行缓存（含 file-index.json / article-index.json / 历次 report）
 scripts/.migration-cache/
 
+# 固定文案 i18n 导入脚本输出，可按需重新生成
+scripts/.i18n-cache/
+
 # Log files
 npm-debug.log*
 yarn-debug.log*

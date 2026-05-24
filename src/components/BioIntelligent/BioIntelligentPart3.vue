@@ -3,11 +3,11 @@
     <div v-intersect="() => titleInView = true">
       <div v-if="titleInView" class="label animate__animated animate__fadeInUp">
         <div class="label-top">
-          <span class="labelBig labelWhite mr117">一起</span>
-          <span class="labelBig labelOrange">生物智造</span>
+          <span class="labelBig labelWhite mr117">{{ getText('bioIntelligent.understandTitle1Part1') }}</span>
+          <span class="labelBig labelOrange">{{ getText('bioIntelligent.understandTitle2') }}</span>
         </div>
         <div class="label-bottom">
-          <span class="labelBig labelWhite ml117">了解</span>
+          <span class="labelBig labelWhite ml117">{{ getText('bioIntelligent.understandTitle1Part2') }}</span>
         </div>
       </div>
     </div>
@@ -125,6 +125,7 @@ export default {
       handlePrev,
       handleNext,
       titleInView,
+      getText,
     };
   },
 };

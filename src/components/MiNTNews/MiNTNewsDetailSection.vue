@@ -20,7 +20,7 @@
 		<div v-if="content.video" class="video">
 			<video width="100%" controls preload="metadata" :poster="getImageUrl(content.poster)">
 			  <source :src="content.video" type="video/mp4" >
-			  您的浏览器不支持 video 标签。
+			  {{ getText('common.media.videoUnsupported') }}
 			</video>
 		</div>
 		
@@ -69,6 +69,7 @@
 
 <script setup>
 import { getImageUrl } from "@/utils/index";
+import { getText } from "@/utils/language";
 
 const props = defineProps({
   info: {

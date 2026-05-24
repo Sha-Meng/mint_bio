@@ -1,6 +1,6 @@
 import axios from "axios";
 import { renderColorShortcodes } from "@/utils/colorShortcode";
-import { currentLanguage } from "@/utils/language";
+import { currentLanguage, getText } from "@/utils/language";
 
 const DEFAULT_DIRECTUS_URL = "/directus-api";
 const DIRECTUS_URL = (process.env.VUE_APP_DIRECTUS_URL || DEFAULT_DIRECTUS_URL).replace(/\/$/, "");
@@ -101,26 +101,22 @@ const LIST_FIELDS = [
 const CATEGORY_MAP = {
   "mint-runtime": {
     value: "runtime",
-    labelZh: "#MiNT进行时",
-    labelEn: "#MiNT Runtime",
+    labelKey: "news.categories.runtime",
     color: "#FF7200",
   },
   "mint-products": {
     value: "production",
-    labelZh: "#MiNT产品力",
-    labelEn: "#MiNT Products",
+    labelKey: "news.categories.products",
     color: "#144BE1",
   },
   "mint-biomanufacturing": {
     value: "manufacture",
-    labelZh: "#MiNT智造力",
-    labelEn: "#MiNT Biomanufacturing",
+    labelKey: "news.categories.biomanufacturing",
     color: "#7455F6",
   },
   "mint-vision": {
     value: "vision",
-    labelZh: "#MiNT Vision",
-    labelEn: "#MiNT Vision",
+    labelKey: "news.categories.vision",
     color: "#007D30",
   },
 };
@@ -165,10 +161,16 @@ function getCategoryMeta(category) {
   const slug = typeof category === "string" ? category : category?.slug;
   return CATEGORY_MAP[slug] || {
     value: slug || "runtime",
-    labelZh: category?.name_zh ? `#${category.name_zh}` : "#MiNT进行时",
-    labelEn: category?.name_en ? `#${category.name_en}` : "#MiNT Runtime",
+    labelKey: "news.categories.runtime",
     color: "#FF7200",
   };
+}
+
+function getCategoryLabel(category, meta) {
+  const lang = getLang();
+  if (lang === "en" && category?.name_en) return `#${category.name_en}`;
+  if (category?.name_zh) return `#${category.name_zh}`;
+  return getText(meta.labelKey);
 }
 
 function appendTransform(url, transform) {
@@ -267,7 +269,6 @@ function mapArticleToListItem(item) {
   const category = getCategoryMeta(item.category);
   const title = pickText(item, "title");
   const summary = normalizeSummary(pickText(item, "summary"), title);
-  const lang = getLang();
 
   return {
     id: item.legacy_id,
@@ -275,7 +276,7 @@ function mapArticleToListItem(item) {
     detailKey: item.slug || item.legacy_id,
     title,
     category: category.value,
-    categorylabel: lang === "en" ? category.labelEn : category.labelZh,
+    categorylabel: getCategoryLabel(item.category, category),
     categorycolor: category.color,
     time: formatDate(item.publish_at),
     pic: getAssetUrl(item.cover, THUMB_TRANSFORM),
@@ -363,7 +364,7 @@ async function fetchDirectusCategories() {
     return {
       slug: item.slug,
       value: meta.value,
-      label: getLang() === "en" ? meta.labelEn : meta.labelZh,
+      label: getCategoryLabel(item, meta),
       color: meta.color,
       sort: item.sort,
     };

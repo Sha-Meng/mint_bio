@@ -6,7 +6,7 @@
       <div class="knotWeed-title-text">
         <p class="knotWeed-title-text-top">
           {{ getText('knotWeed.importIntro') }}
-          <span>1亿</span>
+          <span>{{ getText('knotWeed.importAmount') }}</span>
           {{ getText('knotWeed.importUnit') }}
         </p>
         <p class="knotWeed-title-text-bottom">
