@@ -1,0 +1,130 @@
+[
+  {
+    "key_path": "common.media.videoUnsupported",
+    "group": "common",
+    "label": "媒体-浏览器不支持视频提示",
+    "value_zh": "您的浏览器不支持 video 标签。",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "knotWeed.importAmount",
+    "group": "knotWeed",
+    "label": "节豆日粮-大豆进口量数字",
+    "value_zh": "1亿",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.0.title",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片1标题",
+    "value_zh": "PiX 膜袋材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.0.shortName",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片1短名称",
+    "value_zh": "膜袋材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.1.title",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片2标题",
+    "value_zh": "PiX3D 打印材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.1.shortName",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片2短名称",
+    "value_zh": "3D 打印材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.2.title",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片3标题",
+    "value_zh": "PiX 注塑材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.2.shortName",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片3短名称",
+    "value_zh": "注塑材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.3.title",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片4标题",
+    "value_zh": "PiX 地膜材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.3.shortName",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片4短名称",
+    "value_zh": "地膜材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.4.title",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片5标题",
+    "value_zh": "PiX 纤维材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "newMaterial.moduleCards.4.shortName",
+    "group": "newMaterial",
+    "label": "新材料-模块卡片5短名称",
+    "value_zh": "纤维材料",
+    "value_en": "",
+    "enabled": true
+  },
+  {
+    "key_path": "news.categories.runtime",
+    "group": "news",
+    "label": "新闻分类-MiNT进行时",
+    "value_zh": "#MiNT进行时",
+    "value_en": "#MiNT Runtime",
+    "enabled": true
+  },
+  {
+    "key_path": "news.categories.products",
+    "group": "news",
+    "label": "新闻分类-MiNT产品力",
+    "value_zh": "#MiNT产品力",
+    "value_en": "#MiNT Products",
+    "enabled": true
+  },
+  {
+    "key_path": "news.categories.biomanufacturing",
+    "group": "news",
+    "label": "新闻分类-MiNT智造力",
+    "value_zh": "#MiNT智造力",
+    "value_en": "#MiNT Biomanufacturing",
+    "enabled": true
+  },
+  {
+    "key_path": "news.categories.vision",
+    "group": "news",
+    "label": "新闻分类-MiNT Vision",
+    "value_zh": "#MiNT Vision",
+    "value_en": "#MiNT Vision",
+    "enabled": true
+  }
+]

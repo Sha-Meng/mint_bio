@@ -35,9 +35,10 @@ todos:
   - **5.4 全量真跑完成**（report-1777990658995.json）：attempted=48 / created=45 / skipped=3 / failed=0；error_log=[]；media uploaded=344 + cacheHit=164 + failed=0；分布 runtime:32 / products:8 / biomanufacturing:4 / vision:4 = 48；article-index size=48 ✅
   - **5.5 全量结构审计完成** ✅：新增并执行 `scripts/audit-news-migration.mjs`，逐篇比对旧 JSON 与 Directus 48 篇的 slug/title/summary/category/cover/block 类型序列/image fileId/stretched/raw/html class；先发现唯一差异 id=19 `summary_zh` 未取 `news_list.overviewcontent`，已 PATCH 修正；最终报告 `scripts/.migration-cache/audit-report-1778387635035.json`：source=48 / directus=48 / errors=0 / warnings=0。
   - 5.6 抽检结论：id=48 的 `richHtml` 已作为 3 个 `raw` block 入库，后台 Block Editor 不一定视觉渲染 inline style / class，前端需在 Phase 7 渲染器用 `v-html` 保真；id=11 的 `nopaddingpic` 已审计为 14 个 `image.stretched=true`；id=30 不是“无正文 list 兜底”，源文件 `news_30.json` 实际存在完整正文与 15 张图，原抽检说明已校正。
-  - 5.7 _en 字段缺失清单（48 篇全空，前端 fallback 中文不阻塞）⏳ 待运营按 P0/P1/P2 优先级人工补
-- **Phase 4 收尾长尾**（不阻塞）：4.8 文本颜色已明确改为短代码路线：保持 Directus `11.17.4` 原生 `input-block-editor`，由前端渲染 `[color=<色值>]...[/color]`，并要求把旧新闻中的 `.orange-text` / `<font color>` / `span style=color` 统一迁移为短代码后做零残留审计；上传默认目录动态路径模板仍待后续。
+  - 5.7 _en 字段缺失清单（48 篇全空）✅ 已确认：运营按需人工补；不补不阻塞，英文模式 fallback 中文已于 2026-05-24 验证通过。
+- **Phase 4 收尾长尾**：4.8 文本颜色短代码路线已完成；上传默认目录动态路径模板确认不做，后续由运营在 Directus 后台人工选择目标 folder。
 - **当前运行方式**：`src/api/news.js` 已统一默认 Directus API/Asset 前缀为 `/directus-api`，并固定走 Directus REST；生产不显式配置 `VUE_APP_DIRECTUS_URL` 时也不会直连 `cms.mint-bio.cn`；旧静态 JSON fallback 已移除。
+- **固定文案运行时配置长尾（2026-05-24）**：已完成。用户已创建 `site_i18n_entries` / `site_i18n_settings`，完成 Public 读取权限、初始固定文案导入和浏览器接口验证；本地 `yarn serve` 已验证中文文案更新 + `content_version` 递增生效、英文入口开关生效；当前前端构建已部署到生产，生产复验 3 项通过（中文正常无 key 裸露、文案修改 + `content_version` 递增生效、英文入口开关生效后已按需恢复关闭）。
 
 
 
@@ -284,8 +285,8 @@ news/2026/01 ~ 12/
 - [x] **4D 后修完成**：`phase4-test-article` 的 slug / title_en 头部 Tab 字符清理；`_seo_desc_en` 字段重建为 `seo_desc_en`
 - [x] **4E 完成**：建 `Editor` 角色 + `Editor Policy`（宽松版：news_articles 全权 / news_categories 仅读 / directus_files CRUD / 系统集合 App Access Minimum）
 - [x] 建好 4.5 的 folder 树（22 个 folder：`news/_legacy` + `news/2024` + `news/2025/01-12` + `news/2026/01-05`）
-- [ ] **长尾（不阻塞 Phase 5）**：在 `news_articles` 上配置上传默认目录为 `news/{当前年}/{当前月}/`（cover 字段 + Block Editor Image 字段当前 Folder = `news` 顶层，需测 Directus 是否支持动态路径模板，不支持则用 Flow 或前端 hook 兜底）
-- [ ] **长尾（不阻塞 Phase 5；详见 4.8 节）**：新闻正文颜色能力已改为短代码方案。保持正式字段使用原生 `input-block-editor`，新增前端 `[color=<安全色值>]...[/color]` 渲染能力，并提供旧新闻颜色写法统一迁移脚本 / 审计，最终要求 Directus 新闻正文不残留 `.orange-text`、`<font color>`、`span style=color` 等旧作者写法。
+- [x] **长尾（确认不做）**：不再配置上传默认目录动态模板；后续由运营在 `news_articles` 的 cover 字段和 Block Editor Image 上传时人工选择目标 folder（如 `news/2026/05`）。
+- [x] **长尾（已完成；详见 4.8 节）**：新闻正文颜色能力已改为短代码方案。保持正式字段使用原生 `input-block-editor`，前端已支持 `[color=<安全色值>]...[/color]` 渲染；旧新闻颜色写法已统一迁移为短代码并完成零残留审计（`legacy_id=48` 的 3 个特殊 Raw HTML 视觉块除外且已记录）。
 - [x] **4F+4G 完成**：`editor-test@mint-bio.cn` 测试账号 + Editor Role 绑定 + 6 case 端到端验收全过
 - [x] **4H 完成**：双语策略放宽——`title_en` / `content_blocks_en` 改为可空（Nullable 留勾 + 取消 Required），前端 lang=en 走 fallback 中文（Phase 6/7 mapper 实现，见 plan 6.0）
 
@@ -466,7 +467,7 @@ function categoryLabel(slug, t) {
 - [x] **2026-05-10 完成：全量结构自测**。新增 `scripts/audit-news-migration.mjs`，比对 48 篇 Directus 数据与旧 JSON：文章数、legacy_id、slug、title、summary、category、status、publish date、cover file_id、block type 序列、image file_id 序列、`stretched` flags、raw 数量、inline class 保留。最新 `audit-report-1778395347338.json`：errors=0 / warnings=0。
 - [x] **2026-05-10 完成：抽检问题修正**。id=19 `summary_zh` 已从错误的标题修正为 `news_list.overviewcontent` 长摘要；迁移脚本同步修复优先级：`detail.overviewcontent || listItem.overviewcontent || overviewtitle || title`。
 - [x] **2026-05-10 完成：抽检说明校正**。id=48 的 `richHtml` 已入库为 3 个 raw block（含 inline style，非 `.orange-text`，后台视觉不代表前端最终效果）；id=11 的 `nopaddingpic` 由审计脚本确认 14 个 `image.stretched=true`；id=30 源文件实际有完整详情，不再作为“无正文 list 兜底”样例。
-- [ ] 把 `_en` 字段缺失项整理为待办交回用户**按需**补；不补也不阻塞（前端 fallback 中文）
+- [x] 把 `_en` 字段缺失项整理为待办交回用户**按需**补；不补也不阻塞（前端 fallback 中文），且 2026-05-24 已验证生产 48 篇英文 fallback 不空白。
 
 
 ### Phase 6 - 官网读接口适配
@@ -537,7 +538,7 @@ function categoryLabel(slug, t) {
 - [x] 校验 Directus `/assets/<uuid>` 可访问，抽样图片 transformation（如 `?width=800&format=webp`）正常
 - [x] 校验 Directus 图片 CDN 缓存：生产资源 URL 走 `www.mint-bio.cn/directus-api/assets/*`，图片 transform 响应为长缓存并可命中 CDN/浏览器缓存
 
-- [ ] 校验 `_en` 字段为空时英文站点走中文 fallback，标题和正文不空白
+- [x] 校验 `_en` 字段为空时英文站点走中文 fallback，标题和正文不空白（2026-05-24：生产 Directus published=48；title/content_blocks 均 48/48 走中文 fallback；issues=[]；`npm run build` 通过）
 
 #### 8.2 页面视觉回归（切流前）
 
@@ -551,7 +552,7 @@ function categoryLabel(slug, t) {
 - [x] 旧链接 `/MiNTNews/<legacy_id>` 全部可达；新链接 `/MiNTNews/<slug>` 可达；不存在时有安全兜底（2026-05-17 用户确认路由回归通过）
 - [x] 验证正式切流后不再依赖 `VUE_APP_USE_DIRECTUS=false` 旧包；旧静态 JSON fallback、旧构建开关、旧静态资源清理已列入切流后清理任务（2026-05-18 外网已切 Directus 版本）
 - [x] 记录生产切流、回滚、CDN 刷新和 Directus 后台操作交接步骤（详见 `news-production-cutover_20260510.md`）
-- [ ] 切流后 48h 观察无异常，再进入“稳定 2 周后清理旧静态数据 / fallback 逻辑 / 旧构建开关 / 冗余资源”的后续动作
+- [x] 切流后观察无异常，已完成旧静态数据 / fallback 逻辑 / 旧构建开关 / 冗余资源清理（2026-05-23 收官）
 
 #### 8.4 Directus 后台发布流程验收
 
@@ -571,7 +572,7 @@ function categoryLabel(slug, t) {
 
 
 
-- 当前阻塞：无；Directus 迁移主线已收官。生产新闻模块已固定为 Directus 单一数据源；旧静态 JSON、旧新闻图片资源、`VUE_APP_USE_DIRECTUS` 双轨开关与失败 fallback 已移除。后续风险主要是 Directus/API/同源反代成为新闻模块运行必需依赖；短期回滚仍依赖服务器备份或 Git 历史恢复旧包。4.8 调色盘属于后台体验长尾：前端兼容与部署文档已补，实际调色盘按钮仍需在服务器部署自定义 Interface 后才能验收。
+- 当前阻塞：无；Directus 迁移实施与验收任务已全部完成。生产新闻模块已固定为 Directus 单一数据源；旧静态 JSON、旧新闻图片资源、`VUE_APP_USE_DIRECTUS` 双轨开关与失败 fallback 已移除。后续风险主要是 Directus/API/同源反代成为新闻模块运行必需依赖；短期回滚仍依赖服务器备份或 Git 历史恢复旧包。4.8 文本颜色长尾已改为短代码方案并完成迁移、审计与前端验收；自定义调色盘 Interface 不再作为正式路线。上传目录动态模板确认不做，改为运营人工选择 folder。英文 fallback 验证已通过。
 - P0-1（已修复并灰度确认 2026-05-17）：新建 Directus 文章 `legacy_id=null` 时，首页/列表已可用 slug 进入详情。
 - P0-2（已修复并灰度确认 2026-05-17）：历史文章改为 draft 后，Directus 模式详情页已确认不再 fallback 显示旧静态 JSON。
 - 性能风险 0.9（已灰度复测，暂时接受 2026-05-17）：灰度站刷新后再次打开新闻仍感觉图片重新刷新。已替换 2 张超大 cover：id=5 从 `6240x4160` / 8.72MB 换为 `1440x960` / 51.1KB；id=32 从 `6732x4432` / 7.11MB 换为 `1945x1280` / 113.6KB。新 cover 的 transform WebP 分别约 18KB / 34KB，连续请求 `HIT TCP_MEM_HIT`；本地临时压缩图 `news-5.jpg` / `news-14.jpg` 已删除。进一步代码优化：详情正文图片统一加 `loading="lazy" decoding="async"`，详情封面加 `loading="eager" decoding="async" fetchpriority="high"`，视频加 `preload="metadata"`；`src/api/news.js` 增加浏览器 sessionStorage 30 秒短缓存（仅 Directus GET 成功响应，key 按 path+params 区分），减少刷新/跳转时重复拉新闻 JSON。用户已上传灰度包复测，暂时接受当前体感；服务端/CDN API 短缓存与前端 SWR 均暂不做，作为未来可选项。
@@ -596,7 +597,7 @@ function categoryLabel(slug, t) {
 3. **Phase 8 最终回归与切流后清理完成** ✅：`src/api/news.js` 已移除 `VUE_APP_USE_DIRECTUS` 旧双轨开关、静态 JSON 读取函数和 Directus 失败 fallback；新闻模块固定 Directus 单一数据源。
 4. **旧资源清理完成** ✅：删除 `public/data/news_*.json` / `public/data/news_list.json` / `public/data/news_1.data`；删除 `src/assets/News/**` 中已迁移新闻图片，仅保留仍被详情页背景引用的 `Grid.png`；历史可从 Git 恢复。
 5. **验证结论** ✅：`npm run build` 通过；`src/` 内已无 `/data/news_*`、`news_list.json`、`VUE_APP_USE_DIRECTUS` 或旧新闻资源运行时引用（除 `Grid.png`）。
-6. **后续长尾（不阻塞主线）**：运营按需补 `_en` 字段；id=45 缺视频确认不再补；Directus 历史媒体目录 `news/_legacy` 保留；4.8 颜色调色盘已完成前端兼容与部署文档，下一步是在 Directus 服务器部署 `Editor.js Brand Palette` 自定义 Interface 并做后台验收；上传默认目录动态模板作为后续优化任务。
+6. **最终结论** ✅：迁移实施与验收任务已全部完成。运营后续可按需补 `_en` 英文内容；上传目录动态模板确认不做，改为人工选择 folder；id=45 缺视频确认不再补；Directus 历史媒体目录 `news/_legacy` 保留；4.8 文本颜色短代码方案已完成，自定义调色盘 Interface 不再作为正式路线。
 
 ## Execution Log
 - 2026-03-22：完成新闻系统现状分析，确认新闻后台改造方向。
@@ -652,11 +653,15 @@ function categoryLabel(slug, t) {
 - 2026-05-17：**Phase 8.4 Directus 后台发布流程验收通过**。用户确认新闻新增、编辑、删除/归档、草稿保存、发布后前端展示/隐藏链路均已验收；`news-production-cutover_20260510.md` 的验收清单同步标记完成。正式切流前剩余关键动作收敛为：保留上一版站点目录/上一版 dist 的短期应急回滚包，执行生产覆盖上线，并进入 48h 观察窗口。
 - 2026-05-18：**切流前备份策略收敛**。用户确认服务器已完成现网站点目录备份，且 Git 已保留历史版本；本地临时备份目录不再作为长期归档、不提交到仓库，最终归档以服务器备份 + 本次 Git 提交版本为准。
 - 2026-05-18：**生产切流完成并归档**。用户确认已完成服务器备份和网站部署，外网已切换到 Directus 版本。当前主线进入切流后 48h 观察窗口：重点观察首页/新闻列表/详情、`/directus-api` 4xx/5xx、图片 CDN 命中、Directus 后台发布/编辑/下线链路。短期回滚入口为切流当天保留的上一版站点目录/上一版 dist；稳定后进入旧静态 JSON、旧资源、fallback 逻辑和 `VUE_APP_USE_DIRECTUS=false` 开关清理；对应 Git 版本以本次归档提交为准。
-- 2026-05-23：**Phase 8 收官 / Directus 单源化清理完成**。继续迁移时先跑最终审计，发现 id=1 因后台二次编辑导致 1 段 paragraph 缺失且 `.orange-text` class 被剥离；已用源 `public/data/news_1.json` 恢复该段与两处 orange 高亮，复跑 `node scripts/audit-news-migration.mjs` 通过：`audit-report-1779523427685.json`，source=48 / directus=48 / errors=0 / warnings=0。随后将 `src/api/news.js` 固定为 Directus 单一数据源，移除 `VUE_APP_USE_DIRECTUS` 旧双轨开关、静态 JSON 读取函数与 Directus 失败 fallback；删除 `public/data/news_*.json` / `news_list.json` / `news_1.data`，删除 `src/assets/News/**` 旧新闻资源并保留 `Grid.png`；清理 `MiNTNewsList.vue` 中旧静态图片注释。验证：生产同源新闻/分类 API 与 assets transform 返回 200；`npm run build` 通过；`src/` 内无旧静态新闻运行时引用。**清理后说明**：`scripts/audit-news-migration.mjs` 依赖已删除的旧 `public/data/news_list.json` 与 `news_*.json`，因此清理后再次运行出现 ENOENT 属预期；最终客观审计以清理前报告 `audit-report-1779523427685.json` 为准。用户确认旧链接兼容不再作为验收要求，其他线上验证均已通过。Directus 迁移主线收官，后续仅剩 `_en` 补文、4.8 颜色调色盘、上传默认目录动态模板等长尾优化。
+- 2026-05-23：**Phase 8 收官 / Directus 单源化清理完成**。继续迁移时先跑最终审计，发现 id=1 因后台二次编辑导致 1 段 paragraph 缺失且 `.orange-text` class 被剥离；已用源 `public/data/news_1.json` 恢复该段与两处 orange 高亮，复跑 `node scripts/audit-news-migration.mjs` 通过：`audit-report-1779523427685.json`，source=48 / directus=48 / errors=0 / warnings=0。随后将 `src/api/news.js` 固定为 Directus 单一数据源，移除 `VUE_APP_USE_DIRECTUS` 旧双轨开关、静态 JSON 读取函数与 Directus 失败 fallback；删除 `public/data/news_*.json` / `news_list.json` / `news_1.data`，删除 `src/assets/News/**` 旧新闻资源并保留 `Grid.png`；清理 `MiNTNewsList.vue` 中旧静态图片注释。验证：生产同源新闻/分类 API 与 assets transform 返回 200；`npm run build` 通过；`src/` 内无旧静态新闻运行时引用。**清理后说明**：`scripts/audit-news-migration.mjs` 依赖已删除的旧 `public/data/news_list.json` 与 `news_*.json`，因此清理后再次运行出现 ENOENT 属预期；最终客观审计以清理前报告 `audit-report-1779523427685.json` 为准。用户确认旧链接兼容不再作为验收要求，其他线上验证均已通过。Directus 迁移主线收官，后续仅剩 `_en` 补文、上传默认目录动态模板等长尾优化。
 - 2026-05-23：**4.8 调色盘优化补充**。本地完成两项可落地准备：(1) `MiNTNewsDetailSection.vue` 前端详情页新增对 `editorjs-text-color-plugin` 常见输出 `<font color="...">` 与 `<span style="color: ...">` 的 4 色兼容样式，并兼容旧品牌色 `#FF7200/#144BE1/#007D30`；(2) 新增 `scripts/DIRECTUS-COLOR-PALETTE-README.md`，固化自定义 `Editor.js Brand Palette` Interface 的 fork 补丁、构建部署、后台切换、验收与回滚步骤。由于当前会话无服务器执行边界，Directus 后台真正出现调色盘按钮仍待在服务器部署扩展后验收。
 - 2026-05-23：**4.8 调色盘扩展本地构建完成**。按用户要求在 `D:\UGit\directus-extension-editorjs-mint-color` 克隆 `dimitrov-adrian/directus-extension-editorjs-interface` 并改造为独立 Interface：`id=extension-editorjs-mint-color`、`name=Editor.js Brand Palette`、默认 tools/choices 增加 `color`、`get-tools.ts` 集成 `editorjs-text-color-plugin@2.0.4`，固定 4 色 `#e75a29/#2d5bf6/#74d887/#6bbea9` 且 `customPicker=false`。本地 `npm install && npm i --save-dev editorjs-text-color-plugin@2.0.4 && npm run build` 成功，产物 `dist/index.js` 已生成；同时整理上传包 `D:\UGit\directus-extension-editorjs-mint-color-upload\` 与 `D:\UGit\directus-extension-editorjs-mint-color-upload.zip`（仅含 `package.json` + `dist/index.js`，避免上传 `node_modules`）。下一步：上传 zip 到服务器 `/data/mintbio/directus/extensions/directus-extension-editorjs-mint-color/`，修权限并重启 Directus 后做后台测试字段验收。
 - 2026-05-23：**4.8 调色盘服务器部署调试进展**。服务器已完成数据库与扩展目录备份，扩展上传到 `/data/mintbio/directus/extensions/directus-extension-editorjs-mint-color/` 并被 Directus 加载；期间修复三类兼容问题：`host` 从 `^v9.9.0` 改为 `^11.0.0` 以匹配 Directus `11.17.4`、修复构建产物中 `sche is not defined`（源 `src/index.ts` 尾部截断）、兼容 EditorJS 实例无 `focus/destroy` 方法导致的 Create Item 运行时错误。用户反馈当前 `Editor.js Brand Palette` 已出现；下一步仅在 `palette_test.block` 测试字段完成输入、选中文字、4 色上色、保存刷新验证，暂不切正式 `news_articles.content_blocks_zh/en`。
 - 2026-05-23：**4.8 调色盘阶段性归档 / 暂停正式切换**。用户反馈 `palette_test.block` 测试字段已通过；随后在 `news_articles` 测试文章场景验证时发现真实旧文章编辑界面出现工具栏/转换菜单浮层错乱、选项不消失等 UI 兼容问题。该测试发生在测试文章，不影响正式正文内容。当前结论：`Editor.js Brand Palette` 可保留为测试扩展，但**不用于正式 `news_articles.content_blocks_zh/en`**；正式字段应保持或回滚为 Directus 原生 `input-block-editor`。4.8 作为长尾优化暂停，后续若继续需要调色盘，应优先研究对原生 `input-block-editor` 的更小范围增强或其他官方兼容方案，而不是替换整套 EditorJS Interface。
+- 2026-05-24：**4.8 文本颜色短代码方案收官**。正式路线从自定义调色盘改为 `[color=<安全色值>]...[/color]` 短代码；前端 mapper 已完成安全色值校验与渲染，旧新闻颜色 class / `<font color>` / `span style=color` 已规范化写回 Directus 并完成 dry-run / backup / apply / audit-only。最终审计 `changed=0 / manual=0 / residues=0`，`legacy_id=48` 的 3 个特殊 Raw HTML 视觉块作为已确认排除项保留。旧前端颜色兼容样式和未完成调色盘计划已清理；4.8 不再作为剩余任务。
+- 2026-05-24：**最终长尾收口 / 新闻英文 fallback 验证完成**。用户确认上传默认目录动态模板不做，后续由运营上传时人工选择目标 folder。生产 Directus 只读接口抽检全部 published 新闻：`published=48 / enTitle=0 / zhFallbackTitle=48 / enBlocks=0 / zhFallbackBlocks=48 / issues=[]`，证明 `_en` 为空时英文模式会回落到中文标题与正文且不空白；同时 `npm run build` 通过（仅既有 Browserslist、`::v-deep`、资源体积 warning）。至此 Directus 新闻迁移实施与验收任务全部完成。
+
+
 
 
 

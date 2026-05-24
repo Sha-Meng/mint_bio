@@ -1,63 +1,72 @@
 # mint_bio
 
+元素驱动官网前端项目。
+
+## 文档入口
+
+当前有效交接文档见：
+
+- [doc/index.md](./doc/index.md)
+
+其中包含：
+
+- 运营新闻编辑手册
+- 英文信息更新说明
+- 运维/开发技术文档
+- Directus、部署、CDN、凭据交接说明
+
+历史资料已归档到 `doc/archive/`，不作为当前操作依据。
+
 ## Project setup
-```
+
+```bash
 yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
+## Compiles and hot-reloads for development
+
+```bash
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
----
-
-## 英文版入口恢复指引
-
-当前英文版入口已通过功能开关临时下线。恢复步骤如下：
-
-### 恢复方法
-
-打开 `src/utils/language.js`，将开关常量改为 `true`：
-
-```js
-// 修改前（当前状态）
-export const FEATURE_EN_ENABLED = false
-
-// 修改后（恢复英文版）
-export const FEATURE_EN_ENABLED = true
-```
-
-然后重新构建并部署即可：
+## Compiles and minifies for production
 
 ```bash
 yarn build
-# 部署产出的 dist/ 目录
 ```
 
-### 影响面说明
+## Lints and fixes files
 
-开关恢复为 `true` 后：
+```bash
+yarn lint
+```
 
-1. **Header / MobileHeader** 的语言切换按钮（中文 / English）将重新显示。
-2. 地址栏 `?lang=en` 参数恢复生效，可通过分享链接直达英文版。
-3. `localStorage` 中的语言偏好恢复正常读写，用户选择英文后下次访问仍为英文。
-4. `en-US.json` 翻译文件及所有 i18n 逻辑代码均未删除，无需额外恢复。
+## 英文入口控制
 
-### 注意事项
+英文入口通过 Directus 后台控制。
 
-- 恢复前请确认 `src/i18n/en-US.json` 中的翻译内容已按需更新。
-- 本次下线仅涉及入口隐藏，不影响任何翻译数据和路由配置。
+开启英文入口：
+
+```text
+feature_en_enabled = true
+content_version = 当前版本号 + 1，例如从 1 改为 2
+```
+
+关闭英文入口：
+
+```text
+feature_en_enabled = false
+content_version = 当前版本号 + 1
+```
+
+用户重新打开或强制刷新页面后：
+
+1. Header / MobileHeader 的语言切换按钮按后台配置显示或隐藏。
+2. 地址栏 `?lang=en` 参数在英文入口开启时生效。
+3. `localStorage.language` 保存用户语言偏好。
+4. 固定文案优先读取 Directus `site_i18n_entries`，缺失时回退本地 JSON。
+
+开启英文前请确认英文翻译内容已按需更新，且翻译来源符合项目规则。
+
+固定文案日常维护见：[Directus 固定文案配置指南](./doc/operations/directus-i18n-guide.md)。
+
