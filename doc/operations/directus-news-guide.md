@@ -9,6 +9,10 @@
 - 分类集合：`News Categories` / `news_categories`
 - 媒体库：Directus File Library
 
+后台中 `News Articles` 列表用于维护官网新闻：
+
+![Directus 新闻文章列表](../assets/handoff/Directus-articles.png)
+
 运营日常只需要维护新闻内容和图片。不要修改：
 
 - 数据模型 / 字段配置
@@ -150,6 +154,8 @@
 4. 如果只更新中文新闻，不需要为了发布而补英文。
 
 更多规则见 [英文信息更新说明](./english-content-update.md)。
+
+新闻分类名称由 `news_categories` 中的 `name_zh` / `name_en` 维护；它不走 `site_i18n_entries` 固定文案表。
 
 ## 10. 发布后检查清单
 

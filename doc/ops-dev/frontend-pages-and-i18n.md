@@ -168,7 +168,7 @@ Directus 维护位置：
 |---|---|---|
 | 导航、页面标题、按钮、表单提示等固定文案 | Directus `site_i18n_entries` | 否；更新 `content_version` 即可 |
 | 新闻标题、摘要、正文 | Directus `news_articles` | 否 |
-| 新闻分类中英文切换 | 当前不纳入固定文案配置 | 不处理 |
+| 新闻分类名称 | Directus `news_categories.name_zh` / `name_en` | 否 |
 
 新闻英文 fallback 逻辑在 `src/api/news.js`，详见 [Directus 新闻前端集成](./directus-news-integration.md)。
 

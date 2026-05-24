@@ -26,7 +26,7 @@ https://cms.mint-bio.cn
   ↓ 宝塔 Nginx
 127.0.0.1:8055
   ↓
-Directus 11.17.4
+Directus 11.14.1
 ```
 
 ## 2. 关键域名
@@ -39,9 +39,23 @@ Directus 11.17.4
 | `/directus-api` | 官网同源访问 Directus 的代理路径。 |
 | `/video` | 新闻历史视频或静态视频资源路径。 |
 
+阿里云控制台首页用于进入 ECS、域名、DNS、CDN 等产品：
+
+![阿里云控制台首页](../assets/handoff/ailiyun-home.png)
+
+域名和解析相关界面可参考：
+
+![阿里云域名管理](../assets/handoff/ailiyun-domain.png)
+
+![阿里云 DNS 解析](../assets/handoff/aliyun-dns.png)
+
+阿里云真实登录账号和密码不写入仓库文档。需要登录控制台时，联系开发负责人，在本地私密凭据文档或公司安全渠道查询。
+
 ## 3. 本地开发代理
 
 配置文件：`vue.config.js`
+
+下面是当前项目可直接使用的本地开发代理配置，不是占位模板：
 
 ```js
 proxy: {
@@ -66,6 +80,8 @@ proxy: {
 - `/api`：联系表单等后端接口。
 - `/directus-api`：Directus API 和 assets。
 - `/video`：静态视频资源。
+
+完整可直接使用的 `vue.config.js` 文件配置见 [技术总览](./technical-overview.md) 的“本地代理完整配置”。
 
 ## 4. 前端构建部署
 
@@ -101,6 +117,20 @@ dist/
 - 目录权限辅助检查。
 - 备份任务。
 
+宝塔网站列表用于定位官网、CMS 管理域和反向代理配置：
+
+![宝塔网站页面](../assets/handoff/baota-web.png)
+
+宝塔 SSL 页面用于检查证书状态和到期时间：
+
+![宝塔 SSL 页面](../assets/handoff/baota-ssl.png)
+
+宝塔数据库页面用于定位 MySQL 数据库；截图中红框所示数据库与“联系我们”提交的联系信息相关：
+
+![宝塔数据库页面](../assets/handoff/baota-database.png)
+
+宝塔真实登录账号和密码不写入仓库文档。需要登录面板时，联系开发负责人查询。当前确认：宝塔未开启二次验证，未绑定手机号 / 邮箱归属。
+
 变更前建议：
 
 1. 备份当前站点配置。
@@ -130,7 +160,7 @@ Directus 管理域需要保证：
 
 当前确认：
 
-- Directus 版本：`11.17.4`。
+- Directus 版本：`11.14.1`，实际以服务器当前容器为准。
 - 管理入口：`https://cms.mint-bio.cn`。
 - 内部端口：`127.0.0.1:8055`。
 - 主要集合：`news_articles`、`news_categories`、`directus_files`、`site_i18n_entries`、`site_i18n_settings`。
@@ -146,6 +176,36 @@ Directus 管理域需要保证：
 
 实际路径以服务器当前配置为准。若与推荐路径不同，应在本文件后续维护记录中补充。
 
+Directus Docker Compose 关键结构：
+
+```yaml
+services:
+  directus:
+    image: directus/directus:11.14.1
+    container_name: mintbio-directus
+    ports:
+      - "8055:8055"
+    volumes:
+      - /data/mintbio/directus/uploads:/directus/uploads
+      - /data/mintbio/directus/extensions:/directus/extensions
+    environment:
+      SECRET: "<在安全渠道保存>"
+      ADMIN_EMAIL: "<在安全渠道保存>"
+      ADMIN_PASSWORD: "<在安全渠道保存>"
+      DB_CLIENT: "mysql"
+      DB_HOST: "host.docker.internal"
+      DB_PORT: "3306"
+      DB_DATABASE: "<在安全渠道保存>"
+      DB_USER: "<在安全渠道保存>"
+      DB_PASSWORD: "<在安全渠道保存>"
+      WEBSOCKETS_ENABLED: "true"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+```
+
+真实 `SECRET`、Directus 登录账号、数据库账号密码、Admin Token 不写入仓库文档，应在安全渠道或本机 `doc/private/credentials.local.md` 中交接。
+
 ## 8. CDN / DNS 关注点
 
 CDN 需要关注：
@@ -157,6 +217,12 @@ CDN 需要关注：
 - HTML 短缓存策略。
 - Directus assets 缓存策略。
 - 发布后是否需要刷新缓存。
+
+阿里云 ECS 和 CDN 界面可用于确认源站、实例和加速域名状态：
+
+![阿里云 ECS](../assets/handoff/ailiyun-ecs.png)
+
+![阿里云 CDN](../assets/handoff/aliyun-cdn.png)
 
 建议缓存策略：
 

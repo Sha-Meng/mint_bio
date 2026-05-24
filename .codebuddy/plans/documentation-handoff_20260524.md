@@ -570,3 +570,56 @@ doc/
    - 正式入口为 `doc/index.md`。
    - 旧静态 JSON 新闻流程仅作为“废弃/禁止继续使用”说明出现，或保留在 `archive/legacy-docs/`。
    - 未写入真实密码、Token、Secret、私钥。
+
+---
+
+# 阶段三：交接文档 review、截图增强与开发环境补充
+
+## name
+
+documentation-handoff-review-and-screenshots_20260525
+
+## overview
+
+在既有运营 / 运维开发交接文档基础上，复核当前文档口径，减少不必要的历史兼容说明，补充 `D:\UGit\pic` 中的交接截图，并为开发人员补齐从零还原本地开发环境的步骤和版本要求。
+
+## todos
+
+- [x] 复用既有交接计划，不另建重复 plan。
+- [x] 将 `D:\UGit\pic` 下全部 PNG 截图复制到 `doc/assets/handoff/`。
+- [x] 优化运营文档，插入 Directus 新闻和固定文案截图。
+- [x] 优化运维 / 开发文档，保留 Directus 版本号和路径建议。
+- [x] 在开发文档中补充 Node.js、Yarn、依赖安装、代理、启动、构建、校验的完整环境配置流程。
+- [x] 验证 Markdown 链接、图片路径、文档口径和凭据安全边界。
+
+## User Requirements
+
+- Review 当前文档正确性和合理性，尤其是中英文相关内容。
+- 避免过度版本、兼容、历史迁移等信息占据交接主线。
+- 运维文档保留 Directus 具体版本号、内部端口和推荐路径等必要交接信息。
+- 开发文档新增完整环境配置流程，明确 Node.js、Yarn、安装、启动、构建和校验要求。
+- 使用 `D:\UGit\pic` 全部截图增强文档，图片随仓库交接。
+
+## Implementation Approach
+
+- 图片统一复制到 `doc/assets/handoff/`，Markdown 使用相对路径引用。
+- 运营文档只放和日常操作直接相关的截图，避免技术细节干扰运营。
+- 运维文档保留服务器、宝塔、阿里云、CDN、DNS、SSL、数据库截图，并注明截图用于定位，真实配置以控制台当前状态为准。
+- 开发环境小节以“按步骤还原”为主，推荐 Node.js 24.x LTS + Yarn Classic 1.22.x；项目当前无 `.nvmrc` / `engines`，暂不新增约束文件。
+- 翻译规则继续遵守项目 i18n policy：不自行补译，缺失英文保持空值并回退中文。
+
+## Validation / Acceptance
+
+- 所有新增图片文件存在于 `doc/assets/handoff/`。
+- 文档中新增图片链接大小写和路径正确。
+- `doc/index.md` 继续作为当前交接文档入口。
+- 开发环境流程能覆盖版本检查、依赖安装、本地代理、启动、构建、lint、i18n 审计和 PowerShell 执行策略提示。
+- 文档不包含真实密码、Token、私钥、AccessKey。
+
+## Follow-up Adjustments
+
+- 运营入口已合并为 `正文中英文对照表配置`，旧 `english-content-update.md` 仅保留跳转说明。
+- 当前正式文档不再列出旧新闻 JSON、静态 fallback、旧开关等废弃清单。
+- 本地代理已补充为当前可直接使用的完整 `vue.config.js` 配置。
+- Directus 版本按最新交接信息更新为 `11.14.1`，并注明以服务器当前容器为准。
+- `.gitignore` 已加入 `doc/private/` 和 `*.secrets.md`，用于保护本机临时凭据文件；真实凭据仍不写入仓库文档。

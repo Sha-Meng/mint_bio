@@ -6,14 +6,6 @@
 
 核心文件：`src/api/news.js`
 
-已废弃：
-
-- `public/data/news_list.json`
-- `public/data/news_*.json`
-- 旧新闻图片放入 `src/assets/News/**` 的运营流程
-- 静态 JSON fallback
-- `VUE_APP_USE_DIRECTUS`
-
 `isDirectusNewsEnabled()` 当前固定返回 `true`。
 
 ## 2. API 基础配置
@@ -43,6 +35,10 @@ const DIRECTUS_ASSET_URL = (process.env.VUE_APP_DIRECTUS_ASSET_URL || DIRECTUS_U
 | `news_articles` | 新闻文章。 |
 | `news_categories` | 新闻分类。 |
 | `directus_files` | 封面和正文图片。 |
+
+Directus 数据模型位置可参考下图；日常运营不应在此修改集合或字段：
+
+![Directus 数据模型](../assets/handoff/directus-datamodel.png)
 
 ## 4. `news_articles` 字段
 
@@ -230,4 +226,4 @@ Raw HTML 风险较高，建议只由 Admin 或开发维护。
 - Directus 新闻 `_en` 字段是否填写。
 - 未填写时回退中文是预期行为。
 
-注意：新闻分类中英文切换当前不纳入固定文案运行时配置。
+注意：新闻分类名称由 `news_categories.name_zh` / `name_en` 提供，不纳入 `site_i18n_entries` 固定文案运行时配置。
