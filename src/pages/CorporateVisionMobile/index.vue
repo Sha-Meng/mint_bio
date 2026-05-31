@@ -117,11 +117,10 @@
           <span>{{ getText('corporate.frontend') }}</span><span class="orange-text">{{ getText('corporate.research') }}</span><span>{{ getText('corporate.breakthrough') }}</span>
         </div>
         <div class="scientific-title-middle">
-          <p>{{ getText('corporate.roadDescMobile1') }}</p>
-          <p>{{ getText('corporate.roadDescMobile2') }}</p>
+          <p v-for="line in roadDescLines" :key="line">{{ line }}</p>
         </div>
         <div>
-          <span>{{ getText('corporate.backend') }}</span><span class="orange-text">{{ getText('corporate.landing') }}</span><span>{{ getText('corporate.massProduction') }}</span>
+          <span>{{ getText('corporate.backend') }}</span><span class="orange-text">{{ getText('corporate.massProduction') }}</span><span>{{ getText('corporate.landing') }}</span>
         </div>
       </div>
       <div class="scientific-card">
@@ -132,12 +131,12 @@
             <div class="slider" :style="{ left: sliderPosition + 'px' }"></div>
 
           </div>
-          <div :class="{ 'menu-item': true, 'active': activeIndex === 1 }" @click="itemMove(cardList[1])">{{ getText('corporate.rdTeamMobile') }}</div>
+          <div :class="{ 'menu-item': true, 'active': activeIndex === 1 }" @click="itemMove(cardList[1])">{{ getText('corporate.rdTeam') }}</div>
         </div>
         <div class="scientific-card-content">
-          <img :src="cardList[activeIndex].textMiddle" class="text-middle" />
+          <div class="text-middle">{{ cardList[activeIndex].textMiddle }}</div>
           <div class="text-bottom">{{ cardList[activeIndex].textBottom }}</div>
-          <img :src="cardList[activeIndex].imSrc" :key="imgSrc" class="main-img" />
+          <img :src="cardList[activeIndex].imSrc" :key="cardList[activeIndex].imSrc" class="main-img" />
         </div>
       </div>
     </div>
@@ -181,18 +180,23 @@ export default {
       return items;
     });
 
+    const roadDescLines = computed(() => {
+      const lines = [getText('corporate.roadDesc1')];
+      return lines.filter((line) => typeof line === 'string' && line.trim());
+    });
+
     const cardList = computed(() => [
       {
         index: 0,
-        textTop: getText('corporate.rdTeamMobile'),
-        textMiddle: require("@/assets/images/number-1.png"),
+        textTop: getText('corporate.rdCenter'),
+        textMiddle: getText('corporate.rdCenterMetric'),
         textBottom: getText('corporate.rdCenterDesc'),
         imSrc: require("@/assets/images/scientific.png"),
       },
       {
         index: 1,
-        textTop: getText('corporate.rdTeamMobile'),
-        textMiddle: require("@/assets/images/number-2.png"),
+        textTop: getText('corporate.rdTeam'),
+        textMiddle: getText('corporate.rdTeamMetric'),
         textBottom: getText('corporate.rdTeamDesc'),
         imSrc: require("@/assets/images/scientific-2.png"),
       },
@@ -209,7 +213,7 @@ export default {
       }));
     });
 
-    return { titleStyle: { top: "47%" }, getText, timeList, cardList, corpList };
+    return { titleStyle: { top: "47%" }, getText, timeList, roadDescLines, cardList, corpList };
   },
   data() {
     return {
@@ -578,7 +582,13 @@ export default {
 
       .text-middle {
         margin: 30px auto 10px;
-        width: 118px;
+        color: #ff7200;
+        font-size: 30px;
+        font-weight: 520;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 320px;
+        text-align: center;
       }
 
       .text-bottom {

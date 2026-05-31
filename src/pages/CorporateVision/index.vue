@@ -110,18 +110,15 @@
           </div>
         </div>
         <div class="scientific-title-middle">
-          <p>{{ getText('corporate.roadDesc1') }}</p>
-          <p>{{ getText('corporate.roadDesc2') }}</p>
-          <p>{{ getText('corporate.roadDesc3') }}</p>
-          <p>{{ getText('corporate.roadDesc4') }}</p>
+          <p v-for="line in roadDescLines" :key="line">{{ line }}</p>
         </div>
         <div class="scientific-title-right">
           <div class="scientific-title-left">
             <div>
-              <span>{{ getText('corporate.backend') }}</span><span class="opacity-0">{{ getText('corporate.landing') }}</span><span>{{ getText('corporate.massProduction') }}</span>
+              <span>{{ getText('corporate.backend') }}</span><span class="opacity-0">{{ getText('corporate.massProduction') }}</span><span>{{ getText('corporate.landing') }}</span>
             </div>
             <div>
-              <span class="opacity-0">{{ getText('corporate.backend') }}</span><span class="orange-text">{{ getText('corporate.landing') }}</span><span class="opacity-0">{{ getText('corporate.massProduction') }}</span>
+              <span class="opacity-0">{{ getText('corporate.backend') }}</span><span class="orange-text">{{ getText('corporate.massProduction') }}</span><span class="opacity-0">{{ getText('corporate.landing') }}</span>
             </div>
           </div>
         </div>
@@ -131,7 +128,7 @@
           <div class="scientific-card-left-item" v-for="(card, index) in cardList" :key="index"
             @mousemove="itemMove(card)" :class="{ active: activeIndex === index }">
             <div class="top button-top">{{ card.textTop }}</div>
-            <div class="middle"><img :src="card.textMiddle" alt="" /></div>
+            <div class="middle metric">{{ card.textMiddle }}</div>
             <div class="bottom">{{ card.textBottom }}</div>
           </div>
         </div>
@@ -208,18 +205,23 @@ export default {
       return items;
     });
 
+    const roadDescLines = computed(() => {
+      const lines = [getText('corporate.roadDesc1')];
+      return lines.filter((line) => typeof line === 'string' && line.trim());
+    });
+
     const cardList = computed(() => [
       {
         index: 0,
         textTop: getText('corporate.rdCenter'),
-        textMiddle: require("@/assets/images/number-1.png"),
+        textMiddle: getText('corporate.rdCenterMetric'),
         textBottom: getText('corporate.rdCenterDesc'),
         imRight: require("@/assets/images/scientific.png"),
       },
       {
         index: 1,
         textTop: getText('corporate.rdTeam'),
-        textMiddle: require("@/assets/images/number-2.png"),
+        textMiddle: getText('corporate.rdTeamMetric'),
         textBottom: getText('corporate.rdTeamDesc'),
         imRight: require("@/assets/images/scientific-2.png"),
       },
@@ -237,7 +239,7 @@ export default {
       }));
     });
 
-    return { titleStyle: { top: "47%" }, getText, timeList, cardList, corpList };
+    return { titleStyle: { top: "47%" }, getText, timeList, roadDescLines, cardList, corpList };
   },
   data() {
     return {
@@ -581,8 +583,13 @@ export default {
             rgba(255, 255, 255, 0.0001) 54.33%,
             rgba(255, 255, 255, 0.1) 93.02%);
 
-        img {
-          height: 60px;
+        .metric {
+          color: #ff7200;
+          font-family: MiSans;
+          font-size: 54px;
+          font-weight: 520;
+          line-height: 1.1;
+          letter-spacing: 0;
         }
 
         .button-top {
