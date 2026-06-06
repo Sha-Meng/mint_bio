@@ -350,34 +350,53 @@
     "faq3": "题",
     "productList": [
       {
-        "fullName": "Biosynthetic Histidine",
-        "prefix": "Biosynthetic",
-        "name": "Histidine",
+        "fullName": "无豆粕日粮解决方案",
+        "prefix": "无豆粕日粮",
+        "name": "解决方案",
         "fields": [
-          "Food",
-          "Feed",
-          "Biochemical Reagent & Pharmaceutical Manufacturing"
+          "养殖业"
         ],
         "advantages": [
-          "Cost advantage over similar products",
-          "Higher fermentation rate and efficiency than industry average",
-          "Higher product purity than chemical synthesis"
-        ]
+          "豆粕减量替代",
+          "精准营养供给",
+          "显著降本增效",
+          "降氮减排环保"
+        ],
+        "imageUrl": "https://cms.mint-bio.cn/assets/7ee7c999-1276-4af2-88b5-eecb90965300?key=system-large-contain&v=2026-05-05T14%3A17%3A10.000Z"
       },
       {
-        "fullName": "Biosynthetic Isoleucine",
-        "prefix": "Biosynthetic",
-        "name": "Isoleucine",
+        "fullName": "生物合成组氨酸",
+        "prefix": "生物合成",
+        "name": "组氨酸",
         "fields": [
-          "Pharmaceuticals",
-          "Chemical Reagents",
-          "Feed Additives"
+          "食品",
+          "医药",
+          "化妆品",
+          "饲料"
         ],
         "advantages": [
-          "Reduced soybean consumption & lower animal farming costs when incorporated into feed",
-          "Substantial cost reduction over similar products",
-          "Higher fermentation rate and efficiency than the industry average"
-        ]
+          "自研高效菌株",
+          "绿色生物发酵",
+          "产品纯度高",
+          "工艺路线先进"
+        ],
+        "imageUrl": "assets/images/product-histidine.png"
+      },
+      {
+        "fullName": "生物合成异亮氨酸",
+        "prefix": "生物合成",
+        "name": "异亮氨酸",
+        "fields": [
+          "饲料添加剂",
+          "食品添加剂"
+        ],
+        "advantages": [
+          "发酵效率高",
+          "规模化成本优势",
+          "产品品质稳定",
+          "稳定供应能力"
+        ],
+        "imageUrl": "assets/images/product-isoleucine.png"
       }
     ],
     "faqList": [
@@ -436,7 +455,7 @@
     "expressCase": "[ 生物可降解快递袋 ]",
     "caas": "中国农科院",
     "caasAndMint": "& 元素驱动",
-    "mulchingCase": "[ 生物基降解地膜 ]",
+    "mulchingCase": "[ 生物可降解地膜 ]",
     "xinjiangCaas": "中国农业科学院、南阳科学院",
     "faq": "常见",
     "faq2": "问",
@@ -735,7 +754,8 @@
       },
       {
         "line1": "杭州市",
-        "line2": "准独角兽榜单企业（2023–2026）"
+        "line2": "准独角兽榜单企业",
+        "line3": "（2023–2026）"
       },
       {
         "line1": "浙江省",

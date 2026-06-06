@@ -33,7 +33,7 @@
     <g :filter="`url(#honorFilterTitle_${uid})`">
       <text
         x="40"
-        y="148"
+        :y="titleStartY"
         text-anchor="start"
         fill="#F1F3F7"
         font-family="Montserrat, MiSans, sans-serif"
@@ -42,6 +42,7 @@
       >
         <tspan x="40" dy="0">{{ line1 }}</tspan>
         <tspan x="40" dy="23">{{ line2 }}</tspan>
+        <tspan v-if="line3" x="40" dy="23">{{ line3 }}</tspan>
       </text>
     </g>
     <defs>
@@ -73,7 +74,7 @@
         x="30"
         y="120"
         width="240"
-        height="70"
+        height="90"
         filterUnits="userSpaceOnUse"
         color-interpolation-filters="sRGB"
       >
@@ -129,6 +130,7 @@ export default {
   props: {
     line1: { type: String, default: "" },
     line2: { type: String, default: "" },
+    line3: { type: String, default: "" },
     width: { type: [String, Number], default: "100%" },
     height: { type: [String, Number], default: "100%" },
     uidKey: { type: [String, Number], default: null },
@@ -141,6 +143,9 @@ export default {
   computed: {
     uid() {
       return this.uidKey != null ? String(this.uidKey) : this.autoUid;
+    },
+    titleStartY() {
+      return this.line3 ? 136 : 148;
     },
   },
 };

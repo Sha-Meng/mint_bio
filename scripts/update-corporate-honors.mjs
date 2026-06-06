@@ -13,7 +13,7 @@ const honors = [
   { line1: "浙江省", line2: "企业研究院" },
   { line1: "浙江省", line2: "专精特新中小企业" },
   { line1: "浙江省", line2: "未来独角兽企业" },
-  { line1: "杭州市", line2: "准独角兽榜单企业（2023–2026）" },
+  { line1: "杭州市", line2: "准独角兽榜单企业", line3: "（2023–2026）" },
   { line1: "浙江省", line2: "创新型中小企业" },
   { line1: "浙江省", line2: "科技型中小企业" },
   { line1: "杭州市高新技术", line2: "企业研发中心" },
@@ -22,22 +22,23 @@ const honors = [
   { line1: "西湖区", line2: "高校经济标杆项目" },
 ];
 
-const honorEntries = honors.flatMap((item, index) => [
-  {
-    key_path: `corporate.honors.${index}.line1`,
-    group: "corporate",
-    label: `荣誉墙 ${index + 1} 第一行`,
-    value_zh: item.line1,
-    value_en: "",
-  },
-  {
-    key_path: `corporate.honors.${index}.line2`,
-    group: "corporate",
-    label: `荣誉墙 ${index + 1} 第二行`,
-    value_zh: item.line2,
-    value_en: "",
-  },
-]);
+const LINE_LABELS = {
+  line1: "第一行",
+  line2: "第二行",
+  line3: "第三行",
+};
+
+const honorEntries = honors.flatMap((item, index) =>
+  Object.entries(LINE_LABELS)
+    .filter(([field]) => Object.prototype.hasOwnProperty.call(item, field))
+    .map(([field, lineLabel]) => ({
+      key_path: `corporate.honors.${index}.${field}`,
+      group: "corporate",
+      label: `荣誉墙 ${index + 1} ${lineLabel}`,
+      value_zh: item[field],
+      value_en: "",
+    }))
+);
 
 function loadEnv() {
   const env = {};

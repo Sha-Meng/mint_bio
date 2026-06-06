@@ -36,6 +36,8 @@ Update the right-side feature list on the Products -> material page homepage/ban
 - [x] Convert the supplied certification HEIC into a browser-compatible JPG asset.
 - [x] Replace Material mulching case card 2 and 3 images on desktop and mobile while keeping card 1 unchanged.
 - [x] Validate new image dimensions, ensure no HEIC frontend references remain, and run production build.
+- [x] Update `newMaterial.mulchingCase` from the bio-based wording to the biodegradable wording in Directus and local fallback JSON.
+- [x] Validate that the old `newMaterial.mulchingCase` fallback value is no longer present in source.
 
 # User Requirements
 
@@ -116,6 +118,41 @@ No English translation was provided. Per i18n policy, the script updates `value_
 
 # Validation / Acceptance
 
+## Material Mulching Case Title Copy - 2026-06-06
+
+### User Requirements
+
+- On the material page, change `[ 生物基降解地膜 ]` to `[ 生物可降解地膜 ]`.
+
+### Implementation Approach
+
+- Update the primary runtime Directus entry `newMaterial.mulchingCase` and increment `site_i18n_settings.content_version`.
+- Synchronize `src/i18n/zh-CN.json` and `src/i18n/en-US.json` as fallback-only copies.
+- Do not change surrounding case body text, images, layout, or product card copy.
+
+### Affected Files
+
+- `.codebuddy/plans/new-material-features-copy_20260531.md`
+- `scripts/update-new-material-application-cases.mjs`
+- `src/i18n/zh-CN.json`
+- `src/i18n/en-US.json`
+
+### Todos
+
+- [x] Confirm current Directus value and content version.
+- [x] Apply Directus copy update and version bump if needed.
+- [x] Sync local fallback JSON.
+- [x] Update the related Directus maintenance script so future runs do not restore the old wording.
+- [x] Validate source no longer contains the old key value.
+
+### Acceptance
+
+- [x] Directus `newMaterial.mulchingCase` is `[ 生物可降解地膜 ]`.
+- [x] `site_i18n_settings.content_version` incremented from `40` to `41`.
+- [x] `node scripts/update-new-material-application-cases.mjs` dry-run reports `creates: 0`, `updates: 0`, `disables: 0`.
+- [x] `npm.cmd run i18n:flatten` completed successfully.
+- [x] Source search under `src` and `scripts` confirms the title key now uses `[ 生物可降解地膜 ]`.
+
 ## Material Product Card Scroll Alignment Fix - 2026-06-02
 
 ### User Requirements
@@ -153,6 +190,78 @@ No English translation was provided. Per i18n policy, the script updates `value_
 - [x] Replace hard-coded tab labels with display-only short-title derivation.
 - [ ] Validate build.
 - [ ] Browser-check desktop Material card list alignment and tab movement.
+
+## Material Product Card Alignment Root Cause - 2026-06-06
+
+### User Screenshot Finding
+
+The latest screenshot still shows the old alignment problem in a more specific form: after later product cards slide up, the exposed curved tabs do not sit on one horizontal baseline. Some tabs are higher, and some are lower.
+
+### Root Cause Analysis
+
+- `MouseScroll` renders every product card as an absolutely positioned `.module`.
+- Each `.module` has `height: 740px; display: flex; justify-content: center; align-items: center`.
+- `AaModuleContent` does not define a fixed root height. Its actual height depends on the product card content.
+- Material cards now have different amounts of content:
+  - 地膜 has 5 advantage bullets.
+  - 纤维 has 6 advantage bullets, including a long `OEKO-TEX® STANDARD 100认证` line that can wrap.
+  - 包装 has 4 advantage bullets.
+  - 注塑 has only 2 advantage bullets.
+  - 3D 打印 has 5 advantage bullets and more application chips.
+- Because `.module` vertically centers the whole `AaModuleContent` box, cards with taller content are centered with their top edge higher, while shorter cards are centered with their top edge lower.
+- The tab is inside the `AaModuleContent` root. Therefore the tab inherits that per-card top offset, which is exactly why the tab row becomes visually uneven when several cards have reached the top stack.
+- The mismatch is not primarily caused by the tab text length. Short tab labels reduce horizontal pressure but do not eliminate the vertical baseline drift.
+
+### Why Previous Attempts Missed
+
+- The controlled two-card `MaterialProductCards` approach changed the interaction model, so it did not satisfy the user's requirement that the card/tab interaction remain like the old version.
+- Returning to `MouseScroll` restored the old interaction, but kept `.module { align-items: center; }`, so variable-height cards still produce different tab Y positions.
+- The short-title change addresses text overflow only. It does not address the vertical centering of variable-height card roots.
+
+### Candidate Fix Direction
+
+- Keep the old scroll math and the user-facing interaction: each card still moves by the same `scrollDistance`.
+- Stop vertically centering Material product cards in their `.module` slot. Top-anchor the cards so every `AaModuleContent` starts from the same Y coordinate and every tab has the same baseline.
+- Apply the same top-aligned behavior to AminoAcid, because the user confirmed both pages should share the same alignment model.
+- Give `AaModuleContent` a fixed overall height so the card can contain the largest content case; do not let each card's own content height determine its top/bottom geometry.
+- Avoid changing product content, Directus text, or the card scroll gesture while fixing alignment.
+
+## Shared Product Card Fixed Height Alignment - 2026-06-06
+
+### User Requirements
+
+- Material and AminoAcid desktop product cards should both keep the old card-following-tab scroll interaction.
+- When later cards slide up, all exposed card tabs should remain on one horizontal baseline.
+- Top-align the card stack, but also avoid creating a new bottom-edge mismatch.
+- Prefer a fixed card container that can accommodate the largest content, rather than per-card adaptive height.
+
+### Implementation Approach
+
+- Update shared `MouseScroll` so each `.module` aligns its card to the top of the scroll slot instead of vertically centering it.
+- Update shared desktop `AaModuleContent` so the card root has a stable fixed height equal to the scroll slot height.
+- Make the inner content panel fill the remaining height below the tab, with border-box sizing, so every card has the same top and bottom geometry.
+- Keep the existing scroll math (`moduleHeight = 800`) and align the visible container/module slot/card root to the same `800px` height, preserving the same per-card tab ownership.
+
+### Affected Files
+
+- `src/components/MouseScroll/index.vue`
+- `src/components/AaModuleContent/index.vue`
+- `.codebuddy/plans/new-material-features-copy_20260531.md`
+
+### Todos
+
+- [x] Top-align shared desktop `MouseScroll` modules.
+- [x] Fix desktop `AaModuleContent` root/content heights.
+- [x] Validate build.
+- [x] Verify source-level geometry: fixed card height, shared top alignment, no per-card adaptive root height.
+
+### Acceptance
+
+- [x] `MouseScroll` visible container, module slot, and scroll step are consistently `800px`.
+- [x] `MouseScroll .module` uses `align-items: flex-start`, so Material and AminoAcid card roots are top-aligned.
+- [x] `AaModuleContent` root is fixed at `800px`; the tab is fixed at `40px`; the content panel fills the remaining height.
+- [x] `npm.cmd run build` completed successfully with existing asset-size and `::v-deep` warnings.
+- [x] Local static preview is available at `http://127.0.0.1:8080/#/material` and `http://127.0.0.1:8080/#/aminoAcid`.
 
 Acceptance criteria:
 

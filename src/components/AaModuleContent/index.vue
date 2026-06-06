@@ -139,12 +139,16 @@ const handleNext = throttle(() => {
 .aminoAcid {
   &-module2 {
     width: 100%;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
 
     &-radian {
       position: relative;
       top: 1px;
       width: 20%;
       height: 40px;
+      flex: 0 0 40px;
       overflow: hidden;
       border-radius: 20px 20px 0 0;
 
@@ -209,6 +213,9 @@ const handleNext = throttle(() => {
     }
 
     &-content {
+      flex: 1 1 auto;
+      min-height: 0;
+      box-sizing: border-box;
       border-radius: 20px;
       border: 1px solid transparent;
       background-image: linear-gradient(#181a1d, #12161b),
@@ -221,7 +228,10 @@ const handleNext = throttle(() => {
       background-clip: content-box, border-box;
 
       &-w {
+        height: calc(100% - 105px);
         margin: 45px 74px 60px 74px;
+        display: flex;
+        flex-direction: column;
       }
 
       &-top {
@@ -234,6 +244,8 @@ const handleNext = throttle(() => {
       }
 
       &-bottom {
+        flex: 1 1 auto;
+        min-height: 0;
         display: flex;
         justify-content: space-between;
         gap: 70px;

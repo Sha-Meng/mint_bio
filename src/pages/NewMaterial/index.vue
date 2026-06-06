@@ -158,7 +158,7 @@ export default {
         advantages: cat.advantages,
         imageUrl: (imageUrls[i] || []).map((img, j) => ({
           url: img.url,
-          desc: (cat.items && cat.items[j]) || "",
+          desc: (cat.items && (cat.items[j] || cat.items[0])) || moduleCards[i]?.title || "",
         })),
       }));
     },
@@ -269,9 +269,11 @@ export default {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      height: 600px;
+      aspect-ratio: 1424 / 700;
+      height: auto;
       background-image: url("@/assets/images/material-banner.png");
       background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
       border-radius: 20px;
       border: 1px solid #ffffff33;

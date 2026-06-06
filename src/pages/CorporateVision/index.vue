@@ -149,7 +149,7 @@
       <div v-if="title3InView" class="project animate__animated animate__fadeInUp">
         <div v-for="item in corpList" :key="item.key" class="project-image hover-scale-transition"
           @mousemove="cardHover(item)" @mouseleave="cardLeave(item)" :style="{ transform: transformMap[item.key] || 'scale(1)' }">
-          <HonorCard :line1="item.line1" :line2="item.line2" :uid-key="item.key" />
+          <HonorCard :line1="item.line1" :line2="item.line2" :line3="item.line3" :uid-key="item.key" />
         </div>
       </div>
     </div>
@@ -241,6 +241,7 @@ export default {
         key: HONOR_KEYS[index],
         line1: h.line1,
         line2: h.line2,
+        line3: h.line3,
       }));
     });
 

@@ -151,7 +151,7 @@
     </div> -->
     <div class="project">
         <div v-for="item in corpList" :key="item.key" class="project-image">
-          <HonorCard :line1="item.line1" :line2="item.line2" :uid-key="item.key" />
+          <HonorCard :line1="item.line1" :line2="item.line2" :line3="item.line3" :uid-key="item.key" />
         </div>
       </div>
     <div class="banner-sector">
@@ -215,6 +215,7 @@ export default {
         key: HONOR_KEYS[index],
         line1: h.line1,
         line2: h.line2,
+        line3: h.line3,
       }));
     });
 

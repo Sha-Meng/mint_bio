@@ -90,28 +90,19 @@ export default {
     Propagate
   },
   setup() {
+    const toProductModule = (product) => ({
+      title: product.fullName,
+      topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
+      introductionTitle1: product.prefix,
+      introductionTitle2: product.name,
+      applyTexts: product.fields,
+      advantages: product.advantages,
+      imageUrl: [{ url: product.imageUrl }],
+    });
+
     const module2Data = computed(() => {
-      const list = getText('aminoAcid.productList');
-      return [
-        {
-          title: list[1].fullName,
-          topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-          introductionTitle1: list[1].prefix,
-          introductionTitle2: list[1].name,
-          applyTexts: list[1].fields,
-          advantages: list[1].advantages,
-          imageUrl: ["assets/AminoAcid/module2_ele1.png"],
-        },
-        {
-          title: list[0].fullName,
-          topItems: ["Brilliant", "MiNT BiO", "BioAmino"],
-          introductionTitle1: list[0].prefix,
-          introductionTitle2: list[0].name,
-          applyTexts: list[0].fields,
-          advantages: list[0].advantages,
-          imageUrl: ["assets/AminoAcid/module2_ele2.png"],
-        },
-      ];
+      const list = getText('aminoAcid.productList') || [];
+      return list.map(toProductModule);
     });
 
 

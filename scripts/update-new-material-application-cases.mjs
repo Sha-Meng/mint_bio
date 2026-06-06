@@ -11,7 +11,7 @@ const applicationCaseCopy = {
   "newMaterial.expressCase": "[ 生物可降解快递袋 ]",
   "newMaterial.xinjiangCaas": "中国农业科学院、南阳科学院",
   "newMaterial.caasAndMint": "& 元素驱动",
-  "newMaterial.mulchingCase": "[ 生物基降解地膜 ]",
+  "newMaterial.mulchingCase": "[ 生物可降解地膜 ]",
 };
 
 function loadEnv() {

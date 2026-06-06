@@ -116,17 +116,17 @@ export default {
   margin: 222px 0;
   position: relative;
   width: 100%;
-  height: 740px;
+  height: 800px;
   overflow: hidden;
 }
 
 .module {
   position: absolute;
   width: 100%;
-  height: 740px;
+  height: 800px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   transition: transform 0.3s ease-out;
 }
 </style>
