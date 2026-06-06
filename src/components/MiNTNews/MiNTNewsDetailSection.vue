@@ -39,6 +39,15 @@
 		  <div v-html="content.strongText" class="new-strongText"></div>
 		</div>
 
+		<div v-if="content.heading" :class="['section-heading', `section-heading-level-${content.heading.level}`]">
+		  <div v-if="content.heading.html" v-html="content.heading.html"></div>
+		  <div v-else>{{ content.heading.text }}</div>
+		</div>
+
+		<div v-if="content.listHtml" class="section-list" v-html="content.listHtml"></div>
+
+		<hr v-if="content.divider" class="section-divider" />
+
 		<div v-if="content.richHtml" class="rich-html" v-html="content.richHtml"></div>
 
 		<div v-if="content.quote && content.quote.length" class="section-quote" :style="{ borderLeftColor: props.categorycolor }">
@@ -188,6 +197,71 @@ function imageContentClass(baseClass, index) {
 
     }
 
+    .section-heading {
+      margin-top: 64px;
+      color: white;
+      font-family: MiSans VF;
+      font-weight: 700;
+      line-height: 1.35;
+
+      &.section-heading-level-2 {
+        font-size: 28px;
+      }
+
+      &.section-heading-level-3 {
+        font-size: 24px;
+      }
+
+      &.section-heading-level-4 {
+        font-size: 21px;
+      }
+    }
+
+    .section-list {
+      margin-top: 32px;
+      color: white;
+      font-size: 21px;
+      font-weight: 330;
+      line-height: 33px;
+      font-family: MiSans;
+
+      :deep(ul),
+      :deep(ol) {
+        margin: 0;
+        padding-left: 1.5em;
+      }
+
+      :deep(ul) {
+        list-style: disc;
+      }
+
+      :deep(ol) {
+        list-style: decimal;
+      }
+
+      :deep(li) {
+        margin-top: 10px;
+      }
+
+      :deep(li:first-child) {
+        margin-top: 0;
+      }
+
+      :deep(ul ul),
+      :deep(ol ol),
+      :deep(ul ol),
+      :deep(ol ul) {
+        margin-top: 10px;
+      }
+    }
+
+    .section-divider {
+      width: 100%;
+      margin: 50px 0 0;
+      border: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.36);
+    }
+
     .rich-html {
       margin-top: 50px;
       width: 100%;
@@ -269,6 +343,38 @@ function imageContentClass(baseClass, index) {
           font-size: 14px;
           line-height: 23px;
         }
+      }
+
+      .section-heading {
+        margin-top: 32px;
+
+        &.section-heading-level-2 {
+          font-size: 20px;
+        }
+
+        &.section-heading-level-3,
+        &.section-heading-level-4 {
+          font-size: 18px;
+        }
+      }
+
+      .section-list {
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 23px;
+
+        :deep(ul),
+        :deep(ol) {
+          padding-left: 1.35em;
+        }
+
+        :deep(li) {
+          margin-top: 6px;
+        }
+      }
+
+      .section-divider {
+        margin-top: 30px;
       }
 
       .rich-html {

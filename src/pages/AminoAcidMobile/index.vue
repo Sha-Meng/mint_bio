@@ -53,6 +53,22 @@
       </div>
       <Propagate />
     </div>
+
+    <div class="aminoAcid-faq border-gradient">
+      <div class="aminoAcid-faq-title">
+        <span>{{ getText('aminoAcid.faq') }}</span><span class="orange-text">？</span><span>{{ getText('aminoAcid.faq2') }}</span>
+      </div>
+      <div class="aminoAcid-faq-title aminoAcid-faq-title-second">
+        <span :style="{ opacity: 0 }">{{ getText('aminoAcid.faq') }}</span><span class="orange-text"
+          :style="{ opacity: 0 }">？</span><span>{{ getText('aminoAcid.faq3') }}</span>
+      </div>
+      <el-collapse class="aminoAcid-faq-collapse" @change="handleFaqChange">
+        <el-collapse-item v-for="(item, index) in questionList" :key="index" :title="item.title"
+          :name="index" :icon="activeFaqNames.includes(index) ? Minus : Plus">
+          <div class="aminoAcid-faq-content" v-html="item.content"></div>
+        </el-collapse-item>
+      </el-collapse>
+    </div>
   </div>
 </template>
 
@@ -62,6 +78,7 @@ import BannerTitle from '@/components/BannerTitle'
 import MouseScrollM from '@/components/MouseScrollM';
 import Propagate from '@/components/Propagate';
 import AaModuleContentMobile from "@/components/AaModuleContentMobile";
+import { Plus, Minus } from "@element-plus/icons-vue";
 import { getText } from "@/utils/language";
 
 
@@ -106,10 +123,26 @@ export default {
         zIndex: index,
       };
     };
+    const activeFaqNames = ref([]);
+    const questionList = computed(() => {
+      const faqList = getText('aminoAcid.faqList') || [];
+      return faqList.map(item => ({
+        title: item.question,
+        content: item.answer,
+      }));
+    });
+    const handleFaqChange = (activeNames) => {
+      activeFaqNames.value = Array.isArray(activeNames) ? activeNames : [activeNames];
+    };
     return {
       module2Data,
       getTabStyleData,
+      activeFaqNames,
+      questionList,
+      handleFaqChange,
       getText,
+      Plus,
+      Minus,
     };
   },
 };
@@ -260,6 +293,74 @@ export default {
     }
 
 
+  }
+
+  &-faq {
+    margin-top: 100px;
+    padding: 60px 0 60px 45px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 520;
+    text-align: left;
+
+    &-title {
+      line-height: 34px;
+
+      .orange-text {
+        color: #ff7200;
+      }
+    }
+
+    &-title-second {
+      margin-bottom: 28px;
+    }
+
+    &-collapse {
+      font: 400 14px MiSans;
+      color: #fff;
+
+      --el-collapse-header-bg-color: #11161b !important;
+      --el-collapse-header-text-color: #fff !important;
+      --el-collapse-header-font-size: 14px !important;
+      --el-collapse-header-padding: 0 !important;
+      --el-collapse-header-font-weight: 500 !important;
+      --el-collapse-header-border-bottom: none !important;
+
+      ::v-deep .el-collapse-item__header {
+        min-height: 80px;
+        height: auto;
+        padding: 14px 0;
+        text-align: left;
+        border-bottom: 1px solid #66666680;
+        line-height: 1.45;
+      }
+
+      .is-active {
+        ::v-deep .el-collapse-item__header {
+          border-bottom: none;
+        }
+      }
+
+      ::v-deep .el-collapse-item__wrap {
+        padding: 20px 0;
+        background-color: #11161b;
+        border-bottom: 1px solid #66666680;
+      }
+
+      ::v-deep .el-collapse-item__arrow {
+        margin: 0 0 0 10px;
+      }
+
+      ::v-deep .el-collapse-item__arrow.is-active {
+        transform: rotate(180deg);
+      }
+    }
+
+    &-content {
+      font: 400 14px/1.65 MiSans !important;
+      color: #fff !important;
+      padding-right: 20px;
+    }
   }
 }
 </style>

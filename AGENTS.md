@@ -51,6 +51,8 @@ In particular:
 
 - Follow `.codebuddy/rules/openspec-execution-policy.mdc` as the project-native OpenSpec policy.
 - Follow `.codebuddy/rules/i18n-translation-policy.mdc` for all translation-related tasks.
+- For any website copy/content text change, update Directus first: fixed UI copy lives in `site_i18n_entries`, and changes must increment `site_i18n_settings.content_version` so the runtime cache refreshes.
+- Local `src/i18n/*.json` and module i18n JSON files are fallback only. They may be synchronized for emergency/offline fallback, but they are not the primary source for daily copy changes.
 - For i18n content, translations must strictly follow files in `doc/zh-en/`.
 - Do **not** invent missing translations from context. If a translation is missing from the reference files, ask the user for it.
 

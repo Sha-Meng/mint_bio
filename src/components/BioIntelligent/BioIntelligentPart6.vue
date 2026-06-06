@@ -20,15 +20,15 @@
         <div class="box-data-w" :class="{ visible: expandedIndex === 0 }">
           <div class="box-data">
             <p class="box-data-top">{{ getText('bioIntelligent.bases.muyuan.area') }}</p>
-            <p class="box-data-bottom">126</p>
+            <p class="box-data-bottom">{{ getText('bioIntelligent.bases.muyuan.areaMetric') }}</p>
           </div>
           <div class="box-data">
             <p class="box-data-top">{{ getText('bioIntelligent.bases.muyuan.capacity1') }}</p>
-            <p class="box-data-bottom">30,000</p>
+            <p class="box-data-bottom">{{ getText('bioIntelligent.bases.muyuan.capacity1Metric') }}</p>
           </div>
           <div class="box-data">
             <p class="box-data-top">{{ getText('bioIntelligent.bases.muyuan.capacity2') }}</p>
-            <p class="box-data-bottom">40,000</p>
+            <p class="box-data-bottom">{{ getText('bioIntelligent.bases.muyuan.capacity2Metric') }}</p>
           </div>
         </div>
       </div>
@@ -45,15 +45,15 @@
         <div class="box-data-w" :class="{ visible: expandedIndex === 1 }">
           <div class="box-data">
             <p class="box-data-top">{{ getText('bioIntelligent.bases.hq.patents') }}</p>
-            <p class="box-data-bottom">40+</p>
+            <p class="box-data-bottom">{{ getText('bioIntelligent.bases.hq.patentsMetric') }}</p>
           </div>
           <div class="box-data">
             <p class="box-data-top">{{ getText('bioIntelligent.bases.hq.team') }}</p>
-            <p class="box-data-bottom">30+</p>
+            <p class="box-data-bottom">{{ getText('bioIntelligent.bases.hq.teamMetric') }}</p>
           </div>
           <div class="box-data">
             <p class="box-data-top">{{ getText('bioIntelligent.bases.hq.rdCenter') }}</p>
-            <p class="box-data-bottom">3,000m²+</p>
+            <p class="box-data-bottom">{{ getText('bioIntelligent.bases.hq.rdCenterMetric') }}</p>
           </div>
         </div>
       </div>
@@ -71,21 +71,21 @@
           <div class="box3-data-left">
             <div class="box3-data">
               <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.area1') }}</p>
-              <p class="box3-data-bottom">50</p>
+              <p class="box3-data-bottom">{{ getText('bioIntelligent.bases.jiande.area1Metric') }}</p>
             </div>
             <div class="box3-data">
               <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.capacity1') }}</p>
-              <p class="box3-data-bottom">30,000</p>
+              <p class="box3-data-bottom">{{ getText('bioIntelligent.bases.jiande.capacity1Metric') }}</p>
             </div>
           </div>
           <div class="box3-data-right">
             <div class="box3-data">
               <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.area2') }}</p>
-              <p class="box3-data-bottom">70</p>
+              <p class="box3-data-bottom">{{ getText('bioIntelligent.bases.jiande.area2Metric') }}</p>
             </div>
             <div class="box3-data">
               <p class="box3-data-top">{{ getText('bioIntelligent.bases.jiande.capacity2') }}</p>
-              <p class="box3-data-bottom">120,000</p>
+              <p class="box3-data-bottom">{{ getText('bioIntelligent.bases.jiande.capacity2Metric') }}</p>
             </div>
           </div>
         </div>

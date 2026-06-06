@@ -120,12 +120,19 @@ export default {
       const cats = getText('newMaterial.categories') || [];
       const imageUrls = [
         [
+          { url: "assets/NewMaterial/P004-1.jpeg" },
+          { url: "assets/NewMaterial/P004-2.png" },
+          { url: "assets/NewMaterial/P004-4.jpg" },
+          { url: "assets/NewMaterial/P004-3.png" },
+        ],
+        [
+          { url: "assets/NewMaterial/P005-1.jpg" },
+          { url: "assets/images/product-6.jpg" },
+        ],
+        [
           { url: "assets/NewMaterial/P001-1.png" },
           { url: "assets/NewMaterial/P001-2.jpeg" },
           { url: "assets/NewMaterial/P001-3.jpeg" },
-        ],
-        [
-          { url: "assets/NewMaterial/P002-new.jpg" },
         ],
         [
           { url: "assets/NewMaterial/P003-1.jpeg" },
@@ -136,29 +143,22 @@ export default {
           { url: "assets/NewMaterial/P003-6.png" },
         ],
         [
-          { url: "assets/NewMaterial/P004-1.jpeg" },
-          { url: "assets/NewMaterial/P004-2.png" },
-          { url: "assets/NewMaterial/P004-4.jpg" },
-          { url: "assets/NewMaterial/P004-3.png" },
-        ],
-        [
-          { url: "assets/NewMaterial/P005-1.jpg" },
-          { url: "assets/images/product-6.jpg" },
+          { url: "assets/NewMaterial/P002-new.jpg" },
         ],
       ];
       const moduleCards = getText('newMaterial.moduleCards') || [];
-      // i === 1 对应 PiX 3D 打印材料卡片，按需求隐藏 applyTexts(吸管/杯材/瓶材) 与 advantages(耐温耐冷...) 文字
+      const getTabTitle = (title = "") => title.replace(/生物(?:基)?可降解/g, "");
       return cats.map((cat, i) => ({
-        title: moduleCards[i]?.title || "",
+        title: getTabTitle(moduleCards[i]?.title),
         isRow: true,
         topItems: ["Affordable", "Infinity"],
         introductionTitle1: "PiX",
         introductionTitle2: moduleCards[i]?.shortName || "",
-        applyTexts: i === 1 ? [] : cat.title,
-        advantages: i === 1 ? [] : cat.advantages,
+        applyTexts: cat.title,
+        advantages: cat.advantages,
         imageUrl: (imageUrls[i] || []).map((img, j) => ({
           url: img.url,
-          desc: i === 1 ? "" : ((cat.items && cat.items[j]) || ""),
+          desc: (cat.items && cat.items[j]) || "",
         })),
       }));
     },
@@ -192,13 +192,15 @@ export default {
           transform: "scale(1)",
         },
         {
-          imgSrc: require("@/assets/images/case-2.jpeg"),
+          imgSrc: require("@/assets/images/case-danshen-mulch.jpg"),
           describe: mulch.advantage1 || "",
+          tips: mulch.advantage1Desc || "",
           transform: "scale(1)",
         },
         {
-          imgSrc: require("@/assets/images/case-3.jpeg"),
+          imgSrc: require("@/assets/images/case-certification.jpg"),
           describe: mulch.advantage2 || "",
+          tips: mulch.advantage2Desc || "",
           transform: "scale(1)",
         },
       ];
@@ -275,7 +277,7 @@ export default {
       border: 1px solid #ffffff33;
 
       &-right {
-        width: 340px;
+        width: min(560px, calc(100% - 80px));
         margin-right: 63px;
         background-color: #2828289f;
         backdrop-filter: blur(68px);
@@ -291,6 +293,7 @@ export default {
             font-weight: 500;
             color: #f1f3f7;
             padding-left: 32px;
+            white-space: nowrap;
 
             &::before {
               content: "";

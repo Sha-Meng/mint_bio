@@ -4,31 +4,31 @@
       "title": "元素驱动",
       "subtitle": "MiNT Bio",
       "tagline": "生物智造，无限可能",
-      "description": "元素驱动已打通研发，生产，下游产品转化的生物智造全链路。我们布局多个应用领域，并与下游龙头企业合作打造自有工厂，发展可能性无限的生物智造产品矩阵。"
+      "description": "元素驱动围绕“AI+生物制造”技术创新与产业转化，构建起集技术研发、工程放大、生产制造与产业应用于一体的生物智造体系。"
     },
     "sections": {
       "technology": {
-        "title": "前沿科技力",
-        "subtitle": "与合作伙伴共担ESG责任，共筑地球可持续未来"
+        "title": "前沿\n科技力",
+        "subtitle": "前沿合成生物技术推动生物制造发展"
       },
       "platform": {
-        "title": "平台强赋能",
+        "title": "平台\n强赋能",
         "subtitle": "独创MiNT X Platform, AI赋能生物智造"
       },
       "products": {
-        "title": "卓越产品力",
+        "title": "卓越\n产品力",
         "materials": "系列高性能新型生态环保材料PiX",
         "materialsDesc": "生物基、可降解、可回收",
         "aminoAcids": "生物合成氨基酸",
-        "aminoAcidsDesc": "高效生物合成20+种氨基酸"
+        "aminoAcidsDesc": "高效生物合成多种氨基酸"
       },
       "sustainability": {
-        "title": "绿色可持续",
+        "title": "绿色\n可持续",
         "subtitle": "与合作伙伴共担ESG责任，共筑地球可持续未来"
       }
     },
     "testimonial": {
-      "text": "您的选择和他们一样",
+      "text": "合作伙伴",
       "engText": "THEY Trusted Our Innovation."
     }
   },

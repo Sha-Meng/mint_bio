@@ -10,12 +10,14 @@
         </div>
       </div>
     </BannerTitle>
+    <!-- 品牌手册按钮暂时隐藏；后续有手册文件时按运营文档恢复下载入口
     <div class="button">
       <div class="button-btn">
         <span>{{ getText('news.downloadBrochure') }}</span>
         <img src="@/assets/images/download.png" alt="download" />
       </div>
     </div>
+    -->
     <MiNTDivider :content="'+'"></MiNTDivider>
     <div class="newslist">
       <MiNTNewsListMobile> </MiNTNewsListMobile>

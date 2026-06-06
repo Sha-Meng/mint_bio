@@ -182,16 +182,18 @@ const productListData = computed(() => {
   if (!Array.isArray(langResources)) return []
   const images = [
     { src: require("../../assets/images/product-1.jpeg"), top: -12 },
-    { src: require("../../assets/images/product-2.jpg") },
-    { src: require("../../assets/images/product-3.jpeg") },
+    { src: require("../../assets/images/product-histidine.png"), objectFit: "contain" },
+    { src: require("../../assets/images/product-isoleucine.png"), objectFit: "contain" },
     { src: require("../../assets/images/product-4.jpeg") },
-    { src: require("../../assets/images/product-5.jpg") },
     { src: require("../../assets/images/product-6.jpg"), objectFit: "fill" },
+    { src: require("../../assets/images/product-3.jpeg") },
+    { src: require("../../assets/NewMaterial/P003-1.jpeg") },
+    { src: require("../../assets/NewMaterial/P002-new.jpg") },
   ]
   return langResources.map((item, index) => ({
     isShow: index === 0,
     product: item.name,
-    imgSrc: images[index]?.src,
+    imgSrc: item.image || images[index]?.src,
     advantage: item.advantages,
     applications: item.applications,
     friends: item.friends,
@@ -374,7 +376,7 @@ onMounted(async () => {
 
         .title {
           margin-bottom: 20px;
-          width: 96px;
+          width: 112px;
           white-space: pre-line;
         }
 

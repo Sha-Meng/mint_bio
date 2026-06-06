@@ -7,7 +7,14 @@
         <div class="banner-title-en">{{ getText('bannerTitle.bioIntelligent.line3') }}</div>
       </div>
     </BannerTitleAnimationMobile>
-    <div class="line2 mt120"></div>
+    <div class="platform-intro-divider mt120"></div>
+
+    <section class="platform-intro">
+      <p>{{ getText('bioIntelligent.platformIntro.paragraph1') }}</p>
+      <p>{{ getText('bioIntelligent.platformIntro.paragraph2') }}</p>
+    </section>
+
+    <div class="platform-intro-divider"></div>
 
     <div class="part2">
       <div class="title">
@@ -118,6 +125,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "@/style/variable.less";
+
 .banner-title-content-mobile {
   text-align: center;
   .banner-title-zh {
@@ -141,6 +150,36 @@ export default {
   text {
     color: #ececee;
   }
+}
+
+.platform-intro {
+  background-color: #11161b;
+  padding: 28px 20px 36px;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #f1f3f7;
+    font-weight: 400;
+    text-align: left;
+
+    & + p {
+      margin-top: 14px;
+    }
+  }
+}
+
+.platform-intro-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right,
+      rgba(53, 52, 74, 1) 0%,
+      rgba(53, 52, 74, 0.5) 33%,
+      rgba(255, 255, 255, 1) 58%,
+      rgba(255, 255, 255, 1) 60%,
+      rgba(53, 52, 74, 0.5) 67%,
+      rgba(53, 52, 74, 1) 100%);
 }
 
 .part2 {

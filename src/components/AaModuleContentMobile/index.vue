@@ -284,6 +284,7 @@ onMounted(async () => {
               font-size: 11px;
               font-weight: 500;
               color: #f1f3f7;
+              white-space: nowrap;
               border-radius: 50px;
               border: 1px solid #ffffff;
             }

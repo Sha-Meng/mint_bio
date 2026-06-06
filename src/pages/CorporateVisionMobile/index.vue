@@ -65,12 +65,17 @@
                 <p>{{ getText('corporate.founders.zhang.position2') }}</p>
               </div>
             </div>
-
-            <img src="@/assets/images/story-3.png" class="img-right" />
           </div>
         </div>
         <div class="bottom">
-          {{ getText('corporate.founders.zhang.bio') }}
+          <div class="bottom-left">
+            <p>
+              {{ getText('corporate.founders.zhang.bio') }}
+            </p>
+          </div>
+          <ul class="bottom-right">
+            <li v-for="(item, index) in getText('corporate.founders.zhang.achievements')" :key="index">{{ item }}</li>
+          </ul>
         </div>
       </div>
 
@@ -411,7 +416,7 @@ export default {
           height: 100%;
           border-radius: 8px;
           object-fit: cover;
-          object-position: 50% 10%;
+          object-position: center top;
 
           margin-bottom: 20px;
         }
@@ -480,7 +485,7 @@ export default {
             height: 150px;
             border-radius: 4px;
             object-fit: cover;
-            object-position: 50% 10%;
+            object-position: center top;
           }
         }
 
@@ -490,13 +495,6 @@ export default {
           font-size: 14px;
           padding: 10px 0;
           position: relative;
-
-          .img-right {
-            width: 80px;
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-          }
         }
 
         .space-between {
@@ -507,10 +505,15 @@ export default {
       .bottom {
         text-align: justify;
         display: flex;
+        white-space: pre-line;
 
         &-left {
           flex: 1;
           padding-right: 28px;
+
+          p {
+            white-space: pre-line;
+          }
         }
 
         &-right {

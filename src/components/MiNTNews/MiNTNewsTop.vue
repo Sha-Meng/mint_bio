@@ -83,10 +83,12 @@ import { getText } from "@/utils/language";
 
       .title {
         position: absolute;
-        width: 380px;
+        width: 900px;
         top: 230px;
-        left: 684px;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: 70px;
+        text-align: center;
         background: linear-gradient(to top, #ffffff 30%, #555555 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -102,13 +104,15 @@ import { getText } from "@/utils/language";
         font-weight: 450;
         font-family: Arial, Helvetica, sans-serif;
         top: 135px;
-        left: 425px;
+        left: 52.5%;
+        transform: translateX(-50%);
       }
 
       .desc {
         position: absolute;
         top: 367px;
-        left: 600px;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: 16px;
         font-weight: 380;
         font-family: Arial, Helvetica, sans-serif;

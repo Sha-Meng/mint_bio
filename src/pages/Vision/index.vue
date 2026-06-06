@@ -81,7 +81,6 @@
             <p class="vision-module4-top-title-text2">{{ getText('vision.call') }}</p>
           </div>
           <div class="vision-module4-top-description">
-            <img src="./images/semicolon_icon.png" alt="semicolon" />
             <p class="vision-module4-top-description-text">
               {{ getText('vision.nationalPolicy') }}
             </p>
@@ -94,6 +93,9 @@
             <div class="vision-module4-bottom-card-content">
               <p class="vision-module4-bottom-card-content-text1">
                 {{ item.title }}
+              </p>
+              <p v-if="item.tags" class="vision-module4-bottom-card-content-tags">
+                {{ item.tags }}
               </p>
               <p class="vision-module4-bottom-card-content-text2">
                 {{ item.content }}
@@ -118,6 +120,7 @@ const cardData = computed(() => {
   return policies.map((p, i) => ({
     key: i,
     title: p.title,
+    tags: p.tags,
     content: p.content,
   }));
 });
@@ -514,7 +517,7 @@ function cardLeave() {
 
         &-text1 {
           color: #ff7200;
-          margin-right: 16px;
+          margin-right: 0;
         }
 
         &-text2 {
@@ -525,15 +528,10 @@ function cardLeave() {
       &-description {
         margin-left: 152px;
 
-        img {
-          width: 46px;
-          height: 45px;
-        }
-
         &-text {
-          margin-left: 72px;
           font-size: 20px;
           color: #fff;
+          line-height: 1.6;
         }
       }
     }
@@ -574,20 +572,29 @@ function cardLeave() {
         }
 
         &-content {
-          margin-left: 33px;
-          padding-bottom: 36px;
+          flex: 1;
+          min-width: 0;
+          margin-left: 24px;
+          padding: 36px 36px 36px 0;
           overflow: hidden;
+          text-align: left;
 
           &-text1 {
-            margin: 48px 52px 30px 0;
+            margin: 0 0 18px;
             font-size: 20px;
             font-weight: 500;
             color: #f1f3f7;
           }
 
+          &-tags {
+            margin: 0 0 22px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #ff7200;
+          }
+
           &-text2 {
-            margin-right: 36px;
-            margin-bottom: 0;
+            margin: 0;
             font-size: 16px;
             color: #f1f3f7;
           }

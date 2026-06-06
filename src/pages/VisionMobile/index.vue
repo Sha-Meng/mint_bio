@@ -66,7 +66,6 @@
             <p class="vision-module4-top-title-text2">{{ getText('vision.call') }}</p>
           </div>
           <div class="vision-module4-top-description">
-            <img src="./images/semicolon_icon.png" alt="semicolon" />
             <p class="vision-module4-top-description-text">
               {{ getText('vision.nationalPolicy') }}
             </p>
@@ -80,6 +79,9 @@
             <div class="vision-module4-bottom-card-content">
               <p class="vision-module4-bottom-card-content-text1">
                 {{ item.title }}
+              </p>
+              <p v-if="item.tags" class="vision-module4-bottom-card-content-tags">
+                {{ item.tags }}
               </p>
               <p class="vision-module4-bottom-card-content-text2">
                 {{ item.content }}
@@ -108,6 +110,7 @@ const cardData = computed(() => {
   return policies.map((p, i) => ({
     key: i,
     title: p.title,
+    tags: p.tags,
     content: p.content,
   }));
 });
@@ -328,7 +331,7 @@ const impactData = computed(() => {
 
         &-text1 {
           color: #ff7200;
-          margin-right: 8px;
+          margin-right: 0;
         }
 
         &-text2 {
@@ -341,14 +344,9 @@ const impactData = computed(() => {
         justify-content: flex-start;
         margin: 10px 0 45px;
 
-        img {
-          width: 23px;
-          height: 22px;
-          margin: -4px 8px 0 0;
-        }
-
         &-text {
           font-size: 12px;
+          line-height: 1.7;
           color: #fff;
         }
       }
@@ -386,13 +384,21 @@ const impactData = computed(() => {
 
           &-text1 {
             margin-top: 36px;
+            margin-bottom: 16px;
             font-size: 16px;
             font-weight: 500;
             color: #f1f3f7;
           }
 
+          &-tags {
+            margin: 0 0 18px;
+            font-size: 12px;
+            line-height: 20px;
+            color: #ff7200;
+          }
+
           &-text2 {
-            margin-top: 30px;
+            margin-top: 0;
             font-size: 13px;
             line-height: 21px;
             color: #f1f3f7;

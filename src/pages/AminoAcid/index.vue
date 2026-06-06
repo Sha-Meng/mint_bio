@@ -63,6 +63,22 @@
         </div>
       </div>
     </div>
+
+    <div v-intersect="() => faqTitleInView = true" class="aminoAcid-faq border-gradient">
+      <div v-if="faqTitleInView" class="aminoAcid-faq-title animate__animated animate__fadeInUp">
+        <span>{{ getText('aminoAcid.faq') }}</span><span class="orange-text">？</span><span>{{ getText('aminoAcid.faq2') }}</span>
+      </div>
+      <div v-if="faqTitleInView" class="aminoAcid-faq-title aminoAcid-faq-title-second animate__animated animate__fadeInUp">
+        <span :style="{ opacity: 0 }">{{ getText('aminoAcid.faq') }}</span><span class="orange-text"
+          :style="{ opacity: 0 }">？</span><span>{{ getText('aminoAcid.faq3') }}</span>
+      </div>
+      <el-collapse class="aminoAcid-faq-collapse" @change="handleFaqChange">
+        <el-collapse-item v-for="(item, index) in questionList" :key="index" :title="item.title"
+          :name="index" :icon="activeFaqNames.includes(index) ? Minus : Plus">
+          <div class="aminoAcid-faq-content" v-html="item.content"></div>
+        </el-collapse-item>
+      </el-collapse>
+    </div>
   </div>
 </template>
 
@@ -71,6 +87,7 @@ import { ref, computed } from 'vue';
 import BannerTitle from '@/components/BannerTitle'
 import AaModuleContent from "@/components/AaModuleContent";
 import MouseScroll from '@/components/MouseScroll';
+import { Plus, Minus } from "@element-plus/icons-vue";
 import { getText } from "@/utils/language";
 
 export default {
@@ -105,12 +122,30 @@ export default {
     });
 
     const titleInView = ref(false);
+    const faqTitleInView = ref(false);
+    const activeFaqNames = ref([]);
     const titleStyle = { top: "55%" }
+    const questionList = computed(() => {
+      const faqList = getText('aminoAcid.faqList') || [];
+      return faqList.map(item => ({
+        title: item.question,
+        content: item.answer,
+      }));
+    });
+    const handleFaqChange = (activeNames) => {
+      activeFaqNames.value = Array.isArray(activeNames) ? activeNames : [activeNames];
+    };
     return {
       module2Data,
       titleInView,
+      faqTitleInView,
+      activeFaqNames,
+      questionList,
+      handleFaqChange,
       titleStyle,
       getText,
+      Plus,
+      Minus,
     };
   },
 };
@@ -416,6 +451,79 @@ export default {
           background-clip: content-box, border-box;
         }
       }
+    }
+  }
+
+  &-faq {
+    margin-bottom: 160px;
+    padding: 90px 0 80px;
+    color: #fff;
+    font-family: MiSans;
+    text-align: left;
+
+    &-title {
+      font-size: 60px;
+      font-weight: 520;
+      line-height: 78px;
+
+      .orange-text {
+        color: #ff7200;
+      }
+    }
+
+    &-title-second {
+      margin-bottom: 56px;
+    }
+
+    &-collapse {
+      margin-left: 432px;
+      font: 400 24px MiSans;
+      color: #fff;
+
+      --el-collapse-header-bg-color: #11161b !important;
+      --el-collapse-header-text-color: #fff !important;
+      --el-collapse-header-font-size: 24px !important;
+      --el-collapse-header-padding: 0 !important;
+      --el-collapse-header-font-weight: 500 !important;
+      --el-collapse-header-border-bottom: none !important;
+
+      ::v-deep .el-collapse {
+        border-top: 1px solid #66666680;
+      }
+
+      ::v-deep .el-collapse-item__header {
+        min-height: 120px;
+        height: auto;
+        padding: 24px 0;
+        border-bottom: 1px solid #66666680;
+        line-height: 1.45;
+      }
+
+      .is-active {
+        ::v-deep .el-collapse-item__header {
+          border-bottom: none;
+        }
+      }
+
+      ::v-deep .el-collapse-item__wrap {
+        padding: 40px 0;
+        background-color: #11161b;
+        border-bottom: 1px solid #66666680;
+      }
+
+      ::v-deep .el-collapse-item__arrow {
+        margin: 0 0 0 10px;
+      }
+
+      ::v-deep .el-collapse-item__arrow.is-active {
+        transform: rotate(180deg);
+      }
+    }
+
+    &-content {
+      font: 400 24px/1.65 MiSans !important;
+      color: #fff !important;
+      padding-right: 32px;
     }
   }
 }

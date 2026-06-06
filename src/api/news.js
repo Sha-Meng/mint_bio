@@ -209,6 +209,15 @@ function hasHtml(value) {
   return /<[^>]+>/.test(String(value || ""));
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function isImageGroupBreakText(value) {
   const normalized = String(value || "")
     .replace(/<br\s*\/?\s*>/gi, "")
@@ -233,6 +242,68 @@ function mapInlineTextContent(text) {
   return hasHtml(value) ? { strongText: value } : { desc: value };
 }
 
+function normalizeHeaderLevel(level) {
+  const value = Number(level);
+  if (!Number.isInteger(value)) return 2;
+  return Math.min(Math.max(value, 2), 4);
+}
+
+function mapHeadingContent(text, level) {
+  const value = String(text || "").trim();
+  if (!value) return null;
+
+  const inline = mapInlineTextContent(value);
+  return {
+    heading: {
+      level: normalizeHeaderLevel(level),
+      text: inline.desc || "",
+      html: inline.strongText || "",
+    },
+  };
+}
+
+function renderInlineHtml(text) {
+  const value = String(text || "");
+  const colorResult = renderColorShortcodes(value, { preserveHtml: hasHtml(value) });
+  if (colorResult.changed) return colorResult.html;
+  return hasHtml(value) ? value : escapeHtml(value);
+}
+
+function getListItemContent(item) {
+  if (typeof item === "string") return item;
+  return item?.content || item?.text || "";
+}
+
+function getNestedListItems(item) {
+  return Array.isArray(item?.items) ? item.items : [];
+}
+
+function renderListItems(items, tagName) {
+  return items
+    .map((item) => {
+      const content = renderInlineHtml(getListItemContent(item)).trim();
+      const children = getNestedListItems(item);
+      const childHtml = children.length ? renderListItems(children, tagName) : "";
+      if (!content && !childHtml) return "";
+      return `<li>${content}${childHtml}</li>`;
+    })
+    .filter(Boolean)
+    .join("");
+}
+
+function mapListContent(data) {
+  const items = Array.isArray(data.items) ? data.items : [];
+  if (!items.length) return null;
+
+  const tagName = data.style === "ordered" ? "ol" : "ul";
+  const listItems = renderListItems(items, tagName);
+  if (!listItems) return null;
+
+  return {
+    listHtml: `<${tagName}>${listItems}</${tagName}>`,
+  };
+}
+
 function blockToContent(block) {
   const data = block?.data || {};
 
@@ -247,6 +318,16 @@ function blockToContent(block) {
       if (isImageGroupBreakText(text)) return { imageGroupBreak: true };
       if (!text.trim()) return null;
       return mapInlineTextContent(text);
+    }
+    case "header": {
+      return mapHeadingContent(data.text, data.level);
+    }
+    case "list":
+    case "nestedlist": {
+      return mapListContent(data);
+    }
+    case "delimiter": {
+      return { divider: true };
     }
     case "quote": {
       const text = data.text || "";

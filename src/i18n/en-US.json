@@ -75,37 +75,65 @@
     "list": [
       {
         "name": "[ Soybean Meal-Free Ration Solutions ]",
-        "advantages": ["Substantial reduction in soybean consumption", "Precise essential amino acid supplementation", "Cost-effective operation", "Reduced nitrogen excretion and carbon emissions"],
+        "advantages": [
+          "Substantial reduction in soybean consumption",
+          "Precise essential amino acid supplementation",
+          "Cost-effective operation",
+          "Reduced nitrogen excretion and carbon emissions"
+        ],
         "applications": "Animal Husbandry",
         "friends": "[ Muyuan Group ]"
       },
       {
         "name": "[ Histidine ]",
-        "advantages": ["Manufactured via advanced biosynthesis", "High fermentation efficiency", "High product purity", "Mature production process"],
+        "advantages": [
+          "Manufactured via advanced biosynthesis",
+          "High fermentation efficiency",
+          "High product purity",
+          "Mature production process"
+        ],
         "applications": "Food, Pharmaceuticals, Industrial Applications, Cosmetics",
         "friends": "[ National Dairy Innovation Center ]"
       },
       {
         "name": "[ Biodegradable Films & Bags ]",
-        "advantages": ["High tensile strength", "Excellent barrier performance", "Biodegradable"],
+        "advantages": [
+          "High tensile strength",
+          "Excellent barrier performance",
+          "Biodegradable"
+        ],
         "applications": "Packaging, Express Logistics",
         "friends": "[ Vipshop ]"
       },
       {
         "name": "[ Biodegradable Mulching Film ]",
-        "advantages": ["Adjustable degradation rate", "Superior mechanical performance", "Excellent heat and moisture retention"],
+        "advantages": [
+          "Adjustable degradation rate",
+          "Superior mechanical performance",
+          "Excellent heat and moisture retention"
+        ],
         "applications": "Planting Industry",
         "friends": "[ Chinese Academy of Agricultural Sciences ]"
       },
       {
         "name": "[ Biodegradable Materials for Straws & Cups ]",
-        "advantages": ["Excellent thermal tolerance", "High toughness", "Biodegradable"],
+        "advantages": [
+          "Excellent thermal tolerance",
+          "High toughness",
+          "Biodegradable"
+        ],
         "applications": "Food",
         "friends": ""
       },
       {
         "name": "[ Bio-based Degradable Fibers ]",
-        "advantages": ["Green and non-toxic", "High moisture absorption", "Soft, cotton-like feel", "Antimicrobial", "Biodegradable"],
+        "advantages": [
+          "Green and non-toxic",
+          "High moisture absorption",
+          "Soft, cotton-like feel",
+          "Antimicrobial",
+          "Biodegradable"
+        ],
         "applications": "Textiles, Pharmaceuticals, Daily Use Products",
         "friends": ""
       }
@@ -201,9 +229,9 @@
     "subtitle": "is imperative.",
     "oecdIntro": "According to case analysis by the Organization for Economic Co-operation and Development (OECD),",
     "oecdIntro2": "the application of biotechnology can reduce industrial energy consumption, raw material usage, air pollution, water pollution, and production costs by 15%–88%.",
-    "respond": "响应",
-    "call": "号召",
-    "nationalPolicy": "Biomanufacturing is one of China's nine key future industries, representing innovative, high-quality, and high-efficiency new quality productive forces.",
+    "respond": "面向",
+    "call": "未来产业",
+    "nationalPolicy": "生物制造已被纳入国家”十五五“未来产业重点方向，正成为绿色制造与未来产业发展的重要基础能力。",
     "title60": "的物质生产",
     "subtitle60": "可通过生物制造方式实现",
     "productSolution": "Biomanufacturing [ Product solutions ]",
@@ -221,28 +249,47 @@
     "esgResponsibility": "共担ESG责任",
     "policies": [
       {
-        "title": "• Action Plan for Plastic Pollution Control during the \"14th Five-Year Plan\" Period",
-        "content": "Scientifically and prudently promote plastic substitute products. Strengthen key core technology research and achievement transformation of degradable plastics, continuously improve product quality and performance, and reduce application costs."
+        "title": "《中华人民共和国国民经济和社会发展第十五个五年规划纲要》",
+        "content": "聚焦“生物智造”，快速推动技术产业化落地。",
+        "tags": "生物制造｜未来产业｜核心技术攻关｜新质生产力"
       },
       {
-        "title": "• \"14th Five-Year Plan\" for the Development of the Bioeconomy",
-        "content": "Cultivate and strengthen the pillar industries of the bioeconomy. Accelerate the broad application of biotechnology to empower industries such as healthcare, agriculture, energy, and environmental protection. Promote the deep integration of biotechnology and information technology, comprehensively improve the diversification level of the bio-industry, and drive high-quality development of the bioeconomy."
+        "title": "《浙江省国民经济和社会发展第十五个五年规划纲要》",
+        "content": "依托浙江未来产业生态，推进生物制造工程化与规模化发展。",
+        "tags": "生物制造｜未来产业先导区｜科技金融服务｜现代化产业体系"
       },
       {
-        "title": "• Implementation Plan for the New Industry Standardization Leadership Project (2023–2035)",
-        "content": "Focus on nine key future industries: metaverse, brain-computer interface, quantum information, humanoid robots, generative AI, biomanufacturing, future displays, future networks, and advanced energy storage."
+        "title": "《加快非粮生物基材料创新发展三年行动方案》",
+        "content": "推进“全生命周期低碳未来材料PiX”在农业、包装、纺织及未来制造等方向应用落地。",
+        "tags": "非粮生物质｜生物基材料｜绿色低碳｜材料替代"
       },
       {
-        "title": "• Three-Year Action Plan for Accelerating the Innovative Development of Non-Grain Bio-based Materials",
-        "content": "By 2025, the non-grain bio-based materials industry will basically form an innovative development ecosystem characterized by strong independent innovation capabilities, a continuously enriched product portfolio, and green, circular, and low-carbon practices. The utilization of non-grain biomass feedstocks and related application technologies will be basically mature; some non-grain bio-based products will achieve competitiveness comparable to that of fossil-based products; and a high-quality, sustainable supply and consumption system will be initially established."
+        "title": "《工业和信息化部等七部门关于推动未来产业创新发展的实施意见》",
+        "content": "探索AI与合成生物技术融合，拓展未来制造相关场景应用。",
+        "tags": "AI融合｜未来制造｜生物制造｜场景创新"
       }
     ],
     "oecdStats": [
-      { "label": "Industrial Process Energy (Reduction)", "value": "15%-80%" },
-      { "label": "Raw Material Consumption (Reduction)", "value": "35%-75%" },
-      { "label": "Air Pollution (Reduction)", "value": "50%-90%" },
-      { "label": "Water Pollution (Reduction)", "value": "33%-80%" },
-      { "label": "Production Cost (Reduction)", "value": "9%-90%" }
+      {
+        "label": "Industrial Process Energy (Reduction)",
+        "value": "15%-80%"
+      },
+      {
+        "label": "Raw Material Consumption (Reduction)",
+        "value": "35%-75%"
+      },
+      {
+        "label": "Air Pollution (Reduction)",
+        "value": "50%-90%"
+      },
+      {
+        "label": "Water Pollution (Reduction)",
+        "value": "33%-80%"
+      },
+      {
+        "label": "Production Cost (Reduction)",
+        "value": "9%-90%"
+      }
     ],
     "crisisCards": [
       {
@@ -298,69 +345,189 @@
     "knotWeedLabel": "Soybean-Reduced Ration",
     "slogan1": "生物智造",
     "slogan2": "惠及每一个生命",
+    "faq": "常见",
+    "faq2": "问",
+    "faq3": "题",
     "productList": [
       {
         "fullName": "Biosynthetic Histidine",
         "prefix": "Biosynthetic",
         "name": "Histidine",
-        "fields": ["Food", "Feed", "Biochemical Reagent & Pharmaceutical Manufacturing"],
-        "advantages": ["Cost advantage over similar products", "Higher fermentation rate and efficiency than industry average", "Higher product purity than chemical synthesis"]
+        "fields": [
+          "Food",
+          "Feed",
+          "Biochemical Reagent & Pharmaceutical Manufacturing"
+        ],
+        "advantages": [
+          "Cost advantage over similar products",
+          "Higher fermentation rate and efficiency than industry average",
+          "Higher product purity than chemical synthesis"
+        ]
       },
       {
         "fullName": "Biosynthetic Isoleucine",
         "prefix": "Biosynthetic",
         "name": "Isoleucine",
-        "fields": ["Pharmaceuticals", "Chemical Reagents", "Feed Additives"],
-        "advantages": ["Reduced soybean consumption & lower animal farming costs when incorporated into feed", "Substantial cost reduction over similar products", "Higher fermentation rate and efficiency than the industry average"]
+        "fields": [
+          "Pharmaceuticals",
+          "Chemical Reagents",
+          "Feed Additives"
+        ],
+        "advantages": [
+          "Reduced soybean consumption & lower animal farming costs when incorporated into feed",
+          "Substantial cost reduction over similar products",
+          "Higher fermentation rate and efficiency than the industry average"
+        ]
+      }
+    ],
+    "faqList": [
+      {
+        "question": "元素驱动氨基酸产品的核心优势是什么？",
+        "answer": "基于生物制造路线与自主发酵工艺，元素驱动持续优化发酵效率、产品纯度及规模化生产能力，在成本控制与稳定供应方面形成综合优势。"
+      },
+      {
+        "question": "氨基酸产品可以应用于哪些领域？",
+        "answer": "目前产品可覆盖食品、医药、化妆品、饲料添加剂及化学制剂等多个方向，并可根据不同应用需求提供对应规格产品。"
+      },
+      {
+        "question": "生物制造氨基酸与传统化学合成路线有什么区别？",
+        "answer": "生物制造路线以微生物发酵为核心，可直接获得目标L构型氨基酸，减少传统化学路线中构型拆分和后处理环节，在产品纯度、工艺效率和可持续性方面具备优势，更适配食品、医药、化妆品、动物营养等多元应用场景。"
+      },
+      {
+        "question": "元素驱动氨基酸产品是否支持规模化稳定供应？",
+        "answer": "公司持续推进工程化与产业化能力建设，形成从研发到规模化生产的能力体系，可满足不同场景下的产品供应需求。"
       }
     ]
   },
   "newMaterial": {
-    "features": ["全新化学结构", "可生物降解", "可回收", "高性能", "高适配性", "成本可控"],
+    "features": [
+      "自研生物基核心单体",
+      "生物基含量与降解性能可调",
+      "DIN CERTCO可降解认证",
+      "性能优异",
+      "可开发多种应用场景高性能材料"
+    ],
     "moduleCards": [
-      { "title": "", "shortName": "" },
-      { "title": "", "shortName": "" },
-      { "title": "", "shortName": "" },
-      { "title": "", "shortName": "" },
-      { "title": "", "shortName": "" }
+      {
+        "title": "PiX生物可降解地膜",
+        "shortName": "生物可降解地膜"
+      },
+      {
+        "title": "PiX生物可降解纤维",
+        "shortName": "生物可降解纤维"
+      },
+      {
+        "title": "PiX生物可降解包装",
+        "shortName": "生物可降解包装"
+      },
+      {
+        "title": "PiX生物可降解注塑材料",
+        "shortName": "生物可降解注塑材料"
+      },
+      {
+        "title": "PiX生物可降解3D打印材料",
+        "shortName": "生物可降解3D打印材料"
+      }
     ],
     "applicationCase": "应用",
     "applicationCase2": "案例",
     "vipshop": "唯品会",
     "andMint": "&元素驱动",
-    "expressCase": "[ 生物降解快递袋 ]",
+    "expressCase": "[ 生物可降解快递袋 ]",
     "caas": "中国农科院",
     "caasAndMint": "& 元素驱动",
-    "mulchingCase": "[ 全生物降解地膜 ]",
-    "xinjiangCaas": "新疆农科院",
+    "mulchingCase": "[ 生物基降解地膜 ]",
+    "xinjiangCaas": "中国农业科学院、南阳科学院",
     "faq": "常见",
     "faq2": "问",
     "faq3": "题",
     "categories": [
       {
-        "title": ["电商包装", "物流包装"],
-        "advantages": ["韧性好", "强度高", "阻隔性能优", "承重性足", "可搭竹粉等环保材料"],
-        "items": ["快递袋", "快递袋", "快递包装泡沫膜"]
+        "title": [
+          "经济作物",
+          "设施农业",
+          "规模化种植",
+          "绿色农业"
+        ],
+        "advantages": [
+          "综合性能优异",
+          "降解周期可控",
+          "适配机械化作业",
+          "适配复杂气候环境",
+          "节水保墒性强"
+        ],
+        "items": [
+          "PiX生物可降解地膜"
+        ]
       },
       {
-        "title": ["吸管", "杯材", "瓶材"],
-        "advantages": ["耐温耐冷", "使用温度 - 30 ℃-100℃", "货架期长"],
-        "items": ["吸管", "杯子", "矿泉水瓶"]
+        "title": [
+          "服装面料",
+          "母婴纺织",
+          "家纺",
+          "一次性卫生用品"
+        ],
+        "advantages": [
+          "生物基含量可调",
+          "本征抗菌",
+          "亲肤柔软",
+          "染色性能优",
+          "兼容常规纺织工艺",
+          "OEKO-TEX® STANDARD 100认证"
+        ],
+        "items": [
+          "PiX生物可降解纤维"
+        ]
       },
       {
-        "title": ["日化产品", "文具玩具", "家具家电"],
-        "advantages": ["强度高", "抗压性好", "适配性强"],
-        "items": ["化妆品", "笔", "玩具", "功能性家具", "日用家具", "白电"]
+        "title": [
+          "快递包装",
+          "购物袋",
+          "环保包装",
+          "礼品包装"
+        ],
+        "advantages": [
+          "耐拉扯",
+          "耐穿刺",
+          "不易渗漏",
+          "综合性能稳定"
+        ],
+        "items": [
+          "PiX生物可降解包装"
+        ]
       },
       {
-        "title": ["农业", "种植业"],
-        "advantages": ["保温保墒", "横纵向拉伸性能优", "阻隔性好"],
-        "items": ["地膜", "地膜", "棚膜", "育苗盆"]
+        "title": [
+          "日化用品",
+          "文具玩具",
+          "一次性餐具"
+        ],
+        "advantages": [
+          "适用性广",
+          "强度高"
+        ],
+        "items": [
+          "PiX生物可降解注塑材料"
+        ]
       },
       {
-        "title": ["服装", "纺织"],
-        "advantages": ["透气性好", "弹性佳", "舒适亲肤"],
-        "items": ["运动服", "运动鞋"]
+        "title": [
+          "文创教育",
+          "工业设计",
+          "汽车制造",
+          "机器人研发",
+          "定制化打印"
+        ],
+        "advantages": [
+          "韧性表现优",
+          "耐高温性能提升",
+          "打印效率高",
+          "加工适配性强",
+          "规模化成本优势"
+        ],
+        "items": [
+          "PiX生物可降解3D打印材料"
+        ]
       }
     ],
     "cases": {
@@ -371,27 +538,37 @@
       },
       "mulching": {
         "title": "PiX 地膜材料 全程护航新疆棉成长",
-        "desc": "元素驱动与中国农业科学院农业环境与可持续发展研究所合作，在新疆进行棉花大田试验，现已完成棉花成长全周期实验。",
+        "desc": "元素驱动与中国农业科学院合作，已在新疆棉田进行了覆膜实验，证明PiX地膜具有与PE地膜相当的保温保墒性，覆盖棉花完整生长周期后自然降解无残留，节水性能优异、韧性强，且具有一定的增产作用。",
         "advantage1": "可控生物降解，满足长期作物生长条件。",
-        "advantage2": "节水性能优异，水蒸气透过量远低于市面普通可降解地膜。"
+        "advantage1Desc": "与南阳科学院合作，为当地丹参种植基地定制开发PiX地膜，兼具防草、保墒、保温效果；适时降解，免除人工捡拾残膜的同时，有效促进丹参早出苗、早生长。",
+        "advantage2": "节水性能优异，水蒸气透过量远低于市面普通可降解地膜。",
+        "advantage2Desc": "已获得国际权威工业堆肥可降解认证（DIN CERTCO），并入选浙江省重点新材料首批次应用指导示范目录。"
       }
     },
     "faqList": [
       {
-        "question": "PiX新材料的原料是什么？有创新性吗？",
-        "answer": "PiX材料在上游合成生物端创新，源自以CO<sub>2</sub>碳源、桔杆、非粮生物质利用生产的生物基原料。生物基含量最高可达100%"
+        "question": "PiX 材料的原料来源是什么？",
+        "answer": "PiX是元素驱动自主研发的全生命周期低碳未来材料，基于自研生物基核心单体，可结合非粮生物质等开发生物基、可降解及可回收等不同方向材料。<br>材料生物基含量可根据不同应用方向进行调控，最高可达100%。"
       },
       {
         "question": "PiX 新材料的生产过程绿色、无毒、环保吗？",
         "answer": "是的。PiX材料源自生物发酵，从源头节碳减排。在生产过程中，利用了独创的合成工艺，亦无有毒有害气体、副产排出。"
       },
       {
-        "question": "PiX新材料的降解条件是什么？可以在哪些环境下降解？",
-        "answer": "主要采用堆肥降解。现阶段实验证明，PiX新材料在微生物丰度、高温高湿、紫外光老化等条件下，可实现降解，且降解周期可调控。"
+        "question": "PiX 材料如何实现降解？",
+        "answer": "PiX材料主要采用堆肥降解路线。<br>在微生物、高温高湿及自然老化等条件下，材料可逐步实现降解，并可根据不同应用需求对降解周期进行调控。"
       },
       {
-        "question": "PiX新材料成本可控，体现在哪些方面？",
-        "answer": "材料生产采用了独创的合成工艺，单吨产品原料消耗比例更低，过程能耗更少，产品副产及催化剂用量更少，实现真正的降本增效。同时，PiX的普适性强，能够与竹粉、木浆等其他环保原料搭配生产，可根据需求定制性价比更高的解决方案。"
+        "question": "PiX 材料的成本优势体现在哪些方面？",
+        "answer": "PiX材料采用自主合成工艺，通过降低原料消耗、优化能耗结构及减少副产生成，实现更高的生产效率与成本控制能力。<br>同时，材料体系兼容性强，可结合竹粉、木浆等不同环保材料进行复配开发，满足不同场景下的性能与成本需求。"
+      },
+      {
+        "question": "PiX 材料与传统石油基材料有哪些区别？",
+        "answer": "PiX材料的核心单体基于生物制造路线开发，在原料来源、生产方式及材料生命周期等方面，与传统石油基材料存在差异。<br>材料可根据应用需求实现生物基、可降解及性能调控等不同方向组合，兼顾功能表现与可持续需求。"
+      },
+      {
+        "question": "PiX 材料可以应用在哪些领域？",
+        "answer": "PiX材料可面向农业、纺织、包装、消费品、工业制造等多个领域进行应用开发。<br>未来，随着技术进一步迭代，可进一步拓展至未来制造相关场景。"
       }
     ]
   },
@@ -414,10 +591,22 @@
     "helpSubtitle": "解决粮食安全\"卡脖子问题\"",
     "matchAdvisor": "匹配顾问",
     "stats": [
-      { "number": "2类", "desc": "合成2类养猪氨基酸" },
-      { "number": "100%", "desc": "有望实现100%豆粕代替" },
-      { "number": "1.5亿", "desc": "节省1.5亿亩大豆种植面积" },
-      { "number": "2000万", "desc": "减少进口2000万吨大豆" }
+      {
+        "number": "2类",
+        "desc": "合成2类养猪氨基酸"
+      },
+      {
+        "number": "100%",
+        "desc": "有望实现100%豆粕代替"
+      },
+      {
+        "number": "1.5亿",
+        "desc": "节省1.5亿亩大豆种植面积"
+      },
+      {
+        "number": "2000万",
+        "desc": "减少进口2000万吨大豆"
+      }
     ]
   },
   "corporate": {
@@ -465,18 +654,54 @@
     "roadDescMobile1": "From laboratory to production line is the inevitable path for synthetic biology",
     "roadDescMobile2": "Towards the era of biomanufacturing, MiNT Bio is ready.",
     "timeline": [
-      { "year": "2021", "desc": "Founded in Hangzhou" },
-      { "year": "2023.05", "desc": "Strategic cooperation with Muyuan Group; completed the first batch of mass production and delivery of feed-grade amino acids." },
-      { "year": "2023.08", "desc": "Reached strategic cooperation with SenseTime to promote AI + synthetic biology frontier innovation." },
-      { "year": "2023.10", "desc": "Isoleucine 300-ton mass production-level conversion process optimization matured." },
-      { "year": "2024.01", "desc": "Jointly established Henan Muyuan Anliang Company with Muyuan Group." },
-      { "year": "2024.04", "desc": "First time listed on the Hangzhou Quasi-Unicorn List." },
-      { "year": "2024.05", "desc": "Henan Muyuan Anliang 30,000 tons/year project commenced." },
-      { "year": "2024.06", "desc": "Signed 150,000 tons/year MiNT New Materials project with Jiande City, building a benchmark for the full biodegradable materials industry chain." },
-      { "year": "2024.09", "desc": "Jiande MiNT Manufacturing project commenced; Phase I 30,000 tons/year, planned for production by end of 2025." },
-      { "year": "2024.12", "desc": "Completed Series A financing" },
-      { "year": "2025.06", "desc": "Muyuan Anliang factory officially started trial production; MiNT Manufacturing factory topped out" },
-      { "year": "2025.07", "desc": "Awarded as Zhejiang Province Specialized, Refined, Distinctive, and Innovative SME" }
+      {
+        "year": "2021",
+        "desc": "Founded in Hangzhou"
+      },
+      {
+        "year": "2023.05",
+        "desc": "Strategic cooperation with Muyuan Group; completed the first batch of mass production and delivery of feed-grade amino acids."
+      },
+      {
+        "year": "2023.08",
+        "desc": "Reached strategic cooperation with SenseTime to promote AI + synthetic biology frontier innovation."
+      },
+      {
+        "year": "2023.10",
+        "desc": "Isoleucine 300-ton mass production-level conversion process optimization matured."
+      },
+      {
+        "year": "2024.01",
+        "desc": "Jointly established Henan Muyuan Anliang Company with Muyuan Group."
+      },
+      {
+        "year": "2024.04",
+        "desc": "First time listed on the Hangzhou Quasi-Unicorn List."
+      },
+      {
+        "year": "2024.05",
+        "desc": "Henan Muyuan Anliang 30,000 tons/year project commenced."
+      },
+      {
+        "year": "2024.06",
+        "desc": "Signed 150,000 tons/year MiNT New Materials project with Jiande City, building a benchmark for the full biodegradable materials industry chain."
+      },
+      {
+        "year": "2024.09",
+        "desc": "Jiande MiNT Manufacturing project commenced; Phase I 30,000 tons/year, planned for production by end of 2025."
+      },
+      {
+        "year": "2024.12",
+        "desc": "Completed Series A financing"
+      },
+      {
+        "year": "2025.06",
+        "desc": "Muyuan Anliang factory officially started trial production; MiNT Manufacturing factory topped out"
+      },
+      {
+        "year": "2025.07",
+        "desc": "Awarded as Zhejiang Province Specialized, Refined, Distinctive, and Innovative SME"
+      }
     ],
     "futureTitle": "Embracing the Era of Biomanufacturing",
     "futureDesc": "60% of material production can be achieved through biomanufacturing, and the economic value brought by synthetic biology can reach a trillion-yuan scale.",
@@ -488,18 +713,54 @@
     "rdCenterMetric": "3000m²+",
     "rdTeamMetric": "跨学科研发团队",
     "honors": [
-      { "line1": "杭州市高新技术", "line2": "企业研发中心" },
-      { "line1": "浙江省", "line2": "专精特新中小企业" },
-      { "line1": "浙江省", "line2": "科技型中小企业" },
-      { "line1": "浙江省", "line2": "创新型中小企业" },
-      { "line1": "杭州市西湖区", "line2": "高校经济新锐企业" },
-      { "line1": "西湖区", "line2": "英才A类项目" },
-      { "line1": "西湖区", "line2": "高校经济标杆项目" },
-      { "line1": "杭州市", "line2": "准独角兽榜单企业" },
-      { "line1": "浙江省", "line2": "企业研究院" },
-      { "line1": "浙江省", "line2": "\u201C科技新小龙\u201D" },
-      { "line1": "杭州市", "line2": "新雏鹰企业" },
-      { "line1": "杭州市", "line2": "准独角兽榜单" }
+      {
+        "line1": "",
+        "line2": "国家高新技术企业"
+      },
+      {
+        "line1": "浙江省",
+        "line2": "“科技新小龙”"
+      },
+      {
+        "line1": "浙江省",
+        "line2": "企业研究院"
+      },
+      {
+        "line1": "浙江省",
+        "line2": "专精特新中小企业"
+      },
+      {
+        "line1": "浙江省",
+        "line2": "未来独角兽企业"
+      },
+      {
+        "line1": "杭州市",
+        "line2": "准独角兽榜单企业（2023–2026）"
+      },
+      {
+        "line1": "浙江省",
+        "line2": "创新型中小企业"
+      },
+      {
+        "line1": "浙江省",
+        "line2": "科技型中小企业"
+      },
+      {
+        "line1": "杭州市高新技术",
+        "line2": "企业研发中心"
+      },
+      {
+        "line1": "杭州市",
+        "line2": "新雏鹰企业"
+      },
+      {
+        "line1": "杭州市西湖区",
+        "line2": "高校经济新锐企业"
+      },
+      {
+        "line1": "西湖区",
+        "line2": "高校经济标杆项目"
+      }
     ]
   },
   "bioIntelligent": {
@@ -518,12 +779,31 @@
     "industry1toInf": "产业 1~∞",
     "industry1toInfMobile": "产业 1～∞",
     "industry1toInfDesc": "我们的生物智造基地将生产过程从实验室放大到中试及到产业规模。中试阶段，我们进一步优化生产过程，并进行精密的安全性和稳定性测试。通过中试验证的产品将进行大规模生产，我们将用世界顶级的设备和生产管理流程，对产品质量作出严格把控。",
+    "platformIntro": {
+      "paragraph1": "元素驱动自主研发的多学科深度融合 AI+ 生物制造平台——MiNT X Platform，构建起以非粮碳源生物转化、酶与代谢工程、生物化工技术、自研生物基核心单体为支撑的底层技术矩阵。目前，元素驱动已申请发明专利60余件，其中国际PCT专利16件，实用新型1件。",
+      "paragraph2": "平台深度融合智能技术，全链条赋能生物制造产业，从源头推动生产原料向低碳、可持续方向变革，加速高附加值生物化学品、前沿低碳材料及更多生物基产品的研发、量产与产业化进程，为下游多元产业提供系统化生物制造解决方案，推动生物制造迈向新的产业范式。"
+    },
     "features": {
-      "renewable": { "title": "可再生原料", "desc": "源自微生物和秸秆、淀粉等非粮生物质。" },
-      "aiProtein": { "title": "AI蛋白质设计", "desc": "深入融合AI技术，AI高效预测和设计分子结构。" },
-      "engine": { "title": "科技引擎", "desc": "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。" },
-      "massProduction": { "title": "量产无忧", "desc": "布局2个生物智造基地，成熟产品均已具备量产条件，并配备严格的质量管理流程。" },
-      "application": { "title": "应用无限", "desc": "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。" }
+      "renewable": {
+        "title": "可再生原料",
+        "desc": "源自微生物和秸秆、淀粉等非粮生物质。"
+      },
+      "aiProtein": {
+        "title": "AI蛋白质设计",
+        "desc": "深入融合AI技术，AI高效预测和设计分子结构。"
+      },
+      "engine": {
+        "title": "科技引擎",
+        "desc": "自研合成生物智造平台Mint X Platform，形成覆盖\"基因编辑-AI蛋白计算-代谢路径优化-工艺工程放大\"的全链条专利技术体系。"
+      },
+      "massProduction": {
+        "title": "量产无忧",
+        "desc": "布局2个生物智造基地，成熟产品均已具备量产条件，并配备严格的质量管理流程。"
+      },
+      "application": {
+        "title": "应用无限",
+        "desc": "生物智造产品在农业、包装、消费品等重要领域均可布局应用，并推动传统工业进行绿色转型升级。"
+      }
     },
     "platform": {
       "rawMaterial": "[ 原料 ]",
@@ -554,23 +834,33 @@
         "name": "Muyuan Anliang Hub",
         "location": "Nanyang, Henan",
         "area": "Area (Mu)",
+        "areaMetric": "126",
         "capacity1": "Phase I annual production capacity (Tons)",
-        "capacity2": "Phase II annual production capacity (Tons)"
+        "capacity1Metric": "30,000",
+        "capacity2": "Phase II annual production capacity (Tons)",
+        "capacity2Metric": "40,000"
       },
       "hq": {
         "name": "Headquarter",
         "location": "Xihu District, Hangzhou",
         "patents": "R&D patents",
+        "patentsMetric": "60+",
         "team": "R&D team members",
-        "rdCenter": "R&D center area"
+        "teamMetric": "30+",
+        "rdCenter": "R&D center area",
+        "rdCenterMetric": "3,000m²+"
       },
       "jiande": {
         "name": "MiNT Manufacturing Hub",
         "location": "Jiande, Zhejiang",
         "area1": "Phase I area (Mu)",
+        "area1Metric": "50",
         "capacity1": "Phase I annual production capacity (Tons)",
+        "capacity1Metric": "30,000",
         "area2": "Phase II area (Mu)",
-        "capacity2": "Phase II annual production capacity (Tons)"
+        "area2Metric": "70",
+        "capacity2": "Phase II annual production capacity (Tons)",
+        "capacity2Metric": "120,000"
       }
     }
   },
@@ -615,8 +905,8 @@
     "line2": "势在必行"
   },
   "news": {
-    "title": "发展",
-    "title2": "动态",
+    "title": "元素驱动",
+    "title2": "进行时",
     "subtitle": "实时发布元素驱动最新信息和重要事件，为您提供元素驱动的第一手资讯。",
     "downloadBrochure": "下载品牌手册",
     "all": "全部",
