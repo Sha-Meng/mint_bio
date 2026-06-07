@@ -54,11 +54,11 @@
         </div>
         <div class="product-list-content">
           <div v-for="(item, index) in productList" :key="index" class="product-list-content-item"
-            :style="{ color: item.isShow ? '#fff' : '' }" @mousemove="productMove(index)" @mouseleave="productLeave">
+            :style="{ color: isProductActive(index) ? '#fff' : '' }" @mouseenter="setActiveProduct(index)">
             <div class="product">
               <span class="product-text">{{ item.product }}</span>
               <transition name="fade">
-                <img :src="item.imgSrc" v-if="item.isShow"
+                <img :src="item.imgSrc" v-if="isProductActive(index)"
                   :style="{ top: item.top + 'px', objectFit: item.objectFit }" />
               </transition>
             </div>
@@ -191,7 +191,6 @@ const productListData = computed(() => {
     { src: require("../../assets/NewMaterial/P002-new.jpg") },
   ]
   return langResources.map((item, index) => ({
-    isShow: index === 0,
     product: item.name,
     imgSrc: item.image || images[index]?.src,
     advantage: item.advantages,
@@ -203,10 +202,14 @@ const productListData = computed(() => {
 })
 
 const productList = ref([])
+const activeProductIndex = ref(0)
 
 // 初始化和监听语言变化
 watch(() => productListData.value, (newVal) => {
   productList.value = newVal.map(item => ({ ...item }))
+  if (!productList.value.length || activeProductIndex.value >= productList.value.length) {
+    activeProductIndex.value = 0
+  }
 }, { immediate: true })
 
 const newsList = ref([]);
@@ -281,16 +284,11 @@ const advantageLeave = (advantage) => {
   advantage.animationClass = "animate__animated animate__fadeOut";
 };
 
-const productMove = (index) => {
-  productList.value.forEach((product,i) => {
-    product.isShow = i === index;   
-  });
-};
+const isProductActive = (index) => activeProductIndex.value === index;
 
-const productLeave = () => {
-  productList.value.forEach((product, i) => {
-    product.isShow = i === 0;
-  });
+const setActiveProduct = (index) => {
+  if (activeProductIndex.value === index) return;
+  activeProductIndex.value = index;
 };
 
 const cardHover = (card) => {
