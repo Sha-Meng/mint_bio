@@ -18,7 +18,9 @@
       </div>
     </div>
     <div class="timeline">
-      <div class="timeline-list">
+      <div class="timeline-list" ref="timelineList" @mousedown="startTimelineDrag" @mousemove="onTimelineDrag"
+        @mouseup="endTimelineDrag" @mouseleave="endTimelineDrag" @touchstart="startTimelineDrag"
+        @touchmove="onTimelineDrag" @touchend="endTimelineDrag" @touchcancel="endTimelineDrag">
         <div class="timeline-list-item" v-for="(item, index) in timeList" :key="index">
           <div class="timeline-list-item-time" :style="{ color: item.color, width: item.width }">
             {{ item.time }}
@@ -231,11 +233,16 @@ export default {
       isPrevDisabled: true,
       isNextDisabled: false,
       timelineElement: null,
+      isTimelineDragging: false,
+      timelineDragStartX: 0,
+      timelineDragScrollLeft: 0,
     };
   },
   mounted() {
-    this.timelineElement = document.querySelector(".timeline-list");
-    this.timelineElement.addEventListener("scroll", this.handleScroll);
+    this.timelineElement = this.$refs.timelineList;
+    if (this.timelineElement) {
+      this.timelineElement.addEventListener("scroll", this.handleScroll);
+    }
     this.updateButtonState();
     this.updateSliderPosition();
   },
@@ -270,6 +277,26 @@ export default {
       } else if (direction === "next") {
         this.timelineElement.scrollLeft += scrollStep;
       }
+      this.updateButtonState();
+    },
+    startTimelineDrag(event) {
+      if (!this.timelineElement) return;
+      const point = event.type === 'touchstart' ? event.touches[0] : event;
+      if (!point) return;
+      this.isTimelineDragging = true;
+      this.timelineDragStartX = point.clientX;
+      this.timelineDragScrollLeft = this.timelineElement.scrollLeft;
+    },
+    onTimelineDrag(event) {
+      if (!this.isTimelineDragging || !this.timelineElement) return;
+      const point = event.type === 'touchmove' ? event.touches[0] : event;
+      if (!point) return;
+      const walk = (point.clientX - this.timelineDragStartX) * 2;
+      this.timelineElement.scrollLeft = this.timelineDragScrollLeft - walk;
+      this.updateButtonState();
+    },
+    endTimelineDrag() {
+      this.isTimelineDragging = false;
       this.updateButtonState();
     },
 

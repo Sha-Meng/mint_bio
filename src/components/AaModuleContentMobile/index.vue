@@ -139,9 +139,11 @@ onMounted(async () => {
 
   &-module2 {
     position: relative;
-    width: 370px;
-    left: 10px;
+    width: calc(100% - 20px);
+    max-width: 370px;
+    margin: 0 auto;
     height: 600px;
+    box-sizing: border-box;
     // border: 1px solid white;
     // background: #14181d;
 
@@ -217,8 +219,8 @@ onMounted(async () => {
       height: 560px;
       padding: 10px 10px 20px;
       border-radius: 20px;
-      border-radius: 20px;
       border: 1px solid #7a7c7e;
+      box-sizing: border-box;
       background-image: linear-gradient(#181a1d, #12161b),
         linear-gradient(156.52deg,
           rgba(255, 255, 255, 0.4) 2.12%,
@@ -228,6 +230,7 @@ onMounted(async () => {
 
       &-w {
         // margin: 45px 74px 60px 74px;
+        height: 100%;
       }
 
       &-top {
@@ -239,47 +242,65 @@ onMounted(async () => {
       }
 
       &-bottom {
-        width: 350px;
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         gap: 20px;
+        box-sizing: border-box;
 
         &-introduction {
-          width: 370px;
+          width: 100%;
+          min-width: 0;
+          box-sizing: border-box;
 
           .top-text-wrapper {
             display: flex;
-
+            flex-direction: column;
+            gap: 14px;
           }
 
           &-title {
             display: flex;
             flex-direction: column;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            max-width: 100%;
+            line-height: 1.25;
 
             &-text1,
             &-text2 {
               font-size: 20px;
               font-weight: 500;
+              line-height: 1.25;
             }
 
             &-text1 {
               color: #ff7200;
               margin-right: 10px;
+              white-space: nowrap;
             }
 
             &-text2 {
               color: #f1f3f7;
+              max-width: 100%;
+              word-break: normal;
+              overflow-wrap: anywhere;
             }
           }
 
           &-apply {
-            margin-top: 33px;
             display: flex;
+            flex-wrap: wrap;
+            align-items: center;
             gap: 10px;
+            min-width: 0;
 
             &-text {
               height: 28px;
-              padding: 0 4px;
+              margin: 0;
+              padding: 0 10px;
+              box-sizing: border-box;
               line-height: 28px;
               font-size: 11px;
               font-weight: 500;
@@ -293,12 +314,21 @@ onMounted(async () => {
           &-advantage {
             margin-top: 30px;
 
+            &-text {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              row-gap: 16px;
+            }
+
             li {
               position: relative;
               font-size: 12px;
               font-weight: 500;
               color: #f1f3f7;
               padding-left: 10px;
+              line-height: 1.45;
+              list-style: none;
 
               &::before {
                 content: "";
@@ -313,7 +343,7 @@ onMounted(async () => {
               }
 
               &:not(:last-child) {
-                margin-bottom: 16px;
+                margin-bottom: 0;
                 /* 每项之间的间隔 */
               }
             }
@@ -325,11 +355,12 @@ onMounted(async () => {
           margin-top: 31px;
 
           &-image {
-            width: 346px;
+            width: 100%;
             // height: 526px;
 
             img {
               width: 100%;
+              display: block;
             }
           }
 
@@ -354,7 +385,7 @@ onMounted(async () => {
 
           .swiper-content {
             position: relative;
-            width: 350px;
+            width: 100%;
             // height: 526px;
 
             .swiper {

@@ -4,8 +4,8 @@
 
 ## 当前状态
 
-- PC 入口：`src/components/MiNTNews/MiNTNewsTop.vue` 中的 `news.downloadBrochure` 按钮已用 Vue 注释隐藏。
-- 移动端入口：`src/pages/MiNTNewsMobile/MiNTNewsMobile.vue` 中的 `news.downloadBrochure` 按钮已用 Vue 注释隐藏。
+- PC 入口：`src/components/MiNTNews/MiNTNewsTop.vue` 中的 `news.downloadBrochure` 按钮由 `SHOW_BRAND_BROCHURE_DOWNLOAD` 开关隐藏。
+- 移动端入口：`src/pages/MiNTNewsMobile/MiNTNewsMobile.vue` 中的 `news.downloadBrochure` 按钮复用同一个 `SHOW_BRAND_BROCHURE_DOWNLOAD` 开关隐藏。
 - 文案 key `news.downloadBrochure` 保留，未来恢复按钮时可继续复用。
 
 ## 恢复前准备
@@ -21,9 +21,10 @@ public/downloads/mint-bio-brand-brochure.pdf
 
 ## 恢复按钮
 
-1. 在 `src/components/MiNTNews/MiNTNewsTop.vue` 中解除品牌手册按钮的 Vue 注释。
-2. 在 `src/pages/MiNTNewsMobile/MiNTNewsMobile.vue` 中解除品牌手册按钮的 Vue 注释。
-3. 将按钮改为下载链接，推荐结构如下：
+> 2026-06-07 更新：PC 与移动端现在共用 `src/config/brandBrochure.js` 中的 `SHOW_BRAND_BROCHURE_DOWNLOAD` 开关。恢复入口时先把该值改为 `true`，再配置真实下载链接；不要分别改 PC / Mobile 两处显隐逻辑。
+
+1. 将 `src/config/brandBrochure.js` 中的 `SHOW_BRAND_BROCHURE_DOWNLOAD` 改为 `true`。
+2. 将 PC 与移动端按钮改为下载链接，推荐结构如下：
 
 ```vue
 <a class="button-btn" href="/downloads/mint-bio-brand-brochure.pdf" download>

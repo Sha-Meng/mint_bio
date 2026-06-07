@@ -102,6 +102,11 @@ export default {
       .text-image {
         width: 217px;
       }
+
+      .banner-title-text {
+        width: calc(100vw - 56px);
+        max-width: 320px;
+      }
     }
   }
 }

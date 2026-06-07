@@ -16,8 +16,7 @@
       <div class="desc">
         {{ getText('news.subtitle') }}
       </div>
-      <!-- 品牌手册按钮暂时隐藏，恢复时取消注释即可
-      <div class="button">
+      <div v-if="SHOW_BRAND_BROCHURE_DOWNLOAD" class="button">
         <div class="button-btn">
           <p>{{ getText('news.downloadBrochure') }}</p>
           <div class="button-btn-img">
@@ -25,13 +24,13 @@
           </div>
         </div>
       </div>
-      -->
     </div>
   </div>
 </template>
 
 <script setup>
 import { getText } from "@/utils/language";
+import { SHOW_BRAND_BROCHURE_DOWNLOAD } from "@/config/brandBrochure";
 </script>
 
 <style lang="scss" scoped>

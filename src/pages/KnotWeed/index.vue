@@ -250,7 +250,7 @@ export default {
     }
 
     &-advantage {
-      margin-left: 10.625rem;
+      margin-left: 24rem;
       display: flex;
       flex-direction: column;
       justify-content: center;

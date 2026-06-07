@@ -41,3 +41,29 @@ Update the homepage product matrix to the user-provided 8-item order and copy, w
 - Added `scripts/update-home-product-matrix.mjs` for dry-run/apply/readback-friendly Directus product matrix upserts.
 - Copied `product-histidine.png` and `product-isoleucine.png` into `src/assets/images/` as local fallbacks.
 - Updated desktop and mobile homepage product image mappings to prefer `item.image` and fall back to the 8-item project asset order.
+
+## Mobile Product Card Layout Fix - 2026-06-07
+
+### Goal
+- Fix the mobile homepage product Swiper cards shown in the user screenshots.
+- Restore the compact bracket-style application/material text treatment.
+- Make long application-area text wrap inside the card instead of overflowing.
+- Align performance-advantage bullets into a stable multi-row layout.
+
+### Scope
+- Only the mobile homepage product card area is in scope.
+- Desktop homepage product matrix, Directus copy, `products.list` data, and image mappings are unchanged.
+
+### Implementation Approach
+- Keep the shared `Swiper` component unchanged so other mobile sections keep their current behavior.
+- Override inherited `white-space: nowrap` only within the mobile homepage product-card content.
+- Use compact text sizing and spacing for application areas and material names.
+- Format mobile material names as bracket labels in the display layer, preserving existing `[]` or `【】` values and adding `[ ... ]` only when the source value lacks brackets.
+- Replace the previous `space-between` advantage layout with a wrapping grid that keeps bullets and labels aligned.
+
+### Validation / Acceptance
+- [x] `npm.cmd run build` completes.
+- [x] CSS implementation allows long application text such as the 3D printing application fields to wrap within the card.
+- [x] CSS/display implementation keeps material names such as `PiX生物可降解3D打印材料`, `生物合成组氨酸`, and `无豆粕日粮解决方案` in the compact bracket-style treatment.
+- [x] CSS implementation aligns advantage bullets with a stable two-column grid and full-width final odd item.
+- [ ] Interactive browser verification was attempted but blocked because the in-app Browser security policy rejected `http://127.0.0.1:8091/`.

@@ -166,9 +166,12 @@ export default {
 <style scoped lang="less">
 .module-container {
   position: relative;
-  width: 390px;
+  width: 100%;
+  max-width: 390px;
   height: 100%;
   overflow: hidden;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .module {

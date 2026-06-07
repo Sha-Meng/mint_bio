@@ -143,8 +143,11 @@ export default {
 @import "@/style/variable.less";
 
 .mouse-scroll {
-  width: 370px;
+  width: 100%;
+  max-width: 390px;
   margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
   height: 600px;
 }
 

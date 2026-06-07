@@ -9,12 +9,12 @@
           <div class="footer-left-logo-text1">{{ getText('footer.slogan') }}</div>
           <div class="footer-left-logo-text2"></div>
         </div>
-        <!-- <div class="footer-left-download">
-          <span>下载品牌手册</span>
+        <div v-if="SHOW_BRAND_BROCHURE_DOWNLOAD" class="footer-left-download">
+          <span>{{ getText('news.downloadBrochure') }}</span>
           <div class="footer-left-download-img">
             <img src="@/assets/images/download.png" alt="" />
           </div>
-        </div> -->
+        </div>
       </el-col>
       <el-col :span="2" class="footer-middle">
         <img class="footer-middle-divider" src="./images/divider.png" alt="" />
@@ -68,6 +68,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getText } from "@/utils/language";
+import { SHOW_BRAND_BROCHURE_DOWNLOAD } from "@/config/brandBrochure";
 
 const router = useRouter();
 

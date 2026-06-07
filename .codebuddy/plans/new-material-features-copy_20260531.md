@@ -38,6 +38,7 @@ Update the right-side feature list on the Products -> material page homepage/ban
 - [x] Validate new image dimensions, ensure no HEIC frontend references remain, and run production build.
 - [x] Update `newMaterial.mulchingCase` from the bio-based wording to the biodegradable wording in Directus and local fallback JSON.
 - [x] Validate that the old `newMaterial.mulchingCase` fallback value is no longer present in source.
+- [x] Prevent the mobile Material mulching-case title from breaking between `地` and `膜`.
 
 # User Requirements
 
@@ -117,6 +118,37 @@ No English translation was provided. Per i18n policy, the script updates `value_
 - Desktop and mobile `caseListSecond` keep card 1 on `case-1.jpeg`, use `case-danshen-mulch.jpg` for card 2, and use `case-certification.jpg` for card 3.
 
 # Validation / Acceptance
+
+## Material Mobile Mulching Title Wrap - 2026-06-07
+
+### User Requirements
+
+- Optimize the abnormal mobile wrap where `[ 生物可降解地膜 ]` breaks between `地` and `膜`.
+
+### Implementation Approach
+
+- Treat this as layout-only, not a content/i18n change.
+- Keep the existing title copy and Directus value unchanged.
+- Add a mobile-only nowrap rule for the orange mulching-case title so the short label stays intact.
+
+### Affected Files
+
+- `.codebuddy/plans/new-material-features-copy_20260531.md`
+- `src/pages/NewMaterialMobile/index.vue`
+
+### Todos
+
+- [x] Locate the mobile Material case title markup and style.
+- [x] Apply the scoped mobile title wrapping fix.
+- [x] Validate build or targeted source checks.
+
+### Acceptance
+
+- [x] `src/pages/NewMaterialMobile/index.vue` keeps the mulching-case orange title on one line with `white-space: nowrap` and `word-break: keep-all`.
+- [x] Right-side institution text remains flexible and can wrap normally.
+- [x] `git diff --check` passed.
+- [x] `npm.cmd run build` failed only because the existing `dist/js/app.79210ace.js` file was locked with `EBUSY`.
+- [x] `npm.cmd run build -- --no-clean` completed successfully with existing asset-size / Browserslist / `::v-deep` warnings.
 
 ## Material Mulching Case Title Copy - 2026-06-06
 
@@ -262,6 +294,54 @@ The latest screenshot still shows the old alignment problem in a more specific f
 - [x] `AaModuleContent` root is fixed at `800px`; the tab is fixed at `40px`; the content panel fills the remaining height.
 - [x] `npm.cmd run build` completed successfully with existing asset-size and `::v-deep` warnings.
 - [x] Local static preview is available at `http://127.0.0.1:8080/#/material` and `http://127.0.0.1:8080/#/aminoAcid`.
+
+## Shared Mobile Product Card Layout Fix - 2026-06-06
+
+### User Requirements
+
+- On the material mobile product cards, application chips such as `服装面料`, `母婴纺织`, `家纺`, and `一次性卫生用品` must stay inside the card.
+- The product title should wrap naturally on mobile and avoid the narrow-column break shown in the screenshot.
+- The performance advantages list must show only the custom bullet marker; no extra browser bullet should appear before `OEKO-TEX® STANDARD 100认证`.
+- Apply the fix through the shared mobile product-card component so aminoAcid mobile receives the same responsive layout improvement.
+
+### Implementation Approach
+
+- Keep `MouseScrollM` and its touch/stack interaction unchanged.
+- Convert the shared mobile card shell from fixed inner widths to responsive widths with max constraints.
+- Stack the title and application chips vertically; let the chips wrap as a group while keeping each chip text on one line.
+- Reset the advantages `ul/li` default list styling and preserve the existing custom dot pseudo-element.
+- Do not update Directus or local i18n content because this is layout-only.
+
+### Affected Files
+
+- `src/components/AaModuleContentMobile/index.vue`
+- `src/components/MouseScrollM/index.vue`
+- `src/pages/NewMaterialMobile/index.vue`
+- `src/pages/AminoAcidMobile/index.vue`
+- `.codebuddy/plans/new-material-features-copy_20260531.md`
+
+### Todos
+
+- [x] Replace fixed mobile card widths with responsive widths.
+- [x] Move mobile title/chip layout into a stable vertical flow.
+- [x] Reset advantage list default bullets.
+- [x] Prevent shared mobile scroll containers from exceeding narrow phone widths.
+- [x] Validate build.
+- [x] Verify source-level layout constraints for material and aminoAcid mobile.
+- [ ] Capture browser screenshots for material and aminoAcid mobile.
+
+### Acceptance
+
+- [x] Material mobile fiber-card chips use wrapping flex layout within a responsive card container.
+- [x] Material mobile product title uses full-width flow with responsive wrapping.
+- [x] Material mobile advantages list resets browser list markers before the custom dot.
+- [x] AminoAcid mobile product cards share the same responsive scroll/card width constraints.
+
+### Validation Notes
+
+- `npm.cmd run build` passed with existing bundle-size, Browserslist, and `::v-deep` warnings.
+- `http://127.0.0.1:8080/#/material` returned HTTP 200 from an already-running local server.
+- In-app browser control and Playwright/Puppeteer were not available in this session. Direct Chrome headless loaded DOM successfully but did not produce a screenshot file, so browser screenshot capture remains unverified.
 
 Acceptance criteria:
 

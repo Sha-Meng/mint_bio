@@ -44,7 +44,7 @@
 
       </div>
       <div class="case-list" ref="caseList" @mousedown="startDrag($event, 'caseList')"
-        @mousemove="onDrag($event, 'caseList')" @mouseup="endDrag" @mouseleave="endDrag">
+        @mousemove="dragCaseList" @mouseup="endDrag" @mouseleave="endDrag">
         <div class="case-list-item border-gradient" v-for="(item, index) in caseList" :key="index">
           <div class="case-list-item-top">
             <span>China</span><span>MiNT BiO</span><span>Hangzhou</span>
@@ -69,7 +69,7 @@
         </div>
       </div>
       <div class="case-list" ref="caseListSecond" @mousedown="startDrag($event, 'caseListSecond')"
-        @mousemove="onDrag($event, 'caseListSecond')" @mouseup="endDrag" @mouseleave="endDrag">
+        @mousemove="dragCaseListSecond" @mouseup="endDrag" @mouseleave="endDrag">
         <div class="case-list-item border-gradient" v-for="(item, index) in caseListSecond" :key="index">
           <div class="case-list-item-top">
             <span>China</span><span>MiNT BiO</span><span>Hangzhou</span>
@@ -170,7 +170,7 @@ export default {
         advantages: cat.advantages,
         imageUrl: (imageUrls[i] || []).map((img, j) => ({
           url: img.url,
-          desc: (cat.items && cat.items[j]) || "",
+          desc: (cat.items && (cat.items[j] || cat.items[0])) || moduleCards[i]?.title || "",
         })),
       }));
     },
@@ -232,6 +232,12 @@ export default {
     handleChange(activeNames) {
       this.activeNames = activeNames;
     },
+    dragCaseList(event) {
+      this.onDrag(event, 'caseList');
+    },
+    dragCaseListSecond(event) {
+      this.onDrag(event, 'caseListSecond');
+    },
     startDrag(event, listRef) {
       this.isDragging = true;
       this.startX = event.clientX;
@@ -253,7 +259,11 @@ export default {
 @import "@/style/variable.less";
 
 .mouse-scroll {
+  width: 100%;
+  max-width: 390px;
   margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
   height: 600px;
 }
 
@@ -346,6 +356,29 @@ export default {
 
       }
 
+    }
+
+    &.mobile-sector {
+      .case-title {
+        .text-wrapper {
+          align-items: flex-start;
+        }
+
+        .case-title-second {
+          flex-shrink: 0;
+
+          .orange-text {
+            display: inline-block;
+            white-space: nowrap;
+            word-break: keep-all;
+          }
+        }
+
+        .case-title-third {
+          flex: 1 1 auto;
+          min-width: 0;
+        }
+      }
     }
 
     &-list {

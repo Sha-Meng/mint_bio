@@ -65,38 +65,6 @@ const triggerPopover = () => {
 
 <style lang="less" scoped>
 .vision-module5 {
-  &-step {
-    margin-bottom: 60px;
-    padding: 0 10px;
-    color: #f2f3f7;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    .title {
-      font-size: 16px;
-      text-align: left;
-      margin-right: 4px;
-      height: 36px;
-      line-height: 40px;
-    }
-
-    .number {
-      font-size: 24px;
-      font-weight: 330;
-      line-height: 38.4px;
-      text-align: left;
-    }
-
-    .text {
-      font-size: 14px;
-      text-align: left;
-      height: 36px;
-      line-height: 38px;
-      margin-left: 4px;
-    }
-  }
-
   &-title {
     margin: 60px auto;
     display: flex;
@@ -122,69 +90,97 @@ const triggerPopover = () => {
   }
 
   &-content {
+    width: calc(100% - 50px);
+    max-width: 370px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
+    align-items: stretch;
     gap: 16px;
+
+    > div {
+      box-sizing: border-box;
+      min-width: 0;
+    }
 
     &-img1,
     &-img3 {
-      width: 290px;
-      padding: 40px;
+      width: 100%;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-radius: 12px;
+      color: #f1f3f7;
+      overflow: hidden;
 
       &-title {
-        width: 340px;
-        font-size: 20px;
+        width: auto;
+        margin: 0;
         font-weight: 500;
         color: #f1f3f7;
-        margin-bottom: 20px;
       }
 
       &-desc {
-        font-size: 14px;
+        width: auto;
+        margin: 0;
         color: #f1f3f7;
-        width: 266px;
-        margin-left: 0;
-        line-height: 22px;
       }
     }
 
     &-img1 {
+      min-height: 124px;
+      padding: 32px 40px 28px;
       background: url("./images/module5_img1.jpeg");
       background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
-      border-radius: 12px;
+      border-radius: 8px;
+
+      &-title {
+        margin-bottom: 12px;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      &-desc {
+        font-size: 12px;
+        line-height: 21px;
+        font-weight: 500;
+      }
     }
 
     &-img2 {
       width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
 
       &-item1,
       &-item2 {
-        padding: 40px;
-        width: 180px;
-        height: 160px;
-        border-radius: 12px;
+        width: 100%;
+        min-width: 0;
+        height: 168px;
+        padding: 34px 12px 16px;
+        box-sizing: border-box;
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
 
         &-text {
           text-align: center;
-          width: 80px;
-          font-size: 20px;
-          line-height: 28px;
+          width: 100%;
+          max-width: 96px;
+          margin: 0;
+          font-size: 16px;
+          line-height: 22px;
           font-weight: 500;
           color: #fff;
         }
@@ -192,70 +188,115 @@ const triggerPopover = () => {
 
       &-item1 {
         background: url("./images/module5_img2.png");
-        background-size: cover;
-        background-repeat: no-repeat;
+        background-size: 185% auto;
+        background-position: 44% 44%;
       }
 
       &-item2 {
         background: url("./images/module5_img3.jpeg");
-        background-size: cover;
-        background-repeat: no-repeat;
+        background-size: 190% auto;
+        background-position: 48% 42%;
       }
 
       .learn-more-btn {
-        width: 6rem;
-        height: 2.375rem;
-        line-height: 2.375rem;
+        width: 72px;
+        height: 29px;
+        margin: 0;
+        line-height: 29px;
         text-align: center;
-        font-size: 0.875rem;
+        font-size: 12px;
         font-weight: 500;
         color: #f1f3f7;
         background: rgba(40, 40, 40, 0.6226);
-        border-radius: 13.0625rem;
+        border-radius: 209px;
         border: 1px solid;
         border-image-source: linear-gradient(156.52deg, rgba(255, 255, 255, 0.5) 2.12%, rgba(255, 255, 255, 0.0001) 39%, rgba(255, 255, 255, 0.0001) 54.33%, rgba(255, 255, 255, 0.2) 93.02%);
       }
     }
 
     &-img3 {
+      min-height: 205px;
+      padding: 58px 40px 28px;
+      border-radius: 8px;
       background: url("./images/module5_img4.png");
       background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
 
+      &-title {
+        margin-bottom: 18px;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      &-desc {
+        font-size: 12px;
+        line-height: 21px;
+        font-weight: 500;
+      }
+
       &-btn {
-        margin-top: 5.4375rem;
-        width: 7.75rem;
-        height: 3.625rem;
-        line-height: 3.625rem;
+        width: 72px;
+        height: 29px;
+        margin-top: 18px;
+        line-height: 29px;
         text-align: center;
-        font-size: 1rem;
+        font-size: 12px;
         font-weight: 500;
         color: #f1f3f7;
         background-color: rgba(40, 40, 40, 0.62);
-        border-radius: 13.0625rem;
-      }
-    }
-
-    &-img4 {
-      img {
-        width: 464px;
-        height: 460px;
+        border-radius: 209px;
       }
     }
 
     .last-box {
-      padding: 60px 40px 40px;
       color: #f2f3f7;
       margin-top: 10px;
+    }
+  }
 
-      &-btn {
-        margin-top: 40px;
-        width: 72px;
-        height: 29px;
-        font-size: 12px;
-        line-height: 29px;
-      }
+  &-step {
+    width: 100%;
+    max-width: 370px;
+    box-sizing: border-box;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    color: #f2f3f7;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 8px;
 
+    > div {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: baseline;
+      height: 28px;
+    }
+
+    .title {
+      height: 28px;
+      margin-right: 0;
+      font-size: 14px;
+      line-height: 28px;
+      font-weight: 500;
+    }
+
+    .number {
+      font-size: 24px;
+      font-weight: 330;
+      line-height: 28px;
+      text-align: left;
+    }
+
+    .text {
+      height: 28px;
+      margin-left: 4px;
+      font-size: 12px;
+      line-height: 28px;
+      white-space: nowrap;
     }
   }
 }

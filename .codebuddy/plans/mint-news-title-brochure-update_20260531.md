@@ -17,6 +17,8 @@ Update the `/mintNews` page banner title from "发展 & 动态" to "元素驱动
 - [x] Add operator/developer documentation for restoring brochure downloads later.
 - [x] Validate with dry-run/apply output, build, and search checks.
 - [x] Fix PC banner title layout after long title caused clipping.
+- [x] Add one shared PC/mobile feature switch for the brand brochure button.
+- [x] Validate that both PC and mobile read the same switch and remain hidden by default.
 
 ## User Requirements
 
@@ -97,6 +99,11 @@ flowchart LR
 
 ## Execution Log
 
+- 2026-06-07: Follow-up requirement: mobile MiNTNews hero title wrapped `news.title2` incorrectly, splitting the final character of "jinxing shi" onto its own line. Design: keep Directus/i18n unchanged, split the mobile title into three visual spans (`news.title`, orange `&`, `news.title2`), and use a centered grid with `word-break: keep-all` so the third segment remains atomic on mobile. Acceptance: source confirms no `&nbsp;` concatenated title remains in `MiNTNewsMobile.vue`; build must pass.
+- 2026-06-07: Implemented the mobile title structure/CSS in `src/pages/MiNTNewsMobile/MiNTNewsMobile.vue`; `npm.cmd run build` passed with existing asset-size, Browserslist, and `::v-deep` warnings. Local preview smoke check on port 8091 could not start because PowerShell `Start-Process` hit the environment `Path/PATH` duplicate-key error before the dev server launched.
+- 2026-06-07: Follow-up requirement: mobile brand brochure button must use the same visibility switch as PC. Design: add `src/config/brandBrochure.js` with `SHOW_BRAND_BROCHURE_DOWNLOAD = false`, import it in both PC and mobile MiNTNews banner components, and keep Directus/i18n unchanged because no visible copy changes are needed.
+- 2026-06-07: Implemented shared switch in PC and mobile MiNTNews banners; targeted search confirmed both components reference `SHOW_BRAND_BROCHURE_DOWNLOAD`; `npm.cmd run build` passed with existing asset-size and `::v-deep` warnings.
+- 2026-06-07: Follow-up from BioIntelligent page check: source search found no BioIntelligent-specific active brochure DOM; the remaining page-adjacent brochure block is the shared desktop Footer. Converted Footer's brochure block from a commented placeholder to `v-if="SHOW_BRAND_BROCHURE_DOWNLOAD"` using `news.downloadBrochure`, so BioIntelligent's footer area is governed by the same switch and remains hidden by default.
 - 2026-06-01: Directus dry-run reported `current_content_version=35`, `next_content_version=36`, `updates=2`, keys `news.title` and `news.title2`.
 - 2026-06-01: Directus apply completed and incremented `content_version` to `36`.
 - 2026-06-01: Post-apply dry-run reported `updates=0`, `creates=0`, `next_content_version=36`.

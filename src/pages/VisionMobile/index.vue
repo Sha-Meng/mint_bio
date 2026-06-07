@@ -19,18 +19,20 @@
               </radialGradient>
             </defs>
             <g class="vision-module1-banner-text-base" fill="#ECECEE" fill-opacity="0.58">
-              <text x="50" y="12.3" text-anchor="middle" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
-              <text x="50" y="20.8" text-anchor="middle" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
+              <text x="50" y="12.3" text-anchor="middle" font-size="5.35" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
+              <text x="50" y="20.8" text-anchor="middle" font-size="5.35" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
             </g>
             <g class="vision-module1-banner-text-highlight" fill="url(#visionBannerHighlightMobile)">
-              <text x="50" y="12.3" text-anchor="middle" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
-              <text x="50" y="20.8" text-anchor="middle" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
+              <text x="50" y="12.3" text-anchor="middle" font-size="5.35" class="vision-module1-banner-text-line1">{{ getText('vision.bannerLine1') }}</text>
+              <text x="50" y="20.8" text-anchor="middle" font-size="5.35" class="vision-module1-banner-text-line2">{{ getText('vision.bannerLine2') }}</text>
             </g>
           </svg>
         </div>
       </div>
     </div>
-    <div class="vision-module2 ">
+    <div class="vision-module2 " ref="impactList" @mousedown="startImpactDrag" @mousemove="onImpactDrag"
+      @mouseup="endImpactDrag" @mouseleave="endImpactDrag" @touchstart="startImpactDrag"
+      @touchmove="onImpactDrag" @touchend="endImpactDrag" @touchcancel="endImpactDrag">
       <div class="vision-module2-item" v-for="(item, index) in impactData" :key="index">
         <p class="vision-module2-item-title" >{{ item.title }}</p>
         <div class="hover-scale-transition">
@@ -104,6 +106,32 @@ import CrisisCard from "./CrisisCard";
 import { getText } from "@/utils/language";
 
 
+const impactList = ref(null);
+const isImpactDragging = ref(false);
+const impactDragStartX = ref(0);
+const impactDragScrollLeft = ref(0);
+
+const startImpactDrag = (event) => {
+  if (!impactList.value) return;
+  const point = event.type === 'touchstart' ? event.touches[0] : event;
+  if (!point) return;
+  isImpactDragging.value = true;
+  impactDragStartX.value = point.clientX;
+  impactDragScrollLeft.value = impactList.value.scrollLeft;
+};
+
+const onImpactDrag = (event) => {
+  if (!isImpactDragging.value || !impactList.value) return;
+  const point = event.type === 'touchmove' ? event.touches[0] : event;
+  if (!point) return;
+  const walk = (point.clientX - impactDragStartX.value) * 2;
+  impactList.value.scrollLeft = impactDragScrollLeft.value - walk;
+};
+
+const endImpactDrag = () => {
+  isImpactDragging.value = false;
+};
+
 
 const cardData = computed(() => {
   const policies = getText('vision.policies') || [];
@@ -147,12 +175,19 @@ const impactData = computed(() => {
   .text-section {
     font-size: 22px;
     font-weight: 450;
-    line-height: 1.4;
+    line-height: 1.45;
     text-align: center;
     color: #e8e8ea;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    white-space: nowrap;
+
+    span {
+      display: block;
+    }
   }
 
   &-module1 {
@@ -162,7 +197,8 @@ const impactData = computed(() => {
 
     &-banner {
       position: relative;
-      width: 370px;
+      width: calc(100vw - 40px);
+      max-width: 370px;
       container-type: inline-size;
 
       img {
@@ -175,7 +211,7 @@ const impactData = computed(() => {
         top: 53%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 82%;
+        width: 76%;
         z-index: 1;
         pointer-events: none;
 
@@ -189,7 +225,6 @@ const impactData = computed(() => {
         text {
           font-family: 'MiSans VF', 'MiSans', sans-serif;
           font-weight: 450;
-          font-size: 6.1px;
           letter-spacing: 0;
         }
       }

@@ -3,21 +3,23 @@
     <BannerTitle>
       <div class="text-section">
         <div class="title">
-          <div label1>{{ getText('news.title') }}&nbsp;&nbsp;<span class="sub"> & </span>&nbsp;&nbsp;{{ getText('news.title2') }}</div>
+          <div label1 class="news-title-line">
+            <span class="news-title-main">{{ getText('news.title') }}</span>
+            <span class="sub news-title-amp">&amp;</span>
+            <span class="news-title-side">{{ getText('news.title2') }}</span>
+          </div>
         </div>
         <div class="desc">
           {{ getText('news.subtitle') }}
         </div>
       </div>
     </BannerTitle>
-    <!-- 品牌手册按钮暂时隐藏；后续有手册文件时按运营文档恢复下载入口
-    <div class="button">
+    <div v-if="SHOW_BRAND_BROCHURE_DOWNLOAD" class="button">
       <div class="button-btn">
         <span>{{ getText('news.downloadBrochure') }}</span>
         <img src="@/assets/images/download.png" alt="download" />
       </div>
     </div>
-    -->
     <MiNTDivider :content="'+'"></MiNTDivider>
     <div class="newslist">
       <MiNTNewsListMobile> </MiNTNewsListMobile>
@@ -30,12 +32,18 @@ import MiNTNewsListMobile from "../../components/MiNTNews/MiNTNewsListMobile.vue
 import MiNTDivider from "@/components/Divider";
 import BannerTitle from "@/components/BannerTitle";
 import { getText } from "@/utils/language";
+import { SHOW_BRAND_BROCHURE_DOWNLOAD } from "@/config/brandBrochure";
 
 export default {
   components: {
     MiNTDivider,
     BannerTitle,
     MiNTNewsListMobile
+  },
+  data() {
+    return {
+      SHOW_BRAND_BROCHURE_DOWNLOAD,
+    };
   },
   methods: {
     getText,
@@ -56,6 +64,22 @@ export default {
     line-height: 47.74px;
     text-align: center;
     color: #e8e8ea;
+
+    .news-title-line {
+      display: grid;
+      grid-template-columns: max-content 38px max-content;
+      justify-content: center;
+      align-items: center;
+      column-gap: 14px;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .news-title-main,
+    .news-title-side {
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
 
     .sub {
       color: #FF7200;

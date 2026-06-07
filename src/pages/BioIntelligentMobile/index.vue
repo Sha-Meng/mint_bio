@@ -56,9 +56,34 @@
     <VisionModule5 />
     <div class="part6">
       <div class="title"><span>{{ getText('bioIntelligent.baseTitle') }}</span><span class="orange-text">{{ getText('bioIntelligent.baseSuffix') }}</span></div>
-      <img src="@/assets/images/base-1.png" alt="">
-      <img src="@/assets/images/base-2.png" alt="">
-      <img src="@/assets/images/base-3.png" alt="">
+      <div
+        v-for="base in baseCards"
+        :key="base.key"
+        class="base-card"
+      >
+        <div class="base-card-header">
+          <span>{{ base.name }}</span>
+          <span>MiNT BiO</span>
+          <span>{{ base.location }}</span>
+        </div>
+        <div class="base-card-image-wrap">
+          <img :src="base.imgSrc" :alt="base.name" class="base-card-image">
+          <div class="base-card-image-title">{{ base.name }} / {{ base.location }}</div>
+        </div>
+        <div
+          class="base-card-metrics"
+          :class="{ 'base-card-metrics-four': base.metrics.length === 4 }"
+        >
+          <div
+            v-for="metric in base.metrics"
+            :key="metric.label"
+            class="base-card-metric"
+          >
+            <div class="base-card-metric-label">{{ metric.label }}</div>
+            <div class="base-card-metric-value">{{ metric.value }}</div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -116,6 +141,74 @@ export default {
         title: getText(`bioIntelligent.features.${key}.title`),
         description: getText(`bioIntelligent.features.${key}.desc`),
       }));
+    },
+    baseCards() {
+      return [
+        {
+          key: 'hq',
+          name: getText('bioIntelligent.bases.hq.name'),
+          location: getText('bioIntelligent.bases.hq.location'),
+          imgSrc: require("@/assets/BioIntelligent/hangzhou.jfif"),
+          metrics: [
+            {
+              label: getText('bioIntelligent.bases.hq.patents'),
+              value: getText('bioIntelligent.bases.hq.patentsMetric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.hq.team'),
+              value: getText('bioIntelligent.bases.hq.teamMetric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.hq.rdCenter'),
+              value: getText('bioIntelligent.bases.hq.rdCenterMetric'),
+            },
+          ],
+        },
+        {
+          key: 'muyuan',
+          name: getText('bioIntelligent.bases.muyuan.name'),
+          location: getText('bioIntelligent.bases.muyuan.location'),
+          imgSrc: require("@/assets/BioIntelligent/nanyang.jfif"),
+          metrics: [
+            {
+              label: getText('bioIntelligent.bases.muyuan.area'),
+              value: getText('bioIntelligent.bases.muyuan.areaMetric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.muyuan.capacity1'),
+              value: getText('bioIntelligent.bases.muyuan.capacity1Metric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.muyuan.capacity2'),
+              value: getText('bioIntelligent.bases.muyuan.capacity2Metric'),
+            },
+          ],
+        },
+        {
+          key: 'jiande',
+          name: getText('bioIntelligent.bases.jiande.name'),
+          location: getText('bioIntelligent.bases.jiande.location'),
+          imgSrc: require("@/assets/BioIntelligent/jiande.jfif"),
+          metrics: [
+            {
+              label: getText('bioIntelligent.bases.jiande.area1'),
+              value: getText('bioIntelligent.bases.jiande.area1Metric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.jiande.capacity1'),
+              value: getText('bioIntelligent.bases.jiande.capacity1Metric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.jiande.area2'),
+              value: getText('bioIntelligent.bases.jiande.area2Metric'),
+            },
+            {
+              label: getText('bioIntelligent.bases.jiande.capacity2'),
+              value: getText('bioIntelligent.bases.jiande.capacity2Metric'),
+            },
+          ],
+        },
+      ];
     },
   },
   methods: {
@@ -318,6 +411,118 @@ export default {
   img {
     width: 100%;
     margin: 16px auto;
+  }
+
+  .base-card {
+    width: 100%;
+    margin: 16px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(241, 243, 247, 0.22);
+    border-radius: 10px;
+    background: #202428;
+    overflow: hidden;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .base-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 2px 2px 0;
+    font-size: 9.5px;
+    line-height: 1.3;
+    font-weight: 500;
+    color: rgba(241, 243, 247, 0.58);
+
+    span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    span:nth-child(2) {
+      flex: 0 0 auto;
+      color: rgba(241, 243, 247, 0.58);
+      font-weight: 400;
+    }
+  }
+
+  .base-card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.62;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #333;
+  }
+
+  .base-card-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+  }
+
+  .base-card-image-title {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    overflow-wrap: anywhere;
+  }
+
+  .base-card-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 22px 4px 10px;
+  }
+
+  .base-card-metrics-four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .base-card-metrics-four .base-card-metric-label {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .base-card-metric {
+    min-width: 0;
+    text-align: left;
+  }
+
+  .base-card-metric-label {
+    min-height: 18px;
+    color: rgba(241, 243, 247, 0.72);
+    font-size: 11px;
+    line-height: 1.35;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+
+  .base-card-metric-value {
+    margin-top: 4px;
+    color: #ff7200;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .base-card-metrics-four .base-card-metric-value {
+    font-size: 17px;
   }
 }
 

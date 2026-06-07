@@ -59,7 +59,7 @@
           <template #item-content="{ item }">
             <img :src="item.imgSrc" class="case-list-item-img">
             <div class="case-list-item-first">{{ item.first }}</div>
-            <div class="case-list-item-second">{{ item.second }}</div>
+            <div class="case-list-item-second">{{ formatBracketLabel(item.second) }}</div>
             <div class="case-list-item-third">
               <div v-for="i in item.advantage" :key="i" class="advantage-item">{{ i }}</div>
             </div>
@@ -146,6 +146,14 @@ export default {
   },
   methods: {
     getText,
+    formatBracketLabel(label) {
+      const text = String(label || '').trim();
+      if (!text) return '';
+      if ((text.startsWith('[') && text.endsWith(']')) || (text.startsWith('【') && text.endsWith('】'))) {
+        return text;
+      }
+      return `[ ${text} ]`;
+    },
     initializeProductList() {
       const langResources = getText('products.list');
       const images = [
@@ -442,6 +450,7 @@ export default {
           font-size: 14px;
 
           &-item {
+            white-space: normal;
 
             &-img {
               margin-top: 12px;
@@ -455,39 +464,57 @@ export default {
             }
 
             &-first {
-              font-size: 14px;
+              font-size: 12px;
               color: #F1F3F7;
               text-align: left;
-              margin: 20px 0;
+              line-height: 20px;
+              margin: 20px 0 16px;
+              white-space: normal;
+              word-break: keep-all;
+              overflow-wrap: anywhere;
             }
 
             &-second {
-              font-size: 14px;
+              font-size: 12px;
               color: #F1F3F7;
-              margin: 20px 0;
+              line-height: 20px;
+              margin: 0 0 18px;
+              text-align: left;
+              white-space: normal;
             }
 
             &-third {
-              display: flex;
-              justify-content: space-between;
-              gap: 4px;
-              flex-wrap: wrap;
-              font-size: 14px;
+              display: grid;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              column-gap: 14px;
+              row-gap: 8px;
+              align-items: start;
+              font-size: 12px;
               color: #F1F3F7;
+              line-height: 20px;
+              white-space: normal;
 
               .advantage-item {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
+                min-width: 0;
+                white-space: normal;
+                word-break: keep-all;
+                overflow-wrap: anywhere;
+              }
+
+              .advantage-item:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
               }
 
               .advantage-item::before {
                 content: "";
-                display: inline-block;
+                flex: 0 0 auto;
                 width: 4px;
                 height: 4px;
                 background: #F1F3F7;
                 border-radius: 50%;
-                margin-right: 4px;
+                margin: 8px 6px 0 0;
               }
             }
           }
