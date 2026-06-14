@@ -242,6 +242,17 @@ function mapInlineTextContent(text) {
   return hasHtml(value) ? { strongText: value } : { desc: value };
 }
 
+function getBlockAlignment(block) {
+  const alignment = block?.tunes?.alignment?.alignment || block?.data?.alignment;
+  return ["left", "center", "right", "justify"].includes(alignment) ? alignment : "";
+}
+
+function withBlockAlignment(content, block) {
+  if (!content) return content;
+  const align = getBlockAlignment(block);
+  return align ? { ...content, align } : content;
+}
+
 function normalizeHeaderLevel(level) {
   const value = Number(level);
   if (!Number.isInteger(value)) return 2;
@@ -317,14 +328,14 @@ function blockToContent(block) {
       const text = data.text || "";
       if (isImageGroupBreakText(text)) return { imageGroupBreak: true };
       if (!text.trim()) return null;
-      return mapInlineTextContent(text);
+      return withBlockAlignment(mapInlineTextContent(text), block);
     }
     case "header": {
-      return mapHeadingContent(data.text, data.level);
+      return withBlockAlignment(mapHeadingContent(data.text, data.level), block);
     }
     case "list":
     case "nestedlist": {
-      return mapListContent(data);
+      return withBlockAlignment(mapListContent(data), block);
     }
     case "delimiter": {
       return { divider: true };
@@ -333,7 +344,7 @@ function blockToContent(block) {
       const text = data.text || "";
       if (!text.trim()) return null;
       return {
-        quote: [mapInlineTextContent(text)],
+        quote: [withBlockAlignment(mapInlineTextContent(text), block)],
       };
     }
     case "raw": {

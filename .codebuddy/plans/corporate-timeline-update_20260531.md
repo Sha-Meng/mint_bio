@@ -53,3 +53,11 @@
 - `src/i18n/zh-CN.json` 通过 JSON parse。
 - `scripts/update-corporate-timeline.mjs` 通过 `node --check`。
 - `npm run build` 编译通过。
+
+## 2026-06-08 Patch
+
+- Goal: supplement the `2025.12` corporate timeline item with `浙江省企业研究院`.
+- Scope: update Directus key `corporate.timeline.10.desc`, keep English untouched, and sync local fallback plus `scripts/update-corporate-timeline.mjs`.
+- Desired Chinese copy: `获评浙江省企业研究院、国家高新技术企业、浙江省科技新小龙企业`.
+- Validation: run Directus dry-run/apply/readback, JSON parse, script syntax check, and build.
+- Acceptance: Directus apply updated only `corporate.timeline.10.desc`; `content_version` is now `44`; follow-up dry-run reports `creates: 0`, `updates: 0`; `npm.cmd run build` passed with existing warnings.

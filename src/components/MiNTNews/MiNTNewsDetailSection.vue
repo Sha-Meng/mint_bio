@@ -31,20 +31,20 @@
 			</video>
 		</div> -->
 
-		<div v-if="content.desc" class="section-desc">
+		<div v-if="content.desc" class="section-desc" :style="alignmentStyle(content)">
 		  <span > {{ content.desc }} </span>
 		</div>
 		
-		<div v-if="content.strongText" class="section-desc">
+		<div v-if="content.strongText" class="section-desc" :style="alignmentStyle(content)">
 		  <div v-html="content.strongText" class="new-strongText"></div>
 		</div>
 
-		<div v-if="content.heading" :class="['section-heading', `section-heading-level-${content.heading.level}`]">
+		<div v-if="content.heading" :class="['section-heading', `section-heading-level-${content.heading.level}`]" :style="alignmentStyle(content)">
 		  <div v-if="content.heading.html" v-html="content.heading.html"></div>
 		  <div v-else>{{ content.heading.text }}</div>
 		</div>
 
-		<div v-if="content.listHtml" class="section-list" v-html="content.listHtml"></div>
+		<div v-if="content.listHtml" class="section-list" :style="alignmentStyle(content)" v-html="content.listHtml"></div>
 
 		<hr v-if="content.divider" class="section-divider" />
 
@@ -56,10 +56,10 @@
 		      <img :src="getImageUrl(q.pic)" loading="lazy" decoding="async" />
 		    </div>
 
-		    <div v-if="q.desc" class="section-desc">
+		    <div v-if="q.desc" class="section-desc" :style="alignmentStyle(q)">
 		      <span>{{ q.desc }}</span>
 		    </div>
-		    <div v-if="q.strongText" class="section-desc">
+		    <div v-if="q.strongText" class="section-desc" :style="alignmentStyle(q)">
 		      <div v-html="q.strongText" class="new-strongText"></div>
 		    </div>
 		  </div>
@@ -105,12 +105,21 @@ function imageContentClass(baseClass, index) {
     },
   ];
 }
+
+function alignmentStyle(content) {
+  return content?.align ? { textAlign: content.align } : null;
+}
 </script>
 <style>
 .new-strongText {
   font-size: 21px;
   line-height: 33px;
   font-family: MiSans VF;
+}
+
+.new-strongText b,
+.new-strongText strong {
+  font-weight: 700;
 }
 
 .strong-text{
