@@ -30,7 +30,7 @@
             <p class="footer-right-content-about-item pointer" @click="handleJumps('vision')">{{ getText('nav.vision') }}</p>
           </div>
           <p class="footer-right-content-dynamic " @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
-          <p class="footer-right-content-join">{{ getText('nav.joinUs') }}</p>
+          <p class="footer-right-content-join pointer" @click="openRecruitmentLink">{{ getText('nav.joinUs') }}</p>
           <p class="footer-right-content-down">{{ getText('footer.downloadCenter') }}</p>
         </div>
 
@@ -65,6 +65,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getText } from "@/utils/language";
+import { openRecruitmentLink } from "@/utils/recruitmentLink";
 
 const router = useRouter();
 const showQRCode = ref(false);

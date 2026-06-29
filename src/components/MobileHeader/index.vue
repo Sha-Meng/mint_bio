@@ -34,6 +34,7 @@
                   </div>
                 <p class="pointer" v-if="isPanelOpen.aboutUsPanel" @click="handleJumps('corporate')">{{ getText('nav.corporate') }}</p>
                 <p class="pointer" v-if="isPanelOpen.aboutUsPanel" @click="handleJumps('vision')">{{ getText('nav.vision') }}</p>
+                <p class="pointer" v-if="isPanelOpen.aboutUsPanel" @click="handleRecruitmentClick">{{ getText('nav.joinUs') }}</p>
               </div>
               <div class="popover-mobile-content-menu-item noDivider" >
                 <p class="pointer" @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
@@ -70,6 +71,7 @@
 import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { currentLanguage, switchLanguage, getText, isEnglishEnabled } from '@/utils/language';
+import { openRecruitmentLink } from '@/utils/recruitmentLink';
 
 const router = useRouter();
 
@@ -96,6 +98,11 @@ const togglePanel = (panel) => {
 const handleJumps = (target) => {
   visible.value = false;
   router.push({ name: target });
+};
+
+const handleRecruitmentClick = () => {
+  visible.value = false;
+  openRecruitmentLink();
 };
 
 const popperOptions = ref({

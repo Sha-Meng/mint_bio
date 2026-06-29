@@ -100,6 +100,9 @@
 			<p class="contact-popover-content-connection-desc mt30">
 			  {{ getText('contact.followUsDesc') }}
 			</p>
+            <button class="contact-popover-content-connection-join" type="button" @click="openRecruitmentLink">
+              {{ getText('nav.joinUs') }}
+            </button>
             
           </div>
         </div>
@@ -122,6 +125,7 @@ import axios from "axios";
 import { debounce } from "lodash";
 import emitter from '@/event/event';
 import { getText } from "@/utils/language";
+import { openRecruitmentLink } from "@/utils/recruitmentLink";
 
 
 const visible = ref(false);
@@ -349,6 +353,31 @@ onBeforeUnmount(() => {
       &-qrcode {
         width: 122px;
         height: 123px;
+      }
+
+      &-join {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+        min-width: 132px;
+        height: 48px;
+        padding: 0 26px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        background-color: rgba(255, 255, 255, 0.04);
+        color: #f1f3f7;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1;
+        cursor: pointer;
+        transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+          border-color: rgba(255, 114, 0, 0.75);
+          background-color: rgba(255, 114, 0, 0.12);
+          color: #ffffff;
+        }
       }
 
       &-desc {

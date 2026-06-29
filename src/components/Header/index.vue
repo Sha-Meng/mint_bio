@@ -28,9 +28,12 @@
 						<ul v-if="item.submenu && item.submenu.length" class="submenu">
 							<li class="submenu-item" v-for="subItem in item.submenu" :key="subItem.key"
 								@mouseover="setMouseOver(subItem)" @mouseleave="setMouseLeave(subItem)">
-								<router-link :to="{ name: subItem.router }" class="submenu-item-link">
+								<router-link v-if="!subItem.external" :to="{ name: subItem.router }" class="submenu-item-link">
 									{{ subItem.name }}
 								</router-link>
+								<span v-else class="submenu-item-link" @click.stop="openRecruitmentLink">
+									{{ subItem.name }}
+								</span>
 							</li>
 						</ul>
 					</li>
@@ -78,6 +81,7 @@
 							<p>{{ getText('nav.aboutUs') }}</p>
 							<p class="pointer" @click="handleJumps('corporate')">{{ getText('nav.corporate') }}</p>
 							<p class="pointer" @click="handleJumps('vision')">{{ getText('nav.vision') }}</p>
+							<p class="pointer" @click="openRecruitmentLink">{{ getText('nav.joinUs') }}</p>
 						</div>
 						<div class="popover-content-menu-item">
 							<p class="pointer" @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
@@ -127,6 +131,7 @@
 	} from "lodash";
 	import emitter from "@/event/event";
 	import { currentLanguage, switchLanguage, isChinese, getText, isEnglishEnabled } from "@/utils/language";
+	import { openRecruitmentLink } from "@/utils/recruitmentLink";
 	import arrowUpIcon from "@/components/Header/images/arrow_up.png";
 	import arrowDownIcon from "@/components/Header/images/arrow_down.png";
 	import menuIcon from "@/components/Header/images/menu.png";
@@ -188,6 +193,11 @@
 					key: 22,
 					name: getText('nav.vision'),
 					router: "vision"
+				},
+				{
+					key: 23,
+					name: getText('nav.joinUs'),
+					external: true
 				},
 			],
 			iconUp: arrowUpIcon,

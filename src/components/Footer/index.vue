@@ -24,7 +24,7 @@
           <div class="footer-right-content-menus footer-common">
             <p class="footer-right-content-menus-item" @click="handleJumps('bioIntelligent')">{{ getText('nav.bioIntelligent') }}</p>
             <p class="footer-right-content-menus-item" @click="handleJumps('mintNews')">{{ getText('nav.news') }}</p>
-            <p class="footer-right-content-menus-item" @click="handleJumps('corporate')">{{ getText('nav.joinUs') }}</p>
+            <p class="footer-right-content-menus-item" @click="openRecruitmentLink">{{ getText('nav.joinUs') }}</p>
             <!-- <p class="footer-right-content-menus-item">{{ getText('nav.downloadCenter') }}</p> -->
           </div>
           <div class="footer-right-content-products footer-common">
@@ -69,6 +69,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getText } from "@/utils/language";
 import { SHOW_BRAND_BROCHURE_DOWNLOAD } from "@/config/brandBrochure";
+import { openRecruitmentLink } from "@/utils/recruitmentLink";
 
 const router = useRouter();
 
