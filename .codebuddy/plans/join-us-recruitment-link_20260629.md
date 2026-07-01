@@ -21,7 +21,7 @@ Product Overview:
 Core Features:
 - Shared external-link behavior with `noopener,noreferrer`.
 - Desktop header main About Us hover dropdown and menu popover include visible "Join Us" items.
-- Mobile header About Us panel includes a visible "Join Us" item.
+- Mobile header About Us panel and mobile contact popover include visible "Join Us" items.
 - Desktop contact popover includes a visible recruitment button.
 - Desktop and mobile footer "Join Us" entries open the recruitment link.
 
@@ -37,7 +37,7 @@ Implementation Approach:
 
 Implementation Notes:
 - This task does not touch Directus or local i18n JSON because it does not change copy.
-- `ContactMobile` is intentionally out of scope because the supplied screenshots only identify the desktop contact popover button.
+- `ContactMobile` is included after user feedback that mobile-side matching entry points must be synchronized.
 - If QA finds another shared "Join Us" entry, update this plan before expanding implementation.
 
 Architecture Design:
@@ -51,6 +51,7 @@ Directory Structure:
 - `src/components/Contact/index.vue`
 - `src/components/Footer/index.vue`
 - `src/components/FooterMobile/index.vue`
+- `src/components/ContactMobile/index.vue`
 
 Key Code Structures:
 - `RECRUITMENT_URL`: exported URL constant.

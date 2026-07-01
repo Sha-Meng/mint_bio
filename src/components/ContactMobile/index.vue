@@ -89,6 +89,9 @@
 							<p class="contact-popover-content-connection-desc mt30">Oversea Business Contact:</p>
 							<p>aminosales@mint-bio.com</p>
 						</div>
+						<button class="contact-popover-content-connection-join" type="button" @click="openRecruitmentLink">
+							{{ getText('nav.joinUs') }}
+						</button>
 
 					</div>
 				</div>
@@ -115,6 +118,7 @@
 		debounce
 	} from "lodash";
 	import { getText } from "@/utils/language";
+	import { openRecruitmentLink } from "@/utils/recruitmentLink";
 
 
 	const visible = ref(false);
@@ -308,6 +312,19 @@
 						margin-top: 37px;
 						font-size: 12px;
 						font-weight: 500;
+					}
+
+					&-join {
+						width: 96px;
+						height: 37px;
+						margin-top: 24px;
+						border: 1px solid #ffffff1a;
+						border-radius: 8px;
+						background-color: transparent;
+						color: #f1f3f7;
+						font-size: 14px;
+						font-weight: 500;
+						cursor: pointer;
 					}
 				}
 			}
