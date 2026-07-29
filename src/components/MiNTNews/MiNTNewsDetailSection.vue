@@ -114,7 +114,7 @@ function alignmentStyle(content) {
 .new-strongText {
   font-size: 21px;
   line-height: 33px;
-  font-family: MiSans VF;
+  font-family: "MiSans", sans-serif;
 }
 
 .new-strongText b,
@@ -209,7 +209,7 @@ function alignmentStyle(content) {
     .section-heading {
       margin-top: 64px;
       color: white;
-      font-family: MiSans VF;
+      font-family: "MiSans", sans-serif;
       font-weight: 700;
       line-height: 1.35;
 

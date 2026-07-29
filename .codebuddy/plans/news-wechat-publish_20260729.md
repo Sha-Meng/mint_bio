@@ -63,3 +63,32 @@ Publish two user-supplied WeChat articles to the Directus-backed website news sy
 - [x] Validate on the user's running `127.0.0.1:8080` page: `驱动带来《从源头重构绿色》` remains on one line at the reported layout.
 - [x] Scan 500-1800px viewport widths: no break occurs specifically at the normal-text/color boundary.
 - [x] Verify `npm.cmd run build` succeeds; existing asset-size and Browserslist warnings remain non-blocking.
+
+## Font Declaration Correction (2026-07-29)
+
+Goal: remove fallback and synthetic font metrics from news body rendering before
+evaluating any explicit no-break behavior.
+
+### Todos
+
+- [x] Register MiSans as a variable font across weights 100-900.
+- [x] Use the registered `MiSans` family consistently in the news body.
+- [x] Build the frontend and verify the emitted font declaration.
+- [ ] Re-check the affected paragraph in the user's browser.
+
+### Scope and approach
+
+- Update `src/assets/font/font.css` to declare the existing MiSans variable font
+  with `font-weight: 100 900` and `font-display: swap`.
+- Replace the unregistered `MiSans VF` family name in
+  `MiNTNewsDetailSection.vue` with `"MiSans", sans-serif`.
+- Do not add a word joiner or change line-breaking policy in this step.
+
+### Acceptance
+
+- Computed news body styles use the registered `MiSans` family.
+- Weight 800 resolves through the declared variable-font range.
+- `npm.cmd run build` succeeds.
+
+Note: the preceding color-wrapping acceptance is superseded because the user
+reproduced the boundary break after that change.
