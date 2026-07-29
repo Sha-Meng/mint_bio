@@ -35,13 +35,17 @@
         </div>
 
       </el-col>
-      <div class="download-qrCode">
-        <img src="@/assets/images/down.png" class="down">
-        <img src="@/assets/images/wechat.png" class="weChat" @click="toggleQRCode">
-        <img src="@/assets/images/wxCode.png" class="QRcode" v-if="showQRCode" />
-
+      <div class="footer-advisors">
+        <p class="footer-advisors-title footer-common">{{ getText('footer.contactAdvisor') }}</p>
+        <div class="footer-advisors-list">
+          <div v-for="advisor in contactAdvisors" :key="advisor.key" class="footer-advisor">
+            <p class="footer-advisor-name">{{ getText(advisor.labelKey) }}</p>
+            <p>TEL: {{ advisor.phone }}</p>
+            <p>WECHAT: {{ getText('contact.wechat') }}</p>
+            <img class="footer-advisor-qrcode" :src="advisor.qrCodeUrl" :alt="getText(advisor.labelKey)" />
+          </div>
+        </div>
       </div>
-      <div class="overlay" v-if="showQRCode" @click="toggleQRCode"></div>
 
       <div class="address footer-common">
         <p class="mb26">{{ getText('footer.address') }}</p>
@@ -62,17 +66,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getText } from "@/utils/language";
 import { openRecruitmentLink } from "@/utils/recruitmentLink";
+import { contactAdvisors } from "@/config/contactAdvisors";
 
 const router = useRouter();
-const showQRCode = ref(false);
-
-const toggleQRCode = () => {
-  showQRCode.value = !showQRCode.value;
-};
 
 const handleJumps = (item) => {
   router.push({ name: item });
@@ -180,7 +179,7 @@ const handleJumps = (item) => {
 
 
       &-menus {
-        font-size: 13px;
+        font-size: 14px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -233,38 +232,54 @@ const handleJumps = (item) => {
 
   }
 
-  .download-qrCode {
-    display: flex;
-    gap: 30px;
-
-    .down {
-      width: 140px;
-      height: 60px;
-    }
-
-    .weChat {
-      width: 60px;
-    }
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+  .footer-advisors {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    margin-top: 8px;
+
+    &-title {
+      margin-bottom: 16px;
+    }
+
+    &-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 16px;
+    }
   }
 
-  .QRcode {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1001;
-    width: 200px;
-    height: 200px;
+  .footer-advisor {
+    min-width: 0;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+
+    &-name {
+      min-height: 38px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    &-qrcode {
+      display: block;
+      width: min(128px, 100%);
+      aspect-ratio: 1;
+      margin: 8px 0 0;
+      justify-self: start;
+      border-radius: 0 !important;
+      object-fit: contain;
+      background: #ffffff;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .footer-advisors-list {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-advisor-name {
+      min-height: 0;
+    }
   }
 
   .address {

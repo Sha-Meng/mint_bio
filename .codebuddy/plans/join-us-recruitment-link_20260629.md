@@ -1,48 +1,50 @@
-﻿name: join-us-recruitment-link
+name: join-us-recruitment-link
 
-overview: Add the Liepin recruitment link to the visible "Join Us" entry points highlighted by the user, opening the link in a new browser tab without changing copy, Directus content, or routes.
+overview: Update all visible "Join Us" recruitment entry points from the previous Liepin external URL to the internal MiNT News detail article `join-us-2026-recruitment`, preserving the shared new-tab behavior and leaving visible copy/i18n unchanged.
 
 todos:
-- [x] Confirm the affected components and existing click behavior.
-- [x] Add a shared recruitment-link helper.
-- [x] Wire the desktop and mobile header "Join Us" menu entries.
-- [x] Wire the desktop contact popover and desktop/mobile footers.
-- [x] Run build validation and source-level binding checks.
+- [x] Confirm the affected components still use the shared `openRecruitmentLink` helper.
+- [x] Replace the centralized recruitment target with the internal news detail route.
+- [x] Keep the helper generating an absolute URL from the current site origin/path so hash routing works across deployment paths.
+- [x] Run source-level binding checks for all "Join Us" entry points.
+- [x] Run build validation after implementation.
 
 User Requirements:
-- The highlighted "Join Us" controls should open `https://www.liepin.com/company/13100295/`.
-- The target must open in a new tab.
-- Do not change visible wording or translation data.
+- All "Join Us" controls that call `openRecruitmentLink` should open the `join-us-2026-recruitment` news article.
+- The target must continue to open in a new browser tab.
+- Do not change visible wording, translation data, Directus content, or news article content.
 
 Product Overview:
-- The site already has desktop and mobile navigation, a global contact popover, and footer navigation.
-- This change is a behavior-only recruitment link update.
+- The site has desktop and mobile navigation, global contact popovers, and footer navigation.
+- Recruitment click behavior is centralized in a shared helper, so the behavior update is intentionally single-source.
 
 Core Features:
-- Shared external-link behavior with `noopener,noreferrer`.
-- Desktop header main About Us hover dropdown and menu popover include visible "Join Us" items.
-- Mobile header About Us panel and mobile contact popover include visible "Join Us" items.
-- Desktop contact popover includes a visible recruitment button.
-- Desktop and mobile footer "Join Us" entries open the recruitment link.
+- Shared recruitment behavior with `noopener,noreferrer`.
+- Desktop header main About Us dropdown and menu popover "Join Us" entries use the helper.
+- Mobile header About Us panel uses the helper.
+- Desktop and mobile contact popovers use the helper.
+- Desktop and mobile footer "Join Us" entries use the helper.
 
 Tech Stack Selection:
 - Vue single-file components.
 - Existing i18n key `nav.joinUs`.
-- Plain browser `window.open` for external tab behavior.
+- Browser `window.open` for new-tab behavior.
+- Vue Router hash route `/mintNews/detail/:configId` for the news detail page.
 
 Implementation Approach:
-- Add `src/utils/recruitmentLink.js` with the recruitment URL and an `openRecruitmentLink` function.
-- Import and use the helper in `Header`, `MobileHeader`, `Contact`, `Footer`, and `FooterMobile`.
-- Keep styling scoped to the affected visible button/entry points; contact popover button must match the existing dark/glass page style, not the red screenshot annotation.
+- Update `src/utils/recruitmentLink.js` only for runtime behavior.
+- Export the recruitment news slug and route for clarity.
+- Build the final URL as `${window.location.origin}${window.location.pathname}#/mintNews/detail/join-us-2026-recruitment` so it stays on the same deployed app base.
+- Keep component imports/click handlers unchanged because they already call the shared helper.
 
 Implementation Notes:
 - This task does not touch Directus or local i18n JSON because it does not change copy.
-- `ContactMobile` is included after user feedback that mobile-side matching entry points must be synchronized.
+- `join-us-2026-recruitment` is assumed to be a valid Directus news article slug.
 - If QA finds another shared "Join Us" entry, update this plan before expanding implementation.
 
 Architecture Design:
-- External recruitment behavior is centralized in `src/utils/recruitmentLink.js`.
-- Components remain responsible only for rendering and invoking the shared helper.
+- Recruitment behavior remains centralized in `src/utils/recruitmentLink.js`.
+- Components remain responsible only for rendering and invoking `openRecruitmentLink`.
 
 Directory Structure:
 - `src/utils/recruitmentLink.js`
@@ -54,10 +56,13 @@ Directory Structure:
 - `src/components/ContactMobile/index.vue`
 
 Key Code Structures:
-- `RECRUITMENT_URL`: exported URL constant.
-- `openRecruitmentLink()`: safely opens a new tab and clears `opener` where possible.
+- `RECRUITMENT_NEWS_SLUG`: `join-us-2026-recruitment`.
+- `RECRUITMENT_ROUTE`: `/mintNews/detail/join-us-2026-recruitment`.
+- `getRecruitmentUrl()`: converts the hash route into a same-site absolute URL.
+- `openRecruitmentLink()`: opens the recruitment news URL in a new tab and clears `opener` where possible.
 
 Validation / Acceptance:
-- `npm.cmd run build` completes successfully. Result: passed on 2026-06-29, rerun after feedback fixes, with existing Browserslist, ::v-deep, and webpack asset-size warnings.
-- Source check confirms each highlighted "Join Us" entry calls `openRecruitmentLink`, including the desktop main About Us hover dropdown.
-- No Directus/i18n files are modified.
+- Source check confirms each known "Join Us" entry calls `openRecruitmentLink`.
+- Source check confirms the old Liepin URL is no longer used in `src`.
+- `npm.cmd run build` passed on 2026-07-09 with existing Browserslist, ::v-deep, and webpack asset-size warnings.
+- Manual QA target: PC/mobile Header, Footer, and Contact entries open `#/mintNews/detail/join-us-2026-recruitment`.

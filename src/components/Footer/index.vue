@@ -40,9 +40,20 @@
           </div>
         </div>
         <div class="footer-right-info">
-          <div class="footer-right-info-qrCode">
+          <div class="footer-right-info-advisors">
             <p class="footer-right-info-qrCode-text footer-common">{{ getText('footer.contactAdvisor') }}</p>
-            <img src="@/assets/images/wxCode.png" alt="" />
+            <div class="footer-right-info-advisors-list">
+              <div v-for="advisor in contactAdvisors" :key="advisor.key" class="footer-right-info-advisor">
+                <p class="footer-right-info-advisor-name">{{ getText(advisor.labelKey) }}</p>
+                <p>TEL: {{ advisor.phone }}</p>
+                <p>WECHAT: {{ getText('contact.wechat') }}</p>
+                <img
+                  class="footer-right-info-advisor-qrcode"
+                  :src="advisor.qrCodeUrl"
+                  :alt="getText(advisor.labelKey)"
+                />
+              </div>
+            </div>
           </div>
           <div class="footer-right-info-address footer-common">
             <p class="mb26">{{ getText('footer.address') }}</p>
@@ -70,6 +81,7 @@ import { useRouter } from "vue-router";
 import { getText } from "@/utils/language";
 import { SHOW_BRAND_BROCHURE_DOWNLOAD } from "@/config/brandBrochure";
 import { openRecruitmentLink } from "@/utils/recruitmentLink";
+import { contactAdvisors } from "@/config/contactAdvisors";
 
 const router = useRouter();
 
@@ -221,25 +233,50 @@ const handleJumps = (item) => {
       margin-top: 121px;
       display: flex;
       justify-content: space-between;
-      align-items: end;
+      align-items: flex-end;
 
-      &-qrCode {
-        &-text {
-          margin-bottom: 5px;
+      &-advisors {
+        flex: 0 0 390px;
+
+        &-list {
+          display: flex;
+          gap: 32px;
+        }
+      }
+
+      &-qrCode-text {
+        margin-bottom: 14px;
+      }
+
+      &-advisor {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.6;
+
+        &-name {
+          min-height: 38px;
+          font-size: 14px;
+          line-height: 1.35;
         }
 
-        img {
+        &-qrcode {
+          display: block;
           width: 129px;
           height: 129px;
+          margin-top: 8px;
+          object-fit: contain;
+          border-radius: 0 !important;
+          background: #ffffff;
         }
       }
 
       &-address {
-        margin-left: 51px;
+        margin-left: 36px;
       }
 
       &-copyright {
-        margin-left: 111px;
+        margin-left: 64px;
         color: #ffffff;
 
         &-record {

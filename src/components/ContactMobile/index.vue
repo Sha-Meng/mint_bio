@@ -43,9 +43,6 @@
 						<p class="contact-popover-content-connection-title">
 							{{ getText('contact.alternativeContact') }}
 						</p>
-						<p class="contact-popover-content-connection-email">
-							{{ getText('contact.email') }}
-						</p>
 						<div class="contact-popover-content-connection-bottom">
 							<img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png"
 								alt="QRcode" />
@@ -57,38 +54,22 @@
 							</div>
 
 						</div>
-						<div>
-							<p class="contact-popover-content-connection-desc mt30">
-								{{ getText('contact.advisors.aminoAcid') }}
-							</p>
-							<p class="contact-popover-content-connection-desc counselor">
-								TEL: 15937287752
-							</p>
-							<p class="contact-popover-content-connection-desc counselor">
-								WECHAT: {{ getText('contact.wechat') }}
-							</p>
-							<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode.png" />
+            <div
+              v-for="advisor in contactAdvisors"
+              :key="advisor.key"
+            >
+              <p class="contact-popover-content-connection-desc mt30">
+                {{ getText(advisor.labelKey) }}
+              </p>
+              <p class="contact-popover-content-connection-desc counselor">
+                TEL: {{ advisor.phone }}
+              </p>
+              <p class="contact-popover-content-connection-desc counselor">
+                WECHAT: {{ getText('contact.wechat') }}
+              </p>
+              <img class="contact-popover-content-connection-qrcode" :src="advisor.qrCodeUrl" />
 
-						</div>
-
-						<div>
-							<p class="contact-popover-content-connection-desc mt30">
-								{{ getText('contact.advisors.materials') }}
-							</p>
-							<p class="contact-popover-content-connection-desc counselor">
-								TEL: 19129376767
-							</p>
-							<p class="contact-popover-content-connection-desc counselor">
-								WECHAT: {{ getText('contact.wechat') }}
-							</p>
-							<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode2.jpg" />
-
-						</div>
-
-						<div>
-							<p class="contact-popover-content-connection-desc mt30">Oversea Business Contact:</p>
-							<p>aminosales@mint-bio.com</p>
-						</div>
+            </div>
 						<button class="contact-popover-content-connection-join" type="button" @click="openRecruitmentLink">
 							{{ getText('nav.joinUs') }}
 						</button>
@@ -119,6 +100,7 @@
 	} from "lodash";
 	import { getText } from "@/utils/language";
 	import { openRecruitmentLink } from "@/utils/recruitmentLink";
+	import { contactAdvisors } from "@/config/contactAdvisors";
 
 
 	const visible = ref(false);
@@ -283,6 +265,7 @@
 					}
 
 					&-bottom {
+						margin-top: 24px;
 						display: flex;
 						justify-content: flex-start;
 						gap: 5px;
@@ -306,11 +289,13 @@
 						width: 100px;
 						height: 100px;
 						margin: 0;
+						border-radius: 0 !important;
+						background: #ffffff;
 					}
 
 					&-desc {
 						margin-top: 37px;
-						font-size: 12px;
+						font-size: 13px;
 						font-weight: 500;
 					}
 

@@ -54,48 +54,29 @@
             <p class="contact-popover-content-connection-title">
               {{ getText('contact.alternativeContact') }}
             </p>
-			<div class="contact-popover-content-connection-tel">
-				<div class="contact-popover-content-connection-tel-left">
-					<p class="contact-popover-content-connection-desc mt30">
-					  {{ getText('contact.advisors.aminoAcid') }}
-					</p>
-					<p class="contact-popover-content-connection-desc counselor">
-					  TEL: 15937287752
-					</p>
-					<p class="contact-popover-content-connection-desc counselor">
-					  WECHAT: {{ getText('contact.wechat') }}
-					</p>
-					<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode.png" />
-				</div>
-				<div class="contact-popover-content-connection">
-					<p class="contact-popover-content-connection-desc mt30">
-					  {{ getText('contact.advisors.materials') }}
-					</p>
-					<p class="contact-popover-content-connection-desc counselor">
-					  TEL: 19129376767
-					</p>
-					<p class="contact-popover-content-connection-desc counselor">
-					  WECHAT: {{ getText('contact.wechat') }}
-					</p>
-					<img class="contact-popover-content-connection-qrcode" src="@/assets/images/wxCode2.jpg" />
-				</div>
-			</div>
-			
-            
-            <p class="contact-popover-content-connection-item email">
-              {{ getText('contact.email') }}
-            </p>
-			<div class="contact-popover-content-connection-tel">
-				<div class="contact-popover-content-connection-tel-left">
-					<img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png" alt="QRcode" />
-				</div>
-				<div class="contact-popover-content-connection">
-					<p class="contact-popover-content-connection-desc">Oversea Business Contact:</p>
-					<p class="contact-popover-content-connection-desc mt30">
-					  aminosales@mint-bio.com
-					</p>
-				</div>
-			</div>
+      <div class="contact-popover-content-connection-tel">
+        <div
+          v-for="advisor in contactAdvisors"
+          :key="advisor.key"
+          class="contact-popover-content-connection-tel-left"
+        >
+          <p class="contact-popover-content-connection-desc mt30">
+            {{ getText(advisor.labelKey) }}
+          </p>
+          <p class="contact-popover-content-connection-desc counselor">
+            TEL: {{ advisor.phone }}
+          </p>
+          <p class="contact-popover-content-connection-desc counselor">
+            WECHAT: {{ getText('contact.wechat') }}
+          </p>
+          <img class="contact-popover-content-connection-qrcode" :src="advisor.qrCodeUrl" />
+        </div>
+      </div>
+      <div class="contact-popover-content-connection-tel official-account-section">
+        <div class="contact-popover-content-connection-tel-left">
+          <img class="contact-popover-content-connection-qrcode" src="./images/QRcode.png" alt="QRcode" />
+        </div>
+      </div>
 			<p class="contact-popover-content-connection-desc">{{ getText('contact.followUs') }}</p>
 			<p class="contact-popover-content-connection-desc mt30">
 			  {{ getText('contact.followUsDesc') }}
@@ -126,6 +107,7 @@ import { debounce } from "lodash";
 import emitter from '@/event/event';
 import { getText } from "@/utils/language";
 import { openRecruitmentLink } from "@/utils/recruitmentLink";
+import { contactAdvisors } from "@/config/contactAdvisors";
 
 
 const visible = ref(false);
@@ -350,9 +332,15 @@ onBeforeUnmount(() => {
         margin: 30px 0px
       }
 
+      .official-account-section {
+        margin-top: 28px;
+      }
+
       &-qrcode {
         width: 122px;
         height: 123px;
+        border-radius: 0 !important;
+        background: #ffffff;
       }
 
       &-join {
@@ -381,7 +369,7 @@ onBeforeUnmount(() => {
       }
 
       &-desc {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
       }
 	  
